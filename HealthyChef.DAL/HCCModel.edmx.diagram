@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bcda3a82f16b475f8d63a0c25f925bcd" Name="Diagram1" ZoomLevel="130">
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccAllergen" Width="1.5" PointX="3.625" PointY="5.5" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCoupon" Width="1.5" PointX="6.25" PointY="31.75" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccDeliverySetting" Width="1.5" PointX="1.375" PointY="0.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccGlobalSetting" Width="1.5" PointX="3.375" PointY="0.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccIngredientAllergen" Width="1.5" PointX="11.625" PointY="3.375" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccIngredient" Width="1.5" PointX="9.375" PointY="2.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccMenuItemIngredient" Width="1.5" PointX="11.625" PointY="6.125" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccMenuItemPreference" Width="1.875" PointX="11.625" PointY="8.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccMenuItem" Width="1.5" PointX="9.375" PointY="5.75" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccMenu" Width="1.5" PointX="11.625" PointY="11.375" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgramMealType" Width="1.5" PointX="16.125" PointY="0.75" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgramOption" Width="1.5" PointX="16.125" PointY="17.25" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgramPlan" Width="1.5" PointX="16.125" PointY="3.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgram" Width="1.5" PointX="13.875" PointY="6.75" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfileAllergen" Width="2.625" PointX="5.875" PointY="6.5" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfilePaymentProfile" Width="2.875" PointX="5.875" PointY="12.375" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfilePhone" Width="2.625" PointX="5.875" PointY="16" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfilePreference" Width="2.5" PointX="5.875" PointY="9.5" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Ingredient_Allergens_hcc_Allergen" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Allergens_hcc_Allergen" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Ingredient_Allergens_hcc_Ingredient" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Meal_Ingredients_hcc_Ingredient" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Meal_Ingredients_hcc_Meal" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_MenuItem_Preferences_hcc_MenuItem" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Program_MealTypes_hcc_Program" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProgramOptions_hccPrograms" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProgramPlans_hccPrograms" />
+        <AssociationConnector Association="HealthyChef.DAL.hccMenuMenuItems" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccPreference" Width="1.5" PointX="3.625" PointY="16.125" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_MenuItem_Preferences_hcc_Preference" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Preferences_hcc_Preference" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfile" Width="1.875" PointX="3.625" PointY="8.625" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Allergens_hcc_UserProfile" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_PaymentProfiles_hcc_UserProfile" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Phones_hcc_UserProfile" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Preferences_hcc_UserProfile" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccLedger" Width="2.75" PointX="3.625" PointY="19.75" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.aspnet_Membership" Width="1.5" PointX="1.375" PointY="8.875" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_Ledger_aspnet_Membership" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccUserProfiles_aspnet_Membership" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgramDefaultMenu" Width="1.5" PointX="16.125" PointY="8.625" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProgramDefaultMenus_hccMenuItems" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProgramDefaultMenus_hccPrograms" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccAddress" Width="2.125" PointX="0.75" PointY="3.5" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_hcc_AddressBilling" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartDefaultMenuException" Width="4" PointX="18.375" PointY="10.875" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartDefaultMenuExceptions_hccProgramDefaultMenus" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartDefaultMenuExPref" Width="3.125" PointX="23.125" PointY="13.875" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartDefaultMenuExPrefs_hccCartDefaultMenuExceptions" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartDefaultMenuExPrefs_hccPreferences" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProductionCalendar" Width="1.5" PointX="13.875" PointY="11.125" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProductionCalendars_hccMenus" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccProgramDefaultMenus_hccProductionCalendars1" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartItemCalendar" Width="1.5" PointX="16.125" PointY="13.375" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartItemCalendars_hccProductionCalendars" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartDefaultMenuExceptions_hccCartCalendars" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.ImportedCustomer" Width="1.5" PointX="9.375" PointY="17.875" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.ImportedGiftCert" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_hcc_AddressShipping" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccUserProfileNote" Width="2.25" PointX="5.875" PointY="25.125" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_UserProfile_Notes_hcc_UserProfile" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartSnapshot" Width="1.5" PointX="15.875" PointY="31.25" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartItemMealPreference" Width="1.5" PointX="14.625" PointY="38.375" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccRecurringOrder" Width="2.625" PointX="1.5" PointY="32.25" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCart" Width="1.5" PointX="1.4660847361507288" PointY="14.77865063342203" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCarts_hccCoupons" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartALCMenuItem" Width="1.5" PointX="16.125" PointY="27.625" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartItem" Width="1.5" PointX="3.75" PointY="36.625" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccCartMenuExPref" Width="1.5" PointX="6" PointY="40.25" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartALCMenuItem_hccCartItems_CartItemID" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartItemCalendars_hccCartItems" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hccCartItemALCPrefs_hccCartItems" />
+        <AssociationConnector Association="HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_CartItems_hcc_Carts" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccProgramDefaultMenuExPref" Width="1.5" PointX="18.375" PointY="14.875" />
+        <AssociationConnector Association="HealthyChef.DAL.FK__hccProgra__Prefe__77A09B57" />
+        <AssociationConnector Association="HealthyChef.DAL.FK__hccProgra__Defau__76AC771E" />
+        <EntityTypeShape EntityType="HealthyChef.DAL.hccMenuItemNutritionData" Width="1.5" PointX="11.625" PointY="14.5" />
+        <AssociationConnector Association="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

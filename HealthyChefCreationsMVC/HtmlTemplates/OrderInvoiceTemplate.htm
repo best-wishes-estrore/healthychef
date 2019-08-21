@@ -1,0 +1,39 @@
+﻿<style>
+    .invoice_new td {
+        font-size: 18px;        
+    }
+</style>
+
+<div class="invoice table-responsive">
+    <table style="width: 100%; padding: 5px;" cellpadding="0" cellspacing="3">
+        <tr class="invoice_new" style="height: 30px; background-color: #dddddd;color: #39aa35;padding:5px;">
+            <td colspan="2" style="padding: 5px; border: 1px solid #cccccc;color: #39aa35;">Purchase Number:&nbsp;##PurchaseNumber##</td>
+            <td style="padding: 5px; border: 1px solid #cccccc;color: #39aa35;display:none;">Status:&nbsp;##OrderStatus##</td>
+            <td style="padding: 5px; border: 1px solid #cccccc;color: #39aa35;text-align:left;display:none;">##OrderDate##</td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <b>Billing Information:</b>
+                    ##OrderBillingAddressToHtml##   
+                </div>
+                <div>
+                    <b>Transaction Information:</b>
+                    ##OrderTransactionInfo##
+                </div>
+            </td>
+            <td colspan="2" style="vertical-align:top;">
+                <b>Shipping Information:</b><br />
+                <div>
+                    ##OrderShippingAddressesToHtml## 
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="padding: 2px">
+                <b>Purchased Items</b>
+                ##ItemsToHtml##
+            </td>
+        </tr>
+    </table>
+</div>

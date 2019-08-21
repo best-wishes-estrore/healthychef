@@ -1,0 +1,742 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/Images/Healthy-Chef-Logo-leaves.png" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    @*<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/HealthyChefStyles")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/HealthyChefScripts")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
+    <meta name="msvalidate.01" content="36EB1A194C116E88B600C9EB1A332622" />
+    <asp:ContentPlaceHolder runat="server" ID="masterHeader"></asp:ContentPlaceHolder>
+    @*<meta name="google-site-verification" content="pEdaIoVNdrxoDXJowruYbab9hy2qMQxLxb2gJJKLaJE" />*@
+    <meta name="keywords" content="@ViewBag.MetaKeywords" />
+    <meta name="description" content="@ViewBag.MetaDescription" />
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '384386455746102');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=384386455746102&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N9P7DSB');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body class="home-page">
+
+    <div id="wrapper">
+
+        @*@{
+            //Html.RenderPartial("_TopHeader");
+            Html.RenderAction("TopHeaderSection", "Common");
+        }*@
+
+        <div class="page_gap">
+            <div class="desktop_view">
+                @if (Request.Browser.IsMobileDevice)
+                {
+                    Html.RenderAction("MobileHeaderSection", "Common");
+                }
+                else if (Request.Browser["ScreenPixelsWidth"] == "768")
+                {
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
+                }
+                else
+                {
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
+                }
+                @*@{
+            // Html.RenderPartial("_Header");
+            Html.RenderAction("HeaderSection", "Common");
+        }*@
+            </div>
+                <div id="main" class="no-footer">
+                    <div id="content" class="post">
+                        <div class="three-cols">
+                            @RenderBody()
+                            <div class="cl">&nbsp;</div>
+                        </div>
+                        @*<div class="top">&nbsp;</div>*@
+                        @*<div class="bottom">&nbsp;</div>*@
+                    </div>
+                    @*<div class="cl">
+                    &nbsp;
+                </div>*@
+                </div>
+                <div class="clearfix"></div>
+                @{
+                    //Html.RenderPartial("_Footer");
+                    Html.RenderAction("FooterSection", "Common");
+                }
+
+            </div>
+        </div>
+
+
+
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1068905029;
+        var google_conversion_label = "1zRJCN367gYQxeTY_QM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <script>
+        var FullName = $('#ctl00_lblFullName').text();
+        var UserName = $('#ctl00_lblUserName').text();
+        var UserEmail = $('#ctl00_lblUserEmail').text();
+
+        if (UserEmail != '' && FullName != '') {
+            window.intercomSettings = {
+                app_id: "ktzghdfu",
+                name: FullName,
+                email: UserEmail,
+                created_at: new Date(),
+                custom_launcher_selector: '#my_custom_link'
+            };
+        }
+        else {
+            window.intercomSettings = {
+                app_id: "ktzghdfu",
+                custom_launcher_selector: '#my_custom_link'
+            }
+        }
+        function unixTimeStamp(date) {
+            var myDate = date.split(' ');
+            myDate = myDate[0].split("/");
+            var newDate = myDate[0] + "/" + myDate[1] + "/" + myDate[2];
+            return new Date(newDate).getTime();
+        }
+        $('#my_custom_link').css();
+    </script>
+
+    @*<script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else { var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/ktzghdfu'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })()</script>*@
+
+    <script>
+        (function () {
+            var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else {
+                var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() {
+                    var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true;
+                    s.src = 'https://widget.intercom.io/widget/ktzghdfu'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+                } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); }
+            }
+        })()
+    </script>
+    <noscript>
+        <div style="display: inline;">
+            <img height="1" width="1" style="border-style: none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1068905029/?value=0&amp;label=1zRJCN367gYQxeTY_QM&amp;guid=ON&amp;script=0" />
+        </div>
+    </noscript>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: rgb(102, 102, 102); z-index: 30001; opacity: 0.8;display:none">
+        <p style="position: absolute; color: White; top: 30%; left: 40%;">
+            Loading, please wait...
+            <img src="~/Content/Images/ajax-loading.gif">
+        </p>
+    </div>
+    <script>
+
+        //Nutrition information display modal popup
+        function GetNutritionInfo(MenuItemId) {
+
+            $('#nutritiondata-' + MenuItemId + '').modal('show');
+        };
+         //Select Button Click comment
+        function SelectViewDetails(MenuItemId)
+        {
+            $('#Addselectpopup-' + MenuItemId + '').modal('show');
+        };
+        function PriceCalculator(move, numberofmealtypes, programid) {
+            $('tr', $(this).closest('.form-select-menu')).removeClass('bg-lime-light');
+            $(this).closest('tr').addClass('bg-lime-light');
+            calcPrice(move, numberofmealtypes, programid);
+        };
+        function calcPrice(move, numberofmealtypes,programid) {
+            var numberofdaysperweek = '';
+            if (move == 'next') {
+                numberofdaysperweek = $("div .active").next().attr('data-days-per-week');
+                if (numberofdaysperweek == undefined) {
+                    numberofdaysperweek = parseFloat($("#plantypeslider").find(".item").attr('data-days-per-week'));
+                }
+            }
+            if (move == 'prev') {
+                numberofdaysperweek = $("div .active").prev().attr('data-days-per-week');
+                $('.left').addClass('active');
+                $('.right').removeClass('active');
+                if (numberofdaysperweek == undefined) {
+                    numberofdaysperweek = parseFloat($("#plantypeslider").find(".item").last().attr('data-days-per-week'));
+                }
+            }
+        var selectedValue = parseInt($('#weeklydeldate').val());
+            var planoptionid = parseFloat($("#planoptionslider .active").attr('value'));
+            var PlanPriceByNumofweeks = { programId: programid , PlanId: '0', NumDaysPerWeek: numberofdaysperweek, NumWeeks: selectedValue, ProgramOptionId: planoptionid, Planprice: '0.00', PlanOptionprice: '0.00' }
+         $.ajax({
+             type: "POST",
+             url: '@Url.Action("GetPlanPriceByNumofweeks", "Programs")',
+             data: JSON.stringify(PlanPriceByNumofweeks),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: function (res) {
+                 itemid = res.PlanId;
+                 var variance = parseFloat(res.PlanOptionprice);
+                 var planId = parseFloat(res.PlanId);
+                 var pricePerDay = parseFloat(res.Planprice);
+                 var weeks = selectedValue //parseFloat($(planRadio).attr('data-weeks'));
+                 var weeksDays = parseFloat(res.NumDaysPerWeek);
+                 var days = parseFloat(weeks * weeksDays);
+                 var mealsPerDay = parseInt(numberofmealtypes);
+                 var totalMeals = days * mealsPerDay;
+                 var subtotal = (pricePerDay + variance) * days;
+                 var subtotalmealprice = '$' + subtotal.toFixed(2);
+                 var costperday = ((pricePerDay + variance) * 1).toFixed(2);
+                 var costpermeal = (costperday / mealsPerDay).toFixed(2);
+                 $('#program-subtotal').text(subtotalmealprice);
+                 $('#costperday').text('$' + (costperday * weeksDays).toFixed(2));
+                 $('#costpermeal').text('$' + costpermeal);
+                 var discountpriceformeal = (costpermeal - (costpermeal * 0.05)).toFixed(2);
+                 var discountpriceforday = (costperday - (costperday * 0.05)).toFixed(2);;
+                 $('#costpersubscribeday').text('$' + (discountpriceforday * weeksDays).toFixed(2));
+                 $('#costpersubscribemeal').text('$' + discountpriceformeal);
+                 //$('#program-subtotal').formatCurrency();
+                 $('b', '#days-in-week-label').text(totalMeals);
+
+             },
+             error: function (response)
+             {
+                 alert(response.errorMessage);
+             }
+         });
+        }
+
+        function Planoptions(move, numberofmealtypes, programid)
+        {
+            var planoptionid = '';
+            if (move == 'next') {
+                planoptionid = $("#planoptionslider .active").next().next().next().attr('value');
+                var optionid = $("#planoptionslider .active").attr('id');
+                var currentactiveitem = $('#planoptionslider #' + optionid + '')[0];
+                currentactiveitem.setAttribute('class','item');
+                $('#planoptionslider #' + optionid + '').next().next().next().addClass('active');
+                if (planoptionid == undefined) {
+                    planoptionid = parseFloat($("#planoptionslider").find(".item").attr('value'));
+                    var optionid = $("#planoptionslider").find(".item").attr('id');
+                    var currentactiveitem = $('#planoptionslider #' + optionid + '')[0];
+                    currentactiveitem.setAttribute('class', 'item active');
+                }
+            }
+            if (move == 'prev')
+            {
+                planoptionid = $("#planoptionslider .active").prev().prev().prev().attr('value');
+                var optionid = $("#planoptionslider .active").attr('id');
+                var currentactiveitem = $('#planoptionslider #' + optionid + '')[0];
+                currentactiveitem.setAttribute('class', 'item');
+                $('#planoptionslider #' + optionid + '').prev().prev().prev().addClass('active');
+                if (planoptionid == undefined) {
+                    planoptionid = parseFloat( $("#planoptionslider").find(".item").last().attr('value'));
+                    var optionid = $("#planoptionslider").find(".item").last().attr('id');
+                    var currentactiveitem = $('#planoptionslider #' + optionid + '')[0];
+                    currentactiveitem.setAttribute('class', 'item active');
+                }
+            }
+        var selectedValue = parseInt($('#weeklydeldate').val());
+        var numberofdaysperweek = parseFloat($('.active').attr('data-days-per-week'));
+            var PlanPriceByNumofweeks = { programId: programid, PlanId: '0', NumDaysPerWeek: numberofdaysperweek, NumWeeks: selectedValue, ProgramOptionId: planoptionid, Planprice: '0.00', PlanOptionprice: '0.00' }
+         $.ajax({
+             type: "POST",
+             url: '@Url.Action("GetPlanPriceByNumofweeks", "Programs")',
+             data: JSON.stringify(PlanPriceByNumofweeks),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: function (res) {
+                 itemid = res.PlanId;
+                 var variance = parseFloat(res.PlanOptionprice);
+                 var planId = parseFloat(res.PlanId);
+                 var pricePerDay = parseFloat(res.Planprice);
+                 var weeks = selectedValue //parseFloat($(planRadio).attr('data-weeks'));
+                 var weeksDays = parseFloat(res.NumDaysPerWeek);
+                 var days = parseFloat(weeks * weeksDays);
+                 var mealsPerDay = parseInt(numberofmealtypes);
+                 var totalMeals = days * mealsPerDay;
+                 var subtotal = (pricePerDay + variance) * days;
+                 var subtotalmealprice = '$' + subtotal.toFixed(2);
+                 var costperday = ((pricePerDay + variance) * 1).toFixed(2);
+                 var costpermeal = (costperday / mealsPerDay).toFixed(2);
+                 $('#program-subtotal').text(subtotalmealprice);
+                 $('#costperday').text('$' + (costperday * weeksDays).toFixed(2));
+                 $('#costpermeal').text('$' + costpermeal);
+                 var discountpriceformeal = (costpermeal - (costpermeal * 0.05)).toFixed(2);
+                 var discountpriceforday = (costperday - (costperday * 0.05)).toFixed(2);;
+                 $('#costpersubscribeday').text('$' + (discountpriceforday * weeksDays).toFixed(2));
+                 $('#costpersubscribemeal').text('$' + discountpriceformeal);
+                 //$('#program-subtotal').formatCurrency();
+                 $('b', '#days-in-week-label').text(totalMeals);
+
+             },
+             error: function (response)
+             {
+                 alert(response.errorMessage);
+             }
+         });
+        }
+       function AddtoCart(IsAutorenew,Islogin)
+       {
+           var deliveryDate_ = $('#ddldeliveryDate option:selected').val();
+           //if (deliveryDate_!= '0')
+           //{
+                   var ErrorMessage = "";
+                   var ErrorCount = "0";
+
+                   var QTY = $("#quantity").val();
+                   if (QTY === null || QTY == "") {
+                       ErrorCount = "1";
+                       ErrorMessage = ErrorMessage + 'please enter quantity';
+                   }
+                   else if (QTY === "0") {
+                       ErrorCount = "1";
+                       ErrorMessage = ErrorMessage + 'quantity should be greater than zero';
+
+                   }
+
+                   if (ErrorCount === "1" || ErrorMessage != "") {
+                       alert(ErrorMessage);
+                   }
+                   else {
+                       if (itemid != '') {
+                           var itemId_ = itemid;// $("#plantypeslider").find('.item.active').attr('value');  //$("input[name='itemId']:checked").val();
+                       }
+                       else {
+                           var itemId_ = $("#plantypeslider").find('.item.active').attr('value');  //$("input[name='itemId']:checked").val();
+                       }
+                       var deliveryDate_ = $('#ddldeliveryDate option:selected').val();
+
+                       var optionId_ = $("#planoptionslider").find('.item.active').attr('value');
+                       var quantity_ = $("#quantity").val();
+                       var isrecurred = IsAutorenew;// $('#isRecurring').is(':checked');
+                       var profile = $('#UserprofileId').val();
+
+                       var ProgramAddToCartModel = { itemId: itemId_, optionId: optionId_, deliveryDateString: deliveryDate_, Quantity: quantity_, profileId: profile, isRecurring: isrecurred }
+
+                       $.ajax({
+                           type: "POST",
+                           url: '@Url.Action("AddProgramToCart", "Programs")',
+                           data: JSON.stringify(ProgramAddToCartModel), //'{ _addItemToCartModel: "' + AddtoCartFormData + '"}',
+                           contentType: "application/json; charset=utf-8",
+                           dataType: "json",
+                           success: function (res) {
+                               if (res.statusCode == 200) {
+                                   if (Islogin == "true") {
+                                       var x = document.getElementById("snackbar");
+                                       x.className = "show";
+                                       setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+                                       $('#lblAddtocartmessage').text(res.successMessage);
+                                       $('#snackbar').show();
+                                       $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                                       /*Redirect to Index page in Programs*/
+                            @*window.location.href = '@Url.Action("Index", "Programs")';*@
+                                       if (isrecurred == 'true') {
+                                           ///window.location.href = '@Url.Action("CartCheckout", "Cart")';
+                                           window.location.href = '/cart.aspx';
+                                       }
+                                       else {
+                                           window.location.href = '/cart.aspx';
+                                       }
+
+                                       return true;
+                                   }
+                                   else {
+                                       //alert('Please login and subscribe the plan');
+                                       window.location = "/login.aspx?ReturnUrl=/cart.aspx";
+                                   }
+                               }
+                                   else if (res.statusCode == 400) {
+
+                                       var x = document.getElementById("snackbar");
+                                       x.className = "show";
+                                       setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+                                       $('#lblAddtocartmessage').text(res.errorMessage);
+                                       $('#snackbar').show();
+                                       $("html, body").animate({ scrollTop: 0 }, "slow");
+                                       return false;
+                                   }
+
+                           },
+                           failure: function (response) {
+                               alert(response.errorMessage);
+                           }
+                       });
+                   }
+
+           //}
+           //else
+           //{
+           //    alert('Please Choose Delivery date');
+           //}
+
+        }
+        function ShowTabs() {
+            $('#divSubTabs').show();
+            $('#CloseProfileButton').show();
+            $('#AddProfileButton').hide();
+        }
+        function HideTabs() {
+            window.location.href = "/my-profile.aspx/6";
+            $('#divSubTabs').hide();
+            $('#CloseProfileButton').hide();
+            $('#AddProfileButton').show();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function checkShortcut() {
+            if (event.keyCode == 13) {
+                //alert("Enter key is not allowed");
+                return false;
+            }
+        }
+    function AddMealToCart(menuItemId)//,menuitemname,price)
+    {
+    $("#divLoader").css('display', '');
+    $('body').css("opacity", '0.7');
+    var AddtoCartFormData = getFormData($('#AddMealToCart' + menuItemId));
+    if (AddtoCartFormData.Quantity === undefined || AddtoCartFormData.Quantity === '' || AddtoCartFormData.Quantity === 0  )
+    {
+        alert('please enter quantity');
+        $("#divLoader").css('display', 'none');
+        $('body').css("opacity", '1.0');
+        return false;
+    }
+    if (AddtoCartFormData.Quantity === "0") {
+        alert('Quantity should be grater than zero');
+        $("#divLoader").css('display', 'none');
+        $('body').css("opacity", '1.0');
+        return false;
+    }
+    AddtoCartFormData.sideDishString1 = $('#ddlSide11-' + AddtoCartFormData.menuItemID + ' option:selected').text();
+    AddtoCartFormData.sideDishString1Id = $('#ddlSide11-' + AddtoCartFormData.menuItemID + ' option:selected').val();
+    if (AddtoCartFormData.sideDish1 == -1)
+    {
+        AddtoCartFormData.sideDishString1 = '';
+        AddtoCartFormData.sideDishString1Id = 0;
+    }
+    AddtoCartFormData.sideDishString2 = $('#ddlSide22-' + AddtoCartFormData.menuItemID + ' option:selected').text();
+    AddtoCartFormData.sideDishString2Id = $('#ddlSide22-' + AddtoCartFormData.menuItemID + ' option:selected').val();
+    if (AddtoCartFormData.sideDish2 == -1)
+    {
+        AddtoCartFormData.sideDishString2 = '';
+        AddtoCartFormData.sideDishString2Id = 0;
+    }
+            AddtoCartFormData.DeliveryDate = $('#ddlDeliveryDate option:selected').val();
+            AddtoCartFormData.isFamilyStyle = document.getElementById('isFamilyStyle_' + menuItemId).checked;
+        if (AddtoCartFormData.Quantity == 1 && AddtoCartFormData.isFamilyStyle == true) {
+               alert("Family Style will deliver 2 or more portions in one serving dish.This makes heating meals for the whole family more convenient, reduces packaging, and allows you to save 10% on the price.");
+                $("#divLoader").css('display', 'none');
+            $('body').css("opacity", '1.0');
+                return null;
+            }
+    $('input[value="3"]').prop('checked', true);
+    $.ajax({
+    type: "POST",
+    url: '@Url.Action("AddMealToCartAjax", "Menu")',
+    data: JSON.stringify(AddtoCartFormData), //'{ _addItemToCartModel: "' + AddtoCartFormData + '"}',
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (res) {
+            if (res.Success === false)
+            {
+                alert(res.Message);
+                $('body').css("opacity", '1');
+                $("#divLoader").css('display', 'none');
+            }
+            else
+            {
+                $('#UserCartCountGlobal').html(res.CartCount);
+                $('#aCart').addClass('cart-has-items');
+                //alert('Product Added To Cart');
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+                $('#snackbar').show();
+                //$("html, body").animate({ scrollTop: 0 }, "slow");
+                //var menuitemexitornot = $("#" + menuItemId + " p:first-child").text();
+                //if (menuitemexitornot === "")
+                //{
+                //    $("#yourcart").append('<div class="colul" style="width:100%;"><h4>' + menuitemname + '</h4 ><div class="col-md-12" id=' + menuItemId + '><p>' + price + '</p><p id="Quantity">1</p><p>Ordered</p></div></div >');
+                //   /*<p>Deliverydate: ' + new Date(AddtoCartFormData.DeliveryDate).toDateString("yyyy-MM-dd")+ '</p>*/
+                //}
+                //else
+                //{
+                //    var quantity = $("#" + menuItemId).find("#Quantity").text();
+                //    $("#" + menuItemId).find("#Quantity").text(parseInt(quantity) + parseInt(AddtoCartFormData.Quantity));
+                //}
+                $("#Yourcartpartialview").html(res.Message);
+                $('body').css("opacity", '1');
+                $("#divLoader").css('display', 'none');
+                document.getElementById('isFamilyStyle_' + menuItemId).checked = false;
+                document.getElementById("Quantity_" + menuItemId).value = "1";
+                $("#divfamilystyleerror_" + menuItemId).hide();
+                $("#originalprice_" + menuItemId).show();
+                $("#OriginalPriceStrike_" + menuItemId).hide();
+                $("#discountedprice_" + menuItemId).hide();
+                //location.reload(true);
+                return false;
+            }
+        },
+        failure: function (response)
+        {
+            alert(response.d);
+            $('body').css("opacity", '1');
+            $("#divLoader").css('display', 'none');
+        }
+     });
+        }
+        function AddMealToCart1(menuItemId)
+        {
+           $('#Addselectpopup-' + menuItemId + '').modal('hide');
+    $("#divLoader").css('display', '');
+    $('body').css("opacity", '0.7');
+    var AddtoCartFormData = getFormData($('#AddMealToCart' + menuItemId));
+    if (AddtoCartFormData.Quantity1 === undefined || AddtoCartFormData.Quantity1 === '' || AddtoCartFormData.Quantity1 === 0  )
+    {
+        alert('please enter quantity');
+        $("#divLoader").css('display', 'none');
+        $('body').css("opacity", '1.0');
+        return false;
+    }
+    if (AddtoCartFormData.Quantity1 === "0") {
+        alert('Quantity should be grater than zero');
+        $("#divLoader").css('display', 'none');
+        $('body').css("opacity", '1.0');
+        return false;
+    }
+    AddtoCartFormData.sideDishString1 = $('#ddlSide11-' + AddtoCartFormData.menuItemID + ' option:selected').text();
+    AddtoCartFormData.sideDishString1Id = $('#ddlSide11-' + AddtoCartFormData.menuItemID + ' option:selected').val();
+    if (AddtoCartFormData.sideDish1 == -1)
+    {
+        AddtoCartFormData.sideDishString1 = '';
+        AddtoCartFormData.sideDishString1Id = 0;
+    }
+    AddtoCartFormData.sideDishString2 = $('#ddlSide22-' + AddtoCartFormData.menuItemID + ' option:selected').text();
+    AddtoCartFormData.sideDishString2Id = $('#ddlSide22-' + AddtoCartFormData.menuItemID + ' option:selected').val();
+    if (AddtoCartFormData.sideDish2 == -1)
+    {
+        AddtoCartFormData.sideDishString2 = '';
+        AddtoCartFormData.sideDishString2Id = 0;
+    }
+            AddtoCartFormData.DeliveryDate = $('#ddlDeliveryDate option:selected').val();
+            AddtoCartFormData.isFamilyStyle = document.getElementById('isFamilyStyle1_' + menuItemId).checked;
+            if (AddtoCartFormData.Quantity1 == 1 && AddtoCartFormData.isFamilyStyle == true) {
+                alert("Family Style will deliver 2 or more portions in one serving dish.This makes heating meals for the whole family more convenient, reduces packaging, and allows you to save 10% on the price.");
+                $("#divLoader").css('display', 'none');
+                $('body').css("opacity", '1.0');
+                return false;
+            }
+                AddtoCartFormData.Quantity = AddtoCartFormData.Quantity1;
+                $('input[value="3"]').prop('checked', true);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddMealToCartAjax", "Menu")',
+                    data: JSON.stringify(AddtoCartFormData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.Success === false) {
+                            alert(res.Message);
+                            $('body').css("opacity", '1');
+                            $("#divLoader").css('display', 'none');
+                        }
+                        else {
+                            $('#UserCartCountGlobal').html(res.CartCount);
+                            $('#aCart').addClass('cart-has-items');
+                            var x = document.getElementById("snackbar");
+                            x.className = "show";
+                            setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+                            $('#snackbar').show();
+                            $("#Yourcartpartialview").html(res.Message);
+                            $('body').css("opacity", '1');
+                            $("#divLoader").css('display', 'none');
+                            $('#Addselectpopup-' + menuItemId + '').modal('hide');
+                            document.getElementById('isFamilyStyle1_' + menuItemId).checked = false;
+                            document.getElementById("Quantity1_" + menuItemId).value = "1";
+                            $("#divfamilystyleerror1_" + menuItemId).hide();
+                            $("#originalprice1_" + menuItemId).show();
+                            $("#OriginalPriceStrike1_" + menuItemId).hide();
+                            $("#discountedprice1_" + menuItemId).hide();
+                            return false;
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                        $('body').css("opacity", '1');
+                        $("#divLoader").css('display', 'none');
+                    }
+                });
+}
+                function getFormData(Addtocartform)
+{
+        var unindexed_array = Addtocartform.serializeArray();
+    var indexed_array = {};
+    var prefIds = [];
+    var prefIdname = 'prefIds';
+    $.map(unindexed_array, function (n, i) {
+        indexed_array[n['name']] = n['value'];
+        if (n['name'] == prefIdname) {
+            prefIds.push(n['value']);
+        }
+    });
+    indexed_array[prefIdname] = prefIds;
+    return indexed_array;
+}
+        function togleFamilyStyle(MenuItemID) {
+            if (document.getElementById('isFamilyStyle_' + MenuItemID).checked)
+        {
+                var itemqantity = document.getElementById('Quantity_' + MenuItemID).value;
+             if (itemqantity == 2 || itemqantity > 2) {
+                 document.getElementById("isFamilyStyle_" + MenuItemID).checked = true;
+                 $("#originalprice_" + MenuItemID).hide();
+                 $("#OriginalPriceStrike_" + MenuItemID).show();
+                 $("#discountedprice_" + MenuItemID).show();
+                //AddMealToCart(MenuItemID);
+            }
+            else
+             {
+                 $("#originalprice_" + MenuItemID).hide();
+                 $("#OriginalPriceStrike_" + MenuItemID).show();
+                 $("#discountedprice_" + MenuItemID).show();
+                 $("#divfamilystyleerror_" + MenuItemID).css('display', 'block');
+                 var qty = document.getElementById('Quantity_' + MenuItemID);
+                 qty.value = 2;
+                 qty.focus();
+            }
+        }
+        else
+            {
+                    document.getElementById('Quantity_' + MenuItemID).value = 1;
+                $("#divfamilystyleerror_" + MenuItemID).hide();
+                $("#originalprice_" + MenuItemID).show();
+                $("#OriginalPriceStrike_" + MenuItemID).hide();
+                $("#discountedprice_" + MenuItemID).hide();
+        }
+        }
+        function adjustRadioValues(price,menuitemid) {
+            document.getElementById('OriginalPriceStrike1_' + menuitemid).textContent = "$"+price;
+            document.getElementById('discountedprice1_' + menuitemid).textContent ="$"+ (price * 0.9).toFixed(2);
+        }
+
+        function togleFamilyStyle1(MenuItemID)
+        {
+            debugger;
+            if (document.getElementById('isFamilyStyle1_' + MenuItemID).checked)
+            { 
+                var itemqantity = document.getElementById('Quantity1_' + MenuItemID).value;
+                if (itemqantity == 2 || itemqantity > 2) {
+                    document.getElementById("isFamilyStyle1_" + MenuItemID).checked = true;
+                    $("#originalprice1_" + MenuItemID).hide();
+                    $("#OriginalPriceStrike1_" + MenuItemID).show();
+                    $("#discountedprice1_" + MenuItemID).show();
+                    //AddMealToCart1(MenuItemID);
+                }
+                else {
+                    $("#originalprice1_" + MenuItemID).hide();
+                    $("#OriginalPriceStrike1_" + MenuItemID).show();
+                    $("#discountedprice1_" + MenuItemID).show();
+                    $("#divfamilystyleerror1_" + MenuItemID).css('display', 'block');
+                    var qty = document.getElementById('Quantity1_' + MenuItemID);
+                    qty.value = 2;
+                    qty.focus();
+                }
+            }
+            else {
+                    document.getElementById('Quantity1_' + MenuItemID).value = 1;
+                $("#divfamilystyleerror1_" + MenuItemID).hide();
+                $("#originalprice1_" + MenuItemID).show();
+                $("#OriginalPriceStrike1_" + MenuItemID).hide();
+                $("#discountedprice1_" + MenuItemID).hide();
+            }
+        }
+
+    function increaseItemQuantity(isIncrease, menuItemId) {
+        if (isIncrease) {
+            document.getElementById("Quantity_" + menuItemId).value = "2";
+            document.getElementById("isFamilyStyle_" + menuItemId).checked = true;
+            $("#divfamilystyleerror_" + menuItemId).hide();
+            AddMealToCart(menuItemId);
+        }
+        else {
+            $("#divfamilystyleerror_" + menuItemId).hide();
+            document.getElementById("isFamilyStyle_" + menuItemId).checked = false;
+        }
+        }
+        function increaseItemQuantity1(isIncrease, menuItemId) {
+            if (isIncrease) {
+                document.getElementById("Quantity1_" + menuItemId).value = "2";
+                document.getElementById("isFamilyStyle1_" + menuItemId).checked = true;
+                $("#divfamilystyleerror1_" + menuItemId).hide();
+                AddMealToCart1(menuItemId);
+            }
+            else {
+                $("#divfamilystyleerror1_" + menuItemId).hide();
+                document.getElementById("isFamilyStyle1_" + menuItemId).checked = false;
+            }
+        }
+        function validateQuantity(menuitemid) {
+            if (document.getElementById('Quantity_' + menuitemid).value == 1) {
+                document.getElementById("isFamilyStyle_" + menuitemid).checked = false;
+                $("#divfamilystyleerror_" + menuitemid).hide();
+                $("#originalprice_" + menuitemid).show();
+                $("#OriginalPriceStrike_" + menuitemid).hide();
+                $("#discountedprice_" + menuitemid).hide();
+            }
+        }
+        function validateQuantity1(menuitemid) {
+            if (document.getElementById('Quantity1_' + menuitemid).value == 1) {
+                document.getElementById("isFamilyStyle1_" + menuitemid).checked = false;
+                $("#divfamilystyleerror1_" + menuitemid).hide();
+                $("#originalprice1_" + menuitemid).show();
+                $("#OriginalPriceStrike1_" + menuitemid).hide();
+                $("#discountedprice1_" + menuitemid).hide();
+            }
+        }
+    </script>
+
+</body>
+</html>

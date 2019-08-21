@@ -1,0 +1,199 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.AccountViewModel
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+    Html.EnableClientValidation(true);
+}
+
+
+<div id="main">
+    <div class="background_bg">
+        <div class="container-bottom container">
+            <div class="container-cnt">
+                <!-- Header -->
+                <div class="full-page-header">
+                    <div class="alignleft">
+
+                    </div>
+                    <div class="info">
+
+                    </div>
+                    <div class="cl">&nbsp;</div>
+                </div>
+                <!-- Body Content -->
+
+
+
+                <style type="text/css">
+                    .block {
+                        display: inline-block;
+                    }
+
+                    .fieldRow {
+                        margin: 0.5em 0;
+                    }
+
+                    /*label.push {
+                        min-width: 100px;
+                        display: inline-block;
+                        margin: 0 1em 0 0;
+                        text-align: right;
+                        float:left;
+                    }*/
+
+                    fieldset {
+                        margin: 0;
+                        padding: 0;
+                        border: none;
+                    }
+
+                    legend {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 25px;
+                        line-height: 25px;
+                        font-weight: normal;
+                        color: black;
+                        font-family: 'MyriadPro-BoldCond', arial, sans-serif;
+                    }
+                    .form-control {
+                        width: 30%;
+                        padding: 5px 5px;
+                    }
+                    select {
+                        line-height: 2 !important;
+                    }
+                    input[type=checkbox] {
+                        float: left;
+                        display: block;
+                    }
+                    .form-region .form-edit {
+                        display: none;
+                    }
+                </style>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('label').each(function (index, element) {
+                            $(element).addClass('push');
+                            if ($('input:checkbox', $(element).parent())[0]) {
+                                $(element).css('text-align', 'left');
+                            }
+                        });
+
+                        $("#tabsClient").tabs({
+                            cookie: {
+                                // store cookie for a day, without, it would be a session cookie
+                                expires: 1
+                            }
+                        });
+
+                        ////set all <DIV> elements equal in height w/o max-height property
+                        //if ($('.m-nav')[0]) {
+
+                        $('#tabsClient li a.profTab:first').addClass('active-meal');
+
+                        //Set references
+                        $('#tabsClient li a.profTab').each(function (i, e) {
+                            $(e).click(function (event) {
+                                event.preventDefault();
+                                $("#hdnLastTab").val($(this).text());
+                                //Clear active menu item
+                                $('#tabsClient li a.profTab').removeClass('active-meal');
+
+                                //Set this menu item as active
+                                $(this).addClass('active-meal');
+                            });
+                        });
+                        //}
+
+                        var lastTab = $("#hdnLastTab").val();
+
+                        if (lastTab.length > 0) {
+                            var t = $('#tabsClient li a.profTab:contains(' + lastTab + ')');
+                            var idx = $('#tabsClient li a.profTab').index($('#tabsClient li a.profTab:contains(' + lastTab + ')'));
+                            $('#tabsClient').tabs('option', "active", idx);
+                        }
+                        $('#ui-id-@Model.ActiveTab').click();
+                    });
+                </script>
+                <input type="hidden" name="ctl00$body$ctl00$hdnLastTab" id="hdnLastTab" value="Account">
+
+                <div id="tabsClient" class="m-nav ui-tabs ui-widget ui-widget-content ui-corner-all">
+                    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                        <li id="ctl00_body_ctl00_li_link_01" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="panel1" aria-labelledby="ui-id-1" aria-selected="true"><a href="#panel1" class="profTab ui-tabs-anchor active-meal" role="presentation" tabindex="-1" id="ui-id-1"><span>Account</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_02" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel2" aria-labelledby="ui-id-2" aria-selected="false"><a href="#panel2" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2"><span>Shipping</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_03" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel3" aria-labelledby="ui-id-3" aria-selected="false"><a href="#panel3" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3"><span>Billing</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_04" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel4" aria-labelledby="ui-id-4" aria-selected="false"><a href="#panel4" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4"><span>Preferences</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_05" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel5" aria-labelledby="ui-id-5" aria-selected="false"><a href="#panel5" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-5"><span>Allergens</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_06" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel6" aria-labelledby="ui-id-6" aria-selected="false"><a href="#panel6" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-6"><span>Sub-Profiles</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_07" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel7" aria-labelledby="ui-id-7" aria-selected="false"><a href="#panel7" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-7"><span>Orders</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_09" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel9" aria-labelledby="ui-id-9" aria-selected="false"><a href="#panel9" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-9"><span>Auto-Renewals</span></a></li>
+                        <li id="ctl00_body_ctl00_li_link_08" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel8" aria-labelledby="ui-id-8" aria-selected="false"><a href="#panel8" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-8"><span>Password</span></a></li>
+                    </ul>
+                    <div id="panel1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
+
+                        @{
+                            Html.RenderPartial("~/Views/Account/_UpdateBasicInfo.cshtml",Model.CustomerBasicInfoModel);
+                        }
+
+                    </div>
+                    <div id="panel2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_UpdateShippingInfo.cshtml", Model.CustomerShippinInfoModel);
+                        }
+
+                    </div>
+                    <div id="panel3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        <div class="plan_edit">
+                            @{
+                                Html.RenderPartial("~/Views/Account/_UpdateBillingInfo.cshtml", Model.CustomerBillingInfoModel);
+                                Html.RenderPartial("~/Views/Account/_UpdateCreditCardInfo.cshtml", Model.CustomerCreditCardInfoModel);
+                            }
+                        </div>
+
+                    </div>
+                    <div id="panel4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_UpdateCustomerPreferences.cshtml", Model.CustomerPrefUpdateModel);
+                        } 
+                        
+                    </div>
+                    <div id="panel5" aria-labelledby="ui-id-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_UpdateCustomerAllergens.cshtml", Model.CustomerAllergensUpdateModel);
+                        }
+
+                    </div>
+                    <div id="panel6" aria-labelledby="ui-id-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_CustomerSubProfilesInfo.cshtml", Model.CustomerSubProfilesinfoModel);
+                        }
+
+                    </div>
+                    <div id="panel7" aria-labelledby="ui-id-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_CustomerOrderInfo.cshtml", Model.CustomerOrderInfoModel);
+                        }                       
+
+                    </div>
+                    <div id="panel9" aria-labelledby="ui-id-9" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                        @{
+                            Html.RenderPartial("~/Views/Account/_CustomerRecurringOrderInfo.cshtml", Model.CustomerRecurringOrderInfoModel);
+                        }                        
+
+                    </div>
+                    <div id="panel8" aria-labelledby="ui-id-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+
+                        @{
+                            Html.RenderPartial("~/Views/Account/_UpdateCustomerPassword.cshtml", Model.CustomerUpdatePasswordModel);
+                        }                       
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

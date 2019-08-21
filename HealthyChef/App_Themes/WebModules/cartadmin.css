@@ -1,0 +1,90 @@
+﻿
+.dayPanel {
+    padding: 0px;
+    margin-right: 8px;
+    border: 0;
+}
+
+    .dayPanel select {
+        width: 400px;
+        font-size: 10px;
+    }
+
+.right {
+    text-align: right;
+}
+
+.redFont {
+    color: red;
+}
+
+.greenFont {
+    color: green;
+}
+
+.redBorder {
+    border: 1px solid red;
+}
+
+.greenBorder {
+    border: 1px solid green;
+}
+
+.blueBorder {
+    border: 1px solid blue;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+li {
+    padding: 2px;
+    font-size: 11px;
+    /*list-style: none;*/
+}
+
+.nutrData {
+    display: inline;
+    width: 60px;
+}
+
+    .nutrData fieldset {
+        padding: 0;
+    }
+
+.divDdl {
+}
+
+.divPrefs {
+    max-width: 400px;
+}
+
+    .divPrefs span {
+        margin-right: 10px;
+    }
+
+.divPrefs, .divNuts, .divAllrgs {
+    font-size: 10px;
+}
+
+.label {
+    margin: 0px 0px;
+    font-weight: bold;
+}
+
+.label2 {
+    display: inline;
+    margin: 0px 0px;
+    font-weight: bold;
+}
+
+/*ul {
+    margin: 0px 15px;
+    padding: 0px;
+}*/
+

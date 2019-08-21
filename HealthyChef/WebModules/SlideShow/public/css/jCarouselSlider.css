@@ -1,0 +1,25 @@
+/**
+ * jCarousel Slider Styles
+ */
+
+/*.c-holder { height: 20px; background: #000; padding-top: 8px; }
+.c-holder a { background: url(/WebModules/SlideShow/public/images/slider-nav.png) no-repeat 0 0; width: 10px; height: 11px; margin: 0 2px; float: left; display: inline; font-size: 0; line-height: 0; text-indent: -4000px; }
+.c-holder a:hover,
+.c-holder a.active { background: url(/WebModules/SlideShow/public/images/slider-nav-active.png) no-repeat 0 0; }
+
+.cent { margin: 0 auto; }*/
+
+/*.text-slider ul li { background: none; }
+
+.slider, .text-slider { position: relative; }
+
+.slider .c-holder, .text-slider .c-holder { background: #000; }
+
+.slider { width: 960px; border: 5px solid #282828; margin: 0 0 10px 0; position: relative; min-height: 359px; }
+.slider .slider-navigation, .text-slider .slider-navigation { clear: both; }
+.slider .slider-navigation a, .text-slider .slider-navigation a { width: 56px; height: 111px; font-size: 0; line-height: 0; text-indent: -4000px; display: block; position: absolute; bottom: 25px; }
+.slider .slider-navigation a.prev, .text-slider .slider-navigation a.prev { background: url(/WebModules/SlideShow/public/images/slider-prev.png) no-repeat 0 0; width: 56px; } 
+.slider .slider-navigation a.next, .text-slider .slider-navigation a.next { background: url(/WebModules/SlideShow/public/images/slider-next.png) no-repeat 0 0; right: 5px; } 
+.slider .slider-navigation a.prev.off, .text-slider .slider-navigation a.prev.off { background: url(/WebModules/SlideShow/public/images/slider-no-prev.png) no-repeat 0 0; width: 56px; } 
+.slider .slider-navigation a.next.off, .text-slider .slider-navigation a.next.off { background: url(/WebModules/SlideShow/public/images/slider-no-next.png) no-repeat 0 0; right: 5px; } */
+

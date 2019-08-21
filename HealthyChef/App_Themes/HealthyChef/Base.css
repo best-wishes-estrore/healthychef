@@ -1,0 +1,174 @@
+﻿html { 
+    /* always show firefox scrollbar, to prevent horizontal shift. */
+    overflow:-moz-scrollbars-vertical; 
+}
+
+/* "Edit Module" button that appears on the front-end for authorized users. */
+.webmodules_editModuleLink,
+a.webmodules_editModuleLink,
+a.webmodules_editModuleLink:link,
+a.webmodules_editModuleLink:visited {
+    background-color: #FFFFA5;
+    padding: 1px 2px 2px 2px;
+    border: 1px dotted gray;
+    position: absolute; /*preserve layout*/
+    font-size: 100%;
+    color: Blue;
+    font-weight: normal;
+    text-decoration: underline;
+    z-index: 9999; /*CMS buttons should always be on top.*/
+}
+.webmodules_editModuleLink:hover,
+a.webmodules_editModuleLink:hover {
+    font-size: 100%;
+    color: #00A2FF;
+}
+
+/* "Edit Page" button that appears on the front-end for authorized users. */
+.webmodules_editPageLink,
+a.webmodules_editPageLink,
+a.webmodules_editPageLink:link,
+a.webmodules_editPageLink:visited {
+    background-color: #FFFFA5;
+    padding: 1px 2px 2px 2px;
+    border: 1px dotted gray;
+    position: absolute; 
+    top: 5px;
+    left: 5px;
+    font-size: 100%;
+    color: Blue;
+    font-weight: normal;
+    text-decoration: underline;
+    z-index: 9999; /*CMS buttons should always be on top.*/
+}
+.webmodules_editPageLink:hover,
+a.webmodules_editPageLink:hover {
+    font-size: 100%;
+    color: #00A2FF;
+}
+
+/* sub navigation highlighted/activated style. */
+.subnav .on a:link, .subnav .on a:visited, .subnav .on a:hover, .subnav .on a:active {
+	background-color: #00FF00;
+}
+
+/******************************************************************************
+ main navigation menu. 
+******************************************************************************/
+.mainNavDropDown {
+    z-index: 1; /* do not remove; fixes IE8 rendering issue. */
+    padding: 10px 0px 0px 0px;
+}
+
+/* the <table> element for each menu item. */
+.mainNavDropDown_item {
+}
+
+/* this <td> is contained by the <table> above. */
+.mainNavDropDown_item td {
+}
+
+/* this <a> is contained by the <td> above. */
+.mainNavDropDown_item a {
+    display: block; /* do not mess with this. */
+}
+
+/* do *not* put multiplicative things like padding in here. */
+.mainNavDropDown_item, /* required */
+.mainNavDropDown_item a, /* required */
+.mainNavDropDown_item a:link, /* required */
+.mainNavDropDown_item a:visited /* required */ {
+	background-color: #00FF00;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    width: 15em;
+    padding: 10px 5px;
+}
+
+/* the <table> element for each menu item. */
+.mainNavDropDown_item_hover {
+}
+
+/* this <td> is contained by the <table> above. */
+.mainNavDropDown_item_hover td /* important */ {
+}
+
+/* this <a> is contained by the <td> above. */
+.mainNavDropDown_item_hover a {
+    display: block; /* do not mess with this. */
+}
+
+/* do *not* put multiplicative things like padding in here. */
+.mainNavDropDown_item_hover, /* required */
+.mainNavDropDown_item_hover a, /* required */
+.mainNavDropDown_item_hover a:link, /* required */
+.mainNavDropDown_item_hover a:visited, /* required */
+.mainNavDropDown_item_hover a:hover, /* required */
+.mainNavDropDown_item_hover a:active /* required */ {
+	background-color: #00FF00;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    width: 15em;
+    padding: 10px 5px;
+}
+
+/*.updateProgressContainer
+{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    z-index: 1000;
+}
+
+.updateProgressDisplay
+{
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    top: 30%;
+    left: 43%;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+    z-index: 1001;
+    background-color: #fff;
+    border: solid 1px #000;
+}*/
+.updateProgressContainer
+{
+    display: none;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    z-index: 1000;
+}
+
+.updateProgressDisplay
+{
+    display: none;
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    top: 30%;
+    left: 43%;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+    z-index: 1001;
+    background-color: #fff;
+    border: solid 1px #000;
+}

@@ -1,0 +1,105 @@
+﻿
+@*@{
+    ViewBag.Title = "ThankYou";
+    Layout = "~/Views/Shared/_Header.cshtml";
+}*@
+<div class="container">
+    <!-- Header -->
+    @*<div class="full-page-header">
+        <div class="alignleft">
+
+        </div>
+        <div class="info">
+
+        </div>
+        <div class="cl">&nbsp;</div>
+    </div>*@
+    <!-- Body Content -->
+    <h2 class="post-header">Thank you</h2>
+    <div id="printContainer">
+        <h3>Your purchase is complete.  Thank you for your order!</h3>
+        <br>
+        <asp:label id="lblCompleteDetail" runat="server"></asp:label>                                         <br>
+        You may view your order at any time at <a href="www.healthychefcreations.com">www.healthychefcreations.com</a>  by logging in and clicking My Profile, My Orders.                                           <br>
+        <br>
+        An electronic receipt has been emailed to you.      <img src="//cdsusa.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=A08F77AF-E33F-46CC-A80B-924B9E1C4E4D" width="1" height="1" alt="">                  <img id="track_id" src="https://shareasale.com/sale.cfm?amount=31.9400&amp;tracking=3728763&amp;transtype=sale&amp;merchantID=65905" width="1" height="1" alt="">  <iframe id="stage_id_iframe" src="https://stage39.go2cloud.org/aff_l?offer_id=84&amp;amount=31.9400" scrolling="no" frameborder="0" width="1" height="1"></iframe>
+    </div>
+    <p>
+        <meta name="msvalidate.01" content="36EB1A194C116E88B600C9EB1A332622">
+        <meta name="google-site-verification" content="pEdaIoVNdrxoDXJowruYbab9hy2qMQxLxb2gJJKLaJE">
+        <script type="text/javascript">
+ function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var hdn1 = getParameterByName("pn");
+        var hdn2 = getParameterByName("tl");
+        var hdn3 = getParameterByName("tx");
+        var hdn4 = getParameterByName("ts");
+        var hdn5 = getParameterByName("ct");
+        var hdn6 = getParameterByName("st");
+        var hdn7 = getParameterByName("cy");
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-32947650-1']);
+        _gaq.push(['_trackPageview']);
+        _gaq.push(['_addTrans',
+            hdn1, // transaction ID - required
+            'Healthy Chef Creations',  // affiliation or store name
+            hdn2, // total - required
+            hdn3, // tax
+            hdn4, // shipping
+            hdn5, // city
+            hdn6, // state or province
+            hdn7, // country
+        ]);
+        _gaq.push(['_trackTrans']);
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-32947650-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+
+ function getParameterByNameVal(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+   $(document).ready(function () {
+        var purchaseNum = getParameterByNameVal("pn");
+        var totalAmount = getParameterByNameVal("tl");
+        document.getElementById("track_id").src = "https://shareasale.com/sale.cfm?amount=" + totalAmount + "&tracking=" + purchaseNum + "&transtype=sale&merchantID=65905";
+        document.getElementById("stage_id_iframe").src = "https://stage39.go2cloud.org/aff_l?offer_id=84&amount=" + totalAmount;
+    });
+
+        </script>
+    </p>
+</div>
+<style>
+    .home-page #slider {
+        display: none !important;
+    }
+    .body-content1 .container {
+        padding:40px 20px;
+    }
+</style>

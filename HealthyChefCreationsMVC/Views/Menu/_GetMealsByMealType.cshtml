@@ -1,0 +1,572 @@
+﻿@model HealthyChefCreationsMVC.CustomModels.ViewMenuModel
+
+@foreach (var m in Model.alcMenu)
+{
+    var _showHealthyChefFav = m.meal.CanyonRanchRecipe != true ? "hidden" : "";
+    var _showSoyFree = m.meal.CanyonRanchApproved != true ? "hidden" : "";
+    var _showVegOptAvail = m.meal.VegetarianOptionAvailable != true ? "hidden" : "";
+    var _showVeganOptAvail = m.meal.VeganOptionAvailable != true ? "hidden" : "";
+    var _showGlutenFreeAvail = m.meal.GlutenFreeOptionAvailable != true ? "hidden" : "";
+    using (Html.BeginForm("AddMealToCart", "Menu", FormMethod.Post, new { @id = "AddMealToCart" + m.meal.MenuItemID }))
+    {
+        <span id=""></span>
+        <div class="mealItem">
+            <div class="col-md-4" style="padding-left:0px">
+                @*<img class="img-responsive" src="/userfiles/images/QuinoaBowls sm.jpg" />*@
+                <img class="img-responsive" src="@m.meal.ImageUrl" />
+            </div>
+            <div class="main-description">
+                <span class="food-title"><a href="/ProductDescription?ItemName=@m.meal.Name">@m.meal.Name</a></span>
+                @*<span><img id="" title="Healthy Chef Favorite" class="healthychef-favorite-logo @_showHealthyChefFav" src="~/Content/Images/Healthy-Chef-Logo-leaves.png"></span>
+                    <span><img id="" title="Soy Free Option Available" class="options-logo @_showSoyFree" src="~/Content/Images/sf-button.png" style="border-width:0px;"></span>
+                    <span><img id="" title="Vegetarian Option Available" class="options-logo @_showVegOptAvail" src="~/Content/Images/vg-button.png" alt="Vegetarian Option Available" style="border-width:0px;"></span>
+                    <span><img id="" title="Vegan Option Available" class="options-logo @_showVeganOptAvail" src="~/Content/Images/vn-button.png" alt="Vegan Option Available" style="border-width:0px;"></span>
+                    <span><img id="" title="Gluten Free Option Available" class="options-logo @_showGlutenFreeAvail" src="~/Content/Images/gf-button.png" alt="Gluten Free Option Available" style="border-width:0px;"></span>*@
+                <div>@m.meal.Description</div>
+                <p><em>Allergens: @m.AllergenList</em></p>
+
+                <div class="fly-out" style="width: 100%;display:none;">
+                    <table style="width: 100%;display:none !important;">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: top;width: 33.3%;padding-right: 1em;">
+                                    <div class="fly-column" style="width: 100%;">
+
+                                        @if (Model.activeProfiles.Count > 1)
+                                        {
+                                            <div id="divProfiles">
+                                                <h3 class="font-myriad-cond color-olive">Select a Profile</h3>
+                                                <select name="ProfileID" id="" class="date-picker" style="width:100%">
+                                                    @foreach (var p in Model.activeProfiles)
+                                                    {
+                                                        if (p.IsChildProfile == false)
+                                                        {
+                                                            <option value="@p.UserProfileID" selected="selected">@p.ProfileName</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@p.UserProfileID">@p.ProfileName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        }
+
+                                        @if (m.mealSizes != null && m.mealSizes.Count > 1)
+                                        {
+                                            <div id="">
+                                                <h3 class="font-myriad-cond color-olive">Serving Size</h3>
+                                                <table class="form-select-menu radio-sizes">
+
+                                                    <tbody>
+                                                        @foreach (var ms in m.mealSizes)
+                                                        {
+                                                            <tr class="bg-lime-light">
+                                                                <td class="left-box" style="width:100%;margin-top: 3px;display: inline-block;">
+                                                                    <span class="meal-size" data-price="@ms.Price"><input id="" type="radio" name="sizeId1" value="@ms.SizeId"></span>
+                                                                </td>
+                                                                <td class="middle-box">
+                                                                    @ms.Description
+                                                                </td>
+                                                                <td class="right-box">
+                                                                    @string.Format("{0:c}", ms.Price)
+                                                                </td>
+                                                            </tr>
+                                                        }
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                        else if (m.mealSizes.Count == 1)
+                                        {
+                                            <input type="hidden" value="@m.mealSizes[0].SizeId" name="sizeId" />
+                                        }
+                                    </div>
+                                </td>
+                                <td style="vertical-align: top;padding-right: 1em;width:33.3%">
+                                    <div class="fly-column" style="width: 100%;">
+                                        @if (m.prefsList != null && m.prefsList.Count != 0)
+                                        {
+                                            <div id="">
+                                                <h3 class="font-myriad-cond color-olive">Options</h3>@*Preferences*@
+                                                <table class="form-select-menu radio-prefs" border="0">
+
+                                                    <tbody>
+                                                        @foreach (var pref in m.prefsList)
+                                                        {
+                                                            <tr>
+                                                                <td class="left-box" style="width:100%;margin-top: 3px;display: inline-block;">
+                                                                    <span class="meal-prefs" data-price="@pref.Preference.Cost"><input id="" type="checkbox" name="prefIds" value="@pref.PreferenceID"></span>
+                                                                </td>
+                                                                <td class="middle-box">
+                                                                    @pref.Preference.Name
+                                                                </td>
+                                                                <td class="right-box">
+                                                                    @pref.Preference.Cost
+                                                                </td>
+                                                            </tr>
+                                                        }
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                                <td id="sidesDishesColumn" style="vertical-align: top;width: 33.3%;">
+                                    <div class="fly-column" style="width: 100%;">
+                                        @if (Model.alcSides != null)
+                                        {
+                                            <div id="">
+                                                <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
+                                                <table class="form-select-menu select-sides" border="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <select name="sideDish1" id="ddlSide1-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
+                                                                    @foreach (var d in Model.alcSides)
+                                                                    {
+                                                                        <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="bg-grey-light">
+                                                            <td style="border: none;">
+                                                                @if (Model.alcSides != null)
+                                                                {
+                                                                    <select name="sideDish2" id="ddlSide2-@m.meal.MenuItemID" class="meal-side" meal-side="2" style="width:100%;">
+                                                                        @foreach (var d in Model.alcSides)
+                                                                        {
+                                                                            <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                        }
+                                                                    </select>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="cl">&nbsp;</div>
+                </div>
+            </div>
+            @*select modal popup start*@
+            <div id="Addselectpopup-@m.meal.MenuItemID" class="modal-dialog new_modalpopup Addselectpopup" style="display:none;">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" id="closebutton">&times;</button>
+                        <h4 class="modal-title">@m.meal.Name</h4>
+                    </div>
+                    <div class="modal-body nutrition_body">
+                        <div class="" style="width: 100%;">
+                            <table style="width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="vertical-align: top;width: 33.3%;padding-right: 1em;">
+                                            <div class="fly-column" style="width: 100%;">
+
+                                                @if (Model.activeProfiles.Count > 1)
+                                                {
+                                                    <div id="divProfiles">
+                                                        <h3 class="font-myriad-cond color-olive">Select a Profile</h3>
+                                                        <select name="ProfileID" id="" class="date-picker" style="width:100%">
+                                                            @foreach (var p in (Model.activeProfiles).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                                                            {
+                                                                if (p.IsChildProfile == false)
+                                                                {
+                                                                    <option value="@p.UserProfileID" selected="selected">@p.ProfileName</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@p.UserProfileID">@p.ProfileName</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                }
+
+                                                @if (m.mealSizes != null && m.mealSizes.Count > 1)
+                                                {
+                                                    <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSizes">
+                                                        <h3 class="font-myriad-cond color-olive">Serving Size</h3>
+                                                        <table class="form-select-menu radio-sizes">
+
+                                                            <tbody>
+                                                                @foreach (var ms in m.mealSizes)
+                                                                {
+                                                                    <tr class="bg-lime-light">
+                                                                        <td class="left-box" style="width:100%;margin-top: 3px;display: inline-block;">
+                                                                            <span class="meal-size" data-price="@ms.Price"><input id="" type="radio" name="sizeId" onchange="adjustRadioValues(@ms.Price,@m.meal.MenuItemID);" value="@ms.SizeId"></span>
+                                                                        </td>
+                                                                        <td class="middle-box">
+                                                                            @ms.Description
+                                                                        </td>
+                                                                        <td class="right-box">
+                                                                            @string.Format("{0:c}", ms.Price)
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                }
+                                                else if (m.mealSizes.Count == 1)
+                                                {
+                                                    <input type="hidden" value="@m.mealSizes[0].SizeId" name="sizeId" />
+                                                }
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: top;padding-right: 1em;width: 33.3%">
+                                            <div class="fly-column" style="width: 100%;">
+                                                @if (m.prefsList != null && m.prefsList.Count != 0)
+                                                {
+                                                    <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divPrefs">
+                                                        <h3 class="font-myriad-cond color-olive">Options</h3>@*Preferences*@
+                                                        <table class="form-select-menu radio-prefs" border="0">
+
+                                                            <tbody>
+                                                                @foreach (var pref in m.prefsList)
+                                                                {
+                                                                    <tr>
+                                                                        <td class="left-box" style="width:100%;margin-top: 3px;display: inline-block;">
+                                                                            <span class="meal-prefs" data-price="@pref.Preference.Cost"><input id="" type="checkbox" name="prefIds" value="@pref.PreferenceID"></span>
+                                                                        </td>
+                                                                        <td class="middle-box">
+                                                                            @pref.Preference.Name
+                                                                        </td>
+                                                                        <td class="right-box">
+                                                                            @pref.Preference.Cost
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td id="sidesDishesColumn" style="vertical-align: top;width: 33.3%;">
+                                            <div class="fly-column" style="width: 100%;">
+                                                @if (Model.alcSides != null)
+                                                {
+                                                    <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
+                                                        <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
+                                                        <table class="form-select-menu select-sides" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <select name="sideDish1" id="ddlSide11-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
+                                                                            @foreach (var d in Model.alcSides)
+                                                                            {
+                                                                                <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                            }
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr class="bg-grey-light">
+                                                                    <td style="border: none;">
+                                                                        @if (Model.alcSides != null)
+                                                                        {
+                                                                            <select name="sideDish2" id="ddlSide22-@m.meal.MenuItemID" class="meal-side" meal-side="2" style="width:100%;">
+                                                                                @foreach (var d in Model.alcSides)
+                                                                                {
+                                                                                    <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                }
+                                                                            </select>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        </td>
+                                        @*<td style="padding: 0px 10px;width: 20%;vertical-align: top;display:none;">
+                                                <div class="panel-add-to-cart" style="position: relative;">
+                                                    Price: <span class="plan-price-text right-align">@m.Price</span>
+                                                    <div style="height: 10px;"></div>
+                                                    Quantity:
+                                                    <input name="Quantity" type="number" min="0" value="1" max="99" maxlength="2" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_txtQuantity" class="right-align txt-quantity" style="width:20px;">
+                                                    <span id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_rfvQty" style="color:Red;display:none;">*</span>
+                                                    <span id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_cprQty" style="color:Red;display:none;">*</span>
+                                                    <div style="height: 10px;"></div>
+                                                    @if (m.mealSizes.Count == 1)
+                                                    {
+                                                    <input type="button" name="" value="Add to Cart" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                                                    }
+                                                    else
+                                                    {
+                                                    <input type="button" name="" value="Add to Cart" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange">
+                                                    }
+                                                    <span id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_lblAddItemFeedback"></span>
+                                                    <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_ValSumAtC" style="color:Red;font-size:XX-Small;display:none;">
+
+                                                    </div>
+                                                </div>
+                                            </td>*@
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cl">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="familystyle_div">
+                            <div class="menuquestion cart_check">
+                                <div class="check  align_FS">
+                                    <span>Save 10% With <b class="familystyle">Family Style</b></span>
+                                    <input type="checkbox" id="isFamilyStyle1_@m.meal.MenuItemID" onclick="togleFamilyStyle1(@m.meal.MenuItemID);" />
+                                    <div class="questionmark" data-toggle="modal" data-target="#familystyleinfo">
+                                        <img src="~/Content/Images/question.png" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="align_23">
+                                <div class="align_FS_2">
+                                    <strike style="margin-right:10px" class="strike"><span class="plan-price-text right-align" style="display:none" id="OriginalPriceStrike1_@m.meal.MenuItemID">@m.Price</span></strike><span class="plan-price-text right-align" id="originalprice1_@m.meal.MenuItemID">@m.Price</span><span class="plan-price-text right-align" style="display:none" id="discountedprice1_@m.meal.MenuItemID">@m.DiscountedMockPrice</span><span class="Qty_price"> | QTY:</span>
+                                    <input type="number" id="Quantity1_@m.meal.MenuItemID" class="Quantitymenu" onkeydown="return checkShortcut();" onchange="validateQuantity1(@m.meal.MenuItemID)" name="Quantity1" value="1" min="1" />
+                                </div>
+                                <div class="align_FS_2_3">
+                                    <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float: left;">
+                                        <span style="margin: 3px 5px;">Family Style requires 2 or more servings.</span>
+                                    </div>
+                                    <div class="pull-right">
+                                        @if (m.mealSizes.Count == 1)
+                                        {
+                                            <input type="button" name="" value="Add to Cart" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                                        }
+                                        else
+                                        {
+                                            <input type="button" name="" value="Add to Cart" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            @*select modal popup end*@
+            @*"?" popup Start*@
+            <div id="familystyleinfo" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        @*<div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                @*<h4 class="modal-title">Modal Header</h4>
+                            </div>*@
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <p>Family Style will deliver 2 or more portions in one serving dish.This makes heating meals for the whole family more convenient, reduces packaging, and allows you to save 10% on the price.</p>
+                        </div>
+                        @*<div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+            @*"?" popup End*@
+            @*Nutrition modal popup statrt*@
+            <div id="nutritiondata-@m.meal.MenuItemID" class="modal-dialog new_modalpopup" style="display:none">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@m.meal.Name</h4>
+                    </div>
+                    <div class="modal-body nutrition_body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Calories</legend>
+                                    <label>@m.NutritionInfo.Calories</label>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2">
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Fat (g)</legend>
+                                    <label>@m.NutritionInfo.Fat</label>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2">
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Protein (g)</legend>
+                                    <label>@m.NutritionInfo.Protein</label>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-3">
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Carbohydrates (g)</legend><div class="clearfix"></div>
+                                    <label>@m.NutritionInfo.Carbohydrates</label>
+                                </fieldset>
+                            </div>
+                            @*<div class="col-md-2">
+                                    <fieldset>
+                                        <legend>DietaryFiber:</legend>
+                                        <label>@m.NutritionInfo.DietaryFiber</label>
+                                    </fieldset>
+                                </div>*@
+                            <div class="col-md-3">
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Sodium (mg)</legend>
+                                    <label>@m.NutritionInfo.Sodium</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>*@
+                </div>
+
+            </div>
+            @*Nutrition modal popup end*@
+            <div class="side-column nutrition">
+                @*<a href="javascript:void(0)" class="aSelectALC page-button page-button-arrow" title="Select">Select</a>*@
+                <input type="button" value="Customize" style="width: 97%;" class="page-button-submit" onclick="SelectViewDetails(@m.meal.MenuItemID)" />
+                <input type="button" value="Nutrition" onclick="GetNutritionInfo(@m.meal.MenuItemID)" class="page-button-submit nut" style="width: 97%;margin-top:5px;" />
+                <div class="panel-add-to-cart" style="position: relative;display:none;">
+                    Price: <span class="plan-price-text right-align">@m.Price</span>
+                    <div style="height: 10px;"></div>
+                    Quantity:
+                    <input name="Quantity" type="number" min="1" value="1" max="99" maxlength="2" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_txtQuantity" class="right-align txt-quantity" style="width:20px;">
+                    <span id="" style="color:Red;display:none;">*</span>
+                    <span id="" style="color:Red;display:none;">*</span>
+                    <div style="height: 10px;"></div>
+                    @if (m.mealSizes.Count == 1)
+                    {
+                        <input type="button" name="" value="Add to Cart" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                    }
+                    else
+                    {
+                        <input type="button" name="" value="Add to Cart" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange">
+                    }
+                    <span id=""></span>
+                    <div id="" style="color:Red;font-size:XX-Small;display:none;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="familystyle_div">
+                <div class="menuquestion cart_check">
+                    <div class="align_FS">
+                        <span>Save 10% With <b class="familystyle">Family Style</b></span>
+                        <input type="checkbox" id="isFamilyStyle_@m.meal.MenuItemID" onclick="togleFamilyStyle(@m.meal.MenuItemID);" />
+                        <div class="questionmark" data-toggle="modal" data-target="#familystyleinfo">
+                            <img src="~/Content/Images/question.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="align_23">
+                    <div class="align_FS_2">
+                        <span class="plan-price-text right-align" style="display:none" id="OriginalPriceStrike_@m.meal.MenuItemID"><strike class="strike">@m.Price</strike></span><span class="plan-price-text right-align" id="originalprice_@m.meal.MenuItemID">@m.Price</span><span class="plan-price-text right-align" style="display:none" id="discountedprice_@m.meal.MenuItemID">@m.DiscountedMockPrice</span><span class="Qty_price"> | QTY:</span>
+                        <input type="number" id="Quantity_@m.meal.MenuItemID" class="Quantitymenu" onkeydown="return checkShortcut();" onchange="validateQuantity(@m.meal.MenuItemID)" name="Quantity" value="1" min="1" />
+                    </div>
+                    <div class="align_FS_2_3">
+                        <div id="divfamilystyleerror_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float:left">
+                            <span style="margin: 3px 5px;">Family Style requires 2 or more servings.</span>
+                        </div>
+                        <div class="pull-right">
+                            @if (m.mealSizes.Count == 1)
+                            {
+                                <input type="button" name="" value="ADD" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                            }
+                            else
+                            {
+                                <input type="button" name="" value="ADD" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange">
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cl">&nbsp;</div>
+        </div>
+        <input type="hidden" name="menuItemID" value="@m.meal.MenuItemID" />
+        <input type="hidden" name="DeliveryDate" class="SelectedDeliveryDate" value="" />
+    }
+
+}
+
+
+
+
+<script>
+    function maxLengthCheck(object) {
+        if (object.value.length > object.maxLength)
+            object.value = object.value.slice(0, object.maxLength)
+    }
+
+    function isNumeric(evt) {
+        //var theEvent = evt || window.event;
+        //var key = theEvent.keyCode || theEvent.which;
+        //key = String.fromCharCode(key);
+        //var regex = /[1-9]|\./;
+        //if (!regex.test(key)) {
+        //    theEvent.returnValue = false;
+        //    if (theEvent.preventDefault) theEvent.preventDefault();
+        //}
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
+
+        return true;
+    }
+
+    //$('.familystyle').hover(function () {
+    //    $('#familystyleinfo').modal();
+    //})
+</script>
+<script>
+    $("#closebutton").click(function () {
+        $('input[value="3"]').prop('checked', true);
+    });
+</script>
+<style>
+    .display {
+        display: inline-block !important;
+    }
+
+    .modal-dialog {
+        left: 31%;
+        top: 24%;
+        position: absolute;
+    }
+
+    .nutrition_body legend {
+        font-size: 11px;
+        border: none;
+        margin-bottom: 0px;
+        margin-left: -9px;
+    }
+
+    .nutrition_body fieldset label {
+        height: 100%;
+        vertical-align: middle;
+        text-align: center;
+        width: 100%;
+        margin: 10px auto;
+        font-size: 16px;
+        color: #276f22;
+    }
+</style>

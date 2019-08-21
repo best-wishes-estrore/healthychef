@@ -1,0 +1,759 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.LoginRegistrationViewModel
+
+@{
+    ViewBag.Title = "Account Sign Up";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+    Html.EnableClientValidation(true);
+
+
+    var StatesDropdown = new List<SelectListItem>();
+    var DeliveryTypesDropdown = new List<SelectListItem>();
+    StatesDropdown.Add(new SelectListItem() { Text = "Select a State...", Value = "" });
+    foreach (var s in HealthyChef.Common.Helpers.US_States)
+    {
+        StatesDropdown.Add(new SelectListItem()
+        {
+            Text = s.Name,
+            Value = s.Abbr
+        });
+    }
+
+    var types = HealthyChef.Common.Enums.GetEnumAsTupleList(typeof(HealthyChef.Common.Enums.DeliveryTypes));
+    if (HealthyChef.Common.Helpers.LoggedUser == null || Roles.IsUserInRole(HealthyChef.Common.Helpers.LoggedUser.UserName, "Customer"))
+    {
+        types.RemoveAt(types.IndexOf(types.Where(a => a.Item2 == (int)HealthyChef.Common.Enums.DeliveryTypes.LocalDelivery).Single()));
+    }
+
+    foreach (var dd in types)
+    {
+        DeliveryTypesDropdown.Add(new SelectListItem()
+        {
+            Text = dd.Item1,
+            Value = dd.Item2.ToString()
+        });
+    }
+
+    var YearsDropdown = new List<SelectListItem>();
+    YearsDropdown.Add(new SelectListItem() { Text = "---", Value = "" });
+    int currYear = DateTime.Now.Year;
+    for (int i = 0; i <= 10; i++)
+    {
+        YearsDropdown.Add(new SelectListItem()
+        {
+            Text = (currYear + i).ToString(),
+            Value = (currYear + i).ToString()
+        });
+    }
+}
+
+<style type="text/css">
+    @@media only screen and (min-width:768px) and (max-width:1024px) {
+        .container-cnt {
+            float: initial;
+        }
+
+        input, select {
+            border: 1px solid #ddd;
+        }
+    }
+
+    @@media only screen and (max-width:767px) {
+        #chkissameasshippingaddress {
+            width: auto;
+            float: left;
+            min-width: -webkit-fill-available;
+            margin: 3px 10px !important;
+        }
+        .fieldRow .fieldCol label.push {
+            padding:0px;
+        }
+        .btngrn li {
+            margin-left: 38%;
+        }
+        #ConfirmPassword {
+            width:17%;
+        }
+        .AlphabetsOnly, #panel1 #Email, .cardnumber {
+            width: 26% !important;
+        }
+        .plan_edit .fieldRow .fieldCol label {
+            float: left !important;
+            width: 11%;
+            margin: 7px 0px;
+        }
+        #CardIdCode {
+            float: left;
+            width: 40%;
+            min-width: 120px;
+        }
+        .btngrn .btn-green {
+            margin-left: 15% !important;
+        }
+        .ccvInfo {
+            float: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .widthauto {
+            width: auto !important;
+            padding-bottom: 15px;
+        }
+        .field-validation-error {
+            /*position: absolute !important;*/
+            width: 100%;
+            float: left;
+            margin-left: 35% !important;
+        }
+        .btngrn {
+            margin-left: 27% !important;
+            list-style-type:none;
+        }
+        .confirmpasswd {
+            padding: 0px !important;
+        }
+        .fieldRow .fieldCol .singlestyle {
+            min-width: 120px !important;
+        }
+
+        .user-registation input, .user-registation select, .user-registation select, .user-registation fieldset label {
+            width: 17%;
+            float: left;
+            text-align: left !important;
+            margin: 0px !important;
+            min-width: 134px;
+        }
+
+        .btn-green {
+            min-width: auto !important;
+            width: auto !important;
+        }
+
+        .dropDownList, #ExipiresOnYear {
+            min-width: 60px !important;
+            width: 60px !important;
+        }
+
+        .Expdate label {
+            width: auto !important;
+            min-width: 120px !important;
+        }
+
+        .fieldRow {
+            display: block;
+        }
+        /*input, select {
+                border: 1px solid #ddd;
+                width: 100%;
+                max-width: 100%;
+            }*/
+        /*.col-md-12, .fieldRow .fieldCol label.push, col-md-2 {
+                padding: 0px;
+            }*/
+        /*.Expdate select, .Expdate input {
+                width: 50%;
+                float: left;
+            }*/
+        /*.Expdate .col-md-2, .col-md-6 {
+                padding: 0px;
+            }*/
+        /*input, select, textarea {
+                width: 100%;
+                max-width: 100% !important;
+            }*/
+    }
+
+    .cms-login fieldset, .cms-login fieldset ul {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        border: none;
+        list-style: none;
+    }
+
+    input, select, textarea {
+        max-width: 210px;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .cms-login fieldset ul li {
+        margin: 0.5em 0;
+    }
+
+        .cms-login fieldset ul li table {
+        }
+
+
+    .user-registation fieldset {
+        /*margin: 20px 0;*/
+        padding: 0;
+        border: none;
+    }
+        /*.user-registation fieldset legend {
+            margin: 0 0 0.3em 0;
+            display: block;
+            padding: 0;
+            font-size: 2em;
+            font-weight: normal;
+            color: black;
+            font-family: 'MyriadPro-BoldCond', arial, sans-serif;
+        }*/
+        .user-registation fieldset label {
+            min-width: 120px;
+            display: inline-block;
+            margin: 0 1em 0 0;
+            text-align: right;
+        }
+
+    .fieldRow {
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .field-validation-error {
+        color: #a94442;
+        margin-left: 10px;
+    }
+
+    .user-registation .table_row label::after, label.required::after {
+        content: ":";
+        font-weight: bold;
+        margin-left: 3px;
+    }
+
+    .user-registation .table_row label.remove::after {
+        content: "";
+    }
+    .ccvInfo {
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -3px;
+    }
+    ul.btngrn {
+        margin-left: -10% !important;
+        list-style-type: none;
+    }
+</style>
+
+
+
+
+
+@using (Html.BeginForm("Display", "Register", FormMethod.Post))
+{
+    <div id="main" class="container">
+        <div class="background_bg">
+            <div class="container-bottom container">
+                <div class="">
+                    <!-- Header -->
+                    @*<div class="full-page-header">
+                            <div class="alignleft">
+
+                            </div>
+                            <div class="info">
+
+                            </div>
+                            <div class="cl">&nbsp;</div>
+                        </div>*@
+                    <!-- Body Content -->
+
+                    <p>&nbsp;</p>
+                    <div style="width: 100%; text-align: center;">
+                        <span id="ctl00_body_ctl00_litMessage" style="color:Red;"></span>
+                    </div>
+
+                    <div id="ctl00_body_ctl00_usrctrlRegister_Msg" style="text-align:center;">
+
+                    </div>
+
+                    <div class="user-registation">
+                        <div id="">
+
+                            <fieldset>
+                                <legend><b>Shipping Information</b></legend>
+                                <div id="" data-ctrl="addrShipping">
+                                    <div class="table_row plan_edit">
+                                        @Html.HiddenFor(m => m.UserProfileId)
+                                        @Html.HiddenFor(m => m.ShippingAddressID)
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingFirstName, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.ShippingFirstName, new { @class = "col-md-6 AlphabetsOnly", @id = "txtshippingfirstname", @onchange = "DisplayAsBillingFirstName()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingFirstName)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingLastName, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.ShippingLastName, new { @class = "col-md-6 AlphabetsOnly", @id = "txtshippinglastname", @onchange = "DisplayAsBillingLastName()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingLastName)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingAddress1, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.ShippingAddress1, new { @class = "col-md-6", @id = "txtshippingaddress1", @onchange = "DisplayAsBillingAddress1()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingAddress1)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingAddress2, new { @class = "col-sm-2 push" })
+                                                @Html.TextBoxFor(m => m.ShippingAddress2, new { @class = "col-md-6", @id = "txtshippingaddress2", @onchange = "DisplayAsBillingAddress2()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingAddress2)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingCity, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.ShippingCity, new { @class = "col-md-6 AlphabetsOnly", @id = "txtshippingcity", @onchange = "DisplayAsBillingCity()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingCity)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingState, new { @class = "col-sm-2 push required" })
+                                                @Html.DropDownListFor(m => m.ShippingState, StatesDropdown, new { @class = "col-md-6", @id = "txtshippingstate", @onchange = "DisplayAsBillingState()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingState)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingPostalCode, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.ShippingPostalCode, new { @class = "col-md-6", @onkeypress = "return isNumeric(event)", @maxlength = 5, @id = "txtshippingpostalcode", @onchange = "DisplayAsBillingPostalCode()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingPostalCode)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.ShippingPhone, new { @class = "col-sm-2 push " })
+                                                @Html.TextBoxFor(m => m.ShippingPhone, new { @class = "col-md-6", @onkeypress = "return isNumeric(event)", @maxlength = 20, @id = "txtshippingphone", @onchange = "DisplayAsBillingPhone()" })
+                                                @Html.ValidationMessageFor(m => m.ShippingPhone)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div id="" class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.DefaultShippingTypeID, new { @class = "col-sm-2 push" })
+                                                @Html.DropDownListFor(m => m.DefaultShippingTypeID, DeliveryTypesDropdown, new { @class = "col-md-6" })
+                                                @Html.ValidationMessageFor(m => m.DefaultShippingTypeID)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div id="" class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.IsBusiness, new { @class = "col-sm-2 push remove" })
+                                                @Html.CheckBoxFor(m => m.IsBusiness, new { @class = "width_at" })
+                                                @Html.ValidationMessageFor(m => m.IsBusiness)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        @*<div class="fieldRow col-md-12">
+                                                <div class="fieldCol col-md-offset-2">
+                                                    <button type="button" ng-click="UpdateShippingAddress();" class="pixels-button-solid-green pixels-button" id="SaveAddressButton">Save</button>
+
+                                                    <div>
+                                                        <span id="" data-ctrl="addrShipping" style="color:Green;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <input type="hidden" name="" id="">
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend><b>Billing Information</b></legend>
+                                <p>
+                                    @Html.HiddenFor(m => m.ShippingAddressID)
+                                    @Html.LabelFor(m => m.SameasShipping, new { @class = "push widthauto" })
+                                    @Html.CheckBoxFor(m => m.SameasShipping, new { onclick = "SetBilling(this.checked);", id = "chkissameasshippingaddress" })
+                                    @if (Model.SameasShipping == true)
+                                    {
+                                        <script type="text/javascript">
+                                            window.onload = function () {
+                                                $('.disablethetxt').attr("readonly", true);
+                                                $('.disablethedrpdn').css("pointer-events", "none");
+                                                $('.disablethedrpdn').css('background', '#ddd');
+                                                $('.disablethetxt').css('background', '#ddd');
+                                            };
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        <script type="text/javascript">
+                                            window.onload = function () {
+                                                $('.disablethetxt').attr("readonly", false);
+                                                $('.disablethedrpdn').css("pointer-events", "auto");
+                                                $('.disablethedrpdn').css('background', '#fff');
+                                                $('.disablethetxt').css('background', '#fff');
+                                            };
+                                        </script>
+                                    }
+                                </p>
+                                <div class="clearfix"></div>
+                                <div id="" data-ctrl="addrBilling">
+                                    <div class="table_row plan_edit">
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingFirstName, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.BillingFirstName, new { @class = "col-md-6 disablethetxt AlphabetsOnly", @id = "txtbillingfirstname" })
+                                                @Html.ValidationMessageFor(m => m.BillingFirstName)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingLastName, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.BillingLastName, new { @class = "col-md-6 disablethetxt AlphabetsOnly", @id = "txtbillinglastname" })
+                                                @Html.ValidationMessageFor(m => m.BillingLastName)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingAddress1, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.BillingAddress1, new { @class = "col-md-6 disablethetxt", @id = "txtbillingaddress1" })
+                                                @Html.ValidationMessageFor(m => m.BillingAddress1)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingAddress2, new { @class = "col-sm-2 push" })
+                                                @Html.TextBoxFor(m => m.BillingAddress2, new { @class = "col-md-6 disablethetxt", @id = "txtbillingaddress2" })
+                                                @Html.ValidationMessageFor(m => m.BillingAddress2)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingCity, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.BillingCity, new { @class = "col-md-6 disablethetxt AlphabetsOnly", @id = "txtbillingcity" })
+                                                @Html.ValidationMessageFor(m => m.BillingCity)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingState, new { @class = "col-sm-2 push required" })
+                                                @Html.DropDownListFor(m => m.BillingState, StatesDropdown, new { @class = "col-md-6 disablethedrpdn", @id = "txtbillingstate" })
+                                                @Html.ValidationMessageFor(m => m.BillingState)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingPostalCode, new { @class = "col-sm-2 push required" })
+                                                @Html.TextBoxFor(m => m.BillingPostalCode, new { @class = "col-md-6 disablethetxt", @onkeypress = "return isNumeric(event)", @maxlength = 5, @id = "txtbillingpostalcode" })
+                                                @Html.ValidationMessageFor(m => m.BillingPostalCode)
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="fieldRow col-md-12">
+                                            <div class="fieldCol">
+                                                @Html.LabelFor(m => m.BillingPhone, new { @class = "col-sm-2 push" })
+                                                @Html.TextBoxFor(m => m.BillingPhone, new { @class = "col-md-6 disablethetxt", @onkeypress = "return isNumeric(event)", @maxlength = 20, @id = "txtbillingphone" })
+                                                @Html.ValidationMessageFor(m => m.BillingPhone)
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        @*<div class="fieldRow col-md-12">
+                                                <div class="fieldCol col-md-offset-2">
+
+                                                    <button type="button" ng-click="UpdateShippingAddress();" class="pixels-button-solid-green pixels-button" id="SaveAddressButton">Save</button>
+
+                                                    <div>
+                                                        <span id="" data-ctrl="addrBilling" style="color:Green;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <input type="hidden" name="" id="">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend><b>Payment Information</b></legend>
+
+                                <style type="text/css">
+                                    .cvvContainer {
+                                        position: fixed;
+                                        top: 0px;
+                                        bottom: 0px;
+                                        left: 0px;
+                                        right: 0px;
+                                        overflow: hidden;
+                                        padding: 0;
+                                        margin: 0;
+                                        background-color: #333;
+                                        filter: alpha(opacity=90);
+                                        opacity: 0.9;
+                                        z-index: 1000;
+                                    }
+
+                                    .yourBoldClass {
+                                        font-weight: bold;
+                                    }
+
+                                    .cvvDisplay {
+                                        text-align: center;
+                                        vertical-align: middle;
+                                        position: fixed;
+                                        top: 10%;
+                                        left: 25%;
+                                        padding: 10px;
+                                        width: 600px;
+                                        height: 500px;
+                                        z-index: 1001;
+                                        background-color: #fff;
+                                        border: solid 1px #000;
+                                        filter: alpha(opacity=100);
+                                        opacity: 1.0;
+                                        overflow: hidden;
+                                    }
+                                </style>
+                                <div>
+                                    <span id="" style="color:Green;"></span>
+                                    <span id="" style="color:Red;"></span>
+                                </div>
+                                <div id="">
+                                    @Html.HiddenFor(m => m.UserID, new { @id = "CreditCardInfoUserId" })
+                                    <div class="fieldRow col-md-12">
+                                        <div class="fieldCol">
+                                            @Html.LabelFor(m => m.NameOnCard, new { @class = "col-sm-2 push required" })
+                                            @Html.TextBoxFor(m => m.NameOnCard, new { @class = "col-md-6 AlphabetsOnly" })
+                                            @Html.ValidationMessageFor(m => m.NameOnCard)
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="fieldRow col-md-12">
+                                        <div class="fieldCol">
+                                            @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 push required" })
+                                            @Html.TextBoxFor(m => m.CardNumber, new { @class = "col-md-6", @onkeypress = "return isNumeric(event)" })
+                                            @Html.ValidationMessageFor(m => m.CardNumber)
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="fieldRow col-md-12">
+                                        <div class="fieldCol Expdate">
+                                            @Html.Label("ExpirationDate", new { @class = "col-md-2 required" })
+                                            @Html.DropDownList("ExipiresOnMonth", new List<SelectListItem>
+                                            {
+                                              new SelectListItem{Text="---", Value = "",Selected=true},
+                                              new SelectListItem{ Text="01", Value = "1" },
+                                              new SelectListItem{ Text="02", Value = "2" },
+                                              new SelectListItem{ Text="03", Value = "3" },
+                                              new SelectListItem{ Text="04", Value = "4" },
+                                              new SelectListItem{ Text="05", Value = "5" },
+                                              new SelectListItem{ Text="06", Value = "6" },
+                                              new SelectListItem{ Text="07", Value = "7" },
+                                              new SelectListItem{ Text="08", Value = "8" },
+                                              new SelectListItem{ Text="09", Value = "9" },
+                                              new SelectListItem{ Text="10", Value = "10" },
+                                              new SelectListItem{ Text="11", Value = "11" },
+                                              new SelectListItem{ Text="12", Value = "12" },
+                                             },new { @class = "dropDownList col-md-1" })
+
+                                            <p style="float:left">&nbsp;  / &nbsp; </p>
+                                            @Html.DropDownListFor(m => m.ExipiresOnYear, YearsDropdown, new { @class = "col-md-1" })
+                                            @Html.ValidationMessageFor(m => m.ExipiresOnMonth)
+                                            @Html.ValidationMessageFor(m => m.ExipiresOnYear)
+                                            <span id="Expiredate" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="fieldRow col-md-12">
+                                        <div class="fieldCol">
+                                            @Html.LabelFor(m => m.CardIdCode, new { @class = "col-sm-2 push singlestyle required" })
+                                            @Html.TextBoxFor(m => m.CardIdCode, new { @class = "col-md-6", @onkeypress = "return isNumeric(event)", @maxlength = 4 })
+                                            <a class="ccvInfo" onclick="javascript:CVVClick();">?</a>
+                                            @Html.ValidationMessageFor(m => m.CardIdCode)&nbsp;
+
+
+                                            <div class="cvvContainer" style="display: none;">
+                                                <div class="cvvDisplay">
+                                                    <a class="ccvInfo" onclick="javascript:CVVClick();">Close</a>
+                                                    <br>
+                                                    <iframe src="/cvv.html" style="width: 100%; height: 100%;"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                    function CVVClick() {
+                                        if ($(".cvvContainer").is(":visible")) {
+                                            $(".cvvContainer").hide();
+                                        }
+                                        else {
+                                            $(".cvvContainer").show();
+                                        }
+                                    }
+                                </script>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend><b>Login Information</b></legend>
+                                <div class="fieldRow col-md-12">
+                                    <div class="fieldCol">
+                                        @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 push required" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "col-md-6" })
+                                        @Html.ValidationMessageFor(m => m.Email)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="fieldRow col-md-12">
+                                    <div class="fieldCol">
+                                        @Html.LabelFor(m => m.RegiPassword, new { @class = "col-sm-2 push required" })
+                                        @Html.PasswordFor(m => m.RegiPassword, new { @class = "col-md-6" })
+                                        @Html.ValidationMessageFor(m => m.RegiPassword)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="fieldRow col-md-12">
+                                    <div class="fieldCol">
+                                        <div style="vertical-align:top;">
+                                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-2 push required confirmpasswd" })
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "col-md-6" })
+                                            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                        </div>
+                                        <div style="display: inline-block;">
+                                            <ul class="btngrn" style="margin: 0;">
+                                                <li>Password must be at least 5 characters in length.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <p class="col-md-12 col-md-offset-2 btngrn">
+                                    <input type="submit" name="" value="Continue" class="btn btn-green disablebutton" style="margin-left:7px;padding:5px 15px !important">
+                                    <span style="color:green">@ViewBag.RegisterMessage</span>
+                                </p>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function SetBilling(checked) {
+        if (checked) {
+            document.getElementById('txtbillingfirstname').value = document.getElementById('txtshippingfirstname').value;
+            document.getElementById('txtbillinglastname').value = document.getElementById('txtshippinglastname').value;
+            document.getElementById('txtbillingaddress1').value = document.getElementById('txtshippingaddress1').value;
+            document.getElementById('txtbillingaddress2').value = document.getElementById('txtshippingaddress2').value;
+            document.getElementById('txtbillingcity').value = document.getElementById('txtshippingcity').value;
+            document.getElementById('txtbillingstate').value = document.getElementById('txtshippingstate').value;
+            document.getElementById('txtbillingpostalcode').value = document.getElementById('txtshippingpostalcode').value;
+            document.getElementById('txtbillingphone').value = document.getElementById('txtshippingphone').value;
+            $('.disablethetxt').attr("readonly", true);
+            $('.disablethedrpdn').css("pointer-events", "none");
+            $('.disablethetxt').css('background', '#ddd');
+            $('.disablethedrpdn').css('background', '#ddd');
+        }
+        else {
+            document.getElementById('txtbillingfirstname').value = '';
+            document.getElementById('txtbillinglastname').value = '';
+            document.getElementById('txtbillingaddress1').value = '';
+            document.getElementById('txtbillingaddress2').value = '';
+            document.getElementById('txtbillingcity').value = '';
+            //document.getElementById('BillingAddress2').value = '';
+            document.getElementById('txtbillingstate').value = '';
+            document.getElementById('txtbillingpostalcode').value = '';
+            document.getElementById('txtbillingphone').value = '';
+            $('.disablethetxt').attr("readonly", false)
+            $('.disablethedrpdn').css("pointer-events", "auto");
+            $('.disablethetxt').css('background', '#fff');
+            $('.disablethedrpdn').css('background', '#fff');
+        }
+    }
+
+    function isNumeric(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
+
+        return true;
+    }
+
+
+    $(document).ready(function () {
+
+        localStorage.setItem("radioValue", 0);
+    });
+
+    $('.AlphabetsOnly').keypress(function (e) {
+
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    function DisplayAsBillingFirstName() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingfirstname').val(($('#txtshippingfirstname').val()));
+        }
+    }
+    function DisplayAsBillingLastName() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillinglastname').val(($('#txtshippinglastname').val()));
+        }
+    }
+    function DisplayAsBillingAddress1() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingaddress1').val(($('#txtshippingaddress1').val()));
+        }
+    }
+    function DisplayAsBillingAddress2() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+
+            $('#txtbillingaddress2').val(($('#txtshippingaddress2').val()));
+        }
+    }
+    function DisplayAsBillingCity() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingcity').val(($('#txtshippingcity').val()));
+        }
+    }
+    function DisplayAsBillingState() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingstate').val(($('#txtshippingstate').val()));
+        }
+    }
+    function DisplayAsBillingPostalCode() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingpostalcode').val(($('#txtshippingpostalcode').val()));
+        }
+    }
+    function DisplayAsBillingPhone() {
+        if ($('#chkissameasshippingaddress').prop("checked") == true) {
+            $('#txtbillingphone').val(($('#txtshippingphone').val()));
+        }
+    }
+</script>

@@ -1,0 +1,274 @@
+﻿
+Logged at 20180524125918
+Records Retrived : 1
+Path taken D:\Maniteja\HealthyChefCreationsTFS\healthychef\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180524130037
+Records Retrived : 1
+Path taken D:\Maniteja\HealthyChefCreationsTFS\healthychef\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180524130109
+Records Retrived : 1
+Path taken D:\Maniteja\HealthyChefCreationsTFS\healthychef\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180524130139
+Records Retrived : 1
+Path taken D:\Maniteja\HealthyChefCreationsTFS\healthychef\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713102155
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713102257
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713103048
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713103121
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713104013
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713104147
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713105136
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713163831
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713174104
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713183736
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713185218
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713185541
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713185628
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713190529
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\bin\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180713191810
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\bin\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180713214228
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180713214605
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180714105452
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180714110637
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+
+Logged at 20180714114015
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip2.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714130630
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714132113
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714132542
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714141938
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714143344
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-StartresourceStream-Start
+Logged at 20180714154709
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-StartMessage'D:/HealthychefTfsSourcecode/HealthyChef/WebModules/Reports/PackingSlipReport.rdlc' is a physical path, but a virtual path was expected.resourceStream-Start1resourceStream-Start2resourceStream-Start3resourceStream-Start4resourceStream-Start5
+Logged at 20180714163733
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-Start6
+resourceStream-Start1
+resourceStream-Start2
+resourceStream-Start3
+resourceStream-Start4
+resourceStream-Start5
+
+Logged at 20180714173224
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-Start6
+
+resourceStream-Start1
+resourceStream-Start2
+resourceStream-Start3
+resourceStream-Start4
+resourceStream-Start5
+
+Logged at 20180714175748
+Records Retrived : 127
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.PackingSlipReport.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-Start6
+Path UsedD:\HealthychefTfsSourcecode\HealthyChef\/WebModules/Reports/PackSlip1.rdlc
+
+resourceStream-Start1
+resourceStream-Start2
+resourceStream-Start3
+resourceStream-Start4
+resourceStream-Start5
+
+Logged at 20181205175350
+Records Retrived : 0
+Path taken D:\HealthychefTfsSourcecode\HealthyChef\HealthyChef\WebModules\Reports\PackSlip1.rdlc
+HealthyChef.WebModules.Reports.SalesReport2.rdlc
+HealthyChef.WebModules.Reports.PackSlip1.rdlc
+HealthyChef.WebModules.Reports.ItemsByOrderNum.rdlc
+resourceStream-Start6
+Path UsedD:\HealthychefTfsSourcecode\HealthyChef\HealthyChef\/WebModules/Reports/PackSlip1.rdlc

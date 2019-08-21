@@ -1,0 +1,12 @@
+﻿.quick-content-contentbox
+{
+    border: dashed 1px #aaa;
+    margin:-1px;
+    overflow: hidden;
+}
+
+.quick-content-hover
+{
+    cursor: hand;
+    background-color: #FFF097;
+}
