@@ -101,10 +101,6 @@
                                                     <ul class="drop-down-menu dropdown-menu">
                                                         @for (int i = 0; i < s.ChildNodes.Count; i++)
                                                         {
-                                                            if (s.ChildNodes[0].Title == "Healthy Living")
-                                                            {
-                                                                s.ChildNodes[0].Url = "~/Programs/DetailsbyCheckbox/51/HealthyLivingDinner";
-                                                            }
                                                             <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/","")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
                                                         }
                                                     </ul>

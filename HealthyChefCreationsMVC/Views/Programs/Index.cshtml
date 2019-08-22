@@ -77,21 +77,7 @@
                                 <!-- <div class="section-top">&nbsp;</div> -->
                                
                                 <div class="section-middle">
-                                    @if (p.ProgramID == 51)
-                                    {
-                                       <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
-                                           <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
-                                       </a>
-                                       <div class="description">
-                                           <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = "Healthy Living" })" style="margin-bottom: 4px;">
-                                               <h3>Healthy Living</h3>
-                                           </a>
-                                           <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
-                                       </div>
-                                        
-                                    }
-                                    else
-                                    {
+                                  
                                         <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
                                             <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
                                         </a>
@@ -101,7 +87,7 @@
                                             </a>
                                             <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
                                         </div>
-                                    }
+                                    
                                     <div class="price">
                                         <p style="display:none">
                                             As low as<br>

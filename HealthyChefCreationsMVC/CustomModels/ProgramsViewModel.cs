@@ -27,16 +27,9 @@ namespace HealthyChefCreationsMVC.CustomModels
                 newProgram.Description = _p.Description;
                 newProgram.MoreInfoNavID = _p.MoreInfoNavID ?? 0;
                 newProgram.Price = _p.GetCheapestPlanPrice().ToString("c");
-                if(_p.ProgramID == 51)
+                if(_p.ProgramID == 49)
                 {
-                    var programsData = hccProgram.GetById(49);
-                    if(programsData != null)
-                    {
-                        newProgram.orderDisplay = 1;
-                        newProgram.Name = programsData.Name;
-                        newProgram.ImagePath = programsData.ImagePath;
-                        newProgram.Description = programsData.Description;
-                    }
+                    newProgram.orderDisplay = 1;
                 }
                 if (_p.ProgramID == 33)
                 {

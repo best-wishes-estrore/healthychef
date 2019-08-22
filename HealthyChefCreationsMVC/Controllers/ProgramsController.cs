@@ -29,17 +29,7 @@ namespace HealthyChefCreationsMVC.Controllers
             {
                 ProgramViewModel programViewModel = new ProgramViewModel();
                 hccProgram hccprogram = hccProgram.GetByMoreInfoId(Convert.ToInt16(NavigationIdsList[i]));
-                var healthyLiving = hccProgram.GetAll().Where(x=>x.ProgramID == 49).FirstOrDefault();
-                if (hccprogram != null && hccprogram.ProgramID == 51 && healthyLiving !=null)
-                {
-                    programViewModel.ProgramID = hccprogram.ProgramID;
-                    programViewModel.Name = healthyLiving.Name;
-                    programViewModel.ImagePath = healthyLiving.ImagePath;
-                    programViewModel.Description = healthyLiving.Description;
-                    programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
-                    programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
-                }
-                else if (hccprogram != null)
+                if (hccprogram != null)
                 {
                     programViewModel.ProgramID = hccprogram.ProgramID;
                     programViewModel.Name = hccprogram.Name;
@@ -48,10 +38,22 @@ namespace HealthyChefCreationsMVC.Controllers
                     programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
                     programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
                 }
+                //var healthyLiving = hccProgram.GetAll().Where(x=>x.ProgramID == 49).FirstOrDefault();
+                //if (hccprogram != null && hccprogram.ProgramID == 51 && healthyLiving !=null)
+                //{
+                //    programViewModel.ProgramID = hccprogram.ProgramID;
+                //    programViewModel.Name = healthyLiving.Name;
+                //    programViewModel.ImagePath = healthyLiving.ImagePath;
+                //    programViewModel.Description = healthyLiving.Description;
+                //    programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
+                //    programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
+                //}
+
                 everydaymealplansViewModel.Add(programViewModel);
             }
             return View(everydaymealplansViewModel);
         }
+
         [HttpGet]
         public ActionResult WeightLossProgram()
         {
