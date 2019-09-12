@@ -1,0 +1,12 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.ProgramDetailsViewModel
+<div class="content_tab">
+    @if(Model.contentViewModels != null)
+    {
+        if(!string.IsNullOrEmpty(Model.contentViewModels.Body))
+        {
+            <div class="content_col" >
+                @Html.Raw(Model.contentViewModels.Body)
+            </div>
+        }
+    }
+</div>

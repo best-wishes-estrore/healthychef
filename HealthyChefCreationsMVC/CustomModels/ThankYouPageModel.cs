@@ -13,6 +13,12 @@ namespace HealthyChefCreationsMVC.CustomModels
         public decimal ShippingAmount { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+  
+        public string Email { get; set; }
+
+        public DateTime DeliveryDate { get; set; }
+
+        public int MerchantId = 114169608;
 
         public string Country { get; set; }
 

@@ -2129,6 +2129,8 @@
     <Content Include="Views\Home\LooseWeight.cshtml" />
     <Content Include="Views\Menu\_ProductDescription.cshtml" />
     <Content Include="Views\Shared\_MobileHeader.cshtml" />
+    <Content Include="Views\Programs\_showProgramFeatures.cshtml" />
+    <Content Include="Views\Programs\_MealCarouselDispaly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

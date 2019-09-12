@@ -48,6 +48,7 @@ namespace HealthyChefCreationsMVC
                 }
             }
         }
+
         //protected void Application_BeginRequest(Object sender, EventArgs e)
         //{
         //    if (!Request.IsSecureConnection)
@@ -57,6 +58,7 @@ namespace HealthyChefCreationsMVC
         //        Response.Redirect(path);
         //    }
         //}
+
         private string GetQuery(string u)
         {
             // 1

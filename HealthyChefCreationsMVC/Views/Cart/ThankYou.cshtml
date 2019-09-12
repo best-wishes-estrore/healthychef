@@ -30,3 +30,31 @@
 <script>
         @Html.Raw(Model.GoogleTrackScript)
 </script>
+
+<script src="https://apis.google.com/js/platform.js?onload=renderOptIn"
+        async defer>
+</script>
+
+<script>
+    
+    window.renderOptIn = function () {
+
+        window.gapi.load('surveyoptin', function () {
+
+            window.gapi.surveyoptin.render(
+
+                {
+                    "merchant_id": "@Model.MerchantId",
+
+                    "order_id": "@Model.PurchaseNumber",
+
+                    "email": "@Model.Email",
+
+                    "delivery_country": "@Model.Country",
+
+                    "estimated_delivery_date": "@Model.DeliveryDate.ToString("yyyy-MM-dd")",
+                });
+        });
+    }
+</script>
+<!-- END GCR Opt-in Module Code -->

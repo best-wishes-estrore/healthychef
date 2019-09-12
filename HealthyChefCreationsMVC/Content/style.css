@@ -84,10 +84,18 @@ textarea {
     background-image: none !important;
     opacity: 1;
     color: #39aa35;
+}
+#myCarousel2 .left {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border: 2px solid #39aa35;
+    border: 2px solid #39aa35 !important;
     border-right: none;
+}
+#myCarousel2 .right {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 2px solid #39aa35 !important;
+    border-left: none;
 }
 
 #planoptionslider .left, #planoptionslider .right {
@@ -102,10 +110,31 @@ textarea {
     background-image: none !important;
     opacity: 1;
     color: #39aa35;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 2px solid #39aa35;
-    border-left: none;
+}
+
+.carousel-left {
+    float: left;
+    display: inline;
+    width: 15%;
+    background: #fff;
+    background-image: none !important;
+    opacity: 1;
+    color: #39aa35;
+    border: none !important;
+    width: auto;
+}
+
+.carousel-right {
+    float: right;
+    display: inline;
+    width: 15%;
+    /*font-size: 25px;*/
+    background: #fff;
+    background-image: none !important;
+    opacity: 1;
+    color: #39aa35;
+    border: none !important;
+    width: auto;
 }
 
 .shell {
@@ -808,7 +837,8 @@ body.home-page .slider-spacing {
 
 .section-middle img {
     width: 200px;
-    /* height: 132px; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .section img {
@@ -816,10 +846,7 @@ body.home-page .slider-spacing {
 }
 
 .section .description {
-    width: 80%;
-    float: left;
-    display: inline;
-    padding: 10px 15px;
+    padding: 5px 15px;
     text-align: justify;
 }
 
@@ -1103,9 +1130,8 @@ fieldset.css-order, fieldset.css-order ul, fieldset.css-order {
     margin: 20px 0px;
 }
 
-.active {
+.menuItemtitle {
     color: #276f22;
-    font-weight: bold;
 }
 
 
@@ -1572,11 +1598,6 @@ h2.select-pogramme-header {
 }
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
-
-    .section-middle .description {
-        width: 70%;
-    }
-
     .article-list span {
         width: 27.33%;
         float: left;
@@ -1646,7 +1667,7 @@ h2.select-pogramme-header {
         max-width: 100%;
     }
 
-   
+
     .full-page-panel .top {
         background-size: 100% 100%;
         width: 100%;
@@ -1767,10 +1788,6 @@ h2.select-pogramme-header {
         min-width: 940px;
     }
 
-    .section .description {
-        width: 78%;
-    }
-
     .shell {
         max-width: 940px;
         width: 100%;
@@ -1838,7 +1855,11 @@ body.home-page .no-footer, body.home-page .no-footer #content {
     .three-cols .post, #sidebar .box-white, .background_bg {
         margin: 0 auto 0px auto;
     }
-
+    .selectprofiledetails .col-md-4, .selectprofiledetails .col-md-8 {
+        float: left;
+        width: 50%;
+        padding-bottom: 20px !important;
+    }
     #MealDetailsContainer p {
         margin: 0px !important;
     }
@@ -1889,18 +1910,6 @@ body.home-page .no-footer, body.home-page .no-footer #content {
 
     th, .box-green h3, .box-white h3 {
         padding: 0px;
-    }
-
-    .price {
-        /* position: relative; */
-        /* padding: 0px 15px; */
-        /* width: 100%; */
-        /* text-align: right; */
-    }
-
-    .section .description {
-        width: 100%;
-        padding: 10px;
     }
 
     .register .form-group .col-md-6:first-child {
@@ -2155,6 +2164,11 @@ fieldset {
         margin-right: 0px;
     }
 
+.contentshowMore_col {
+    width: 66% !important;
+    margin: 0px !important;
+}
+
 .bottom_line {
     border: 1px solid #000;
 }
@@ -2175,10 +2189,12 @@ hr {
     #Healthyorganicmeals .content p br {
         display: none;
     }
+
     .selectprofiledetails .col-md-4, .selectprofiledetails .col-md-8 {
         width: 50%;
         float: left;
     }
+
     #navigation > ul > li {
         width: 19%;
     }
@@ -2217,7 +2233,7 @@ hr {
         margin-top: 30px;
     }
 
-    .section-middle .description h3 {
+    /*.section-middle .description h3 {
         margin: 0px;
         color: #276f22;
         float: initial;
@@ -2225,7 +2241,7 @@ hr {
         position: relative;
         margin-top: 0%;
         padding: 0px 0px;
-    }
+    }*/
 
     .page-content {
         display: block;
@@ -2622,22 +2638,6 @@ hr {
     }
 }
 
-@media only screen and (min-width : 1024px) and (max-width : 1336px) {
-    /* #bs-example-navbar-collapse-1 li { */
-    /* width: 20% !important; */
-    /* } */
-
-    .section .description {
-        width: 79%;
-    }
-}
-
-/* @media only screen and (min-width : 800px) and (max-width : 1280px) { */
-/* #bs-example-navbar-collapse-1 li { */
-/* width: 20% !important; */
-/* } */
-/* } */
-
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
 
     .content_start {
@@ -2789,18 +2789,6 @@ label.col-md-4.align_right {
 
 .user-registation legend {
     font-weight: 600;
-}
-
-@media screen and (max-width:320px) and (orientation:landscape) {
-
-    .section .description, .section-middle img, .section img {
-        padding-left: 0px !important;
-        width: 100% !important;
-    }
-
-    .section-middle .description h3 {
-        margin-top: 0%;
-    }
 }
 
 @media only screen and (max-width:767px) and (orientation : landscape) {
@@ -2964,10 +2952,10 @@ blockquote p em {
     color: red;
 }
 
-.content_col {
-    width: 100%;
+/*.content_col {
+    width: 100% !important;
     display: inline-block;
-}
+}*/
 
 .full-page-header .heading-image img {
     margin: 0px !important;
@@ -3148,14 +3136,14 @@ section .banner {
     font-size: 10px;
     color: #fff;
     display: block;
-    padding: 5px 0px 5px 0px;
+    padding: 7px 0px 7px 0px;
 }
 
 #myCarousel .carousel-control .icon-next, #myCarousel .carousel-control .fa-plus, #myCarousel1 .carousel-control .icon-next, #myCarousel1 .carousel-control .fa-plus {
     font-size: 10px;
     color: #fff;
     display: block;
-    padding: 5px 0px 5px 0px;
+    padding: 7px 0px 7px 0px;
 }
 
 #myCarousel .carousel-control.right, #myCarousel .carousel-control.left, #myCarousel1 .carousel-control.right, #myCarousel1 .carousel-control.left {
@@ -3202,6 +3190,10 @@ section .banner {
     width: 70%;
     overflow: hidden;
     margin: 0px auto;
+}
+
+.exampleMeniWidthStyle {
+    width:100%;
 }
 
 .col-height legend {
@@ -3512,6 +3504,18 @@ section .banner {
     color: #000;
 }
 
+#defaultBreakFastMenu.carousel-inner > .item.active {
+    width: 100%;
+}
+
+#defaultLunchMenu.carousel-inner > .item.active {
+    width: 100%;
+}
+
+#defaultDinnerMenu.carousel-inner > .item.active {
+    width: 100%;
+}
+
 #plan-mealtypes {
     border: none !important;
     margin: 10px -5px;
@@ -3550,16 +3554,14 @@ section .banner {
     font-size: 18px;
     font-weight: 600;
     margin-top: 20px;
+    width:867px;
+    margin-left: 10px;
 }
 
 .hiderowmenu img#imageurl {
     width: 150px;
     float: left;
     height: 98px;
-}
-
-.hiderowmenu .menu_data {
-    margin-top: 22px;
 }
 
     .hiderowmenu .menu_data b {
@@ -3805,7 +3807,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .meals_menu {
     float: left;
-    margin-bottom: 5px;
 }
 
 #plan-types {
@@ -3829,10 +3830,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin: 0px 6px;
 }
 
-.menu_data strong b span, .menu_data strong hr {
+/*.menu_data strong b span, .menu_data strong hr {
     background: #fff;
     border: none;
-}
+}*/
 
 #menuitemsid {
     padding: 0px;
@@ -3840,7 +3841,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     padding-bottom: 5px;
 }
 
-#yourcart h5, #yourcart #menuitemsid p {
+#yourcart h5 {
     color: #000;
     font-size: 14px !important;
     margin-bottom: 5px;
@@ -4143,10 +4144,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     border: 1px solid #ddd;
 }
 
-.halfcol {
+/*.halfcol {
     width: 50%;
     float: left;
-}
+}*/
 
 .txtQuantity_item td {
     vertical-align: top;
@@ -4300,7 +4301,7 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
     }
 }
 
-@media only screen and (max-width: 1280px) and (min-width: 800px) and (orientation:landscape) {
+@media only screen and (max-width: 1600px) and (min-width: 800px) and (orientation:landscape) {
 
     .top-navigation .btn-green {
         padding: 6px 9px;
@@ -4451,11 +4452,6 @@ body.home-page #content {
 
 .familystyle {
     cursor: pointer;
-}
-
-#menuitemsid .halfcol p:first-child {
-    width: 43%;
-    margin-top: 2px;
 }
 
 .familystyle_div {
@@ -4653,9 +4649,6 @@ span[class^="dot-"] {
     display: none;
 }
 
-.health-chief-diet .description div {
-    min-height: 85px;
-}
 
 .health-chief-diet .description {
     padding: 0px;
@@ -4687,8 +4680,38 @@ span[class^="dot-"] {
 .Addselectpopup, .new_modalpopup {
     left: 0px !important;
 }
+
 @media (min-width: 992px) {
     .selectprofiledetails .col-md-4, .selectprofiledetails .col-md-8 {
         width: 50%;
     }
+}
+
+.menuitemadd {
+    width: 100%;
+    font-size: 14px;
+}
+
+    .menuitemadd table td {
+        line-height: initial;
+        padding: 3px 0px;
+    }
+
+    .menuitemadd .cart_check {
+        padding: 0px 10px;
+        text-align: right;
+    }
+.top45{
+    position: absolute;
+    top: 45%;
+}
+.carousel-content {
+    width: 90% !important;
+    margin: 0px auto !important;
+}
+.carousel-content td {
+    padding:5px !important;
+}
+#programFetures {
+    display: none;
 }

@@ -3,11 +3,7 @@
     ViewBag.Title = "Healthy Prepared Meals Delivered | Healthy Organic Meal Delivery Program | Healthy Chef";
     Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
 }
-@*@{ 
-    string programName = string.Empty;
-    string programImagePath = string.Empty;
-    string programDescription = string.Empty;
-}*@
+
 
 <div class="container">
     <div id="main">
@@ -67,53 +63,59 @@
                     {
                         foreach (var p in Model.programs)
                         {
-                            //if(p.ProgramID == 49)
-                            //{
-                            //    programName = p.Name;
-                            //    programImagePath = p.ImagePath;
-                            //    programDescription = p.Description;
-                            //}
                             <div class="section newmenuprograms">
                                 <!-- <div class="section-top">&nbsp;</div> -->
-                               
+
                                 <div class="section-middle">
-                                    @if (p.ProgramID == 51)
-                                    {
-                                       <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
-                                           <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
-                                       </a>
-                                       <div class="description">
-                                           <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = "Healthy Living" })" style="margin-bottom: 4px;">
-                                               <h3>Healthy Living</h3>
+
+                                    @*@if (p.ProgramID == 51)
+                                        {
+                                           <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
+                                               <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
                                            </a>
-                                           <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
-                                       </div>
-                                        
-                                    }
-                                    else
-                                    {
-                                        <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
-                                            <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
-                                        </a>
-                                        <div class="description">
-                                            <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
-                                                <h3>@p.Name</h3>
-                                            </a>
-                                            <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
-                                        </div>
-                                    }
-                                    <div class="price">
-                                        <p style="display:none">
-                                            As low as<br>
-                                            <span>
-                                                <span id="">@p.Price</span>
-                                            </span> per day.
-                                        </p>
+                                           <div class="description">
+                                               <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = "Healthy Living" })" style="margin-bottom: 4px;">
+                                                   <h3>Healthy Living</h3>
+                                               </a>
+                                               <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
+                                           </div>
 
-                                        <a id="" class="btn btn-orange page-button-arrow" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">Select</a>
-                                        @*<a id="" class="btn btn-green page-button-arrow" href="@Url.Action("Details", "Content", new { Id = p.MoreInfoNavID })">More Info</a>*@@*page-button*@
+                                        }*@
+                                    <table border="0">
+                                        <tr>
+                                            <td>
+                                                <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
+                                                    <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <div class="description">
+                                                    <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">
+                                                        <h3>@p.Name</h3>
+                                                    </a>
+                                                    <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="price">
+                                                    <p style="display:none">
+                                                        As low as<br>
+                                                        <span>
+                                                            <span id="">@p.Price</span>
+                                                        </span> per day.
+                                                    </p>
 
-                                    </div>
+                                                    <a id="" class="btn btn-orange page-button-arrow" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID, programName = p.Name.Replace(' ', '-') })" style="margin-bottom: 4px;">Select</a>
+                                                    @*<a id="" class="btn btn-green page-button-arrow" href="@Url.Action("Details", "Content", new { Id = p.MoreInfoNavID })">More Info</a>*@@*page-button*@
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+
+                                   
                                     <div class="cl">&nbsp;</div>
 
                                 </div>

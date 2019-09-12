@@ -507,9 +507,12 @@ namespace HealthyChefCreationsMVC.CustomModels
                             }
                         }
                         var ccart = hccCart.GetCurrentCart();
-                        ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
-                        //hccAddress cartAddressForTax = hccAddress.GetById(parentProfile.ShippingAddressID.Value);
-                        ccart.Save();
+                        if(ccart != null)
+                        {
+                            ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
+                            //hccAddress cartAddressForTax = hccAddress.GetById(parentProfile.ShippingAddressID.Value);
+                            ccart.Save();
+                        }
                     }
                 }
                 if (IsUserLoggedIn())

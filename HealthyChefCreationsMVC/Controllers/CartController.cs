@@ -1168,7 +1168,14 @@ namespace HealthyChefCreationsMVC.Controllers
                         thankYouPageModel.TaxableAmount = CurrentCart.TaxableAmount;
                         thankYouPageModel.ShippingAmount = CurrentCart.ShippingAmount;
                         thankYouPageModel.GoogleTrackScript = sb.ToString();
+                        thankYouPageModel.Email = Helpers.LoggedUser.Email;
+                        var currentDate = hccProductionCalendar.GetNext4Calendars();
+                        if(currentDate != null)
+                        {
+                            thankYouPageModel.DeliveryDate = currentDate[0].DeliveryDate;
+                        }
                         thankYouPageModel.UserName = hccAddress.GetById(CurrentCart.OwnerProfile.BillingAddressID.Value).FirstName == null ? "" : hccAddress.GetById(CurrentCart.OwnerProfile.BillingAddressID.Value).FirstName;
+
                         if (CurrentCart.OwnerProfile.BillingAddressID != null)
                         {
                             thankYouPageModel.City = hccAddress.GetById(CurrentCart.OwnerProfile.BillingAddressID.Value).City == null ? "Ntng" : hccAddress.GetById(CurrentCart.OwnerProfile.BillingAddressID.Value).City;
@@ -1548,9 +1555,7 @@ namespace HealthyChefCreationsMVC.Controllers
                                     {
                                         CurrentCart = hccCart.GetCurrentCart(profile.ASPUser);
                                         CurrentCartId = CurrentCart.CartID;
-
                                     }
-
                                 }
                             }
                             else

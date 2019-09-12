@@ -40,7 +40,6 @@
                 {
                     <div style="text-align: center;font-size: 13px;color:red;">
                         @ViewBag.ExpiredOrderCartitems
-
                     </div>
                 }
                 else
@@ -347,7 +346,7 @@
                                             {
                                                 <tr Id='cartItem_@Item.CartItemID'>
                                                     <td style="font-size: 14px;color:#276f22;font-weight:bold;margin-bottom: 7px;display: block;">
-                                                        @*@Item.OrderNumber&nbsp;-&nbsp;*@
+
                                                         @if (Item.ItemName.Contains("Gift Certificate "))
                                                         {
                                                             <span> @Item.ItemName.Split('-')[0]</span>
@@ -360,17 +359,60 @@
                                                             <br />
                                                         }
                                                         else
+                                                        if (Item.ItemTypeID == 2)
                                                         {
                                                             <span>@Item.ItemName.Split('-')[0]</span>
+                                                            <br />
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@Item.ItemName.Split('-')[2]</span>
                                                             <br />
                                                         }
                                                         @if (Item.Plan_IsAutoRenew == true && Item.ItemTypeID == 2)
                                                         {
                                                             <span style="color:gray;">Subscription</span>
                                                         }
-                                                        <span id="ItemName" style="color:gray;"> @Item.ItemName.Replace("w/ Profile Preferences", "") </span>
+                                                        @if (Request.Browser.IsMobileDevice)
+                                                        {
+                                                            if (Item.ItemTypeID == 2)
+                                                            {
+                                                                if (Item.ItemName.Contains("Dinner"))
+                                                                {
+                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                }
+                                                                else if (Item.ItemName.Contains("Lunch"))
+                                                                {
+                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                }
+                                                                else if (Item.ItemName.Contains("Breakfast"))
+                                                                {
+                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                }
+                                                                else if (Item.ItemName.Split('-').Length == 5 && Item.ItemName.Contains("Healthy Living"))
+                                                                {
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]</span>
+                                                                }
+                                                                else if (Item.ItemName.Split('-').Length == 5)
+                                                                {
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[2]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[2]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]</span>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <span id="ItemName" style="color:gray;">@Item.ItemName.Split('-').Last()</span>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <span id="ItemName" style="color:gray;"> @Item.ItemName.Replace("w/ Profile Preferences", "") </span>
+                                                        }
                                                     </td>
-                                                    <td style="width:10%" align="center" class="cart_check">
+                                                    <td style="width:10%" align="center" class="cart_check cartpagecheck">
                                                         @if (Item.Plan_IsAutoRenew == true && Item.ItemTypeID == 1)
                                                         {
                                                             <input type="checkbox" onchange="DeleteAutoRenewItemFS(@Item.CartItemID)" id="AddorCancelFamilyStyle_@Item.CartItemID" value="@Item.CartItemID" checked="checked" />
@@ -956,12 +998,7 @@
                                 }
 
                             </div>
-
-
-
-
                         </div>
-
                         <div class="clear"></div>
                         <div class="cotinue-shopping-button">
                             @*<input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnContinue" value="Continue Shopping" id="ctl00_body_ctl00_CartDisplay1_btnContinue" class="pixels-button-double pixels-button-double-orange">

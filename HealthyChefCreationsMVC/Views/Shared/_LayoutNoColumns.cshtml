@@ -190,16 +190,16 @@
             $(this).closest('tr').addClass('bg-lime-light');
             calcPrice(move, numberofmealtypes, programid);
         };
-        function calcPrice(move, numberofmealtypes,programid) {
+        function calcPrice(move, numberofmealtypes, programid) {
             var numberofdaysperweek = '';
             if (move == 'next') {
-                numberofdaysperweek = $("div .active").next().attr('data-days-per-week');
+                numberofdaysperweek = $("#plantypeslider .active").next().attr('data-days-per-week');
                 if (numberofdaysperweek == undefined) {
                     numberofdaysperweek = parseFloat($("#plantypeslider").find(".item").attr('data-days-per-week'));
                 }
             }
             if (move == 'prev') {
-                numberofdaysperweek = $("div .active").prev().attr('data-days-per-week');
+                numberofdaysperweek = $("#plantypeslider .active").prev().attr('data-days-per-week');
                 $('.left').addClass('active');
                 $('.right').removeClass('active');
                 if (numberofdaysperweek == undefined) {
@@ -278,7 +278,7 @@
                 }
             }
         var selectedValue = parseInt($('#weeklydeldate').val());
-        var numberofdaysperweek = parseFloat($('.active').attr('data-days-per-week'));
+            var numberofdaysperweek = parseFloat($('#plantypeslider .active').attr('data-days-per-week'));
             var PlanPriceByNumofweeks = { programId: programid, PlanId: '0', NumDaysPerWeek: numberofdaysperweek, NumWeeks: selectedValue, ProgramOptionId: planoptionid, Planprice: '0.00', PlanOptionprice: '0.00' }
          $.ajax({
              type: "POST",
@@ -435,6 +435,7 @@
         }
     function AddMealToCart(menuItemId)//,menuitemname,price)
     {
+        debugger;
     $("#divLoader").css('display', '');
     $('body').css("opacity", '0.7');
     var AddtoCartFormData = getFormData($('#AddMealToCart' + menuItemId));
@@ -496,6 +497,7 @@
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
                 $('#snackbar').show();
+                location.reload(true);
                 //$("html, body").animate({ scrollTop: 0 }, "slow");
                 //var menuitemexitornot = $("#" + menuItemId + " p:first-child").text();
                 //if (menuitemexitornot === "")
@@ -664,7 +666,6 @@
 
         function togleFamilyStyle1(MenuItemID)
         {
-            debugger;
             if (document.getElementById('isFamilyStyle1_' + MenuItemID).checked)
             { 
                 var itemqantity = document.getElementById('Quantity1_' + MenuItemID).value;

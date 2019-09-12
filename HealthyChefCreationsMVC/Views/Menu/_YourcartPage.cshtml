@@ -1,5 +1,5 @@
 ﻿@model HealthyChefCreationsMVC.CustomModels.ViewMenuModel
-@{ 
+@{
     bool IsCartPrinted = false;
 }
 <div class="col-md-4" style="padding:0px 5px">
@@ -15,8 +15,8 @@
                 <div id="1" class="col-11">
                     @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).FirstOrDefault() != null)
                     {
-                        <span style="color: #276f22;font-size: 15px;font-weight: bold;margin-bottom:5px;">Delivered on:<span>&nbsp;@Model.calendar[0].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></span>
-                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).OrderBy(x=>x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[0].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
+                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
                         {
                             var itemname = cartitem.ItemName.Split('-')[2];
                             if (Model.calendar[0].DeliveryDate == Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).FirstOrDefault().DeliveryDate)
@@ -36,30 +36,48 @@
                                         <h5>@itemname</h5>
                                     }
                                 }
-                                        <div class="col-md-12" id="menuitemsid">
-                                            <div class="halfcol">
-                                                <p>$@cartitem.mockItemPrice.ToString("0.00")</p>
-                                                @*<p>$@cartitem.ItemPrice.ToString("0.00")</p>*@
-                                                <p><span>QTY:</span> 
-                                                <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)"id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
-                                            </div>
-                                                @if (cartitem.ItemTypeID == 1)
-                                                {
-                                                    <div class="pull-left cart_check" style="padding:5px 10px">
-                                                        @if (cartitem.Quantity >= 2)
-                                                        {
-                                                             <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)"  checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
-                                                        }
-                                                        else
-                                                        {
-                                                            <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
-                                                        }
-                                                    </div>
-                                                }
-                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;font-weight:bold;text-decoration: none;float:right;margin-right:20px;margin-top: 3px;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            @*<p> Ordered </p>*@
-                                        </div>
-                                        <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;"/>
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="cart_check">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="visibility:hidden;margin:0px" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
                             }
                         }
                     }
@@ -67,7 +85,7 @@
                 <div id="2" class="col-11">
                     @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[1].DeliveryDate).FirstOrDefault() != null)
                     {
-                        <span style="color: #276f22;font-size: 15px;font-weight: bold;margin-bottom:5px;">Delivered on:<span>&nbsp;@Model.calendar[1].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></span>
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[1].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
                         foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[1].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
                         {
                             var itemname = cartitem.ItemName.Split('-')[2];
@@ -88,41 +106,54 @@
                                         <h5>@itemname</h5>
                                     }
                                 }
-                                <div class="col-md-12" id="menuitemsid">
-                                    <div class="halfcol">
-                                        <p>$@cartitem.mockItemPrice.ToString("0.00")</p>
-                                        @*<p>$@cartitem.ItemPrice.ToString("0.00")</p>*@
-                                        <p>
-                                            <span>QTY:</span>
-                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
-                                    </div>
-                                    @if (cartitem.ItemTypeID == 1)
-                                    {
-                                        <div class="pull-left cart_check" style="padding:5px 10px">
-                                            @if (cartitem.Quantity >= 2)
-                                            {
-                                                <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
-                                            }
-                                            else
-                                            {
-                                                <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
-                                            }
-                                        </div>
-                                    }
-                                    <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;font-weight:bold;text-decoration: none;margin-top: 3px;float: right;margin-right: 20px;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @*<p> Ordered </p>*@
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="cart_check">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td><a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
                             }
                         }
                     }
-                    @*}*@
                 </div>
                 <div id="3" class="col-11">
-
                     @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[2].DeliveryDate).FirstOrDefault() != null)
                     {
-                        <span style="color: #276f22;font-size: 15px;font-weight: bold;margin-bottom:5px;">Delivered on:<span>&nbsp;@Model.calendar[2].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></span>
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[2].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
                         foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[2].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
                         {
                             var itemname = cartitem.ItemName.Split('-')[2];
@@ -143,40 +174,56 @@
                                         <h5>@itemname</h5>
                                     }
                                 }
-                                <div class="col-md-12" id="menuitemsid">
-                                    <div class="halfcol">
-                                        <p>$@cartitem.mockItemPrice.ToString("0.00")</p>
-                                        @*<p>$@cartitem.ItemPrice.ToString("0.00")</p>*@
-                                        <p>
-                                            <span>QTY:</span>
-                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
-                                    </div>
-                                    @if (cartitem.ItemTypeID == 1)
-                                    {
-                                        <div class="pull-left cart_check" style="padding:5px 10px">
-                                            @if (cartitem.Quantity >= 2)
-                                            {
-                                                <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
-                                            }
-                                            else
-                                            {
-                                                <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
-                                            }
-                                        </div>
-                                    }
-                                    <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;font-weight:bold;text-decoration: none;margin-top: 3px;float: right;margin-right: 20px;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @*<p> Ordered </p>*@
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="pull-left cart_check" style="padding:5px 10px">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
                             }
                         }
                     }
-                    @*}*@
                 </div>
                 <div id="4" class="col-11">
                     @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[3].DeliveryDate).FirstOrDefault() != null)
                     {
-                        <span style="color: #276f22;font-size: 15px;font-weight: bold;margin-bottom:5px;">Delivered on:<span>&nbsp;@Model.calendar[3].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></span>
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[3].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
                         foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[3].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
                         {
                             var itemname = cartitem.ItemName.Split('-')[2];
@@ -197,41 +244,59 @@
                                         <h5>@itemname</h5>
                                     }
                                 }
-                                <div class="col-md-12" id="menuitemsid">
-                                    <div class="halfcol">
-                                        <p>$@cartitem.mockItemPrice.ToString("0.00")</p>
-                                        @*<p>$@cartitem.ItemPrice.ToString("0.00")</p>*@
-                                        <p>
-                                            <span>QTY:</span>
-                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
-                                    </div>
-                                    @if (cartitem.ItemTypeID == 1)
-                                    {
-                                        <div class="pull-left cart_check" style="padding:5px 10px">
-                                            @if (cartitem.Quantity >= 2)
-                                            {
-                                                <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
-                                            }
-                                            else
-                                            {
-                                                <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
-                                            }
-                                        </div>
-                                    }
-                                    <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;font-weight:bold;text-decoration: none;margin-top: 3px;float: right;margin-right: 20px;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    @*<p> Ordered </p>*@
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child">
+                                                            <span>$@cartitem.mockItemPrice.ToString("0.00")</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="pull-left cart_check" style="padding:5px 10px">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
                             }
 
                         }
                     }
-                    @*}*@
                 </div>
                 <div>
                     @if (@Model.mockSubTotal != null)
                     {
-                    <span style="padding-left: 5px;font-weight: bold;color: #000;font-size: 14px !important;">Subtotal:</span><span style="float: right;padding-right: 10px;font-weight: bold;color: #000;font-size: 14px !important;">@Model.mockSubTotal</span>
+                        <span style="padding-left: 5px;font-weight: bold;color: #000;font-size: 14px !important;">Subtotal:</span><span style="float: right;padding-right: 10px;font-weight: bold;color: #000;font-size: 14px !important;">@Model.mockSubTotal</span>
                     }
                 </div>
             </div>

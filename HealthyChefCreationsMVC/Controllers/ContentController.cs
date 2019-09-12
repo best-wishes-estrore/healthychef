@@ -14,14 +14,14 @@ namespace HealthyChefCreationsMVC.Controllers
 {
     public class ContentController : Controller
     {
-        hccCartItem CurrentGiftCert=new hccCartItem();
+        hccCartItem CurrentGiftCert = new hccCartItem();
         // GET: Content
         public ActionResult Details(int Id)
         {
             var contentModel = new ContentViewModel(Id);
-
             return View(contentModel);
         }
+
         [HttpPost]
         public JsonResult BuyGiftCertificate(GiftCertificateShippinInfo _customerShippingInfo)
         {

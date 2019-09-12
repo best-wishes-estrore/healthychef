@@ -201,6 +201,11 @@ namespace HealthyChefCreationsMVC.CustomModels
             hccMenuItem menuItem = hccMenuItem.GetByItemName(ItemName);
             int _MealTYpeID = 0;
             int _MealTypeIdSide = 0;
+            //if menuitem price is null
+            if (menuItem.CostLarge == 0.0000M || menuItem.CostChild == 0.0000M || menuItem.CostRegular == 0.0000M || menuItem.CostSmall == 0.0000M)
+            {
+                menuItem = hccMenuItem.GetByItemNameLast(ItemName);
+            }
             switch (menuItem.MealTypeID)
             {
                 case 10:
@@ -259,16 +264,12 @@ namespace HealthyChefCreationsMVC.CustomModels
                     }
                     else
                         ActiveMenuItemIds = null;
-
                     cmd.Dispose();
                     conn.Close();
                     conn.Dispose();
                 }
             }
-            if(menuItem.CostLarge == 0.0000M || menuItem.CostChild == 0.0000M || menuItem.CostRegular == 0.0000M || menuItem.CostSmall == 0.0000M)
-            {
-                menuItem = hccMenuItem.GetByItemNameLast(ItemName);
-            }
+            
             using (var hcc = new healthychefEntities())
             {
                 if (menuItem.MealTypeID == 10 || menuItem.MealTypeID == 30 || menuItem.MealTypeID == 50 || menuItem.MealTypeID == 90)
@@ -326,6 +327,7 @@ namespace HealthyChefCreationsMVC.CustomModels
 
             }
         }
+
         public void CombineDataResults(IEnumerable<hcc_AlcMenu2_Result> resultDataSet)
         {
             if (_iresult == null)

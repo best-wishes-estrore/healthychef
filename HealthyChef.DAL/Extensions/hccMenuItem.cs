@@ -241,7 +241,7 @@ namespace HealthyChef.DAL
             }
         }
 
-        public static  hccMenuItem GetByItemNameLast(string menuItemName)
+        public static hccMenuItem GetByItemNameLast(string menuItemName)
         {
             try
             {
@@ -251,14 +251,21 @@ namespace HealthyChef.DAL
                     var MenuItems = (from menuitem in cont.hccMenuItems
                                      where menuitem.Name == menuItemName
                                      select menuitem).ToList();
-                    foreach(var data in MenuItems)
+                    if(MenuItems.Count > 1)
                     {
-                        if (data.CostLarge != 0.0000M && data.CostChild != 0.0000M && data.CostRegular != 0.0000M && data.CostSmall != 0.0000M)
+                        foreach (var data in MenuItems)
                         {
-                            Items.Add(data);
+                            if (data.CostLarge != 0.0000M && data.CostChild != 0.0000M && data.CostRegular != 0.0000M && data.CostSmall != 0.0000M)
+                            {
+                                Items.Add(data);
+                            }
                         }
+                        return Items.FirstOrDefault();
                     }
-                    return Items.FirstOrDefault();
+                    else
+                    {
+                        return MenuItems.FirstOrDefault();
+                    }                    
                 }
             }
             catch (Exception ex)
