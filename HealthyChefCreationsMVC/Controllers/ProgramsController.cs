@@ -48,11 +48,11 @@ namespace HealthyChefCreationsMVC.Controllers
                 //    programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
                 //    programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
                 //}
-              everydaymealplansViewModel.Add(programViewModel);
+
+                everydaymealplansViewModel.Add(programViewModel);
             }
             return View(everydaymealplansViewModel);
         }
-
 
         [HttpGet]
         public ActionResult WeightLossProgram()
@@ -82,7 +82,6 @@ namespace HealthyChefCreationsMVC.Controllers
             }
             return View(weightlossViewModel);
         }
-
         // GET: Programs
         [HttpGet]
         public ActionResult Index()
