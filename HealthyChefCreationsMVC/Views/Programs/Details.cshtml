@@ -1120,18 +1120,17 @@
 <script>
 
     function showOrHideProgramFetures() {
-        debugger;
         var dots = document.getElementById("dots");
         var moreText = document.getElementById("programFetures");
         var btnText = document.getElementById("learnMore");
 
         if (dots.style.display === "none") {
             dots.style.display = "inline-block";
-            btnText.innerHTML = "Learn more";
+            btnText.innerHTML = "LEARN MORE";
             moreText.style.display = "none";
         } else {
             dots.style.display = "none";
-            btnText.innerHTML = "Show less";
+            btnText.innerHTML = "SHOW LESS";
             moreText.style.display = "block";
         }
         //$("#programFetures").toggle();
