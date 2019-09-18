@@ -126,7 +126,6 @@ namespace HealthyChefCreationsMVC.CustomModels
                         {
                             if (this.CurrentCart.IsEditCoupon!=1)
                             {
-
                                 this.CurrentCart.CouponID = parentprofile.DefaultCouponId;
                                 this.CurrentCart.Save();
                             }
@@ -172,7 +171,6 @@ namespace HealthyChefCreationsMVC.CustomModels
                         //divCalculateShipping.Visible = false;
                         if (addr != null)
                             lblBillingAddress = addr.ToString();
-
 
                         var types = Enums.GetEnumAsTupleList(typeof(Enums.DeliveryTypes));
                         //addr = hccAddress.GetById(addr.AddressID);
@@ -255,7 +253,6 @@ namespace HealthyChefCreationsMVC.CustomModels
                                         ShoppingCartAmt = CurrentCart.ShippingAmount;
                                     }
                                 }
-
                                 HttpContext.Current.Session["ShippingAmount"] = ShoppingCartAmt;
 
                                 CurrentCart.CalculateTotals(this.profCart);
@@ -474,8 +471,8 @@ namespace HealthyChefCreationsMVC.CustomModels
                                                 if (cartItem.TaxRateAssigned > 6)
                                                 {
                                                     var descAmt = cartItem.TaxRateAssigned - 6;
-                                                    var cartItems = ((descAmt * cartItem.TaxableAmount)) / 100;
-                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(Convert.ToDouble(cartItems), 2));
+                                                    var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
+                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 3));
                                                 }
                                                 cartItem.Save();
                                             }
@@ -492,14 +489,13 @@ namespace HealthyChefCreationsMVC.CustomModels
                                                 if (cartItem.TaxRateAssigned > 6)
                                                 {
                                                     var descAmt = cartItem.TaxRateAssigned - 6;
-                                                    var cartItems = ((descAmt * cartItem.TaxableAmount)) / 100;
-                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(Convert.ToDouble(cartItems), 2));
+                                                    var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
+                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 3));
                                                 }
                                                 cartItem.Save();
                                             }
                                         }
                                     }
-                                    
                                     currentcart.IsEditCoupon = 0;
                                     currentcart.Save();
                                 }
@@ -510,6 +506,15 @@ namespace HealthyChefCreationsMVC.CustomModels
                         if(ccart != null)
                         {
                             ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
+                            if(CurrentCart.CouponID.HasValue)
+                            {
+                                if (cartItems.FirstOrDefault().TaxRateAssigned > 0)
+                                {
+                                    var taxRatePercent = cartItems.FirstOrDefault().TaxRateAssigned / 100;
+                                    CurrentCart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * ccart.TaxableAmount), 2);
+                                    Tax = CurrentCart.TaxAmount.ToString("c");
+                                }
+                            }
                             //hccAddress cartAddressForTax = hccAddress.GetById(parentProfile.ShippingAddressID.Value);
                             ccart.Save();
                         }

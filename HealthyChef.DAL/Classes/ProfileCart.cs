@@ -83,19 +83,18 @@ namespace HealthyChef.DAL
                 var currentcart = hccCart.GetCurrentCart();
                 decimal profSubTax = 0.00m;
                 // if shipping address is FL, add tax for taxable items
-                if (ShippingAddress != null
-                    && ShippingAddress.State == "FL")
+                if (ShippingAddress != null && ShippingAddress.State == "FL")
                 {
                     try
                     {
                         TaxLookup taxInfo = TaxLookup.RequestTax(ShippingAddress.PostalCode);
-
                         if (!taxInfo.State.Contains("Error"))
                         {
                             decimal taxRate = decimal.Parse(taxInfo.Sales_Tax_Rate);
 
                             if (this.CartItemsWithMealSides.Count > 0)
                             {
+
                                 this.CartItemsWithMealSides.ForEach(delegate(hccCartItem cartItem)
                                 {
                                     if (cartItem.IsTaxable)
@@ -103,11 +102,7 @@ namespace HealthyChef.DAL
                                         decimal itemTax = 0.00m;
                                         decimal taxableAmt = 0.00m;
                                         double discountpereachamount = 0.0;
-                                        //if()
-                                        //{
-
-                                        //}
-
+                                        
                                         //If Item is FamilyStyle
                                         if (cartItem.Plan_IsAutoRenew == true)
                                         {

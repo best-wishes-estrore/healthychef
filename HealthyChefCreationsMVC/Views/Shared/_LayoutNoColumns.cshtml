@@ -174,22 +174,24 @@
         </p>
     </div>
     <script>
-
         //Nutrition information display modal popup
-        function GetNutritionInfo(MenuItemId) {
-
+        function GetNutritionInfo(MenuItemId)
+        {
             $('#nutritiondata-' + MenuItemId + '').modal('show');
         };
+
          //Select Button Click comment
         function SelectViewDetails(MenuItemId)
         {
             $('#Addselectpopup-' + MenuItemId + '').modal('show');
         };
+
         function PriceCalculator(move, numberofmealtypes, programid) {
             $('tr', $(this).closest('.form-select-menu')).removeClass('bg-lime-light');
             $(this).closest('tr').addClass('bg-lime-light');
             calcPrice(move, numberofmealtypes, programid);
         };
+
         function calcPrice(move, numberofmealtypes, programid) {
             var numberofdaysperweek = '';
             if (move == 'next') {
@@ -206,7 +208,7 @@
                     numberofdaysperweek = parseFloat($("#plantypeslider").find(".item").last().attr('data-days-per-week'));
                 }
             }
-        var selectedValue = parseInt($('#weeklydeldate').val());
+            var selectedValue = parseInt($('#weeklydeldate').val());
             var planoptionid = parseFloat($("#planoptionslider .active").attr('value'));
             var PlanPriceByNumofweeks = { programId: programid , PlanId: '0', NumDaysPerWeek: numberofdaysperweek, NumWeeks: selectedValue, ProgramOptionId: planoptionid, Planprice: '0.00', PlanOptionprice: '0.00' }
          $.ajax({
@@ -435,7 +437,6 @@
         }
     function AddMealToCart(menuItemId)//,menuitemname,price)
     {
-        debugger;
     $("#divLoader").css('display', '');
     $('body').css("opacity", '0.7');
     var AddtoCartFormData = getFormData($('#AddMealToCart' + menuItemId));
@@ -497,7 +498,7 @@
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
                 $('#snackbar').show();
-                location.reload(true);
+                //location.reload(true);
                 //$("html, body").animate({ scrollTop: 0 }, "slow");
                 //var menuitemexitornot = $("#" + menuItemId + " p:first-child").text();
                 //if (menuitemexitornot === "")
@@ -530,10 +531,11 @@
             $("#divLoader").css('display', 'none');
         }
      });
-        }
-        function AddMealToCart1(menuItemId)
-        {
-           $('#Addselectpopup-' + menuItemId + '').modal('hide');
+   }
+
+   function AddMealToCart1(menuItemId)
+   {
+    $('#Addselectpopup-' + menuItemId + '').modal('hide');
     $("#divLoader").css('display', '');
     $('body').css("opacity", '0.7');
     var AddtoCartFormData = getFormData($('#AddMealToCart' + menuItemId));
@@ -612,10 +614,11 @@
                         $("#divLoader").css('display', 'none');
                     }
                 });
-}
-                function getFormData(Addtocartform)
-{
-        var unindexed_array = Addtocartform.serializeArray();
+        }
+
+ function getFormData(Addtocartform)
+ {
+    var unindexed_array = Addtocartform.serializeArray();
     var indexed_array = {};
     var prefIds = [];
     var prefIdname = 'prefIds';
@@ -628,10 +631,11 @@
     indexed_array[prefIdname] = prefIds;
     return indexed_array;
 }
-        function togleFamilyStyle(MenuItemID) {
-            if (document.getElementById('isFamilyStyle_' + MenuItemID).checked)
+        function togleFamilyStyle(MenuItemID)
         {
-                var itemqantity = document.getElementById('Quantity_' + MenuItemID).value;
+            if (document.getElementById('isFamilyStyle_' + MenuItemID).checked)
+            {
+              var itemqantity = document.getElementById('Quantity_' + MenuItemID).value;
              if (itemqantity == 2 || itemqantity > 2) {
                  document.getElementById("isFamilyStyle_" + MenuItemID).checked = true;
                  $("#originalprice_" + MenuItemID).hide();
@@ -652,14 +656,16 @@
         }
         else
             {
-                    document.getElementById('Quantity_' + MenuItemID).value = 1;
+                document.getElementById('Quantity_' + MenuItemID).value = 1;
                 $("#divfamilystyleerror_" + MenuItemID).hide();
                 $("#originalprice_" + MenuItemID).show();
                 $("#OriginalPriceStrike_" + MenuItemID).hide();
                 $("#discountedprice_" + MenuItemID).hide();
+            }
         }
-        }
-        function adjustRadioValues(price,menuitemid) {
+
+        function adjustRadioValues(price, menuitemid)
+        {
             document.getElementById('OriginalPriceStrike1_' + menuitemid).textContent = "$"+price;
             document.getElementById('discountedprice1_' + menuitemid).textContent ="$"+ (price * 0.9).toFixed(2);
         }

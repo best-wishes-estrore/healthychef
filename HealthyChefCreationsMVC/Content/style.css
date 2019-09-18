@@ -3581,6 +3581,9 @@ section .banner {
     .hiderowmenu .menu_data hr {
         margin-top: 9px;
     }
+.menu_data{
+    min-height: 200px;
+}
 
 .callus p {
     display: inline-block;
