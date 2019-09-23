@@ -11,7 +11,7 @@
             {
                 var isActive = count == 0 ? "active" : "";
                 <div class="menu_data item @isActive">
-                    <table id="plan-mealtypes-@ViewData["MealType"]" cellpadding="5" cellspacing="1">
+                    <table id="plan-mealtypes-@ViewData["MealType"]" cellpadding="5" cellspacing="1" class="full-width">
                         <tbody id="planmenu">
                             <tr>
                                 <td colspan="2">
@@ -30,7 +30,7 @@
                                     <p> @defaultplan.Description</p>
 
                                     @*<b>Nutrition Info:</b><br />*@
-                                    <br />
+                                    @*<br />*@
                                     <strong>
                                         <b>
                                             <span>@defaultplan.Calories</span>

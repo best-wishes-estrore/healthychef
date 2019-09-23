@@ -69,28 +69,36 @@
                                 <!-- <div class="section-top">&nbsp;</div> -->
 
                                 <div class="section-middle">
-                                    <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })" style="margin-bottom: 4px;">
-                                        <img width="150" alt="@p.Name" src="@p.ImagePath" class="left">
-                                    </a>
-                                    <div class="description">
-                                        <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })" style="margin-bottom: 4px;">
-                                            <h3>@p.Name</h3>
-                                        </a>
-                                        <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
-                                    </div>
-									 <div class="price">
-                                        <p style="display:none">
-                                            As low as<br>
-                                            <span>
-                                                <span id="">@p.Price</span>
-                                            </span> per day.
-                                        </p>
+                                    <table border="0" class="full-width">
+                                        <tr>
+                                            <td width="20%">
+                                                <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })">
+                                                    <img alt="@p.Name" src="@p.ImagePath" class="img-responsive">
+                                                </a>
+                                            </td>
+                                            <td width="80%" align="top">
+                                                <div class="description">
+                                                    <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })">
+                                                        <h3>@p.Name</h3>
+                                                    </a>
+                                                    <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
+                                                </div>
+                                                <div class="price">
+                                                    <p style="display:none">
+                                                        As low as<br>
+                                                        <span>
+                                                            <span id="">@p.Price</span>
+                                                        </span> per day.
+                                                    </p>
 
-                                        <a id="" class="btn btn-orange page-button-arrow" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })" style="margin-bottom: 4px;">Select</a>
-                                        @*<a id="" class="btn btn-green page-button-arrow" href="@Url.Action("Details", "Content", new { Id = p.MoreInfoNavID })">More Info</a>*@@*page-button*@
+                                                    <a id="" class="btn btn-orange page-button-arrow" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })" style="margin-bottom: 4px;">Select</a>
+                                                    @*<a id="" class="btn btn-green page-button-arrow" href="@Url.Action("Details", "Content", new { Id = p.MoreInfoNavID })">More Info</a>*@@*page-button*@
 
-                                    </div>
-                                    <div class="cl">&nbsp;</div>                                   
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="cl">&nbsp;</div>
                                 </div>
                                 <!-- <div class="section-bottom">&nbsp;</div> -->
                             </div>

@@ -841,7 +841,7 @@ body.home-page .slider-spacing {
 }
 
 .section-middle img {
-    width: 200px;
+    width: 100%;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -979,7 +979,7 @@ body.home-page .slider-spacing {
 
     .meals .mealItem .side-column {
         float: right;
-        width: 17%;
+       width: 17%;
     }
 
         .meals .mealItem .side-column .panel-add-to-cart {
@@ -1570,15 +1570,6 @@ h2.select-pogramme-header {
 }
 
 
-@media screen and (min-width: 481px) and (max-width: 900px) {
-    .divAddCouponCode {
-        width: 100%;
-    }
-
-    .shippingMethod span {
-        float: left;
-    }
-}
 
 @media screen and (min-width: 715px) and (max-width: 840px) {
 
@@ -1854,276 +1845,6 @@ h2.select-pogramme-header {
 body.home-page .no-footer, body.home-page .no-footer #content {
     width: 100%;
     border-radius: 10px;
-}
-
-@media only screen and (max-width:767px) {
-    .three-cols .post, #sidebar .box-white, .background_bg {
-        margin: 0 auto 0px auto;
-    }
-    .selectprofiledetails .col-md-4, .selectprofiledetails .col-md-8 {
-        float: left;
-        width: 50%;
-        padding-bottom: 20px !important;
-    }
-    #MealDetailsContainer p {
-        margin: 0px !important;
-    }
-
-    .left-box input[type="radio" i] {
-        margin: 0px 3px 0px 5px;
-    }
-
-    .modal-title {
-        font-size: 15px !important;
-    }
-
-    .newbutton h2 {
-        line-height: initial;
-    }
-
-    /* .meals .mealItem .main-description { */
-    /* margin: 10px 0px; */
-    /* } */
-
-    /* .menuquestion { */
-    /* width: 100% !important; */
-    /* } */
-
-    .familystyle_div .plan-price-text1 {
-        text-align: right;
-    }
-
-    #Amazing-varity .section2_img .col-md-4:first-child, #Amazing-varity .section2_img .col-md-4:nth-child(2) {
-        display: none !important;
-    }
-
-    #planschef .btn-orange {
-        margin-bottom: 20px;
-    }
-
-    #Healthyorganicmeals .col-md-4:first-child, #Healthyorganicmeals .col-md-4:nth-child(2) {
-        margin-bottom: 40px !important;
-    }
-
-    .txtQuantity_item th {
-        font-size: 100% !important;
-    }
-
-    .cotinue-shopping-button {
-        text-align: center;
-    }
-
-    th, .box-green h3, .box-white h3 {
-        padding: 0px;
-    }
-
-    .register .form-group .col-md-6:first-child {
-        padding: 0px !important;
-        margin-bottom: 20px;
-    }
-
-    .gift-banner h1 {
-        font-size: 20px !important;
-    }
-
-    .wm_FormBuilder .wm_ShortText, .wm_Longtext {
-        margin: 0px 15px;
-        width: 80% !important;
-    }
-
-    .help_line {
-        width: 70%;
-    }
-
-    .container-cnt .alignleft {
-        width: 100% !important;
-    }
-
-    .page-button-submit, .meals .mealItem .side-column, .nut {
-        width: auto !important;
-        margin: 4px 0px;
-        padding: 0px 2px;
-    }
-
-    .btn-primary {
-        padding: 5px 7px 5px 1px !important;
-    }
-
-    .p-10 .btn-primary {
-        padding: 5px 7px 5px 1px !important;
-        margin: 10px 5px !important;
-    }
-
-    #bs-example-navbar-collapse-1 .drop-down-menu.active {
-        background: #fff !important;
-    }
-
-    .m-nav h5 {
-        width: 100% !important;
-    }
-
-    .nutrition_body td {
-        width: 100% !important;
-        float: left;
-        padding: 10px;
-    }
-
-    .radio-sizes td, .radio-prefs td, .radio-prefs .bg-lime-light td {
-        width: auto !important;
-        float: left;
-        padding: 3px !important;
-    }
-
-    .phoneno i {
-        display: inline-block !important;
-        text-decoration: none;
-    }
-
-    .Addselectpopup, .new_modalpopup {
-        width: 100% !important;
-        left: 0px !important;
-    }
-
-    .nutrition_body .col-md-2, .nutrition_body .col-md-3 {
-        width: 100% !important;
-        padding: 10px;
-    }
-
-    #snackbar {
-        padding: 3px 16px !important;
-    }
-
-    section .post h2 {
-        font-size: 15px;
-        line-height: 58px !important;
-    }
-
-    body .home-page #navigation {
-        margin: 0px !important;
-    }
-
-    .align_auto {
-        width: auto;
-    }
-
-    .mycart-page table .align_ment_mble {
-        width: 100%;
-    }
-
-    .txtQuantity_item td {
-        padding: 3px;
-        font-size: 100% !important;
-    }
-
-    .orange, .red, .green {
-        margin-right: 0px !important;
-        padding: 10px 5px !important;
-    }
-
-    .container {
-        /* padding-right: 7px; */
-        /* padding-left: 7px; */
-        max-width: 100% !important;
-    }
-
-    body {
-        overflow: hidden;
-    }
-
-    .form_submit {
-        padding: initial !important;
-    }
-
-        .form_submit .p-10 .btn-green {
-            width: 43% !important;
-        }
-
-        .form_submit input {
-            border: 1px solid #ccc;
-            width: 80% !important;
-        }
-
-        .form_submit .col-md-4 {
-            padding: 0px !important;
-        }
-
-        .form_submit .validation_error {
-            width: 100%;
-            top: -25%;
-            left: 1%;
-            color: #f00;
-            float: left;
-            font-size: 12px;
-            background: #fff;
-            text-shadow: 1px 1px 1px #ddd;
-        }
-
-    .post .heading-image img {
-        width: 100%;
-        height: 100% !important;
-        margin-bottom: 10px;
-    }
-
-    .plan_edit form .align_right {
-        text-align: left;
-    }
-
-    .expiry_date {
-        width: 20% !important;
-    }
-
-    #CardIdCode {
-        float: left;
-        width: 50%;
-    }
-
-    .ui-tabs .ui-tabs-panel {
-        padding: 0px;
-    }
-
-    .box-green {
-        padding: 16px 0px 16px 0px;
-    }
-
-    .ui-tabs .ui-tabs-nav li {
-        margin: 5px .2em 0 0;
-    }
-
-    .section-middle img, .section img {
-        width: 100%;
-        height: auto;
-    }
-
-    .background_bg {
-        background: none;
-        padding: 0px;
-        border-radius: 0px;
-        border: 0px solid #ddd;
-        box-shadow: 0px 0px 0px 0px #ddd;
-    }
-
-    .expdate label {
-        float: left;
-        width: 100%;
-    }
-
-    .expdate select {
-        float: left;
-    }
-
-    .checkbox_1 td {
-        width: 100% !important;
-        float: left;
-    }
-
-    body.home-page #main, .full-page-panel .middle {
-        width: 100%;
-    }
-
-    .wm-field label {
-        width: 100%;
-        float: left;
-    }
 }
 
 .full-page-panel .health-chief-diet .form-control {
@@ -2592,56 +2313,6 @@ hr {
     }
 }
 
-@media only screen and (min-width : 375px) and (max-width : 812px) and (orientation : landscape) {
-    .col_gap p {
-        padding: 0px 16px !important;
-    }
-
-    #Healthyorganicmeals .col-md-4, #Amazing-varity .col-md-4 {
-        width: 33.3% !important;
-        float: left;
-        padding: 5px !important;
-    }
-
-    #Amazing-varity .btn-orange {
-        margin-left: 38%;
-        float: left;
-    }
-
-    #Healthyorganicmeals .content p br {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 854px) and (min-width: 450px) and (orientation: landscape) {
-    #main #sidebar {
-        width: 100% !important;
-        text-align: center;
-    }
-
-    .plan_edit .fieldRow .fieldCol label {
-        float: left !important;
-        width: 42%;
-        margin: 7px 0px;
-    }
-
-    #sidebar .box-green h3:first-child {
-        text-align: center;
-    }
-
-    #panel8 table td:first-child {
-        width: 27%;
-    }
-
-    #panel8 table td .btn-green {
-        margin-left: 9%;
-    }
-
-    .content_field .col-md-4 {
-        width: 30%;
-        float: left;
-    }
-}
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
 
@@ -2794,71 +2465,6 @@ label.col-md-4.align_right {
 
 .user-registation legend {
     font-weight: 600;
-}
-
-@media only screen and (max-width:767px) and (orientation : landscape) {
-    .mealItem .col-md-3 {
-        float: left;
-        width: 30%;
-    }
-
-    .mealItem .addToCart {
-        margin-bottom: 15px;
-    }
-
-    .mealItem .col-md-7 {
-        float: left;
-        width: 70%;
-        padding-left: 10px;
-    }
-
-    .newbutton h2 {
-        line-height: initial;
-        width: 100% !important;
-        padding: 0px !important;
-    }
-
-    .btn-mobile {
-        padding: 0px 15px !important;
-    }
-
-    #familystylepopup .modal-dialog {
-        width: 70% !important;
-    }
-
-    #Healthyorganicmeals .col-md-4 h4 p {
-        font-size: 12px !important;
-        min-height: 60px !important;
-    }
-
-        #Healthyorganicmeals .col-md-4 h4 p br {
-            display: none;
-        }
-
-    .phoneno {
-        font-size: larger !important;
-    }
-
-    #sidebar .center p.buttons {
-        margin-left: 0px;
-    }
-
-    .btn-green {
-        padding: 5px 11px !important;
-    }
-
-    .article-list span {
-        width: auto;
-        margin-right: 2%;
-    }
-
-    .alignleft img {
-        width: 100%;
-    }
-
-    .buttons a span {
-        margin-right: 0px;
-    }
 }
 
 #panel8 .push {
@@ -3073,24 +2679,6 @@ section .btn-orange, section .btn-orange:hover {
 
 #Healthyorganicmeals a {
     font-size: 11px;
-}
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-    section {
-        background-size: 100% 100% !important;
-    }
-
-    #Healthyorganicmeals .content p {
-        min-height: 60px !important;
-    }
-
-        #Healthyorganicmeals .content p br {
-            display: none;
-        }
-
-    #Amazing-varity .btn-orange {
-        margin-right: 30px;
-    }
 }
 
 section .banner {
@@ -3859,57 +3447,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: bold;
 }
 
-@media screen and (min-width: 600px) and (max-width:767px) {
-    .col_gap p {
-        min-height: auto !important;
-    }
-
-    #navigation > ul > li {
-        position: relative;
-        float: left;
-        font-size: 14px;
-        line-height: 35px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .meals .mealItem .col-md-4 {
-        padding: 0px 20px;
-        width: 25%;
-        float: left;
-    }
-}
-
-@media (device-height : 568px) and (device-width : 320px) and (-webkit-min-device-pixel-ratio: 2) {
-    #plan-mealtypes .hiderowmenu img {
-        margin: 0px;
-    }
-
-    .content_field .col-md-4 {
-        margin: 0px 5px;
-    }
-
-    #btnaddtocart {
-        padding: 6px 10px;
-    }
-
-    .daily_cat .col-md-12 {
-        padding: 10px;
-    }
-
-    .three_images img {
-        height: 120px !important;
-    }
-
-    .standard_meal, .weightloss h2 {
-        padding: 0px 10px;
-    }
-
-    .three_images img {
-        height: 120px !important;
-    }
-}
-
 .content-meals table {
     padding: 10px;
     border: 1px solid #ddd;
@@ -4234,79 +3771,6 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
 
 #lblFeedback0, #lblFeedback1 {
     font-size: 16px !important;
-}
-
-@media only screen and (max-width: 960px) and (min-width: 600px) and (orientation:landscape) {
-    .nutrition_body .col-md-2, .nutrition_body .col-md-3 {
-        padding: 0px 0px;
-        width: 20% !important;
-        float: left;
-    }
-
-    /* .familystyle_div { */
-    /* margin-top: 1% !important; */
-    /* } */
-}
-
-@media only screen and (max-width: 732px) and (min-width: 412px) and (orientation:landscape) {
-    .nutrition_body .col-md-2, .nutrition_body .col-md-3, #MealDetailsContainer .col-md-4 {
-        padding: 0px 0px;
-        width: 20% !important;
-        float: left;
-    }
-}
-
-@media only screen and (max-width: 640px) and (min-width: 320px) and (orientation:landscape) {
-    .nutrition_body .col-md-2, .nutrition_body .col-md-3, #MealDetailsContainer .col-md-4 {
-        padding: 0px 0px;
-        width: 100% !important;
-        float: left;
-    }
-}
-
-@media only screen and (max-width: 640px) and (min-width: 360px) and (orientation:landscape) {
-    #MealDetailsContainer .mealItem .col-md-4 {
-        padding: 0px 0px;
-        width: 25% !important;
-        float: left;
-    }
-
-
-    .nutrition_body .col-md-3 {
-        width: 21% !important;
-    }
-
-    .divfamilystyleerror .pull-left span {
-        width: auto !important;
-    }
-
-    #MealDetailsContainer .mealItem .col-md-4 {
-        width: 25%;
-    }
-
-    #MealDetailsContainer .mealItem .col-md-2 {
-        width: 19% !important;
-    }
-}
-
-@media only screen and (max-width: 568px) and (min-width: 320px) and (orientation:landscape) {
-    #Healthyorganicmeals .col-md-4 {
-        width: 100% !important;
-    }
-
-    #Healthyorganicmeals .content p {
-        min-height: 10px !important;
-    }
-
-    #MealDetailsContainer .mealItem .col-md-4 {
-        width: 100% !important;
-    }
-}
-
-@media only screen and (max-width: 480px) and (min-width: 320px) and (orientation:landscape) {
-    #MealDetailsContainer .mealItem .col-md-4, #MealDetailsContainer .mealItem .col-md-2 {
-        width: 100% !important;
-    }
 }
 
 @media only screen and (max-width: 1600px) and (min-width: 800px) and (orientation:landscape) {
@@ -4727,4 +4191,10 @@ span[class^="dot-"] {
 .active {
     color: #276f22;
     font-weight: bold;
+}
+.full-width {
+    width:100%;
+}
+.menuitems {
+    vertical-align:top;
 }
