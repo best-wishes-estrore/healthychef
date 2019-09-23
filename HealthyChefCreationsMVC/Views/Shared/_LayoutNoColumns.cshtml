@@ -512,6 +512,7 @@
                 //    $("#" + menuItemId).find("#Quantity").text(parseInt(quantity) + parseInt(AddtoCartFormData.Quantity));
                 //}
                 $("#Yourcartpartialview").html(res.Message);
+                $("#YourcartpartialviewDesktop").html(res.Message);
                 $('body').css("opacity", '1');
                 $("#divLoader").css('display', 'none');
                 document.getElementById('isFamilyStyle_' + menuItemId).checked = false;
@@ -596,6 +597,7 @@
                             setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
                             $('#snackbar').show();
                             $("#Yourcartpartialview").html(res.Message);
+                            $("#YourcartpartialviewDesktop").html(res.Message);
                             $('body').css("opacity", '1');
                             $("#divLoader").css('display', 'none');
                             $('#Addselectpopup-' + menuItemId + '').modal('hide');

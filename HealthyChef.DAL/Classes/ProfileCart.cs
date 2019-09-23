@@ -106,8 +106,16 @@ namespace HealthyChef.DAL
                                         //If Item is FamilyStyle
                                         if (cartItem.Plan_IsAutoRenew == true)
                                         {
-                                            discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                            taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            if(cartItem.ItemTypeID == 1)
+                                            {
+                                                discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
+                                                taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            }
+                                            else
+                                            {
+                                                discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                                taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            }
                                         }
                                         else
                                         {

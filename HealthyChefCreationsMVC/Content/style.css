@@ -10,6 +10,11 @@
     -moz-box-sizing: border-box;
 }
 
+#Yourcartpartialview h4 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .clear {
     clear: both;
 }
@@ -4717,4 +4722,9 @@ span[class^="dot-"] {
 }
 #programFetures {
     display: none;
+}
+
+.active {
+    color: #276f22;
+    font-weight: bold;
 }

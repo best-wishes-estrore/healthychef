@@ -75,39 +75,39 @@
 
                     <div class="m-nav" style="text-align: center;">
                         <!--<ul>
-                            <li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnBreakfast" value="Breakfast" id="btnBreakfast" class="alc-button-submit active">
+            <input type="submit" name="ctl00$body$ctl00$btnBreakfast" value="Breakfast" id="btnBreakfast" class="alc-button-submit active">
 
-                            </li>
-                            <li>
+        </li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnLunch" value="Lunch" id="btnLunch" class="alc-button-submit">
+            <input type="submit" name="ctl00$body$ctl00$btnLunch" value="Lunch" id="btnLunch" class="alc-button-submit">
 
-                            </li>
-                            <li>
+        </li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnDinner" value="Dinner" id="btnDinner" class="alc-button-submit">
+            <input type="submit" name="ctl00$body$ctl00$btnDinner" value="Dinner" id="btnDinner" class="alc-button-submit">
 
-                            </li>
-                            <li>
+        </li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnChild" value="Child" id="btnChild" class="alc-button-submit">
+            <input type="submit" name="ctl00$body$ctl00$btnChild" value="Child" id="btnChild" class="alc-button-submit">
 
-                            </li>
-                            <li>
+        </li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnDessert" value="Dessert" id="btnDessert" class="alc-button-submit">
+            <input type="submit" name="ctl00$body$ctl00$btnDessert" value="Dessert" id="btnDessert" class="alc-button-submit">
 
-                            </li>
-                            <li>
+        </li>
+        <li>
 
-                                <input type="submit" name="ctl00$body$ctl00$btnOther" value="Other" id="btnOther" class="alc-button-submit">
+            <input type="submit" name="ctl00$body$ctl00$btnOther" value="Other" id="btnOther" class="alc-button-submit">
 
-                            </li>
+        </li>
 
 
-                        </ul>-->
+    </ul>-->
                         <span style="float:left;color: #276f22;font-weight:bold;font-size:1.6em" class="mble_displaynone">Weekly A La Carte Menus : </span>
 
                         <ul>
@@ -133,6 +133,12 @@
                         <div class="clearfix"></div>
                         <hr />
 
+                        <div class="Mobile_details" style="display:none">
+                            <div id="Yourcartpartialview">
+                                @Html.Partial("~/Views/Menu/_YourcartPage.cshtml", Model)
+                            </div>
+                        </div>
+
                         <fieldset class="css-order">
                             <ul>
                                 <li style="width: 100%;">
@@ -141,28 +147,20 @@
                                     <div style="float: left;">
                                         @*<select name="DeliveryDate" onchange="" id="ddlDeliveryDate" class="date-picker">
 
-                                            @foreach (var d in Model.calendar)
-                                            {
-                                            <option value="@d.DeliveryDate">@d.DeliveryDate.ToString("MMMM d, yyyy (ddd)")</option>
-                                            }
+                        @foreach (var d in Model.calendar)
+                        {
+                        <option value="@d.DeliveryDate">@d.DeliveryDate.ToString("MMMM d, yyyy (ddd)")</option>
+                        }
 
-                                            </select>*@
+                        </select>*@
 
                                         @Html.DropDownList("DeliveryDate", Model.calendarDropdown, new { id = "ddlDeliveryDate", @class = "date-picker", @placeholder = "Select a Delivery Dates" })
                                     </div>
                                 </li>
                             </ul>
                         </fieldset>
-
-
-
-
                     </div>
-                    <div class="Mobile_details" style="display:none">
-                        <div id="Yourcartpartialview">
-                            @Html.Partial("~/Views/Menu/_YourcartPage.cshtml", Model)
-                        </div>
-                    </div>
+                   
                     <div class="col-md-8">
                         <div class="meals">
                             @*<h2>&nbsp;</h2>*@
@@ -482,6 +480,8 @@
                                                                                     }
                                                                                 </div>
                                                                             </td>
+
+
                                                                             @*<td style="padding: 0px 10px;width: 33.3%;vertical-align: top;display:none;">
                                                                                     <div class="panel-add-to-cart" style="position: relative;">
                                                                                         Price: <span class="plan-price-text right-align">@m.Price</span>
@@ -697,7 +697,7 @@
                     </div>
                     @*<div id="divLoader" style="display:none;"> <h1 style="font-family: 'Ubuntu',sans-serif;color: #F06324;text-align:center;margin-top:110px">Adding...</h1>*@@*<img src="~/Content/Images/ajax-loading.gif" alt="Loader" />*@
                     <div class="Desktop_details">
-                        <div id="Yourcartpartialview">
+                        <div id="YourcartpartialviewDesktop">
                             @Html.Partial("~/Views/Menu/_YourcartPage.cshtml", Model)
                         </div>
                     </div>
@@ -718,7 +718,7 @@
                     $('input[value="3"]').prop('checked', true);
                 });
             </script>
-           
+
             <script type="text/javascript">
                 var _activeTab = 2;
                 $(document).ready(function () {
