@@ -1696,3 +1696,8 @@ body.home-page #content .three-cols .image img {
         width: 80% !important;
         margin: 0px 10% !important;
     }
+
+.active {
+    color: #276f22;
+    font-weight: bold;
+}
