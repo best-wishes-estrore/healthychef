@@ -234,159 +234,158 @@
 
 @using (Html.BeginForm("AddProgramToCart", "Programs", FormMethod.Post))
 {
-    <div class="background_bg">
-        <div class="container">
-            <div class="top">&nbsp;</div>
-            <div class="row">
-                @*<h2 class="Mobile_details" style="color: #286f23;display:none">@Model.ProgramName</h2>*@
-           
-                <div class="left_col col-md-8">
-                    <div class="middle health-chief-diet weightloss">
-                        <h2>@Model.ProgramName</h2>
-                        <div class="section">
-                            <div class="col-md-4" style="padding: 0px;">
-                                <img alt="@Model.Program.Name" src="@Model.Program.ImagePath" class="" width="100%">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="description">
-                                    <div style="margin-bottom:10px; color: grey; font-size: 14px; line-height: 18px;text-align:justify">
-                                        @Model.Program.Description
-                                        <span id="dots" style="color:#fff">...</span>
-                                        <span id="programFetures">
-                                            @Html.Partial("~/Views/Programs/_showProgramFeatures.cshtml", Model)
-                                        </span>
-                                    </div>
-                                    <a id="learnMore" class="btn btn-green" target="_blank" onclick="showOrHideProgramFetures()">LEARN MORE</a>
-                                </div>
-                            </div>
-                            <div class="cl">&nbsp;</div>
+<div class="background_bg">
+    <div class="container">
+        <div class="top">&nbsp;</div>
+        <div class="row">
+            <div class="left_col col-md-8">
+                <div class="middle health-chief-diet weightloss">
+                    <h2>@Model.ProgramName</h2>
+                    <div class="section">
+                        <div class="col-md-4" style="padding: 0px;">
+                            <img alt="@Model.Program.Name" src="@Model.Program.ImagePath" class="" width="100%">
                         </div>
-                    </div>
-                    <div id="examplemenu" class="exampleMeniWidthStyle">
-                        @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model)
-                        <br />
+                        <div class="col-md-8">
+                            <div class="description">
+                                <div style="margin-bottom:10px; color: grey; font-size: 14px; line-height: 18px;text-align:justify">
+                                    @Model.Program.Description
+                                    <span id="dots" style="color:#fff">...</span>
+                                    <span id="programFetures">
+                                        @Html.Partial("~/Views/Programs/_showProgramFeatures.cshtml", Model)
+                                    </span>
+                                </div>
+                                <a id="learnMore" class="btn btn-green" target="_blank" onclick="showOrHideProgramFetures()">LEARN MORE</a>
+                            </div>
+                        </div>
+                        <div class="cl">&nbsp;</div>
                     </div>
                 </div>
+                <div id="examplemenu" class="Desktop_details exampleMeniWidthStyle">
+                    @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "desktop" } })
+                    <br />
+                </div>
+            </div>
 
-                <div class="right_col col-md-4" style="padding:0px;margin-top:20px;">
-                    <fieldset style="background:#f2f2f2;border: 2px solid #dcd7d7;padding: 0px;border-radius: 5px;">
-                        <div class="col-height">
-                            <table id="plan-types" cellpadding="0" cellspacing="0" class="form-select-menu" border="0">
-                                <tbody>
-                                    <tr><td class="col-title" align="center" colspan="2">@Model.ProgramName @*Plan Type*@</td></tr>
-                                    <tr>
-                                        <td align="center">
-                                            <span class="weight_loss">Days Per Week</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-                                            <div id="myCarousel1" class="carousel" data-interval="false" style="width:25%">
-                                                <div id="plantypeslider" class="carousel-inner" data-interval="false">
-                                                    @foreach (var planType in Model.PlanTypes)
-                                                    {
-                                                        var isDefaultPlanType = planType.IsDefault ? "active" : "";
-                                                        <div class="item @isDefaultPlanType" selected="@isDefaultPlanType"
-                                                             id="plan-type-@planType.PlanID"
-                                                             data-id="@planType.PlanID"
-                                                             data-price="@planType.PricePerDay"
-                                                             data-weeks="@planType.NumWeeks"
-                                                             data-days-per-week="@planType.NumDaysPerWeek"
-                                                             data-meals-per-day="@planType.MealsPerDay"
-                                                             data-default="@isDefaultPlanType"
-                                                             value="@planType.PlanID">
-                                                            @planType.NumDaysPerWeek
-                                                        </div>
-                                                    }
-                                                </div>
+            <div class="right_col col-md-4" style="padding:0px;margin-top:20px;">
 
-                                                <!-- Left and right controls -->
-                                                <a class="left carousel-control" href="#myCarousel1" data-slide="prev" onclick="PriceCalculator('prev',@Model.programmealtypes.Count(),@Model.ProgramId)">
-                                                    <span class="fa fa-minus"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="right carousel-control" href="#myCarousel1" data-slide="next" onclick="PriceCalculator('next',@Model.programmealtypes.Count(),@Model.ProgramId)">
-                                                    <span class="fa fa-plus"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </div>
-                                        </td>
-
-
-                                        @*<td style="display:none;"><div id="plantypecost">$59.99/day</div></td>*@
-                                    </tr>
-                                    <tr hidden="hidden" style="display:none;">
-                                        <td class="left-box" valign="top">
-                                            <select name="itemId" id="plantypeids">
-
+                <fieldset style="background:#f2f2f2;border: 2px solid #dcd7d7;padding: 0px;border-radius: 5px;">
+                    <div class="col-height">
+                        <table id="plan-types" cellpadding="0" cellspacing="0" class="form-select-menu" border="0">
+                            <tbody>
+                                <tr><td class="col-title" align="center" colspan="2">@Model.ProgramName @*Plan Type*@</td></tr>
+                                <tr>
+                                    <td align="center">
+                                        <span class="weight_loss">Days Per Week</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <div id="myCarousel1" class="carousel" data-interval="false" style="width:25%">
+                                            <div id="plantypeslider" class="carousel-inner" data-interval="false">
                                                 @foreach (var planType in Model.PlanTypes)
                                                 {
-                                                    var isDefaultPlanType = planType.IsDefault ? "true" : "false";
-                                                    <option selected="@isDefaultPlanType"
-                                                            id="plan-type-@planType.PlanID"
-                                                            data-id="@planType.PlanID"
-                                                            data-price="@planType.PricePerDay"
-                                                            data-weeks="@planType.NumWeeks"
-                                                            data-days-per-week="@planType.NumDaysPerWeek"
-                                                            data-meals-per-day="@planType.MealsPerDay"
-                                                            data-default="@isDefaultPlanType"
-                                                            value="@planType.PlanID">
+                                                    var isDefaultPlanType = planType.IsDefault ? "active" : "";
+                                                    <div class="item @isDefaultPlanType" selected="@isDefaultPlanType"
+                                                         id="plan-type-@planType.PlanID"
+                                                         data-id="@planType.PlanID"
+                                                         data-price="@planType.PricePerDay"
+                                                         data-weeks="@planType.NumWeeks"
+                                                         data-days-per-week="@planType.NumDaysPerWeek"
+                                                         data-meals-per-day="@planType.MealsPerDay"
+                                                         data-default="@isDefaultPlanType"
+                                                         value="@planType.PlanID">
                                                         @planType.NumDaysPerWeek
-                                                    </option>
+                                                    </div>
                                                 }
-                                            </select>
-                                        </td>
-                                    </tr>
+                                            </div>
 
-                                </tbody>
-                            </table>
+                                            <!-- Left and right controls -->
+                                            <a class="left carousel-control" href="#myCarousel1" data-slide="prev" onclick="PriceCalculator('prev',@Model.programmealtypes.Count(),@Model.ProgramId)">
+                                                <span class="fa fa-minus"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel1" data-slide="next" onclick="PriceCalculator('next',@Model.programmealtypes.Count(),@Model.ProgramId)">
+                                                <span class="fa fa-plus"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </td>
 
-                            @*Program mealtype start*@
-                            <div class="col-md-12 text-center meal_include">
-                                <span class="col-title">Meals Included</span>
-                                <table id="plan-mealtypes" cellpadding="0" cellspacing="0" class="form-select-menu plan_meals tdform mealsincludetblform" border="0" width="100%" style="margin:12px 0px">
 
-                                    <tbody class="mealt_type">
-                                        @if (Model.ProgramName.Contains("Living"))
-                                        {
+                                    @*<td style="display:none;"><div id="plantypecost">$59.99/day</div></td>*@
+                                </tr>
+                                <tr hidden="hidden" style="display:none;">
+                                    <td class="left-box" valign="top">
+                                        <select name="itemId" id="plantypeids">
 
-                                            //foreach (var planType in Model.programmealtypes)
-                                            //{
-                                            <tr>
-                                                @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.BreakfastEntree).FirstOrDefault() != null)
-                                                {
-                                                    <td>
-                                                        <input type="checkbox" class="mealtype" name="mealType" value="1" checked><span>Breakfast</span>
-                                                    </td>
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        <input type="checkbox" class="mealtype" name="mealType" value="1"><span>Breakfast </span>
-                                                    </td>
-                                                }
+                                            @foreach (var planType in Model.PlanTypes)
+                                            {
+                                                var isDefaultPlanType = planType.IsDefault ? "true" : "false";
+                                                <option selected="@isDefaultPlanType"
+                                                        id="plan-type-@planType.PlanID"
+                                                        data-id="@planType.PlanID"
+                                                        data-price="@planType.PricePerDay"
+                                                        data-weeks="@planType.NumWeeks"
+                                                        data-days-per-week="@planType.NumDaysPerWeek"
+                                                        data-meals-per-day="@planType.MealsPerDay"
+                                                        data-default="@isDefaultPlanType"
+                                                        value="@planType.PlanID">
+                                                    @planType.NumDaysPerWeek
+                                                </option>
+                                            }
+                                        </select>
+                                    </td>
+                                </tr>
 
-                                                @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.LunchEntree).FirstOrDefault() != null)
-                                                {
-                                                    <td><input type="checkbox" class="mealtype" name="mealType" value="2" checked><span>Lunch</span></td>
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        <input type="checkbox" class="mealtype" name="mealType" value="2"><span>Lunch</span>
-                                                    </td>
-                                                }
+                            </tbody>
+                        </table>
 
-                                                @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.DinnerEntree).FirstOrDefault() != null)
-                                                {
-                                                    <td><input type="checkbox" class="mealtype" name="mealType" value="3" checked><span>Dinner</span></td>
-                                                }
-                                                else
-                                                {
-                                                    <td><input type="checkbox" class="mealtype" name="mealType" value="3"><span>Dinner</span></td>
-                                                }
+                        @*Program mealtype start*@
+                        <div class="col-md-12 text-center meal_include">
+                            <span class="col-title">Meals Included</span>
+                            <table id="plan-mealtypes" cellpadding="0" cellspacing="0" class="form-select-menu plan_meals tdform mealsincludetblform" border="0" width="100%" style="margin:12px 0px">
 
-                                                @*@if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.ChildEntree).FirstOrDefault() != null)
+                                <tbody class="mealt_type">
+                                    @if (Model.ProgramName.Contains("Living"))
+                                    {
+
+                                        //foreach (var planType in Model.programmealtypes)
+                                        //{
+                                        <tr>
+                                            @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.BreakfastEntree).FirstOrDefault() != null)
+                                            {
+                                                <td>
+                                                    <input type="checkbox" class="mealtype" name="mealType" value="1" checked><span>Breakfast</span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <input type="checkbox" class="mealtype" name="mealType" value="1"><span>Breakfast </span>
+                                                </td>
+                                            }
+
+                                            @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.LunchEntree).FirstOrDefault() != null)
+                                            {
+                                                <td><input type="checkbox" class="mealtype" name="mealType" value="2" checked><span>Lunch</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <input type="checkbox" class="mealtype" name="mealType" value="2"><span>Lunch</span>
+                                                </td>
+                                            }
+
+                                            @if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.DinnerEntree).FirstOrDefault() != null)
+                                            {
+                                                <td><input type="checkbox" class="mealtype" name="mealType" value="3" checked><span>Dinner</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><input type="checkbox" class="mealtype" name="mealType" value="3"><span>Dinner</span></td>
+                                            }
+
+                                            @*@if (Model.programmealtypes.Where(x => x.MealTypeID == (int)Enums.MealTypes.ChildEntree).FirstOrDefault() != null)
                                         {
                                             <td><input type="checkbox" class="mealtype" name="mealType" value="4" checked>Child</td>
                                         }
@@ -404,184 +403,184 @@
                                             <td><input type="checkbox" class="mealtype" name="mealType" value="5">Other</td>
                                         }*@
 
-                                            </tr>
-                                            //}
-                                        }
+                                        </tr>
+                                        //}
+                                    }
 
+                                    else
+                                    {
+                                        foreach (var planType in Model.programmealtypes)
+                                        {
+                                            <tr class="meals_data">
+                                                @if (planType.MealTypeID == (int)Enums.MealTypes.BreakfastEntree)
+                                                {
+                                                    <td><i class="fa fa-check"></i><span>Breakfast</span></td>
+                                                }
+                                                @if (planType.MealTypeID == (int)Enums.MealTypes.LunchEntree)
+                                                {
+                                                    <td><i class="fa fa-check"></i><span>Lunch</span></td>
+                                                }
+                                                @if (planType.MealTypeID == (int)Enums.MealTypes.DinnerEntree)
+                                                {
+                                                    <td><i class="fa fa-check"></i><span>Dinner</span></td>
+                                                }
+                                                @if (planType.MealTypeID == (int)Enums.MealTypes.ChildEntree)
+                                                {
+                                                    <td><i class="fa fa-check"></i><span>Child</span></td>
+                                                }
+                                                @if (planType.MealTypeID == (int)Enums.MealTypes.OtherEntree)
+                                                {
+                                                    <td><i class="fa fa-check"></i><span>Other</span></td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            @*Program mealtype end*@
+                        </div>
+                    </div>
+                    <div class="col-height text-center daily_cat">
+                        <span id="legend-options" class="col-title">Portion Size @*Plan Option*@</span>
+                        <div style="display:none;">
+                            <table id="plan-options" class="form-select-menu table table-hover col-height">
+
+                                <tbody>
+                                    @foreach (var planOption in Model.PlanOptions)
+                                    {
+                                        var isDefaultPlanOption = planOption.IsDefault ? "true" : "false";
+                                        <tr>
+                                            <td class="left-box" valign="top">
+                                                <input type="radio" style="color: green;background-color: #ccc;" name="optionId"
+                                                       id="plan-option-@planOption.ProgramOptionID"
+                                                       data-id="@planOption.ProgramOptionID"
+                                                       data-price="@planOption.OptionValue"
+                                                       data-default="@isDefaultPlanOption"
+                                                       value="@planOption.ProgramOptionID">
+                                            </td>
+                                            <td class="middle-box" valign="top">
+                                                <label for="plan-option-@planOption.ProgramOptionID">
+                                                    @planOption.OptionText
+                                                </label>
+                                            </td>
+                                            <td class="right-box" align="right" valign="top" style="display:none;">
+
+                                                <span>
+
+                                                    @if (@planOption.OptionValue == 0)
+                                                    {
+                                                        <span id="">
+                                                            @string.Format("{0:f2}", planOption.OptionValue)
+                                                        </span>
+                                                    }
+
+                                                    else if (@planOption.OptionValue < 0)
+                                                    {
+                                                        <span id="">
+                                                            -$@string.Format("{0:f2}", Math.Abs(planOption.OptionValue))
+                                                        </span>
+                                                    }
+
+                                                    else if (@planOption.OptionValue > 0)
+                                                    {
+                                                        <span id="">
+                                                            +$@string.Format("{0:f2}", planOption.OptionValue)
+                                                        </span>
+                                                    }
+
+                                                </span>/ day
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div id="myCarousel2" class="form-select-menu mealsincludetblform carousel slide slider_new" data-interval="false">
+                                <div id="planoptionslider" class="carousel-inner">
+                                    @foreach (var planOption in Model.PlanOptions)
+                                    {
+                                        var isDefaultPlanOption = planOption.IsDefault ? "active" : "";<div class="item @isDefaultPlanOption" selected="@isDefaultPlanOption"
+                                                                                                            id="plan-option-@planOption.ProgramOptionID"
+                                                                                                            data-id="@planOption.ProgramOptionID"
+                                                                                                            data-price="@planOption.OptionValue"
+                                                                                                            data-default="@isDefaultPlanOption"
+                                                                                                            value="@planOption.ProgramOptionID">
+                                            <a data-toggle="tooltip" href="#" title="@planOption.OptionText">@planOption.OptionText</a>
+                                        </div>
+                                        <span style="display:none;">
+
+                                            @if (@planOption.OptionValue == 0)
+                                            {
+                                                <span id="">
+                                                    @string.Format("{0:f2}", planOption.OptionValue)
+                                                </span>
+                                            }
+
+                                            else if (@planOption.OptionValue < 0)
+                                            {
+                                                <span id="">
+                                                    -$@string.Format("{0:f2}", Math.Abs(planOption.OptionValue))
+                                                </span>
+                                            }
+
+                                            else if (@planOption.OptionValue > 0)
+                                            {
+                                                <span id="">
+                                                    +$@string.Format("{0:f2}", planOption.OptionValue)
+                                                </span>
+                                            }
+
+                                        </span><span style="display:none;">/ day</span>
+
+                                    }
+                                </div>
+
+                                <a class="left carousel-control" href="#myCarousel" data-slide="prev" onclick="Planoptions('prev',@Model.programmealtypes.Count(),@Model.ProgramId)">
+                                    <span class="fa fa-chevron-left"></span>
+                                    @*<span class="sr-only">Previous</span>*@
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next" onclick="Planoptions('next',@Model.programmealtypes.Count(),@Model.ProgramId)">
+                                    <span class="fa fa-chevron-right"></span>
+                                    @*<span class="sr-only">Next</span>*@
+                                </a>
+                            </div>
+                        </div>
+                        <div id="divLoader" style="display:none;"> <img src="~/Content/Images/ajax-loading.gif" alt="Loader" /> </div>
+                        <input type="hidden" id="program-id" value="33">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-height text-center">
+                            @*<span style="float:left;padding:0px 20px;width:40%"> Deliveried on</span>*@
+                            <div class="select_dropdown">
+                                <select name="deliveryDateString" id="ddldeliveryDate" style="max-width:100%;font-size: 13px;" class="date-picker form-control">
+                                    @*<option data-calendarid="0" value="0">CHOOSE DELIVERY DATE</option>*@
+                                    @foreach (var d in Model.calendar)
+                                    {
+                                        <option data-calendarid="@d.CalendarID" value="@d.DeliveryDate"> Arrives @d.DeliveryDate.ToString("ddddd, MMMM d")</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="select_dropdown">
+                                <select name="weeklydeldate" id="weeklydeldate" style="max-width:100%;font-size: 13px;" class="date-picker form-control">
+                                    @foreach (var weekno in Model.plantypesfornoofweeks)
+                                    {
+                                        if (Model.plantypesfornoofweeks.Max(x => x.NumWeeks) == @weekno.NumWeeks)
+                                        {
+                                            <option value="@weekno.NumWeeks" selected="selected">@weekno.NumWeeks Weeks,1 Delivery Per Week</option>
+                                        }
                                         else
                                         {
-                                            foreach (var planType in Model.programmealtypes)
-                                            {
-                                                <tr class="meals_data">
-                                                    @if (planType.MealTypeID == (int)Enums.MealTypes.BreakfastEntree)
-                                                    {
-                                                        <td><i class="fa fa-check"></i><span>Breakfast</span></td>
-                                                    }
-                                                    @if (planType.MealTypeID == (int)Enums.MealTypes.LunchEntree)
-                                                    {
-                                                        <td><i class="fa fa-check"></i><span>Lunch</span></td>
-                                                    }
-                                                    @if (planType.MealTypeID == (int)Enums.MealTypes.DinnerEntree)
-                                                    {
-                                                        <td><i class="fa fa-check"></i><span>Dinner</span></td>
-                                                    }
-                                                    @if (planType.MealTypeID == (int)Enums.MealTypes.ChildEntree)
-                                                    {
-                                                        <td><i class="fa fa-check"></i><span>Child</span></td>
-                                                    }
-                                                    @if (planType.MealTypeID == (int)Enums.MealTypes.OtherEntree)
-                                                    {
-                                                        <td><i class="fa fa-check"></i><span>Other</span></td>
-                                                    }
-                                                </tr>
-                                            }
+                                            <option value="@weekno.NumWeeks">@weekno.NumWeeks Weeks,1 Delivery Per Week</option>
                                         }
-                                    </tbody>
-                                </table>
-                                @*Program mealtype end*@
+                                    }
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-height text-center daily_cat">
-                            <span id="legend-options" class="col-title">Portion Size @*Plan Option*@</span>
-                            <div style="display:none;">
-                                <table id="plan-options" class="form-select-menu table table-hover col-height">
 
-                                    <tbody>
-                                        @foreach (var planOption in Model.PlanOptions)
-                                        {
-                                            var isDefaultPlanOption = planOption.IsDefault ? "true" : "false";
-                                            <tr>
-                                                <td class="left-box" valign="top">
-                                                    <input type="radio" style="color: green;background-color: #ccc;" name="optionId"
-                                                           id="plan-option-@planOption.ProgramOptionID"
-                                                           data-id="@planOption.ProgramOptionID"
-                                                           data-price="@planOption.OptionValue"
-                                                           data-default="@isDefaultPlanOption"
-                                                           value="@planOption.ProgramOptionID">
-                                                </td>
-                                                <td class="middle-box" valign="top">
-                                                    <label for="plan-option-@planOption.ProgramOptionID">
-                                                        @planOption.OptionText
-                                                    </label>
-                                                </td>
-                                                <td class="right-box" align="right" valign="top" style="display:none;">
-
-                                                    <span>
-
-                                                        @if (@planOption.OptionValue == 0)
-                                                        {
-                                                            <span id="">
-                                                                @string.Format("{0:f2}", planOption.OptionValue)
-                                                            </span>
-                                                        }
-
-                                                        else if (@planOption.OptionValue < 0)
-                                                        {
-                                                            <span id="">
-                                                                -$@string.Format("{0:f2}", Math.Abs(planOption.OptionValue))
-                                                            </span>
-                                                        }
-
-                                                        else if (@planOption.OptionValue > 0)
-                                                        {
-                                                            <span id="">
-                                                                +$@string.Format("{0:f2}", planOption.OptionValue)
-                                                            </span>
-                                                        }
-
-                                                    </span>/ day
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12">
-                                <div id="myCarousel2" class="form-select-menu mealsincludetblform carousel slide slider_new" data-interval="false">
-                                    <div id="planoptionslider" class="carousel-inner">
-                                        @foreach (var planOption in Model.PlanOptions)
-                                        {
-                                            var isDefaultPlanOption = planOption.IsDefault ? "active" : "";<div class="item @isDefaultPlanOption" selected="@isDefaultPlanOption"
-                                                                                                                id="plan-option-@planOption.ProgramOptionID"
-                                                                                                                data-id="@planOption.ProgramOptionID"
-                                                                                                                data-price="@planOption.OptionValue"
-                                                                                                                data-default="@isDefaultPlanOption"
-                                                                                                                value="@planOption.ProgramOptionID">
-                                                <a data-toggle="tooltip" href="#" title="@planOption.OptionText">@planOption.OptionText</a>
-                                            </div>
-                                            <span style="display:none;">
-
-                                                @if (@planOption.OptionValue == 0)
-                                                {
-                                                    <span id="">
-                                                        @string.Format("{0:f2}", planOption.OptionValue)
-                                                    </span>
-                                                }
-
-                                                else if (@planOption.OptionValue < 0)
-                                                {
-                                                    <span id="">
-                                                        -$@string.Format("{0:f2}", Math.Abs(planOption.OptionValue))
-                                                    </span>
-                                                }
-
-                                                else if (@planOption.OptionValue > 0)
-                                                {
-                                                    <span id="">
-                                                        +$@string.Format("{0:f2}", planOption.OptionValue)
-                                                    </span>
-                                                }
-
-                                            </span><span style="display:none;">/ day</span>
-
-                                        }
-                                    </div>
-
-                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev" onclick="Planoptions('prev',@Model.programmealtypes.Count(),@Model.ProgramId)">
-                                        <span class="fa fa-chevron-left"></span>
-                                        @*<span class="sr-only">Previous</span>*@
-                                    </a>
-                                    <a class="right carousel-control" href="#myCarousel" data-slide="next" onclick="Planoptions('next',@Model.programmealtypes.Count(),@Model.ProgramId)">
-                                        <span class="fa fa-chevron-right"></span>
-                                        @*<span class="sr-only">Next</span>*@
-                                    </a>
-                                </div>
-                            </div>
-                            <div id="divLoader" style="display:none;"> <img src="~/Content/Images/ajax-loading.gif" alt="Loader" /> </div>
-                            <input type="hidden" id="program-id" value="33">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-height text-center">
-                                @*<span style="float:left;padding:0px 20px;width:40%"> Deliveried on</span>*@
-                                <div class="select_dropdown">
-                                    <select name="deliveryDateString" id="ddldeliveryDate" style="max-width:100%;font-size: 13px;" class="date-picker form-control">
-                                        @*<option data-calendarid="0" value="0">CHOOSE DELIVERY DATE</option>*@
-                                        @foreach (var d in Model.calendar)
-                                        {
-                                            <option data-calendarid="@d.CalendarID" value="@d.DeliveryDate"> Arrives @d.DeliveryDate.ToString("ddddd, MMMM d")</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <div class="select_dropdown">
-                                    <select name="weeklydeldate" id="weeklydeldate" style="max-width:100%;font-size: 13px;" class="date-picker form-control">
-                                        @foreach (var weekno in Model.plantypesfornoofweeks)
-                                        {
-                                            if (Model.plantypesfornoofweeks.Max(x => x.NumWeeks) == @weekno.NumWeeks)
-                                            {
-                                                <option value="@weekno.NumWeeks" selected="selected">@weekno.NumWeeks Weeks,1 Delivery Per Week</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@weekno.NumWeeks">@weekno.NumWeeks Weeks,1 Delivery Per Week</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
-
-                                @*@if (Model.activeProfiles.Count != 0)
+                            @*@if (Model.activeProfiles.Count != 0)
                         {
                             <span style="float:left;padding:0px 20px;width:40%;">Profile</span>
                             <div id="divProfiles">
@@ -600,37 +599,37 @@
                                 </select>
                             </div>
                         }*@
-                                @if (Model.activeProfiles.Count > 1)
-                                {
-                                    <div id="divProfiles" class="select_dropdown">
-                                        <h3 class="font-myriad-cond color-olive">Select a Profile</h3>
-                                        <select name="ProfileID" id="UserprofileId" class="date-picker dropdown_style" style="width:100%">
-                                            @foreach (var p in (Model.activeProfiles).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                            @if (Model.activeProfiles.Count > 1)
+                            {
+                                <div id="divProfiles" class="select_dropdown">
+                                    <h3 class="font-myriad-cond color-olive">Select a Profile</h3>
+                                    <select name="ProfileID" id="UserprofileId" class="date-picker dropdown_style" style="width:100%">
+                                        @foreach (var p in (Model.activeProfiles).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                                        {
+                                            if (p.IsChildProfile == false)
                                             {
-                                                if (p.IsChildProfile == false)
-                                                {
-                                                    <option value="@p.UserProfileID" selected="selected">@p.ProfileName</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="@p.UserProfileID">@p.ProfileName</option>
-                                                }
+                                                <option value="@p.UserProfileID" selected="selected">@p.ProfileName</option>
                                             }
-                                        </select>
+                                            else
+                                            {
+                                                <option value="@p.UserProfileID">@p.ProfileName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            }
+
+                            <div class="select_dropdown selectprofiledetails">
+                                <div align="center">
+                                    @*Your selected plan price is*@
+                                    @*<legend>Cost For Subscribe</legend>*@
+                                    <div class="col-md-4" style="padding:0px 5px;margin-top:5px" id="HideMealsPerDay">
+                                        <div id="costpermeal">0.00</div><label>Per Meal</label>
+                                        <hr />
+                                        <div id="costpersubscribemeal">0.00</div><label>Per Meal</label>
                                     </div>
-                                }
 
-                                <div class="select_dropdown selectprofiledetails">
-                                    <div align="center">
-                                        @*Your selected plan price is*@
-                                        @*<legend>Cost For Subscribe</legend>*@
-                                        <div class="col-md-4" style="padding:0px 5px;margin-top:5px" id="HideMealsPerDay">
-                                            <div id="costpermeal">0.00</div><label>Per Meal</label>
-                                            <hr />
-                                            <div id="costpersubscribemeal">0.00</div><label>Per Meal</label>
-                                        </div>
-
-                                        @*<div class="col-md-3" style="padding:0px 5px;margin-top:5px">
+                                    @*<div class="col-md-3" style="padding:0px 5px;margin-top:5px">
 
                                     <div id="costpermeal">0.00</div><label>Per Meal</label>
                                     <hr />
@@ -638,95 +637,101 @@
 
                                 </div>*@
 
-                                        @*<legend>Cost for purchase</legend>*@
-                                        <div class="col-md-4" style="padding:0px 5px;margin-top:5px">
-                                            <div id="costperday">0.00</div><label>Per Week</label>
-                                            <hr />
-                                            <div id="costpersubscribeday">0.00</div><label>Per Week</label>
-                                        </div>
-                                        <div class="col-md-8" style="margin-bottom:5px;padding:0px">
-                                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                            {
-                                                <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('false','true')" class="btn btn-orange purchase_btn">Add to <br /> Cart</button><br />
-                                                <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('true','true')" class="btn btn-orange subscribe_btn">Subscribe  & <br /> Save 5%</button>
-                                            }
-                                            else
-                                            {
-                                                <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('false','false')" class="btn btn-orange purchase_btn">Add to <br /> Cart</button><br />
-                                                <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('true','false')" class="btn btn-orange subscribe_btn">Subscribe  & <br /> Save 5%</button>
-                                            }
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-md-12 preferences">
-                                            <input id='btnYourpreferences' class="btn btn-default" type="button" value="My Preferences" />
-                                        </div>
-                                        <legend style="display:none;">SubTotal</legend>
-                                        <div style="display:none;" id="program-subtotal">0.00</div>
+                                    @*<legend>Cost for purchase</legend>*@
+                                    <div class="col-md-4" style="padding:0px 5px;margin-top:5px">
+                                        <div id="costperday">0.00</div><label>Per Week</label>
+                                        <hr />
+                                        <div id="costpersubscribeday">0.00</div><label>Per Week</label>
                                     </div>
-
-                                    <p id="days-in-week-label" align="center" style="display:none;">for a total of <b>X</b> meals, plus extras.</p>
-
+                                    <div class="col-md-8" style="margin-bottom:5px;padding:0px">
+                                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                        {
+                                            <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('false','true')" class="btn btn-orange purchase_btn">Add to <br /> Cart</button><br />
+                                            <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('true','true')" class="btn btn-orange subscribe_btn">Subscribe  & <br /> Save 5%</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('false','false')" class="btn btn-orange purchase_btn">Add to <br /> Cart</button><br />
+                                            <button type="button" name="" id="btnaddtocart" onclick="return AddtoCart('true','false')" class="btn btn-orange subscribe_btn">Subscribe  & <br /> Save 5%</button>
+                                        }
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 preferences">
+                                        <input id='btnYourpreferences' class="btn btn-default" type="button" value="My Preferences" />
+                                    </div>
+                                    <legend style="display:none;">SubTotal</legend>
+                                    <div style="display:none;" id="program-subtotal">0.00</div>
                                 </div>
 
-                                <div style="text-align:center;margin:20px 0px;display: none;width: 100%;">
-                                    <span style="display:none;">Quantity</span>
-                                    <input name="Quantity" type="number" min="1" value="1" max="99" maxlength="2" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" id="quantity" style="margin-right: 1em; text-align: center; width: 20px;display:none;">
-                                    <span id="" style="color:Red;display:none;">*</span>
-                                    <span id="" style="color:Red;display:none;">*</span>
-                                    <input type="button" name="" value="Add to Cart" id="btnaddtocart" onclick="return AddtoCart('false')" class="add-cart page-button-plus page-button-submit" style="float: left;display:none;">
-                                    <br />
-                                    <br />
-                                </div>
+                                <p id="days-in-week-label" align="center" style="display:none;">for a total of <b>X</b> meals, plus extras.</p>
+
+                            </div>
+
+                            <div style="text-align:center;margin:20px 0px;display: none;width: 100%;">
+                                <span style="display:none;">Quantity</span>
+                                <input name="Quantity" type="number" min="1" value="1" max="99" maxlength="2" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" id="quantity" style="margin-right: 1em; text-align: center; width: 20px;display:none;">
+                                <span id="" style="color:Red;display:none;">*</span>
+                                <span id="" style="color:Red;display:none;">*</span>
+                                <input type="button" name="" value="Add to Cart" id="btnaddtocart" onclick="return AddtoCart('false')" class="add-cart page-button-plus page-button-submit" style="float: left;display:none;">
+                                <br />
+                                <br />
                             </div>
                         </div>
-                    </fieldset>
-                    <div class="clearfix"></div>
-                    <div class="content_field questions Desktop_details">
-                        <h4>Questions?</h4>
-                        <div class="col-md-12 chat_online">
+                    </div>
+                </fieldset>
+                <div class="clearfix"></div>
+                <div class="content_field questions Desktop_details">
+                    <h4>Questions?</h4>
+                    <div class="col-md-12 chat_online">
 
-                            @*<h4 style="color:#39aa35;font-weight:bold">Chat Now</h4>*@
-                            <img src="~/Content/Images/redesign/chaticon.png" />
-                            <a id="my_custom_link" href="mailto:ktzghdfu@intercom-mail.com">Chat online now</a>
-                        </div>
-                        <div class="col-md-12 callus">
-                            <p>or call us toll free:</p>
-                            <a href="tel:18665752433" class="callus_number">
-                                @*<img alt="" src="/App_Themes/HealthyChef/images/icon-1.png" />*@
-                                1-866-575-2433
-                            </a>
-                        </div>
+                        @*<h4 style="color:#39aa35;font-weight:bold">Chat Now</h4>*@
+                        <img src="~/Content/Images/redesign/chaticon.png" />
+                        <a id="my_custom_link" href="mailto:ktzghdfu@intercom-mail.com">Chat online now</a>
                     </div>
-                    <div class="content_field" style="display:none;">
-                        <h4>See Our Meal Plans</h4>
-                        <div class="col-md-12">
-                            <ul class="menu_list">
-                                <li><a href="/meal-programs/healthy-living.aspx" target="_blank" id="Healthy Living">Healthy Living</a></li>
-                                <li><a href="/meal-programs/healthy-mommy.aspx" target="_blank" id="Healthy Mommy">Healthy Mommy</a></li>
-                                <li><a href="/weight-loss-programs/low-carb.aspx" target="_blank" id="Low Carb ">Low Carb </a></li>
-                                <li><a href="/weight-loss-programs/mediterranean-diet.aspx" target="_blank" id="Mediterranean Weight Loss Diet">Mediterranean Weight Loss Diet</a></li>
-                                <li><a href="/custom-programs/a-la-carte-menu.aspx" target="_blank" id="A La Carte Meals">A La Carte Meals</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="content_field" style="display:none;">
-                        <h4>This Week’s A La Carte Meals</h4>
-                        <div class="col-md-12">
-                            <ul class="menu_list">
-                                <li><a href="/Menu?mealtype=0" target="_blank" id="Breakfast">Breakfast</a></li>
-                                <li><a href="/Menu?mealtype=1" target="_blank" id="Lunch">Lunch</a></li>
-                                <li><a href="/Menu?mealtype=2" target="_blank" id="Dinner">Dinner</a></li>
-                                <li><a href="/Menu?mealtype=3" target="_blank" id="Child">Child</a></li>
-                                <li><a href="/Menu?mealtype=4" target="_blank" id="Dessert">Dessert</a></li>
-                                <li><a href="/Menu?mealtype=5" target="_blank" id="Other">Other</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-md-12 callus">
+                        <p>or call us toll free:</p>
+                        <a href="tel:18665752433" class="callus_number">
+                            @*<img alt="" src="/App_Themes/HealthyChef/images/icon-1.png" />*@
+                            1-866-575-2433
+                        </a>
                     </div>
                 </div>
+                <div class="content_field" style="display:none;">
+                    <h4>See Our Meal Plans</h4>
+                    <div class="col-md-12">
+                        <ul class="menu_list">
+                            <li><a href="/meal-programs/healthy-living.aspx" target="_blank" id="Healthy Living">Healthy Living</a></li>
+                            <li><a href="/meal-programs/healthy-mommy.aspx" target="_blank" id="Healthy Mommy">Healthy Mommy</a></li>
+                            <li><a href="/weight-loss-programs/low-carb.aspx" target="_blank" id="Low Carb ">Low Carb </a></li>
+                            <li><a href="/weight-loss-programs/mediterranean-diet.aspx" target="_blank" id="Mediterranean Weight Loss Diet">Mediterranean Weight Loss Diet</a></li>
+                            <li><a href="/custom-programs/a-la-carte-menu.aspx" target="_blank" id="A La Carte Meals">A La Carte Meals</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content_field" style="display:none;">
+                    <h4>This Week’s A La Carte Meals</h4>
+                    <div class="col-md-12">
+                        <ul class="menu_list">
+                            <li><a href="/Menu?mealtype=0" target="_blank" id="Breakfast">Breakfast</a></li>
+                            <li><a href="/Menu?mealtype=1" target="_blank" id="Lunch">Lunch</a></li>
+                            <li><a href="/Menu?mealtype=2" target="_blank" id="Dinner">Dinner</a></li>
+                            <li><a href="/Menu?mealtype=3" target="_blank" id="Child">Child</a></li>
+                            <li><a href="/Menu?mealtype=4" target="_blank" id="Dessert">Dessert</a></li>
+                            <li><a href="/Menu?mealtype=5" target="_blank" id="Other">Other</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div id="examplemenu" class="Mobile_details exampleMeniWidthStyle" style="display:none;">
+                @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "mobile" } })
+                <br />
             </div>
         </div>
-        <div class="cl">&nbsp;</div>
+       
     </div>
+    <div class="cl">&nbsp;</div>
+</div>
     <div class="bottom">&nbsp;</div>
 
     @*</div>*@
@@ -1083,6 +1088,7 @@
                             $("#defaultmenu").hide();
                             $("#planmenu").show();
                             $("#examplemenu").html(res.Message);
+                            $("#examplemenuMobileView").html(res.Message);
                             //for (var i = 0; i < res.length; i++) {
                             //    //var html = '<td class="menuitems" border="1"><b>' + res[i].MenuItemName + '</b> <br /><br /><b>Description:</b>' + res[i].Description + '<br /><br /><b>Nutrition Info:</b><br />' + res[i].Calories + '  ' + res[i].Fat + ' ' + res[i].Protein + ' ' + res[i].Carbohydrates + ' ' + res[i].DietaryFiber + '</td>';
                             //    var html = ' <td class="menuitems"><b>' + res[i].MenuItemName + '</b><br />' + res[i].Description + '<br /><hr /><strong><b>' + res[i].Calories + ' </b><b>' + res[i].Fat + '</b><b>' + res[i].Protein + '</b><b>' + res[i].Carbohydrates + '</b><b>' + res[i].DietaryFiber + '</b></strong><hr /><br /><br /></td>';

@@ -4,13 +4,13 @@
 @if (Model.programdefaultmenudetails.Count > 0)
 {
 <div class="container" style="padding: 10px; margin:0;">
-    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultBreakfastMenuDetails, new ViewDataDictionary { { "MealType", "Breakfast" } })
+    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultBreakfastMenuDetails, new ViewDataDictionary { { "MealType", "Breakfast" }, { "media", ViewData["media"] } })
 
-    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultLunchMenuDetails, new ViewDataDictionary { { "MealType", "Lunch" } })
+    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultLunchMenuDetails, new ViewDataDictionary { { "MealType", "Lunch" }, { "media", ViewData["media"] } })
 
-    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultDinnerMenuDetails, new ViewDataDictionary { { "MealType", "Dinner" } })
+    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultDinnerMenuDetails, new ViewDataDictionary { { "MealType", "Dinner" }, { "media", ViewData["media"] } })
 
-    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultOtherMenuDetails, new ViewDataDictionary { { "MealType", "Other" } })
+    @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultOtherMenuDetails, new ViewDataDictionary { { "MealType", "Other" }, { "media", ViewData["media"] } })
 
 </div>
 }
