@@ -260,10 +260,13 @@
                         <div class="cl">&nbsp;</div>
                     </div>
                 </div>
-                <div id="examplemenu" class="Desktop_details exampleMeniWidthStyle">
-                    @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "desktop" } })
-                    <br />
-                </div>
+                @if (!Request.Browser.IsMobileDevice)
+                {
+                    <div id="examplemenu" class="Desktop_details exampleMeniWidthStyle">
+                        @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "desktop" } })
+                        <br />
+                    </div>
+                }
             </div>
 
             <div class="right_col col-md-4" style="padding:0px;margin-top:20px;">
@@ -721,14 +724,15 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
-            <div id="examplemenu" class="Mobile_details exampleMeniWidthStyle" style="display:none;">
-                @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "mobile" } })
-                <br />
-            </div>
+            @if (Request.Browser.IsMobileDevice)
+            {
+                <div id="examplemenuMobileView" class="Mobile_details exampleMeniWidthStyle" style="display:none;">
+                    @Html.Partial("~/Views/Programs/_ExampleDisplayMenu.cshtml", Model, new ViewDataDictionary { { "media", "mobile" } })
+                    <br />
+                </div>
+            }
         </div>
-       
     </div>
     <div class="cl">&nbsp;</div>
 </div>
@@ -1088,17 +1092,11 @@
                             $("#defaultmenu").hide();
                             $("#planmenu").show();
                             $("#examplemenu").html(res.Message);
-                            $("#examplemenuMobileView").html(res.Message);
-                            //for (var i = 0; i < res.length; i++) {
-                            //    //var html = '<td class="menuitems" border="1"><b>' + res[i].MenuItemName + '</b> <br /><br /><b>Description:</b>' + res[i].Description + '<br /><br /><b>Nutrition Info:</b><br />' + res[i].Calories + '  ' + res[i].Fat + ' ' + res[i].Protein + ' ' + res[i].Carbohydrates + ' ' + res[i].DietaryFiber + '</td>';
-                            //    var html = ' <td class="menuitems"><b>' + res[i].MenuItemName + '</b><br />' + res[i].Description + '<br /><hr /><strong><b>' + res[i].Calories + ' </b><b>' + res[i].Fat + '</b><b>' + res[i].Protein + '</b><b>' + res[i].Carbohydrates + '</b><b>' + res[i].DietaryFiber + '</b></strong><hr /><br /><br /></td>';
-                            //    var lasttddata = $("#planmenu").find(".hiderowmenu td:last-child")[i];
-                            //    lasttddata.innerHTML = html;
-                            //    var imagechangeurlhtml = '<img  class="img-responsive" src=' + res[i].MenuItemImageUrl + ' />';
-                            //    //var imageurl = $("#planmenu").find(".hiderowmenu td:eq(1)")[i];
-                            //    var imageurl = $("#planmenu").find(".hiderowmenu .img-responsive")[i];
-                            //    imageurl.setAttribute('src', res[i].MenuItemImageUrl);
-                            //};
+                            var mobileIdData = $("#examplemenuMobileView").val();
+                            if(mobileIdData === "")
+                            {
+                                $("#examplemenuMobileView").html(res.Message);
+                            }
                         }
                         else
                         {

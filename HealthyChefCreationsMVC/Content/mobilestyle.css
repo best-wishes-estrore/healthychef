@@ -1476,6 +1476,10 @@ body.home-page #content .three-cols .image img {
         width: 100%;
         margin-right: 10px;
     }
+    .landscape_3 .col-md-4 {
+        width:33.3%;
+        float:left;
+    }
     #defaultBreakFastMenu.carousel-inner > .item.active {
         min-height: 150px;
     }

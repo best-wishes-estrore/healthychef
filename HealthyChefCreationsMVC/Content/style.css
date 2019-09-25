@@ -3142,7 +3142,7 @@ section .banner {
     font-size: 20px !important;
 }
 
-#examplemenu .col-title {
+#examplemenu .col-title, #examplemenuMobileView .col-title {
     color: #4CAF50;
     font-size: 18px;
     font-weight: 600;
