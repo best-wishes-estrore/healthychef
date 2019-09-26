@@ -1744,3 +1744,13 @@ body.home-page #content .three-cols .image img {
 .phoneno i {
     display: contents;
 }
+
+.descriptionTruncateForMobile 
+{
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+

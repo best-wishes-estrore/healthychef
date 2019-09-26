@@ -195,10 +195,10 @@ namespace HealthyChefCreationsMVC.CustomModels
                             menuItemdetails.MenuItemName = menuItem.Name;
                             menuItemdetails.MealTypeID = defaultmenu.MealTypeID;
                             menuItemdetails.Calories = "Calories:" + " " + Convert.ToInt32(menuItemNutritionData.Calories);
-                            menuItemdetails.Fat = "Fat:" + " " + Convert.ToInt32(menuItemNutritionData.TotalFat) + " " + "g";
-                            menuItemdetails.Protein = "Protein:" + " " + Convert.ToInt32(menuItemNutritionData.Protein) + " " + "g";
-                            menuItemdetails.Sodium = "Sodium:" + " " + Convert.ToInt32(menuItemNutritionData.Sodium) + " " + "mg";
-                            menuItemdetails.Carbohydrates = "Carbs:" + " " + Convert.ToInt32(menuItemNutritionData.TotalCarbohydrates) + " " + "g" /*+ menuItemNutritionData.Protein*/ ;
+                            menuItemdetails.Fat = "Fat:" + " " + Convert.ToInt32(menuItemNutritionData.TotalFat) + "" + "g";
+                            menuItemdetails.Protein = "Protein:" + " " + Convert.ToInt32(menuItemNutritionData.Protein) + "" + "g";
+                            menuItemdetails.Sodium = "Sodium:" + " " + Convert.ToInt32(menuItemNutritionData.Sodium) + "" + "mg";
+                            menuItemdetails.Carbohydrates = "Carbs:" + " " + Convert.ToInt32(menuItemNutritionData.TotalCarbohydrates) + "" + "g" /*+ menuItemNutritionData.Protein*/ ;
                             //  menuItemdetails.DietaryFiber = "DietaryFiber:" + Convert.ToInt32(menuItemNutritionData.DietaryFiber);
                         }
                         programdefaultmenudetailsbymenuitemid.Add(menuItemdetails);

@@ -1117,20 +1117,20 @@ namespace HealthyChefCreationsMVC.Controllers
                         }
                     }
 
-                    if(billProf != null)
-                    {
-                        hccAddress billAddr12 = hccAddress.GetById(billProf.ShippingAddressID.Value);
-                        List<hccCartItem> cartItem = hccCartItem.GeCartItemsByPurchaseNumber(purchaseNum);
-                        if (billAddr12.State == "FL")
-                        {
-                            if (cartItem.FirstOrDefault().TaxRateAssigned > 0)
-                            {
-                                var taxRatePercent = cartItem.FirstOrDefault().TaxRateAssigned / 100;
-                                CurrentCart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * CurrentCart.TaxableAmount), 2);
-                                CurrentCart.Save();
-                            }
-                        }
-                    }
+                    //if(billProf != null)
+                    //{
+                    //    hccAddress billAddr12 = hccAddress.GetById(billProf.ShippingAddressID.Value);
+                    //    List<hccCartItem> cartItem = hccCartItem.GeCartItemsByPurchaseNumber(purchaseNum);
+                    //    if (billAddr12.State == "FL")
+                    //    {
+                    //        if (cartItem.FirstOrDefault().TaxRateAssigned > 0)
+                    //        {
+                    //            var taxRatePercent = cartItem.FirstOrDefault().TaxRateAssigned / 100;
+                    //            CurrentCart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * CurrentCart.TaxableAmount), 2);
+                    //            CurrentCart.Save();
+                    //        }
+                    //    }
+                    //}
                    
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("window.dataLayer = window.dataLayer || [];");
