@@ -525,6 +525,14 @@ namespace HealthyChefCreationsMVC.CustomModels
                                             Tax = ccart.TaxAmount.ToString("c");
                                             //Total Amount
                                             ccart.TotalAmount = ccart.TaxableAmount + ccart.TaxAmount + ccart.ShippingAmount;
+
+                                            if (cartItems.FirstOrDefault().TaxRateAssigned > 6)
+                                            {
+                                                var descAmt = cartItems.FirstOrDefault().TaxRateAssigned - 6;
+                                                var descreAmountCart = Convert.ToDecimal(((descAmt * ccart.TaxableAmount)) / 100);
+                                                ccart.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descreAmountCart, 2));
+                                            }
+
                                             if (acctBalance >= ccart.TotalAmount)
                                             {
                                                 creditAppliedToBalance = ccart.TotalAmount;

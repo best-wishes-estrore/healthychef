@@ -27,10 +27,14 @@
                                 <td class="menuitems" style="text-align: justify;">
 
                                     <strong class="menuItemtitle">@defaultplan.MenuItemName</strong><br />
-                                    <p> @defaultplan.Description</p>
-
-                                    @*<b>Nutrition Info:</b><br />*@
-                                    @*<br />*@
+                                    @if (!Request.Browser.IsMobileDevice)
+                                    {
+                                        <p class="descriptionTruncateForDesktop"> @defaultplan.Description</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="descriptionTruncateForMobile"> @defaultplan.Description</p>
+                                    }
                                     <strong>
                                         <b>
                                             <span>@defaultplan.Calories</span>
