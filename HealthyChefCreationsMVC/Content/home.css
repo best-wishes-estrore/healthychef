@@ -1,0 +1,314 @@
+﻿
+/*Navbar part*/
+.navbar-default {
+    background: none !important;
+    border-bottom: none !important;
+}
+
+.navbar {
+    position: relative;
+    min-height: 80px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.navbar-brand {
+    line-height: 40px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 40px;
+}
+
+.navbar-default .navbar-nav > li > a:active {
+    color: #fff !important;
+    background: #276f22 !important;
+}
+.navbar-default .navbar-nav > .active > a {
+    color: #fff !important;
+    background: #276f22 !important;
+}
+
+    .navbar-default .navbar-nav > .active > a:hover {
+        color: #555;
+        background-color: #fff;
+    }
+
+.navbar-default .navbar-nav > .active > a {
+    /* color: green;
+    background-color: #fff;*/
+    color: #fff !important;
+    background: #276f22 !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /*z-index: 999;*/
+}
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    /* color: #333; */
+    /*background-color: transparent;color:#777 !important;*/
+    color: #fff !important;
+    background: #276f22 !important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #276f22 !important;
+}
+
+
+/*SECTION PART*/
+.banner_part {
+    height: 580px;
+    position: relative;
+    overflow: hidden;
+    background-image: url(../Content/Images/home/slider1.png);
+    background-repeat: no-repeat !important;
+    background-size: 41% !important;
+    background-position: top right !important;
+}
+
+    .banner_part .banner_text .banner_text_iner {
+        /*display: table-cell;
+    vertical-align: middle;*/
+        padding-top: 100px;
+    }
+
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+
+.banner_part .banner_text {
+    display: table;
+    width: 100%;
+    height: 580px;
+}
+.banner_text a:hover{
+    color:#fff;
+}
+
+.percent a:hover {
+    color: #fff;
+}
+
+.banner_part .banner_text h1 {
+    font-size: 65px;
+    line-height: 1;
+    text-transform: capitalize;
+    color: #276F22 !important;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #222222;
+    line-height: 1.273;
+}
+
+    .banner_part .banner_text p {
+        font-size: 14px;
+        line-height: 1.929;
+        font-family: "Roboto", sans-serif;
+        color: #646464;
+    }
+
+    .banner_part .banner_text .btn_1 {
+        box-shadow: 0px 12px 20px 0px rgba(255, 126, 95, 0.15);
+        /*margin-top: 45px;*/
+    }
+
+.btn_1 {
+    display: inline-block;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #fff !important;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    text-transform: capitalize;
+    /* margin-top: 45px;*/
+    background-size: 300% 100%;
+}
+
+.btn_1,
+.banner_part .banner_text .btn_1 {
+    background-color: #39AA35
+}
+
+
+.btn-default:hover{
+    background-color:#fff !important;
+}
+.madeorder {
+    /* height:400px;*/
+    /*width:100%;*/
+    background-image: url(../Content/Images/home/section1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.percent {
+    background-image: url(../Content/Images/home/natural.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+}
+/*carousel*/
+
+.carousel-control {
+    width: 4%;
+}
+
+    .carousel-control.left,
+    .carousel-control.right {
+        margin-left: 15px;
+        background-image: none;
+    }
+
+@media (max-width: 767px) {
+    .carousel-inner .active.left {
+        left: -100%;
+    }
+
+    .carousel-inner .next {
+        left: 100%;
+    }
+
+    .carousel-inner .prev {
+        left: -100%;
+    }
+
+    .active > div {
+        display: none;
+    }
+
+        .active > div:first-child {
+            display: block;
+        }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    .carousel-inner .active.left {
+        left: -50%;
+    }
+
+    .carousel-inner .next {
+        left: 50%;
+    }
+
+    .carousel-inner .prev {
+        left: -50%;
+    }
+
+    .active > div {
+        display: none;
+    }
+
+        .active > div:first-child {
+            display: block;
+        }
+
+            .active > div:first-child + div {
+                display: block;
+            }
+}
+
+@media (min-width: 992px) {
+    .carousel-inner .active.left {
+        left: -25%;
+    }
+
+    .carousel-inner .next {
+        left: 25%;
+    }
+
+    .carousel-inner .prev {
+        left: -25%;
+    }
+}
+
+.carousel-control.right,
+.carousel-control.left {
+    background: none !important;
+}
+
+.test {
+    background-image: url(../Content/Images/home/test.png);
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+    background-size: contain;
+    background-position: bottom center;
+}
+
+.links li a {
+    color: #357931;
+    font-size: 22px;
+    font-weight: 600;
+}
+.links li {
+    padding: 5px 40px !important;
+}
+    .links li{
+        border-right:1px solid #ccc !important;
+    }
+        .links li:last-child {
+            border-right: 0px solid #ccc !important;
+        }
+
+        .links {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+.carousel-inner.item {
+    height: 335px;
+    max-height: 335px;
+}
+
+@media (max-width: 576px) {
+    .banner_part {
+        background-image: none;
+    }
+
+    .navbar-brand img {
+        width: 200px;
+    }
+    .navbar-default{
+        background:#fff !important;
+    }
+
+    header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+    }
+}
+
+
+/*footer*/
+.list-inline a{
+    color:#a4a4a4;
+    font-size:15px;
+}
+.list-inline a:hover {
+    color: green;
+}
+
+/*
+#main{
+    margin-top:80px;
+}*/
+
