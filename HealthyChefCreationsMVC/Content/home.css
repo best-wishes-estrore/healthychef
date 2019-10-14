@@ -164,16 +164,28 @@ header {
     background-size: cover;
     background-position: bottom center;
 }
-/*carousel*/
 
+
+.color-orange {
+    color: #fe9309;
+    margin-top: 100px !important;
+    margin-bottom: 10px;
+}
+.more-space .color-orange {
+    color: #fe9309;
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+/*carousel*/
 .carousel-control {
     width: 4%;
 }
 
     .carousel-control.left,
     .carousel-control.right {
-        margin-left: 15px;
+        color: gray !important;
         background-image: none;
+        width: auto !important;
     }
 
 @media (max-width: 767px) {
