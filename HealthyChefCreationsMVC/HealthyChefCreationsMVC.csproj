@@ -390,6 +390,7 @@
     <Content Include="Content\fonts\myriadpro-semiboldit-webfont.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\home.css" />
     <Content Include="Content\Images\ajax-loading.gif" />
     <Content Include="Content\Images\amex.gif" />
     <Content Include="Content\Images\bg-full-page-bottom.png" />
@@ -427,6 +428,27 @@
     <Content Include="Content\Images\Healthy-Chef-Logo-leaves.png" />
     <Content Include="Content\Images\Healthy-Chef-Logo.png" />
     <Content Include="Content\Images\Healthy-Meals-Delivered.png" />
+    <Content Include="Content\Images\home\calerioes.png" />
+    <Content Include="Content\Images\home\chef.jpg" />
+    <Content Include="Content\Images\home\chef.png" />
+    <Content Include="Content\Images\home\food.png" />
+    <Content Include="Content\Images\home\gulten.png" />
+    <Content Include="Content\Images\home\health.png" />
+    <Content Include="Content\Images\home\Healthy-Chef-Logo.png" />
+    <Content Include="Content\Images\home\lowcard.png" />
+    <Content Include="Content\Images\home\madeorder.jpg" />
+    <Content Include="Content\Images\home\madeordercheck.png" />
+    <Content Include="Content\Images\home\main-chef.png" />
+    <Content Include="Content\Images\home\natural.png" />
+    <Content Include="Content\Images\home\organic.png" />
+    <Content Include="Content\Images\home\real.png" />
+    <Content Include="Content\Images\home\section1.png" />
+    <Content Include="Content\Images\home\slider1.png" />
+    <Content Include="Content\Images\home\star.png" />
+    <Content Include="Content\Images\home\test.png" />
+    <Content Include="Content\Images\home\test1.png" />
+    <Content Include="Content\Images\home\tick.png" />
+    <Content Include="Content\Images\home\veg.png" />
     <Content Include="Content\Images\icon-1.png" />
     <Content Include="Content\Images\icon-2.png" />
     <Content Include="Content\Images\icon-3.png" />
@@ -2137,6 +2159,7 @@
     <Content Include="Views\Shared\_MobileHeader.cshtml" />
     <Content Include="Views\Programs\_showProgramFeatures.cshtml" />
     <Content Include="Views\Programs\_MealCarouselDispaly.cshtml" />
+    <Content Include="Views\Shared\_Header2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
