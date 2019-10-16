@@ -665,7 +665,7 @@ section h2 {
 }
 
 .img-responsive {
-    width: 100%;
+   /* width: 100%;*/
 }
 
 .top-footer li a {
