@@ -395,7 +395,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                                             cart.PaymentDue = Math.Round(paymentDue, 2);
                                             cart.Save();
                                             GrandTotal = cart.TotalAmount.ToString("c");
-                                            mockSubTotal = (Convert.ToDecimal(SubTotal.TrimStart('$')) - cart.SubTotalDiscount).ToString("c");
+                                            mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - cart.SubTotalDiscount).ToString("c");
                                             AcctBalance = acctBalance.ToString("c");
                                             PaymentDue = paymentDue.ToString("c");
                                             RemainAcctBalance = remainAcctBalance.ToString("c");
@@ -547,7 +547,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                                             ccart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
                                             ccart.PaymentDue = Math.Round(paymentDue, 2);
                                             GrandTotal = ccart.TotalAmount.ToString("c");
-                                            mockSubTotal = (Convert.ToDecimal(SubTotal.TrimStart('$')) - ccart.SubTotalDiscount).ToString("c");
+                                            mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - ccart.SubTotalDiscount).ToString("c");
                                             AcctBalance = acctBalance.ToString("c");
                                             PaymentDue = paymentDue.ToString("c");
                                             RemainAcctBalance = remainAcctBalance.ToString("c");
