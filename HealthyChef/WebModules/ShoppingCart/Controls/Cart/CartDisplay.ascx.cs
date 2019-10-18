@@ -633,85 +633,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                                     CurrentCart.TaxableAmount += 0;
                                 }
 
-                                //New Implementation for TaxableAmount according to Discountable Amount
-                                if(parentProfile != null)
-                                {
-                                    hccAddress cartAddress = hccAddress.GetById(parentProfile.ShippingAddressID.Value);
-                                    if (cartAddress.State == "FL")
-                                    {
-                                        if (cartItem.Plan_IsAutoRenew == true)
-                                        {
-                                            if (cartItem.ItemTypeID != 1)
-                                            {
-                                                discountpereachamountForPrograms = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
-                                                cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForPrograms);
-                                            }
-                                            if (cartItem.ItemTypeID == 1)
-                                            {
-                                                discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                                cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForItem);
-                                            }
-
-                                            if (cartItem.ItemTypeID == 1)
-                                            {
-                                                if (CurrentCart.CouponID != null)
-                                                {
-                                                    if (cartItem.Plan_IsAutoRenew == true)
-                                                    {
-                                                        var newCoupons = hccCoupon.GetById((int)CurrentCart.CouponID);
-                                                        var copounDiscount = newCoupons.Amount / 100;
-                                                        var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                                        discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                                        var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
-                                                        cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
-                                                    }
-                                                }
-                                            }
-
-                                            if (cartItem.ItemTypeID != 1)
-                                            {
-                                                if (CurrentCart.CouponID != null)
-                                                {
-                                                    if (cartItem.Plan_IsAutoRenew == true)
-                                                    {
-                                                        var newCoupons = hccCoupon.GetById((int)CurrentCart.CouponID);
-                                                        var copounDiscount = newCoupons.Amount / 100;
-                                                        var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                                        discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
-                                                        var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
-                                                        cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
-                                                    }
-                                                }
-                                            }
-
-                                            if (cartItem.TaxRateAssigned > 6)
-                                            {
-                                                var descAmt = cartItem.TaxRateAssigned - 6;
-                                                var descritionarycartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
-                                                cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descritionarycartItems, 2));
-                                            }
-                                            cartItem.Save();
-                                        }
-                                    }
-
-                                    if (cartItem.Plan_IsAutoRenew == false)
-                                    {
-                                        if (CurrentCart.CouponID != null)
-                                        {
-                                            var newCoupons = hccCoupon.GetById((int)CurrentCart.CouponID);
-                                            var copounDiscount = newCoupons.Amount / 100;
-                                            var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                            cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.TaxableAmount - discountPrice), 2);
-                                            if (cartItem.TaxRateAssigned > 6)
-                                            {
-                                                var descAmt = cartItem.TaxRateAssigned - 6;
-                                                var descritionaryCartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
-                                                cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descritionaryCartItems, 2));
-                                            }
-                                            cartItem.Save();
-                                        }
-                                    }
-                                }
+                               
                                 if (CurrentCart.CouponID != null)
                                 {
                                     cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity;
@@ -723,45 +645,6 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                     var ccart = hccCart.GetCurrentCart();
                     ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
                     ccart.Save();
-
-                    //Implementation for The TaxAmount and Discretinary and Discount Implementation.
-                    if(parentProfile != null)
-                    {
-                        hccAddress cartAddress = hccAddress.GetById(parentProfile.ShippingAddressID.Value);
-                        if(cartAddress.State == "FL")
-                        {
-                            if(cartItems.Count > 0)
-                            {
-                                if(cartItems.FirstOrDefault().TaxRateAssigned > 0)
-                                {
-                                    var taxRatePercent = cartItems.FirstOrDefault().TaxRateAssigned / 100;
-                                    cart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * ccart.TaxableAmount), 2);
-                                    //Total Amount
-                                    cart.TotalAmount = ccart.TaxableAmount + cart.TaxAmount + cart.ShippingAmount;
-                                    if (cartItems.FirstOrDefault().TaxRateAssigned > 6)
-                                    {
-                                        var descAmt = cartItems.FirstOrDefault().TaxRateAssigned - 6;
-                                        var descreAmountCart = Convert.ToDecimal(((descAmt * ccart.TaxableAmount)) / 100);
-                                        cart.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descreAmountCart, 2));
-                                    }
-                                    if (acctBalance >= cart.TotalAmount)
-                                    {
-                                        creditAppliedToBalance = cart.TotalAmount;
-                                    }
-                                    else
-                                    {
-                                        creditAppliedToBalance = acctBalance;
-                                    }
-
-                                    remainAcctBalance = acctBalance - creditAppliedToBalance;
-                                    paymentDue = cart.TotalAmount - creditAppliedToBalance;
-                                    cart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
-                                    cart.PaymentDue = Math.Round(paymentDue, 2);
-                                    cart.Save();
-                                }
-                            }
-                        }
-                    }
                     
                     //// subtotal               
                     lblSubTotal.Text = cart.SubTotalAmount.ToString("c");
@@ -1104,26 +987,9 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
 
         protected void btnRemoveCoupon_Click(object sender, EventArgs e)
         {
-
             try
             {
-                if (CurrentCart == null)
-                {
-                    CurrentCart = hccCart.GetById(CurrentCartId);
-                }
-
-                int? defaultCouponId = hccUserProfile.GetParentProfileBy(CurrentCart.AspNetUserID.Value).DefaultCouponId;
-
-                int? currentCouponId = CurrentCart.CouponID;
-
-                CurrentCart.IsDefaultCouponRemoved = currentCouponId == defaultCouponId;
-
-                CurrentCart.CouponID = currentCouponId != defaultCouponId ? defaultCouponId : null;
-
-                CurrentCart.Save();
-
-                lblDiscount.Text = string.Empty;
-
+                removeCoupon();
                 Bind();
             }
             catch (Exception)
@@ -1131,6 +997,26 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
 
                 throw;
             }
+        }
+        
+        private void removeCoupon()
+        {
+            if (CurrentCart == null)
+            {
+                CurrentCart = hccCart.GetById(CurrentCartId);
+            }
+
+            int? defaultCouponId = hccUserProfile.GetParentProfileBy(CurrentCart.AspNetUserID.Value).DefaultCouponId;
+
+            int? currentCouponId = CurrentCart.CouponID;
+
+            CurrentCart.IsDefaultCouponRemoved = currentCouponId == defaultCouponId;
+
+            CurrentCart.CouponID = currentCouponId != defaultCouponId ? defaultCouponId : null;
+
+            CurrentCart.Save();
+
+            lblDiscount.Text = string.Empty;
         }
 
         protected void btnClearCart_Click(object sender, EventArgs e)
@@ -1153,7 +1039,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                 if (header != null)
                     header.SetCartCount();
             }
-
+            removeCoupon();
             Bind();
         }
 

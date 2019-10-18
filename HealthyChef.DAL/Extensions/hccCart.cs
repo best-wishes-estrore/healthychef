@@ -725,11 +725,11 @@ namespace HealthyChef.DAL
                     });
 
                     this.SubTotalAmount += profCart.SubTotalNA;
+                    this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
                     this.TaxAmount += profCart.SubTax;
                     this.ShippingAmount += profCart.ShippingFee;
                     //this.ShippingAmount += profCart.SubShipping;
                     //this.SubTotalDiscount += profCart.SubDiscountAmount;
-                    this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
                     //this.TaxableAmount += profCart.SubTaxableAmount;
                     this.DiscretionaryTaxAmount += profCart.SubDiscretionaryTaxAmount;
                 });

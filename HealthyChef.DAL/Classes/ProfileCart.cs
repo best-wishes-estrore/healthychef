@@ -81,6 +81,7 @@ namespace HealthyChef.DAL
             get
             {
                 var currentcart = hccCart.GetCurrentCart();
+                var couponDiscount = hccCart.CalculateDiscountForSubTotalDiscount(currentcart, 0);
                 decimal profSubTax = 0.00m;
                 // if shipping address is FL, add tax for taxable items
                 if (ShippingAddress != null && ShippingAddress.State == "FL")
@@ -135,18 +136,18 @@ namespace HealthyChef.DAL
                                         decimal discTaxAmt = itemTax - baseTaxAmt;
 
                                         //cartItem.TaxRate = taxRate;
-                                        cartItem.TaxRateAssigned = taxRate;
-                                        cartItem.TaxableAmount = taxableAmt;
-                                        cartItem.DiscretionaryTaxAmount = discTaxAmt;
-                                        cartItem.Save();
-
                                         SubTaxableAmount += taxableAmt;
                                         SubDiscretionaryTaxAmount += discTaxAmt;
+
+                                        cartItem.TaxRateAssigned = taxRate;
+                                        cartItem.TaxableAmount = taxableAmt;
                                         cartItem.DiscretionaryTaxAmount = discTaxAmt;
                                         cartItem.Save();
                                     }
                                 });
                             }
+                            SubTaxableAmount -= couponDiscount;
+                            profSubTax = Math.Round((SubTaxableAmount * (taxRate / 100)), 2);
                         }
                         else
                         {
