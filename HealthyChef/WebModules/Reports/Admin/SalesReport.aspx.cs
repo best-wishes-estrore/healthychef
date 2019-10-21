@@ -84,8 +84,10 @@ namespace HealthyChef.WebModules.Reports.Admin
                     ReportViewer1.LocalReport.SubreportProcessing +=
                         new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
                     
-                    Stream resourceStream = Assembly.GetCallingAssembly()
-                        .GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc");
+                    var resourceStream = new StreamReader(Server.MapPath("~/WebModules/Reports/SalesReport2.rdlc"));
+
+                   // Assembly.GetCallingAssembly()
+                     //   .GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc");
 
                     ReportViewer1.LocalReport.LoadSubreportDefinition("SalesReport2", resourceStream);
 
@@ -94,9 +96,9 @@ namespace HealthyChef.WebModules.Reports.Admin
 
                     this.ReportViewer1.LocalReport.Refresh();
                 }
-                catch (Exception )
+                catch (Exception ex)
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }
