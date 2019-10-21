@@ -391,6 +391,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\home.css" />
+    <Content Include="Content\HomePageContent.html" />
     <Content Include="Content\Images\ajax-loading.gif" />
     <Content Include="Content\Images\amex.gif" />
     <Content Include="Content\Images\bg-full-page-bottom.png" />

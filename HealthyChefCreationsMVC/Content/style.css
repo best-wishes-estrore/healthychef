@@ -648,7 +648,11 @@ body.home-page .slider-spacing {
 
 .container-cnt {
     width: 100%;
-    margin-top: 30px;
+ /*margin-top: 90px;*/
+   
+}
+.standard_meal {
+    margin-top: 90px;
 }
 
 
@@ -697,6 +701,7 @@ body.home-page .slider-spacing {
 .full-page-header {
     padding-bottom: 0px;
     min-height: 0px;
+   /* margin-top:90px;*/
 }
 
     .full-page-header p {
@@ -787,11 +792,11 @@ body.home-page .slider-spacing {
     }
 
 .cart_bg {
-    margin-top: 10px;
+    margin-top: 90px;
     background: #fff;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 1px #ddd;
+    /*box-shadow: 1px 1px 1px 1px #ddd;*/
 }
 
 .txtQuantity_item tr {
@@ -811,6 +816,15 @@ body.home-page .slider-spacing {
 
 .mycart-page {
     width: 100%;
+}
+.content_field {
+    margin-top: 5%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    display: inline-block !important;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
 }
 
 .cotinue-shopping-button input[type="submit"] {
@@ -952,13 +966,37 @@ body.home-page .slider-spacing {
     margin: 0;
     padding: 0;
     list-style: none;
-    margin-top:55px !important;
+   /* margin-top:55px !important;*/
 }
 .background_bg{
-    margin-top:55px;
+   margin-top:90px;
+}
+.cco{
+    margin-top:0px;
+}
+.m-nav{
+   /* margin-top:90px;*/
 }
 
+.section .description{
+    padding-left:10px !important;
+}
 
+.page-button-submit {
+    border: 1px solid #39aa35;
+    color: #fff;
+    padding: 0px;
+    background-image: linear-gradient(#36a636, #297624);
+    background: -webkit-linear-gradient(#36a636, #297624);
+    text-align: center;
+    width: 100% !important;
+    line-height: 32px;
+    border-radius: 6px;
+}
+.side-column {
+    display: flow-root !important;
+   /* display: block !important;*/
+}
 .meals .m-nav ul li {
     float: left;
     width: 14%;
@@ -1009,6 +1047,7 @@ body.home-page .slider-spacing {
     .meals .mealItem .side-column {
         float: right;
        width: 17%;
+         /* width:initial;*/
     }
 
         .meals .mealItem .side-column .panel-add-to-cart {
@@ -1561,7 +1600,7 @@ a.chosseBtn:hover {
 }
 
 .wm_FormBuilder .wm_ShortText {
-    width: 65% !important;
+width: 65% ;
 }
 
 .select-pogramme {
@@ -1683,7 +1722,7 @@ h2.select-pogramme-header {
         width: 100%;
         float: left;
     }
-
+    
     .container-bottom {
         background-size: 100% 9px;
     }
@@ -1777,7 +1816,7 @@ h2.select-pogramme-header {
     }
 
     .three-cols {
-        width: 116% !important;
+       /* width: 116% !important;*/
     }
 
         .three-cols .col {
@@ -1940,6 +1979,9 @@ hr {
     border-width: 1px;
 }
 
+.heading-image {
+    margin-top: 90px;
+}
 @media only screen and (min-width:768px) and (max-width:1024px) {
     #Healthyorganicmeals .content p br {
         display: none;
@@ -1961,6 +2003,7 @@ hr {
     .Desktop_view td img {
         width: 200px;
     }
+   
 
     .top-navigation #logo a {
         width: 100%;
@@ -2283,7 +2326,7 @@ hr {
         width: 40% !important;
         float: left;
     }
-
+    
     .form_submit .form-control {
         width: auto;
         display: inline-block;
@@ -2774,11 +2817,12 @@ section .banner {
 }
 
 #myCarousel .carousel-control.right, #myCarousel1 .carousel-control.right {
-    background: #39aa35;
+    background: #39aa35 !important;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 25px !important;
+    height: 25px !important;
 }
+
 
     #myCarousel .carousel-control.right.active, #myCarousel1 .carousel-control.right.active {
         background: #39aa35;
@@ -2790,9 +2834,9 @@ section .banner {
 
 #myCarousel .carousel-control.left, #myCarousel1 .carousel-control.left {
     border-radius: 50%;
-    width: 25px;
-    background: #39aa35;
-    height: 25px;
+    width: 25px !important;
+    background: #39aa35 !important;
+    height: 25px !important;
 }
 
 #planoptionslider.carousel-inner > .item.active {
@@ -3007,7 +3051,7 @@ section .banner {
 }
 
 .container {
-    max-width: 80%;
+    /*max-width: 80%;*/
 }
 
 #bs-example-navbar-collapse-1 .active .drop-down-menu.active, #bs-example-navbar-collapse-1 .active .drop-down-menu.active li.active {
@@ -3108,13 +3152,21 @@ section .banner {
     padding: 4px;
     box-shadow: 2px 2px 2px 2px #ddd;
     border: 2px solid #ddd;
-    margin: 5% 0px;
+   /* margin: 5% 0px;*/
+    margin: 8% 0px;
     border-top: 0px solid #98da6c;
 }
 
-    .order_meal .btn-green a {
-        color: #fff;
+    .order_meal .color-orange{
+        margin-top:0px !important ;
     }
+.content_col h2{
+    margin-top:90px !important;
+}
+
+.order_meal .btn-green a {
+    color: #fff;
+}
 
 #plantypeslider.carousel-inner > .item.active {
     background: none !important;
@@ -3182,9 +3234,9 @@ section .banner {
 }
 
 .hiderowmenu img#imageurl {
-    width: 150px;
-    float: left;
-    height: 98px;
+    width: 150px !important;
+    float: left !important;
+    height: 98px !important;
 }
 
     .hiderowmenu .menu_data b {
@@ -3319,7 +3371,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .standard_meal .alignleft {
-    width: 30%;
+    width: 30% ;
     float: left;
 }
 

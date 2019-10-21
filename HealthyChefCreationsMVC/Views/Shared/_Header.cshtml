@@ -40,6 +40,14 @@
                 <a class="navbar-brand" href="/"><img src="/App_Themes/HealthyChef/Images/Healthy-Chef-Logo.png" class="img-responsive" /></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
+                <div class="topbar" style="display: flow-root;">
+                    <ul class="nav navbar-nav navbar-right" style="position: relative;
+    z-index: 99999;">
+                        <li class=""><a href="/contact_us.aspx"><i class="fa fa-envelope" aria-hidden="true" style="color:#39aa35;"></i> Email</a></li>
+                        <li class=""><a href="/login.aspx"><i class="fa fa-user" aria-hidden="true" style="color:#39aa35;"></i> Login</a></li>
+                        <li class=""><a href="/cart.aspx"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#39aa35;"></i> Cart <span>(5)</span></span></a></li>
+                    </ul>
+                </div>
                 <ul class="nav navbar-nav navbar-right" style="position: relative; z-index: 99999;">
                     @{ var _sitemap = Model.mySiteMap; }
                     @if (_sitemap.Count != 0)
@@ -83,7 +91,7 @@
                                                     childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx");
                                                 }
 
-                                                <li><a href="@childHref" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
+                                                <li><a href="@childHref" style="white-space: pre-wrap;" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
                                             }
                                         </ul>
                                     }
