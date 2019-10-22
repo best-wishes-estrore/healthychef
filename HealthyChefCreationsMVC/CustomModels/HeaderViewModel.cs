@@ -19,6 +19,8 @@ namespace HealthyChefCreationsMVC.CustomModels
             }
         }
 
+        public int CartCount { get; internal set; }
+
         public HeaderViewModel()
         {
             //var _programs = hccProgram.GetBy(true).Where(p => p.DisplayOnWebsite).ToList();

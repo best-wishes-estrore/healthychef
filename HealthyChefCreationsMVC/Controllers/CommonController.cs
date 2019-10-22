@@ -118,6 +118,16 @@ namespace HealthyChefCreationsMVC.Controllers
         public PartialViewResult HeaderSection()
         {
             HeaderViewModel headerViewModel = new HeaderViewModel();
+            MembershipUser user = Helpers.LoggedUser;
+            if (user == null || Roles.IsUserInRole(user.UserName, "Customer"))
+            {
+                hccCart cart = (user == null) ? hccCart.GetCurrentCart() : hccCart.GetCurrentCart(user);
+                if (cart != null)
+                {
+                    List<hccCartItem> cartItems = hccCartItem.GetWithoutSideItemsBy(cart.CartID);
+                    headerViewModel.CartCount = cartItems.Count;
+                }
+            }
             return PartialView("~/Views/Shared/_Header.cshtml", headerViewModel);
         }
 
