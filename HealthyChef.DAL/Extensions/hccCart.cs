@@ -723,7 +723,7 @@ namespace HealthyChef.DAL
                             CalculateDiscountForItemByCart(this, cartItem, totalNA);//,itemName1
                         }
                     });
-
+                    profCart.CurrentCart = this;
                     this.SubTotalAmount += profCart.SubTotalNA;
                     this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
                     this.TaxAmount += profCart.SubTax;
