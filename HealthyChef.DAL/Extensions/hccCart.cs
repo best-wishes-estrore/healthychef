@@ -678,11 +678,11 @@ namespace HealthyChef.DAL
                 }
 
                 cartItem.DiscountAdjPrice = adjItemPrice;
-                cartItem.DiscountPerEach = discountRation;
             }
 
             if (cartItem.DiscountAdjPrice == 0.00m)
                 cartItem.DiscountAdjPrice = cartItem.ItemPrice; // reflect item price here to ease calculations later of dealing with  DiscountAdjPrice == 0.00m ?? cartItem.ItemPrice
+            cartItem.DiscountPerEach = discountRation;
         }
 
         public void CalculateTotals(List<ProfileCart> profileCarts)
@@ -723,14 +723,11 @@ namespace HealthyChef.DAL
                             CalculateDiscountForItemByCart(this, cartItem, totalNA);//,itemName1
                         }
                     });
-                    profCart.CurrentCart = this;
+                    //profCart.CurrentCart = this;
                     this.SubTotalAmount += profCart.SubTotalNA;
-                    this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
                     this.TaxAmount += profCart.SubTax;
                     this.ShippingAmount += profCart.ShippingFee;
-                    //this.ShippingAmount += profCart.SubShipping;
-                    //this.SubTotalDiscount += profCart.SubDiscountAmount;
-                    //this.TaxableAmount += profCart.SubTaxableAmount;
+                    this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
                     this.DiscretionaryTaxAmount += profCart.SubDiscretionaryTaxAmount;
                 });
             }

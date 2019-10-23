@@ -83,11 +83,11 @@ namespace HealthyChef.WebModules.Reports.Admin
                     ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/WebModules/Reports/SalesReport1.rdlc");
                     ReportViewer1.LocalReport.SubreportProcessing +=
                         new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
-                    
-                    var resourceStream = new StreamReader(Server.MapPath("~/WebModules/Reports/SalesReport2.rdlc"));
 
-                   // Assembly.GetCallingAssembly()
-                     //   .GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc");
+                    //var resourceStream = new StreamReader(Server.MapPath("~/WebModules/Reports/SalesReport2.rdlc"));
+
+                    var resourceStream = Assembly.GetCallingAssembly()
+                        .GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc");
 
                     ReportViewer1.LocalReport.LoadSubreportDefinition("SalesReport2", resourceStream);
 

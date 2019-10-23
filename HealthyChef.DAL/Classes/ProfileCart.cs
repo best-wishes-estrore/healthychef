@@ -75,13 +75,11 @@ namespace HealthyChef.DAL
                 return profSubMealsCount;
             }
         }
-        public hccCart CurrentCart { get; set; }
 
         public decimal SubTax
         {
             get
             {
-                var couponDiscount = hccCart.CalculateDiscountForSubTotalDiscount(CurrentCart, 0);
                 decimal profSubTax = 0.00m;
                 // if shipping address is FL, add tax for taxable items
                 if (ShippingAddress != null && ShippingAddress.State == "FL")
@@ -122,6 +120,8 @@ namespace HealthyChef.DAL
                                         {
                                             taxableAmt = cartItem.ItemPrice * cartItem.Quantity;
                                         }
+                                        taxableAmt -= cartItem.DiscountPerEach;
+
                                         if (taxableAmt == cartItem.ItemPrice)
                                         {
                                             itemTax = Math.Round((taxableAmt * (taxRate / 100)), 2);
@@ -135,7 +135,6 @@ namespace HealthyChef.DAL
                                         decimal baseTaxAmt = Math.Round(taxableAmt * .06m, 2);
                                         decimal discTaxAmt = itemTax - baseTaxAmt;
 
-                                        //cartItem.TaxRate = taxRate;
                                         SubTaxableAmount += taxableAmt;
                                         SubDiscretionaryTaxAmount += discTaxAmt;
 
@@ -146,7 +145,6 @@ namespace HealthyChef.DAL
                                     }
                                 });
                             }
-                            SubTaxableAmount -= couponDiscount;
                             profSubTax = Math.Round((SubTaxableAmount * (taxRate / 100)), 2);
                         }
                         else
