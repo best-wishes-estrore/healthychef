@@ -4683,6 +4683,7 @@
     <EmbeddedResource Include="WebModules\Reports\ProductFeed.rdlc" />
     <EmbeddedResource Include="WebModules\Reports\SalesReport2.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="WebModules\Reports\WaaG1.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

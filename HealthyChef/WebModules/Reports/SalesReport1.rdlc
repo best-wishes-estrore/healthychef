@@ -18,7 +18,7 @@
               <Width>0.6875in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.22917in</Width>
+              <Width>0.63542in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.61458in</Width>
@@ -27,7 +27,7 @@
               <Width>0.63542in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98958in</Width>
+              <Width>0.64583in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.8125in</Width>
@@ -858,7 +858,6 @@
                       </Style>
                     </Subreport>
                     <ColSpan>12</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1264,7 +1263,7 @@
         <KeepTogether>true</KeepTogether>
         <DataSetName>SalesReport1</DataSetName>
         <Height>1.78125in</Height>
-        <Width>10.40625in</Width>
+        <Width>9.46875in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1279,7 +1278,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>10.40625in</Width>
+  <Width>9.46875in</Width>
   <Page>
     <LeftMargin>0.5in</LeftMargin>
     <RightMargin>0.5in</RightMargin>
