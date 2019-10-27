@@ -555,7 +555,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                             double discountpereachamountForPrograms = 0.0;
                             if (cartItem.Plan_IsAutoRenew != null)
                             {
-                                if (cartItem.Plan_IsAutoRenew == true && cartItem.Plan_IsAutoRenew != false)
+                                if (cartItem.Plan_IsAutoRenew)
                                 {
                                     if (Discount != null)
                                     {
@@ -622,29 +622,13 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                                     CurrentCart = cart;
                                 }
                             }
-                            if (CurrentCart != null)
-                            {
-                                if (cartItem.TaxableAmount != null && cartItem.TaxableAmount != 0)
-                                {
-                                    CurrentCart.TaxableAmount += (cartItem.DiscountAdjPrice)*(cartItem.Quantity);
-                                }
-                                else
-                                {
-                                    CurrentCart.TaxableAmount += 0;
-                                }
-
-                               
-                                if (CurrentCart.CouponID != null)
-                                {
-                                    cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity;
-                                }
-                                CurrentCart.Save();
-                            }
                         }
                     }
-                    var ccart = hccCart.GetCurrentCart();
-                    ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
-                    ccart.Save();
+                    if (CurrentCart != null)
+                    {
+                        CurrentCart.TaxableAmount = CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount;
+                        CurrentCart.Save();
+                    }
                     
                     //// subtotal               
                     lblSubTotal.Text = cart.SubTotalAmount.ToString("c");
