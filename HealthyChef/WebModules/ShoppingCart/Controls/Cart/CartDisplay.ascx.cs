@@ -555,7 +555,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                             double discountpereachamountForPrograms = 0.0;
                             if (cartItem.Plan_IsAutoRenew != null)
                             {
-                                if (cartItem.Plan_IsAutoRenew)
+                                if (cartItem.Plan_IsAutoRenew.Value)
                                 {
                                     if (Discount != null)
                                     {
