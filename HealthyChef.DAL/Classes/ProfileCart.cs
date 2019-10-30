@@ -81,6 +81,7 @@ namespace HealthyChef.DAL
             get
             {
                 decimal profSubTax = 0.00m;
+                SubTaxableAmount = 0.00m;
                 // if shipping address is FL, add tax for taxable items
                 if (ShippingAddress != null && ShippingAddress.State == "FL")
                 {
