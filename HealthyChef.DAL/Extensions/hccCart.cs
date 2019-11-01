@@ -1035,7 +1035,19 @@ namespace HealthyChef.DAL
                         }
                         if (cartItem.IsCancelled)
                             fullName += " - <b>Cancelled<b>";
-                        sb.AppendFormat(formatToUse, cartItem.OrderNumber, cartitemname == "" ? cartitemnamewithsize : cartitemname, cartItem.Quantity.ToString(),
+                        var itemName = cartitemname == "" ? cartitemnamewithsize : cartitemname;
+                        if (cartItem.Plan_IsAutoRenew.HasValue && cartItem.Plan_IsAutoRenew.Value)
+                        {
+                            if (cartItem.ItemTypeID == 1)
+                            {
+                                itemName += "<br/>Family Style selected. 10% discount applied.";
+                            }
+                            else if (cartItem.ItemTypeID == 2)
+                            {
+                                itemName += "<br/>Auto renew activated. 5% discount applied.";
+                            }
+                        }
+                        sb.AppendFormat(formatToUse, cartItem.OrderNumber, itemName, cartItem.Quantity.ToString(),
                             cartItem.mockSingleItemPrice.ToString("c"), cartItem.mockTotalPrice.ToString("c"), "");// cartItem.ItemSubMealTotal.ToString("c")
                         isEven = !isEven;
                     });
