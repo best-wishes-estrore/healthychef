@@ -1040,11 +1040,11 @@ namespace HealthyChef.DAL
                         {
                             if (cartItem.ItemTypeID == 1)
                             {
-                                itemName += "<br/>Family Style selected. 10% discount applied.";
+                                itemName += "<br/><b>Family Style selected. 10% discount applied.</b>";
                             }
                             else if (cartItem.ItemTypeID == 2)
                             {
-                                itemName += "<br/>Auto renew activated. 5% discount applied.";
+                                itemName += "<br/><b>Auto renew activated. 5% discount applied.</b>";
                             }
                         }
                         sb.AppendFormat(formatToUse, cartItem.OrderNumber, itemName, cartItem.Quantity.ToString(),
