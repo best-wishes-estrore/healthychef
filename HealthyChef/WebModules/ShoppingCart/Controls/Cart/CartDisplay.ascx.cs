@@ -343,38 +343,13 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                         }
                         else
                         {
-                            //deliveryType = "Overnight Shipping";
-                            //deliveryTypeId = 1;
-                            //hccShippingZone hccshopin = new hccShippingZone();
-                            //string ZipCode = txtCalZipCode.Text;
-                            //if (ZipCode == "")
-                            //{
-                            //    ZipCode = hccshopin.GetZipCodeByZoneName(ZipCode);
-                            //    if (ZipCode.Length == 4)
-                            //    {
-                            //        ZipCode = "0" + ZipCode;
-                            //    }
-                            //    else if (ZipCode.Length == 3)
-                            //    {
-                            //        ZipCode = "00" + ZipCode;
-                            //    }
-                            //    else if (ZipCode.Length == 2)
-                            //    {
-                            //        ZipCode = "000" + ZipCode;
-                            //    }
-                            //    else
-                            //    {
-                            //        ZipCode = "0000" + ZipCode;
-                            //    }
-                            //}
-                            //CurrentCart.ShippingAmount = ShippingAddressFee(ZipCode, cartItems, deliveryType, deliveryTypeId);
                             txtCalZipCode.Text = string.Empty;
                             CurrentCart.ShippingAmount = 0;
                             Session["ShippingAmount"] = CurrentCart.ShippingAmount;
                         }
                     }
 
-                    if (cartItems.Count > 0)
+                    if (cartItems !=null && cartItems.Count > 0)
                     {
                         btnClearCart.Visible = true;
                         btnCheckOut.Visible = true;
@@ -456,7 +431,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                     lvwCart.DataSource = CurrentProfileCarts;
                     lvwCart.DataBind();
 
-                    
+
 
                     ////Number of meals
                     //lblNoMeals.Text = cartItems[0].NumberOfMeals.ToString();
@@ -477,7 +452,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
 
                                 if (CurrentCart.SubTotalDiscount > 0.00m)
                                 {
-                                    
+
                                     divDiscounts.Visible = true;
                                     lblDiscount.ForeColor = System.Drawing.Color.Red;
                                     lblDiscount.Text = "(" + "-" + CurrentCart.SubTotalDiscount.ToString("c") + ")";
@@ -551,76 +526,71 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                         foreach (var cartItem in procart.CartItems)
                         {
                             double discountstring = 0;
-                            double discountpereachamountForItem = 0.0;
-                            double discountpereachamountForPrograms = 0.0;
-                            if (cartItem.Plan_IsAutoRenew != null)
+                            if (cartItem.Plan_IsAutoRenew != null && cartItem.Plan_IsAutoRenew.Value)
                             {
-                                if (cartItem.Plan_IsAutoRenew.Value)
+                                if (Discount != null)
                                 {
-                                    if (Discount != null)
+                                    if (Discount != "$0.00")
                                     {
-                                        if (Discount != "$0.00")
+                                        if (Discount.Contains("($"))
                                         {
-                                            if (Discount.Contains("($"))
-                                            {
-                                                Discount = Discount.Replace("($", "").Replace(")", "");
-                                            }
-                                            else
-                                            {
-                                                Discount = Discount.Replace("$", "");
-                                            }
-                                            discountstring = Convert.ToDouble(Discount);
+                                            Discount = Discount.Replace("($", "").Replace(")", "");
                                         }
                                         else
                                         {
-                                            if (Discount.Contains("($"))
-                                            {
-                                                Discount = Discount.Replace("($", "").Replace(")", "");
-                                            }
-                                            else
-                                            {
-                                                Discount = Discount.Replace("$", "");
-                                            }
-                                            discountstring = Convert.ToDouble(Discount);
+                                            Discount = Discount.Replace("$", "");
                                         }
-                                    }
-                                    double discountpereachamount = 0.0;
-                                    if (cartItem.ItemTypeID == 2)
-                                    {
-                                         discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                        discountstring = Convert.ToDouble(Discount);
                                     }
                                     else
                                     {
-                                         discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.1), 2));
-                                    }
-                                    Discount = "($" + (discountstring + discountpereachamount).ToString("f2") + ")";
-
-                                    if (cart != null)
-                                    {
-                                        cart.SubTotalDiscount += Convert.ToDecimal(discountpereachamount);
-                                        cart.TotalAmount = Convert.ToDecimal(Convert.ToDouble(cart.TotalAmount) - Convert.ToDouble(discountpereachamount));
-                                        cart.PaymentDue = Convert.ToDecimal(Convert.ToDouble(cart.PaymentDue) - Convert.ToDouble(discountpereachamount));
-                                        acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
-                                        creditAppliedToBalance = 0.00m;
-                                        remainAcctBalance = 0.00m;
-                                        paymentDue = 0.00m;
-
-                                        if (acctBalance >= cart.TotalAmount)
+                                        if (Discount.Contains("($"))
                                         {
-                                            creditAppliedToBalance = cart.TotalAmount;
+                                            Discount = Discount.Replace("($", "").Replace(")", "");
                                         }
                                         else
                                         {
-                                            creditAppliedToBalance = acctBalance;
+                                            Discount = Discount.Replace("$", "");
                                         }
-                                        remainAcctBalance = acctBalance - creditAppliedToBalance;
-                                        paymentDue = cart.TotalAmount - creditAppliedToBalance;
-                                        cart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
-                                        cart.PaymentDue = Math.Round(paymentDue, 2);
-                                        cart.Save();
+                                        discountstring = Convert.ToDouble(Discount);
                                     }
-                                    CurrentCart = cart;
                                 }
+                                double discountpereachamount = 0.0;
+                                if (cartItem.ItemTypeID == 2)
+                                {
+                                    discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                }
+                                else
+                                {
+                                    discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.1), 2));
+                                }
+                                Discount = "($" + (discountstring + discountpereachamount).ToString("f2") + ")";
+
+                                if (cart != null)
+                                {
+                                    cart.SubTotalDiscount += Convert.ToDecimal(discountpereachamount);
+                                    cart.TotalAmount = Convert.ToDecimal(Convert.ToDouble(cart.TotalAmount) - Convert.ToDouble(discountpereachamount));
+                                    cart.PaymentDue = Convert.ToDecimal(Convert.ToDouble(cart.PaymentDue) - Convert.ToDouble(discountpereachamount));
+                                    acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
+                                    creditAppliedToBalance = 0.00m;
+                                    remainAcctBalance = 0.00m;
+                                    paymentDue = 0.00m;
+
+                                    if (acctBalance >= cart.TotalAmount)
+                                    {
+                                        creditAppliedToBalance = cart.TotalAmount;
+                                    }
+                                    else
+                                    {
+                                        creditAppliedToBalance = acctBalance;
+                                    }
+                                    remainAcctBalance = acctBalance - creditAppliedToBalance;
+                                    paymentDue = cart.TotalAmount - creditAppliedToBalance;
+                                    cart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
+                                    cart.PaymentDue = Math.Round(paymentDue, 2);
+                                    cart.Save();
+                                }
+                                CurrentCart = cart;
                             }
                         }
                     }
@@ -629,7 +599,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                         CurrentCart.TaxableAmount = CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount;
                         CurrentCart.Save();
                     }
-                    
+
                     //// subtotal               
                     lblSubTotal.Text = cart.SubTotalAmount.ToString("c");
                     lblmocksubtotal.Text = (cart.SubTotalAmount - cart.SubTotalDiscount).ToString("c");
@@ -982,7 +952,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Controls.Cart
                 throw;
             }
         }
-        
+
         private void removeCoupon()
         {
             if (CurrentCart == null)

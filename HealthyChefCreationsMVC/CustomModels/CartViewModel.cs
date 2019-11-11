@@ -50,7 +50,7 @@ namespace HealthyChefCreationsMVC.CustomModels
         {
             get
             {
-                if(this.CurrentCart != null)
+                if (this.CurrentCart != null)
                     return CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount + CurrentCart.TaxAmount + CurrentCart.ShippingAmount;
                 else
                     return decimal.Zero;
@@ -124,7 +124,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                         parentprofile = hccUserProfile.GetParentProfileBy((Guid)user.ProviderUserKey);
                         if (parentprofile != null)
                         {
-                            if (this.CurrentCart.IsEditCoupon!=1)
+                            if (this.CurrentCart.IsEditCoupon != 1)
                             {
                                 this.CurrentCart.CouponID = parentprofile.DefaultCouponId;
                                 this.CurrentCart.Save();
@@ -133,7 +133,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                     }
                     if (this.CurrentCart != null)
                     {
-                        this.cartItems = hccCartItem.GetWithoutSideItemsBy(this.CurrentCart.CartID);                        
+                        this.cartItems = hccCartItem.GetWithoutSideItemsBy(this.CurrentCart.CartID);
                     }
                     else
                     {
@@ -194,370 +194,366 @@ namespace HealthyChefCreationsMVC.CustomModels
                 IsExpiredCartItems = new List<hccCartItem>();
                 this.profCart = new List<ProfileCart>();
                 //populate profcarts
-                if (this.cartItems != null)
+                if (cartItems != null && cartItems.Count > 0)
                 {
-                    if (cartItems.Count > 0)
+                    List<hccProductionCalendar> pc = new List<hccProductionCalendar>();
+                    decimal? discre = 0.00m;
+                    foreach (hccCartItem cartItem in cartItems)
                     {
-                        List<hccProductionCalendar> pc = new List<hccProductionCalendar>();
-                        decimal? discre = 0.00m;
-                        foreach (hccCartItem cartItem in cartItems)
+                        ProfileCart profCart;
+                        int shippingAddressId;
+
+                        if (cartItem.IsMealSide)
+                            continue;
+
+                        if (!pc.Exists(a => a.DeliveryDate == cartItem.DeliveryDate))
+                            pc.Add(hccProductionCalendar.GetBy(cartItem.DeliveryDate));
+
+                        hccProductionCalendar cpc = pc.SingleOrDefault(a => a.DeliveryDate == cartItem.DeliveryDate);
+
+                        if (cpc != null && (cpc.OrderCutOffDate.AddDays(1) >= DateTime.Now || (HttpContext.Current.Request.Url.OriginalString.Contains("Admin"))))
                         {
-                            ProfileCart profCart;
-                            int shippingAddressId;
-
-                            if (cartItem.IsMealSide)
-                                continue;
-
-                            if (!pc.Exists(a => a.DeliveryDate == cartItem.DeliveryDate))
-                                pc.Add(hccProductionCalendar.GetBy(cartItem.DeliveryDate));
-
-                            hccProductionCalendar cpc = pc.SingleOrDefault(a => a.DeliveryDate == cartItem.DeliveryDate);
-
-                            if (cpc != null && (cpc.OrderCutOffDate.AddDays(1) >= DateTime.Now || (HttpContext.Current.Request.Url.OriginalString.Contains("Admin"))))
+                            if (cartItem.UserProfile != null && (cartItem.UserProfile.UseParentShipping || cartItem.UserProfile.ShippingAddressID.HasValue))
                             {
-                                if (cartItem.UserProfile != null && (cartItem.UserProfile.UseParentShipping || cartItem.UserProfile.ShippingAddressID.HasValue))
-                                {
-                                    if (cartItem.UserProfile.UseParentShipping)
-                                        shippingAddressId = parentProfile.ShippingAddressID.Value;
-                                    else
-                                        shippingAddressId = cartItem.UserProfile.ShippingAddressID.Value;
-
-                                    profCart = this.profCart
-                                        .SingleOrDefault(a => a.ShippingAddressId == shippingAddressId && a.DeliveryDate == cartItem.DeliveryDate);
-                                }
+                                if (cartItem.UserProfile.UseParentShipping)
+                                    shippingAddressId = parentProfile.ShippingAddressID.Value;
                                 else
-                                {
-                                    profCart = this.profCart
-                                   .SingleOrDefault(a => a.ShippingAddressId == 0
-                                       && a.DeliveryDate == cartItem.DeliveryDate);
+                                    shippingAddressId = cartItem.UserProfile.ShippingAddressID.Value;
 
-                                    shippingAddressId = 0;
-                                }
-                               
-                                if (profCart == null)
-                                {
-                                    profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
-                                    this.profCart.Add(profCart);
-                                }
-                                profCart.CartItems.Add(cartItem);
-
-                                decimal ShoppingCartAmt = 0;
-                                if (cartItem.UserProfile != null)
-                                {
-                                    if (cartItem.UserProfile.BillingAddressID != null)
-                                    {
-                                        ShoppingCartAmt = ShippingAddressFee(txtCalZipCode, cartItems, ShippingDeliveryType, deliveryTypeId);
-                                    }
-                                    else
-                                    {
-                                        ShoppingCartAmt = CurrentCart.ShippingAmount;
-                                    }
-                                }
-                                HttpContext.Current.Session["ShippingAmount"] = ShoppingCartAmt;
-
-                                CurrentCart.CalculateTotals(this.profCart);
-
-                                //// subtotal               
-                                SubTotal = CurrentCart.SubTotalAmount.ToString("c");
-
-                                ////tax
-                                Tax = CurrentCart.TaxAmount.ToString("c");
-
-                                //discount  //Coupon Info
-                                if (CurrentCart.CouponID.HasValue)
-                                {
-                                    hccCoupon coup = hccCoupon.GetById(CurrentCart.CouponID.Value);
-
-                                    if (coup != null)
-                                    {
-                                        if ((!coup.StartDate.HasValue || coup.StartDate <= DateTime.Now) && (!coup.EndDate.HasValue || coup.EndDate >= DateTime.Now))
-                                        {
-                                            if (CurrentCart.SubTotalDiscount > 0.00m)
-                                            {
-                                                Discount = CurrentCart.SubTotalDiscount.ToString("c");
-                                                SubTotalAdj = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
-                                                mockSubTotal = SubTotalAdj;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            CurrentCart.CouponID = null;
-                                            CurrentCart.Save();
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    Discount = CurrentCart.SubTotalDiscount == Convert.ToDecimal("0.00") ? (0.00m).ToString("c") : CurrentCart.SubTotalDiscount.ToString("c");
-                                    SubTotalAdj = (0.00m).ToString("c");
-                                }
-                                
-                                //shipping
-                                ShippingAmount = CurrentCart.ShippingAmount.ToString("c");
-
-                                //total
-                                decimal cartTotal = CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount + CurrentCart.TaxAmount + CurrentCart.ShippingAmount;
-                                CurrentCart.TotalAmount = Math.Round(cartTotal, 2);
-
-                                // CurrentCart.AccountBalanceCredit;
-                                decimal acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
-                                decimal creditAppliedToBalance = 0.00m;
-                                decimal remainAcctBalance = 0.00m;
-                                decimal paymentDue = 0.00m;
-
-                                if (acctBalance >= cartTotal)
-                                {
-                                    creditAppliedToBalance = cartTotal;
-                                }
-                                else
-                                {
-                                    creditAppliedToBalance = acctBalance;
-                                }
-
-                                remainAcctBalance = acctBalance - creditAppliedToBalance;
-                                paymentDue = cartTotal - creditAppliedToBalance;
-
-                                CurrentCart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
-                                CurrentCart.PaymentDue = Math.Round(paymentDue, 2);
-                                if (cartItem.DiscretionaryTaxAmount != null)
-                                {
-                                    discre += cartItem.DiscretionaryTaxAmount;
-                                    CurrentCart.DiscretionaryTaxAmount = discre.Value;
-                                }
-                                CurrentCart.Save();
-
-                                GrandTotal = CurrentCart.PaymentDue.ToString("c");
-                                Subtotal = CurrentCart.SubTotalAmount.ToString("c");
-                                mockSubTotal = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
-                                AcctBalance = acctBalance.ToString("c");
-                                PaymentDue = paymentDue.ToString("c");
-                                RemainAcctBalance = remainAcctBalance.ToString("c");
+                                profCart = this.profCart
+                                    .SingleOrDefault(a => a.ShippingAddressId == shippingAddressId && a.DeliveryDate == cartItem.DeliveryDate);
                             }
                             else
                             {
-                                IsExpiredCartItems.Add(cartItem);
+                                profCart = this.profCart
+                               .SingleOrDefault(a => a.ShippingAddressId == 0
+                                   && a.DeliveryDate == cartItem.DeliveryDate);
+
+                                shippingAddressId = 0;
                             }
 
-                        }
-                        var currentcartdetails = hccCart.GetById(this.CurrentCart.CartID);
-                        if (currentcartdetails != null)
-                        {
-                            currentcartdetails.TaxableAmount = 0;
-                            currentcartdetails.Save();
-                        }
-                        foreach (var profileCart in profCart)
-                        {
-
-                            foreach (var cartItem in profileCart.CartItems)
+                            if (profCart == null)
                             {
-                                double discountstring = 0;
-                                if (cartItem.Plan_IsAutoRenew != null)
-                                {
-                                    if (cartItem.Plan_IsAutoRenew == true&& cartItem.Plan_IsAutoRenew != false)
-                                    {
-                                        if (Discount != null)
-                                        {
-                                            if(Discount != "$0.00")
-                                                discountstring = Convert.ToDouble(Discount.Replace("$", ""));
-                                        }
-                                        double discountpereachamount = 0.0;
-                                        if (cartItem.ItemTypeID != 1)
-                                        {
-                                             discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
-                                        }
-                                        else if (cartItem.ItemTypeID == 1)
-                                        {
-                                            discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                        }
-                                        Discount = "$" + (discountstring + discountpereachamount).ToString("f2");
-                                        var cart = hccCart.GetById(cartItem.CartID);
-                                        if(cart!=null)
-                                        {
-                                            cart.SubTotalDiscount += Convert.ToDecimal(discountpereachamount);
-                                            cart.TotalAmount = Convert.ToDecimal(Convert.ToDouble(cart.TotalAmount) - Convert.ToDouble(discountpereachamount));
-                                            cart.PaymentDue = Convert.ToDecimal(Convert.ToDouble(cart.PaymentDue) - Convert.ToDouble(discountpereachamount));
-                                            decimal acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
-                                            decimal creditAppliedToBalance = 0.00m;
-                                            decimal remainAcctBalance = 0.00m;
-                                            decimal paymentDue = 0.00m;
+                                profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
+                                this.profCart.Add(profCart);
+                            }
+                            profCart.CartItems.Add(cartItem);
 
-                                            if (acctBalance >= cart.TotalAmount)
-                                            {
-                                                creditAppliedToBalance = cart.TotalAmount;
-                                            }
-                                            else
-                                            {
-                                                creditAppliedToBalance = acctBalance;
-                                            }
-                                            remainAcctBalance = acctBalance - creditAppliedToBalance;
-                                            paymentDue = cart.TotalAmount - creditAppliedToBalance;
-                                            cart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
-                                            cart.PaymentDue = Math.Round(paymentDue, 2);
-                                            cart.Save();
-                                            GrandTotal = cart.TotalAmount.ToString("c");
-                                            mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - cart.SubTotalDiscount).ToString("c");
-                                            AcctBalance = acctBalance.ToString("c");
-                                            PaymentDue = paymentDue.ToString("c");
-                                            RemainAcctBalance = remainAcctBalance.ToString("c");
-                                        }
-                                    }
+                            decimal ShoppingCartAmt = 0;
+                            if (cartItem.UserProfile != null)
+                            {
+                                if (cartItem.UserProfile.BillingAddressID != null)
+                                {
+                                    ShoppingCartAmt = ShippingAddressFee(txtCalZipCode, cartItems, ShippingDeliveryType, deliveryTypeId);
                                 }
-
-                                double discountpereachamountForItem = 0.0;
-                                double discountpereachamountForPrograms = 0.0;
-                                var currentcart = hccCart.GetById(this.CurrentCart.CartID);
-                                if (currentcart != null)
+                                else
                                 {
-                                    if (cartItem.TaxableAmount != null && cartItem.TaxableAmount != 0)
+                                    ShoppingCartAmt = CurrentCart.ShippingAmount;
+                                }
+                            }
+                            HttpContext.Current.Session["ShippingAmount"] = ShoppingCartAmt;
+
+                            CurrentCart.CalculateTotals(this.profCart);
+
+                            //// subtotal               
+                            SubTotal = CurrentCart.SubTotalAmount.ToString("c");
+
+                            ////tax
+                            Tax = CurrentCart.TaxAmount.ToString("c");
+
+                            //discount  //Coupon Info
+                            if (CurrentCart.CouponID.HasValue)
+                            {
+                                hccCoupon coup = hccCoupon.GetById(CurrentCart.CouponID.Value);
+
+                                if (coup != null)
+                                {
+                                    if ((!coup.StartDate.HasValue || coup.StartDate <= DateTime.Now) && (!coup.EndDate.HasValue || coup.EndDate >= DateTime.Now))
                                     {
-                                        currentcart.TaxableAmount += ((cartItem.DiscountAdjPrice) * cartItem.Quantity);
+                                        if (CurrentCart.SubTotalDiscount > 0.00m)
+                                        {
+                                            Discount = CurrentCart.SubTotalDiscount.ToString("c");
+                                            SubTotalAdj = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
+                                            mockSubTotal = SubTotalAdj;
+                                        }
                                     }
                                     else
                                     {
-                                        currentcart.TaxableAmount += 0;
+                                        CurrentCart.CouponID = null;
+                                        CurrentCart.Save();
                                     }
-                                    
-                                    if(this.parentProfile != null)
-                                    {
-                                        //If Item is Familystyle.
-                                        hccAddress cartAddress = hccAddress.GetById(this.parentProfile.ShippingAddressID.Value);
-                                        if (cartAddress.State == "FL")
-                                        {
-                                            if (cartItem.Plan_IsAutoRenew == true)
-                                            {
-                                                if (cartItem.ItemTypeID != 1)
-                                                {
-                                                    discountpereachamountForPrograms = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
-                                                    cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForPrograms);
-                                                }
-                                                if (cartItem.ItemTypeID == 1)
-                                                {
-                                                    discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                                    cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForItem);
-                                                }
-
-                                                if (cartItem.ItemTypeID == 1)
-                                                {
-                                                    if (currentcart.CouponID != null)
-                                                    {
-                                                        if (cartItem.Plan_IsAutoRenew == true)
-                                                        {
-                                                            var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
-                                                            var copounDiscount = newCoupons.Amount / 100;
-                                                            var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                                            discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                                            var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
-                                                            cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
-                                                        }
-                                                    }
-                                                }
-
-                                                if (cartItem.ItemTypeID != 1)
-                                                {
-                                                    if (currentcart.CouponID != null)
-                                                    {
-                                                        if (cartItem.Plan_IsAutoRenew == true)
-                                                        {
-                                                            var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
-                                                            var copounDiscount = newCoupons.Amount / 100;
-                                                            var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                                            discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
-                                                            var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
-                                                            cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
-                                                        }
-                                                    }
-                                                }
-
-                                                if (cartItem.TaxRateAssigned > 6)
-                                                {
-                                                    var descAmt = cartItem.TaxRateAssigned - 6;
-                                                    var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
-                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 2));
-                                                }
-                                                cartItem.Save();
-                                            }
-                                        }
-
-                                        if (cartItem.Plan_IsAutoRenew == false)
-                                        {
-                                            if (currentcart.CouponID != null)
-                                            {
-                                                var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
-                                                var copounDiscount = newCoupons.Amount / 100;
-                                                var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
-                                                cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.TaxableAmount - discountPrice), 2);
-                                                if (cartItem.TaxRateAssigned > 6)
-                                                {
-                                                    var descAmt = cartItem.TaxRateAssigned - 6;
-                                                    var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
-                                                    cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 2));
-                                                }
-                                                cartItem.Save();
-                                            }
-                                        }
-                                    }
-                                    currentcart.IsEditCoupon = 0;
-                                    currentcart.Save();
                                 }
-                                GrandTotal = currentcart.TotalAmount.ToString("c");
                             }
-                        }
-                        var ccart = hccCart.GetCurrentCart();
-                        if(ccart != null)
-                        {
-                            ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
-                            if(this.parentProfile != null)
+                            else
                             {
-                                if (CurrentCart.CouponID.HasValue || cartItems.FirstOrDefault().Plan_IsAutoRenew == false || cartItems.FirstOrDefault().Plan_IsAutoRenew == true)
+                                Discount = CurrentCart.SubTotalDiscount == Convert.ToDecimal("0.00") ? (0.00m).ToString("c") : CurrentCart.SubTotalDiscount.ToString("c");
+                                SubTotalAdj = (0.00m).ToString("c");
+                            }
+
+                            //shipping
+                            ShippingAmount = CurrentCart.ShippingAmount.ToString("c");
+
+                            //total
+                            decimal cartTotal = CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount + CurrentCart.TaxAmount + CurrentCart.ShippingAmount;
+                            CurrentCart.TotalAmount = Math.Round(cartTotal, 2);
+
+                            // CurrentCart.AccountBalanceCredit;
+                            decimal acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
+                            decimal creditAppliedToBalance = 0.00m;
+                            decimal remainAcctBalance = 0.00m;
+                            decimal paymentDue = 0.00m;
+
+                            if (acctBalance >= cartTotal)
+                            {
+                                creditAppliedToBalance = cartTotal;
+                            }
+                            else
+                            {
+                                creditAppliedToBalance = acctBalance;
+                            }
+
+                            remainAcctBalance = acctBalance - creditAppliedToBalance;
+                            paymentDue = cartTotal - creditAppliedToBalance;
+
+                            CurrentCart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
+                            CurrentCart.PaymentDue = Math.Round(paymentDue, 2);
+                            if (cartItem.DiscretionaryTaxAmount != null)
+                            {
+                                discre += cartItem.DiscretionaryTaxAmount;
+                                CurrentCart.DiscretionaryTaxAmount = discre.Value;
+                            }
+                            CurrentCart.Save();
+
+                            GrandTotal = CurrentCart.PaymentDue.ToString("c");
+                            Subtotal = CurrentCart.SubTotalAmount.ToString("c");
+                            mockSubTotal = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
+                            AcctBalance = acctBalance.ToString("c");
+                            PaymentDue = paymentDue.ToString("c");
+                            RemainAcctBalance = remainAcctBalance.ToString("c");
+                        }
+                        else
+                        {
+                            IsExpiredCartItems.Add(cartItem);
+                        }
+
+                    }
+                    var currentcartdetails = hccCart.GetById(this.CurrentCart.CartID);
+                    if (currentcartdetails != null)
+                    {
+                        currentcartdetails.TaxableAmount = 0;
+                        currentcartdetails.Save();
+                    }
+                    foreach (var profileCart in profCart)
+                    {
+                        foreach (var cartItem in profileCart.CartItems)
+                        {
+                            double discountstring = 0;
+                            if (cartItem.Plan_IsAutoRenew != null)
+                            {
+                                if (cartItem.Plan_IsAutoRenew == true && cartItem.Plan_IsAutoRenew != false)
                                 {
-                                    hccAddress cartAddress = hccAddress.GetById(this.parentProfile.ShippingAddressID.Value);
-                                    if (cartAddress.State == "FL")
+                                    if (Discount != null)
                                     {
+                                        if (Discount != "$0.00")
+                                            discountstring = Convert.ToDouble(Discount.Replace("$", ""));
+                                    }
+                                    double discountpereachamount = 0.0;
+                                    if (cartItem.ItemTypeID != 1)
+                                    {
+                                        discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                    }
+                                    else if (cartItem.ItemTypeID == 1)
+                                    {
+                                        discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
+                                    }
+                                    Discount = "$" + (discountstring + discountpereachamount).ToString("f2");
+                                    var cart = hccCart.GetById(cartItem.CartID);
+                                    if (cart != null)
+                                    {
+                                        cart.SubTotalDiscount += Convert.ToDecimal(discountpereachamount);
+                                        cart.TotalAmount = Convert.ToDecimal(Convert.ToDouble(cart.TotalAmount) - Convert.ToDouble(discountpereachamount));
+                                        cart.PaymentDue = Convert.ToDecimal(Convert.ToDouble(cart.PaymentDue) - Convert.ToDouble(discountpereachamount));
                                         decimal acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
                                         decimal creditAppliedToBalance = 0.00m;
                                         decimal remainAcctBalance = 0.00m;
                                         decimal paymentDue = 0.00m;
 
-                                        if (cartItems.FirstOrDefault().TaxRateAssigned > 0)
+                                        if (acctBalance >= cart.TotalAmount)
                                         {
-                                            var taxRatePercent = cartItems.FirstOrDefault().TaxRateAssigned / 100;
-                                            ccart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * ccart.TaxableAmount), 2);
-                                            Tax = ccart.TaxAmount.ToString("c");
-                                            //Total Amount
-                                            ccart.TotalAmount = ccart.TaxableAmount + ccart.TaxAmount + ccart.ShippingAmount;
-
-                                            if (cartItems.FirstOrDefault().TaxRateAssigned > 6)
-                                            {
-                                                var descAmt = cartItems.FirstOrDefault().TaxRateAssigned - 6;
-                                                var descreAmountCart = Convert.ToDecimal(((descAmt * ccart.TaxableAmount)) / 100);
-                                                ccart.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descreAmountCart, 2));
-                                            }
-
-                                            if (acctBalance >= ccart.TotalAmount)
-                                            {
-                                                creditAppliedToBalance = ccart.TotalAmount;
-                                            }
-                                            else
-                                            {
-                                                creditAppliedToBalance = acctBalance;
-                                            }
-
-                                            remainAcctBalance = acctBalance - creditAppliedToBalance;
-                                            paymentDue = ccart.TotalAmount - creditAppliedToBalance;
-                                            ccart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
-                                            ccart.PaymentDue = Math.Round(paymentDue, 2);
-                                            GrandTotal = ccart.TotalAmount.ToString("c");
-                                            mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - ccart.SubTotalDiscount).ToString("c");
-                                            AcctBalance = acctBalance.ToString("c");
-                                            PaymentDue = paymentDue.ToString("c");
-                                            RemainAcctBalance = remainAcctBalance.ToString("c");
+                                            creditAppliedToBalance = cart.TotalAmount;
                                         }
+                                        else
+                                        {
+                                            creditAppliedToBalance = acctBalance;
+                                        }
+                                        remainAcctBalance = acctBalance - creditAppliedToBalance;
+                                        paymentDue = cart.TotalAmount - creditAppliedToBalance;
+                                        cart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
+                                        cart.PaymentDue = Math.Round(paymentDue, 2);
+                                        cart.Save();
+                                        GrandTotal = cart.TotalAmount.ToString("c");
+                                        mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - cart.SubTotalDiscount).ToString("c");
+                                        AcctBalance = acctBalance.ToString("c");
+                                        PaymentDue = paymentDue.ToString("c");
+                                        RemainAcctBalance = remainAcctBalance.ToString("c");
                                     }
                                 }
                             }
-                            ccart.Save();
+
+                            double discountpereachamountForItem = 0.0;
+                            double discountpereachamountForPrograms = 0.0;
+                            var currentcart = hccCart.GetById(this.CurrentCart.CartID);
+                            if (currentcart != null)
+                            {
+                                if (cartItem.TaxableAmount != null && cartItem.TaxableAmount != 0)
+                                {
+                                    currentcart.TaxableAmount += ((cartItem.DiscountAdjPrice) * cartItem.Quantity);
+                                }
+                                else
+                                {
+                                    currentcart.TaxableAmount += 0;
+                                }
+
+                                if (this.parentProfile != null)
+                                {
+                                    //If Item is Familystyle.
+                                    hccAddress cartAddress = hccAddress.GetById(this.parentProfile.ShippingAddressID.Value);
+                                    if (cartAddress.State == "FL")
+                                    {
+                                        if (cartItem.Plan_IsAutoRenew == true)
+                                        {
+                                            if (cartItem.ItemTypeID != 1)
+                                            {
+                                                discountpereachamountForPrograms = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                                cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForPrograms);
+                                            }
+                                            if (cartItem.ItemTypeID == 1)
+                                            {
+                                                discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
+                                                cartItem.TaxableAmount = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamountForItem);
+                                            }
+
+                                            if (cartItem.ItemTypeID == 1)
+                                            {
+                                                if (currentcart.CouponID != null)
+                                                {
+                                                    if (cartItem.Plan_IsAutoRenew == true)
+                                                    {
+                                                        var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
+                                                        var copounDiscount = newCoupons.Amount / 100;
+                                                        var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
+                                                        discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
+                                                        var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
+                                                        cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
+                                                    }
+                                                }
+                                            }
+
+                                            if (cartItem.ItemTypeID != 1)
+                                            {
+                                                if (currentcart.CouponID != null)
+                                                {
+                                                    if (cartItem.Plan_IsAutoRenew == true)
+                                                    {
+                                                        var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
+                                                        var copounDiscount = newCoupons.Amount / 100;
+                                                        var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
+                                                        discountpereachamountForItem = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                                        var taxableDiscountPrice = Math.Round(discountPrice + Convert.ToDecimal(discountpereachamountForItem), 2);
+                                                        cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity - taxableDiscountPrice), 2);
+                                                    }
+                                                }
+                                            }
+
+                                            if (cartItem.TaxRateAssigned > 6)
+                                            {
+                                                var descAmt = cartItem.TaxRateAssigned - 6;
+                                                var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
+                                                cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 2));
+                                            }
+                                            cartItem.Save();
+                                        }
+                                    }
+
+                                    if (cartItem.Plan_IsAutoRenew == false)
+                                    {
+                                        if (currentcart.CouponID != null)
+                                        {
+                                            var newCoupons = hccCoupon.GetById((int)currentcart.CouponID);
+                                            var copounDiscount = newCoupons.Amount / 100;
+                                            var discountPrice = Math.Round(Convert.ToDecimal(cartItem.ItemPrice * cartItem.Quantity * copounDiscount), 2);
+                                            cartItem.TaxableAmount = Math.Round(Convert.ToDecimal(cartItem.TaxableAmount - discountPrice), 2);
+                                            if (cartItem.TaxRateAssigned > 6)
+                                            {
+                                                var descAmt = cartItem.TaxRateAssigned - 6;
+                                                var cartItems = Convert.ToDecimal(((descAmt * cartItem.TaxableAmount)) / 100);
+                                                cartItem.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(cartItems, 2));
+                                            }
+                                            cartItem.Save();
+                                        }
+                                    }
+                                }
+                                currentcart.IsEditCoupon = 0;
+                                currentcart.Save();
+                            }
+                            GrandTotal = currentcart.TotalAmount.ToString("c");
                         }
                     }
+                    /*var ccart = hccCart.GetCurrentCart();
+                    if (ccart != null)
+                    {
+                        ccart.TaxableAmount = ccart.SubTotalAmount - ccart.SubTotalDiscount;
+                        if (this.parentProfile != null)
+                        {
+                            if (CurrentCart.CouponID.HasValue || cartItems.FirstOrDefault().Plan_IsAutoRenew == false || cartItems.FirstOrDefault().Plan_IsAutoRenew == true)
+                            {
+                                hccAddress cartAddress = hccAddress.GetById(this.parentProfile.ShippingAddressID.Value);
+                                if (cartAddress.State == "FL")
+                                {
+                                    decimal acctBalance = parentProfile != null ? parentProfile.AccountBalance : 0.00m;
+                                    decimal creditAppliedToBalance = 0.00m;
+                                    decimal remainAcctBalance = 0.00m;
+                                    decimal paymentDue = 0.00m;
+
+                                    if (cartItems.FirstOrDefault().TaxRateAssigned > 0)
+                                    {
+                                        var taxRatePercent = cartItems.FirstOrDefault().TaxRateAssigned / 100;
+                                        ccart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * ccart.TaxableAmount), 2);
+                                        Tax = ccart.TaxAmount.ToString("c");
+                                        //Total Amount
+                                        ccart.TotalAmount = ccart.TaxableAmount + ccart.TaxAmount + ccart.ShippingAmount;
+
+                                        if (cartItems.FirstOrDefault().TaxRateAssigned > 6)
+                                        {
+                                            var descAmt = cartItems.FirstOrDefault().TaxRateAssigned - 6;
+                                            var descreAmountCart = Convert.ToDecimal(((descAmt * ccart.TaxableAmount)) / 100);
+                                            ccart.DiscretionaryTaxAmount = Convert.ToDecimal(Math.Round(descreAmountCart, 2));
+                                        }
+
+                                        if (acctBalance >= ccart.TotalAmount)
+                                        {
+                                            creditAppliedToBalance = ccart.TotalAmount;
+                                        }
+                                        else
+                                        {
+                                            creditAppliedToBalance = acctBalance;
+                                        }
+
+                                        remainAcctBalance = acctBalance - creditAppliedToBalance;
+                                        paymentDue = ccart.TotalAmount - creditAppliedToBalance;
+                                        ccart.CreditAppliedToBalance = Math.Round(creditAppliedToBalance, 2);
+                                        ccart.PaymentDue = Math.Round(paymentDue, 2);
+                                        GrandTotal = ccart.TotalAmount.ToString("c");
+                                        mockSubTotal = (Convert.ToDecimal(SubTotal?.TrimStart('$')) - ccart.SubTotalDiscount).ToString("c");
+                                        AcctBalance = acctBalance.ToString("c");
+                                        PaymentDue = paymentDue.ToString("c");
+                                        RemainAcctBalance = remainAcctBalance.ToString("c");
+                                    }
+                                }
+                            }
+                        }
+                        ccart.Save();
+                    }*/
                 }
                 if (IsUserLoggedIn())
                 {
@@ -567,7 +563,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                 {
                     isUserLoggedIn = false;
                 }
-                if(IsExpiredCartItems.Count>0)
+                if (IsExpiredCartItems.Count > 0)
                 {
                     this.IsExpiredOrder = true;
                 }
@@ -576,7 +572,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                     this.IsExpiredOrder = false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (IsUserLoggedIn())
                 {
@@ -596,7 +592,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                 }
                 else if (ex.Message.Contains("Tax Lookup could not determine the tax rate"))
                 {
-                    lblFeedbackCart= ex.Message + ". Please update your profile shipping address that uses this zip code; or contact Healthy Chef Customer Service.";
+                    lblFeedbackCart = ex.Message + ". Please update your profile shipping address that uses this zip code; or contact Healthy Chef Customer Service.";
 
                 }
                 else
