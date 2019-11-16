@@ -337,12 +337,15 @@ namespace HealthyChefCreationsMVC.CustomModels
                         }
 
                     }
-                    var currentcartdetails = hccCart.GetById(this.CurrentCart.CartID);
-                    if (currentcartdetails != null)
+                    var cart = hccCart.GetById(this.CurrentCart.CartID);
+                    if (cart != null)
                     {
-                        currentcartdetails.TaxableAmount = 0;
-                        currentcartdetails.Save();
+                        cart.TaxableAmount = 0;
+                        cart.DiscretionaryTaxAmount = 0;
+                        cart.Save();
                     }
+                    cart.CalculateTotals(this.profCart);
+
                     foreach (var profileCart in profCart)
                     {
                         foreach (var cartItem in profileCart.CartItems)
@@ -367,7 +370,6 @@ namespace HealthyChefCreationsMVC.CustomModels
                                         discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
                                     }
                                     Discount = "$" + (discountstring + discountpereachamount).ToString("f2");
-                                    var cart = hccCart.GetById(cartItem.CartID);
                                     if (cart != null)
                                     {
                                         cart.SubTotalDiscount += Convert.ToDecimal(discountpereachamount);
@@ -402,7 +404,9 @@ namespace HealthyChefCreationsMVC.CustomModels
 
                             double discountpereachamountForItem = 0.0;
                             double discountpereachamountForPrograms = 0.0;
-                            var currentcart = hccCart.GetById(this.CurrentCart.CartID);
+                            //var currentcart = hccCart.GetById(this.CurrentCart.CartID);
+                            
+                            /*
                             if (currentcart != null)
                             {
                                 if (cartItem.TaxableAmount != null && cartItem.TaxableAmount != 0)
@@ -496,9 +500,12 @@ namespace HealthyChefCreationsMVC.CustomModels
                                 currentcart.IsEditCoupon = 0;
                                 currentcart.Save();
                             }
-                            GrandTotal = currentcart.TotalAmount.ToString("c");
+                            */
+                            GrandTotal = cart.TotalAmount.ToString("c");
                         }
                     }
+                    cart.TaxableAmount = cart.SubTotalAmount - cart.SubTotalDiscount;
+                    cart.Save();
                     /*var ccart = hccCart.GetCurrentCart();
                     if (ccart != null)
                     {
