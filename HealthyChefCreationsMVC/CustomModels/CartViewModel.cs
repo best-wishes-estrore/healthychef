@@ -242,7 +242,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                             decimal ShoppingCartAmt = 0;
                             if (cartItem.UserProfile != null)
                             {
-                                if (cartItem.UserProfile.BillingAddressID != null)
+                                if (cartItem.UserProfile.ShippingAddressID != null)
                                 {
                                     ShoppingCartAmt = ShippingAddressFee(txtCalZipCode, cartItems, ShippingDeliveryType, deliveryTypeId);
                                 }
