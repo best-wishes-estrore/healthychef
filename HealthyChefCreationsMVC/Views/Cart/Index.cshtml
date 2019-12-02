@@ -1275,7 +1275,6 @@ alert(response.d);
     }
 
     function ApplyCouponCode() {
-        debugger;
 var CouponCode = $('#CouponCodeText').val();
 if (CouponCode === undefined || CouponCode === '') {
 alert('please enter the promo code');
@@ -1294,7 +1293,6 @@ url: '@Url.Action("AddCouponCode", "Cart")',
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (res) {
-        debugger;
         //alert(res);
         $("#wrapper").html(res.responseText);
         if (res.Message != "Coupon applied successfully") {
@@ -1307,7 +1305,6 @@ url: '@Url.Action("AddCouponCode", "Cart")',
 }
     },
     error: function (error) {
-        debugger;
         $("#wrapper").html(error.responseText);
     },
 failure: function (response) {
