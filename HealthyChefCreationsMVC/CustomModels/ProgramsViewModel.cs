@@ -269,17 +269,26 @@ namespace HealthyChefCreationsMVC.CustomModels
         public List<int> GetAllWeeks(int CurrentCalendarId, int currentProgramId)
         {
             List<int> hccMenuItems = new List<int>();
-            hccProductionCalendar cal = hccProductionCalendar.GetById(CurrentCalendarId);
-            //hccMenu menu = cal.GetMenu();
+            hccMenu menu = null;
+            hccProductionCalendar cal = null;
+            List<hccMenuItem> hccDefMenuItems = null;
 
             this.programMealTypesForDefaultMenu = hccProgramMealType.GetBy(this.Program.ProgramID).Where(x => x.MealTypeID == 10 || x.MealTypeID == 70 || x.MealTypeID == 30 || x.MealTypeID == 50 || x.MealTypeID == 90).Where(x => x.RequiredQuantity >= 0).ToList();
             List<hccProgramDefaultMenu> defMenus = hccProgramDefaultMenu.GetBy(CurrentCalendarId, currentProgramId);
+            if (defMenus.Count <= 0)
+            {
+                cal = hccProductionCalendar.GetById(CurrentCalendarId);
+                menu = cal.GetMenu();
+                hccDefMenuItems = hccMenuItem.GetByMenuId(menu.MenuID);
+            }
 
             if (this.programMealTypesForDefaultMenu.Count > 0)
             {
                 this.programMealTypesForDefaultMenu.ForEach(delegate (hccProgramMealType mealType)
                 {
-                    List<int> menuItems = defMenus.Where(dm => dm.MealTypeID == mealType.MealTypeID).Select(m => m.MenuItemID).ToList();
+                    List<int> menuItems = defMenus.Count > 0 ? 
+                            defMenus.Where(dm => dm.MealTypeID == mealType.MealTypeID).Select(m => m.MenuItemID).ToList() 
+                            : hccDefMenuItems.Where(dm => dm.MealTypeID == mealType.MealTypeID).Select(m => m.MenuItemID).ToList();
                     hccMenuItems = hccMenuItems.Concat(menuItems).ToList();
                 });
             }
