@@ -28,84 +28,74 @@
         });
     });
 </script>
-
-<div class="page-content">
-    <div class="container">
-        <div id="navigation">
-            <h1 id="logo" style="display:none">
-                <a href="/" title="Healthy Chef">
-                    Healthy Chef
-                    <img src="/App_Themes/HealthyChef/Images/Healthy-Chef-Logo.png" />
-                </a>
-            </h1>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <ul id="bs-example-navbar-collapse-1" class="collapse navbar-collapse" data-navigation="true">
-                @{ var _sitemap = Model.mySiteMap; }
-                @if (_sitemap.Count != 0)
-                {
-                    foreach (var s in _sitemap)
+<header class="main_menu home_menu">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/App_Themes/HealthyChef/Images/Healthy-Chef-Logo.png" class="img-responsive" /></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right" style="position: relative; z-index: 99999;">
+                    @{ var _sitemap = Model.mySiteMap; }
+                    @if (_sitemap.Count != 0)
                     {
-                <li id="About Us">
-
-                    @if (s.Title == "Weight Loss Diets")
-                    {
-                        @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key" onclick="Getsubmenunavigationofweightloss()">@s.Title</a>*@
-                        <a class="mainmenu" tabindex="-1" href="/weight-loss-programs.aspx" id="NavigationItem_@s.Key">@s.Title</a>
-                        <span class="caret dropdown-toggle" data-toggle="dropdown" role="button"></span>
-                    }
-                    else
-                    if (s.Title == "Everyday Meal Plans")
-                    {
-                        @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key"  onclick="Getsubmenunavigationofeverydaymealplans()">@s.Title</a>*@
-                        <a class="mainmenu" href="/everydaymealplans.aspx" tabindex="-1" id="NavigationItem_@s.Key">@s.Title</a>
-                        <span class="caret dropdown-toggle" data-toggle="dropdown" role="button"></span>
-                    }
-                    else
-                    {
-                        <a class="mainmenu" tabindex="-1" href="/@s.Url.Replace(@"~/","")" id="NavigationItem_@s.Key">@s.Title</a>
-                        <span class="caret dropdown-toggle" data-toggle="dropdown" role="button"></span>
-                    }
-                    @if (s.HasChildNodes == true)
-                    {
-                        if (s.Title == "Weekly Menus")
+                        foreach (var s in _sitemap)
                         {
-                        <ul class="drop-down-menu dropdown-menu">
-                            @for (int i = 0; i < s.ChildNodes.Count; i++)
-                            {
-                                if (s.ChildNodes[i].Url == "~/browse-menu/dinner.aspx")
-                                {
-                                    <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
-                                }
-                                else
-                                {
-                                    <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/", "")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
-                                }
-                            }
-                        </ul>
-                        }
-                        else
-                        {
-                            <ul class="drop-down-menu dropdown-menu">
-                                @for (int i = 0; i < s.ChildNodes.Count; i++)
-                                {
-                                    <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/","")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
-                                }
-                            </ul>
-                        }
+                            <li class="@(@s.HasChildNodes ? "dropdown" : "")">
+                                @{
+                                    var title = s.Title;
+                                    var href = s.Url.Replace("~/", "/");
+                                    var clickevent = "";
+                                    if (title == "Weight Loss Diets")
+                                    {
+                                        href = "/weight-loss-programs.aspx";
+                                        clickevent = "Getsubmenunavigationofweightloss()";
+                                    }
+                                    else if (title == "Everyday Meal Plans")
+                                    {
+                                        href = "/everydaymealplans.aspx";
+                                        clickevent = "Getsubmenunavigationofeverydaymealplans()";
+                                    }
 
+                                    <a class="mainmenu" id="NavigationItem_@s.Key"
+                                       onclick="@clickevent" href="@href">
+                                        @title
+                                        @if (s.HasChildNodes)
+                                        {
+                                            <span class="caret"></span>
+                                            <span class="dropdown-toggle" data-toggle="dropdown" href="#"> </span>
+                                        }
+                                    </a>
+
+                                    if (s.HasChildNodes)
+                                    {
+                                        <ul class="dropdown-menu">
+                                            @for (int i = 0; i < s.ChildNodes.Count; i++)
+                                            {
+                                                var childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/", "");
+                                                if (s.ChildNodes[i].Url == "~/browse-menu/dinner.aspx")
+                                                {
+                                                    childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx");
+                                                }
+
+                                                <li><a href="@childHref" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
+                                            }
+                                        </ul>
+                                    }
+                                }
+                            </li>
+                        }
                     }
-                </li>
-                    }
-                }
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-</div>
+    </nav>
+</header>
 
 <script>
     function Getsubmenunavigationofeverydaymealplans() {
@@ -132,4 +122,9 @@
         }
         location.href = '/Programs/WeightLossProgram?NavigationIdsList=' + Programnavigationidslist.toString();
     }
+    $('ul.nav li.dropdown').hover(function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+    }, function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+    });
 </script>

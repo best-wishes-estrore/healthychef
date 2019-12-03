@@ -952,14 +952,19 @@ body.home-page .slider-spacing {
     margin: 0;
     padding: 0;
     list-style: none;
+    margin-top:55px !important;
+}
+.background_bg{
+    margin-top:55px;
 }
 
-    .meals .m-nav ul li {
-        float: left;
-        width: 14%;
-        border-right: 1px solid #ddd;
-        font-size: 1.6em;
-    }
+
+.meals .m-nav ul li {
+    float: left;
+    width: 14%;
+    border-right: 1px solid #ddd;
+    font-size: 1.6em;
+}
 
         .meals .m-nav ul li input {
             background: none;
