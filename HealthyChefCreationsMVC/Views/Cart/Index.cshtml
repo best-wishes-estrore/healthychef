@@ -1274,7 +1274,8 @@ alert(response.d);
         }
     }
 
-function ApplyCouponCode() {
+    function ApplyCouponCode() {
+        debugger;
 var CouponCode = $('#CouponCodeText').val();
 if (CouponCode === undefined || CouponCode === '') {
 alert('please enter the promo code');
@@ -1286,18 +1287,29 @@ type: "POST",
 url: '@Url.Action("AddCouponCode", "Cart")',
     /**/
     data: '{CouponCode: "' + CouponCode + '"}',
+    //data: {
+    //    CouponCode: CouponCode
+       
+    //},
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (res) {
+        debugger;
+        //alert(res);
+        $("#wrapper").html(res.responseText);
         if (res.Message != "Coupon applied successfully") {
             alert(res.Message);
         }
         if (res.Success === true) {
              /**/
-              window.location.href = '@Url.Action("Index", "Cart")';
+             // window.location.href = '@Url.Action("Index", "Cart")';
              /**/
 }
-},
+    },
+    error: function (error) {
+        debugger;
+        $("#wrapper").html(error.responseText);
+    },
 failure: function (response) {
 alert(response.d);
 }
@@ -1319,10 +1331,10 @@ url: '@Url.Action("AddCouponCode", "Cart")',
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (res) {
-        alert(res.Message);
+      //  alert(res.Message);
         if (res.Success === true) {
              /**/
-              window.location.href = '@Url.Action("Index", "Cart")';
+             // window.location.href = '@Url.Action("Index", "Cart")';
              /**/
 }
 },

@@ -149,7 +149,7 @@ namespace HealthyChef.DAL
                 using (var cont = new healthychefEntities())
                 {
                     hccRecurringOrder item = cont.hccRecurringOrders
-                            .Where(a => a.CartID == CartId).SingleOrDefault();
+                            .Where(a => a.CartID == CartId).FirstOrDefault();
                     if (item != null)
                     {
                         cont.hccRecurringOrders.DeleteObject(item);

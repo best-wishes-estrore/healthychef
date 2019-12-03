@@ -30,6 +30,8 @@ namespace HealthyChefCreationsMVC.CustomModels
         public string Tax { get; set; }
         public string Shipping { get; set; }
 
+
+      
         public hccCoupon ActiveCoupon
         {
             get
@@ -106,7 +108,7 @@ namespace HealthyChefCreationsMVC.CustomModels
         public string ShippingAmount { set; get; }
 
 
-        public CartViewModel()
+        public CartViewModel(int ?couponId=null)
         {
             try
             {
@@ -242,7 +244,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                             decimal ShoppingCartAmt = 0;
                             if (cartItem.UserProfile != null)
                             {
-                                if (cartItem.UserProfile.BillingAddressID != null)
+                                if (cartItem.UserProfile.ShippingAddressID != null)
                                 {
                                     ShoppingCartAmt = ShippingAddressFee(txtCalZipCode, cartItems, ShippingDeliveryType, deliveryTypeId);
                                 }
@@ -262,7 +264,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                             Tax = CurrentCart.TaxAmount.ToString("c");
 
                             //discount  //Coupon Info
-                            if (CurrentCart.CouponID.HasValue)
+                            if (CurrentCart.CouponID.HasValue && couponId!=0)
                             {
                                 hccCoupon coup = hccCoupon.GetById(CurrentCart.CouponID.Value);
 
@@ -286,8 +288,18 @@ namespace HealthyChefCreationsMVC.CustomModels
                             }
                             else
                             {
-                                Discount = CurrentCart.SubTotalDiscount == Convert.ToDecimal("0.00") ? (0.00m).ToString("c") : CurrentCart.SubTotalDiscount.ToString("c");
-                                SubTotalAdj = (0.00m).ToString("c");
+                                if (couponId!=0)
+                                {
+                                    Discount = CurrentCart.SubTotalDiscount == Convert.ToDecimal("0.00") ? (0.00m).ToString("c") : CurrentCart.SubTotalDiscount.ToString("c");
+                                    SubTotalAdj = (0.00m).ToString("c");
+                                }
+                                else
+                                {
+                                    
+                                    CurrentCart.SubTotalDiscount = 0;
+                                    Discount = CurrentCart.SubTotalDiscount.ToString("c"); 
+                                }
+                              
                             }
 
                             //shipping
@@ -684,6 +696,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                 coup = hccCoupon.GetById(this.CurrentCart.CouponID ?? 0);
                 if (coup != null)
                 {
+                    
                     if ((!coup.StartDate.HasValue || coup.StartDate <= DateTime.Now) && (!coup.EndDate.HasValue || coup.EndDate >= DateTime.Now))
                     {
                         return coup;
