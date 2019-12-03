@@ -114,7 +114,7 @@ namespace HealthyChefCreationsMVC.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 120)]
+        [OutputCache(Duration = 60)]
         public PartialViewResult HeaderSection()
         {
             HeaderViewModel headerViewModel = new HeaderViewModel();

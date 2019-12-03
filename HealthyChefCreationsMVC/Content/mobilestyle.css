@@ -162,7 +162,7 @@
 }
 
 .content_start td {
-    width: 100% !important;
+   /* width: 100% !important;*/
     float: left;
     padding: 10px;
 }
@@ -177,7 +177,7 @@
 }
 
 .newbutton .page-button-submit {
-    display: none;
+   /* display: none;*/
 }
 
 .mc-modal {
@@ -196,7 +196,7 @@
 }
 
 .meals .col-md-8 {
-    padding: 0px;
+    /*padding: 0px;*/
 }
 
 .Addselectpopup .divfamilystyleerror {
@@ -236,13 +236,13 @@
     float: right !important;
 }
 
-#familystyleinfo .modal-dialog {
+/*#familystyleinfo .modal-dialog {
     width: 100% !important;
     left: 0px;
     margin: 0px;
     padding: 10px;
 }
-
+    */
 .divfamilystyleerror .pull-left span {
     width: auto !important;
     float: left !important;
@@ -339,7 +339,7 @@
 }
 
 .post .content_col p, .post .content_col h2, .post .content_col h3 {
-    margin-left: 5px !important;
+   /* margin-left: 5px !important;*/
 }
 
 .mycart-page {
@@ -399,7 +399,7 @@
 }
 
 #panel8 td {
-    width: 50%;
+   /* width: 50%;*/
     vertical-align: top;
     padding: 7px 10px;
 }
@@ -440,7 +440,7 @@ section h2 {
 }
 
 #tabsClient .btn-green {
-    margin-left: 41%;
+   /* margin-left: 41%;*/
 }
 
 .table_row input[type="checkbox"] {
@@ -573,12 +573,12 @@ section h2 {
 .align_mble tr td:first-child {
     display: none;
 }
-
+/*
 .plan_edit .fieldRow .fieldCol label {
     float: left !important;
-    width: 42%;
+   width: 50%;
     margin: 7px 0px;
-}
+}*/
 
 .align_ment_mble td {
     width: 50% !important;
@@ -606,9 +606,15 @@ section h2 {
     text-align: center;
 }
 
-.gridviewbill td {
+/*.gridviewbill td {
     float: left;
     width: 100%;
+    padding: 10px;
+}*/
+
+.gridviewbill td {
+   /* float: left;*/
+    width: auto;
     padding: 10px;
 }
 
@@ -793,7 +799,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .alignleft img {
     height: auto;
-    width: 100% !important;
+   /*width: 100% !important;*/
 }
 
 .alc-button-submit {
@@ -803,7 +809,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .meals .m-nav ul li {
     width: 18.75%;
-    padding: 0px 5px;
+    padding: 0px 10px;
 }
 
     .meals .m-nav ul li:first-child {
@@ -1769,4 +1775,16 @@ body.home-page #content .three-cols .image img {
     text-overflow: ellipsis;
 }
 
-
+.caret {
+    width: 0 !important;
+    height: 0 !important;
+    margin-left: 2px !important;
+    vertical-align: middle !important;
+    border-top: 6px dashed !important;
+    border-top: 4px solid\9 !important;
+    border-right: 6px solid transparent !important;
+    border-left: 6px solid transparent !important;
+    position: absolute !important;
+    right: 10px !important;
+    top: 15px !important;
+}

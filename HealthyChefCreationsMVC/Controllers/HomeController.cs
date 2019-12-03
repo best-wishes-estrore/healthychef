@@ -242,6 +242,7 @@ namespace HealthyChefCreationsMVC.Controllers
                                     }
                                     else
                                     {
+                                        FormsAuthentication.RedirectFromLoginPage(userName, true);
                                         return RedirectToAction("Display");
                                     }
 
