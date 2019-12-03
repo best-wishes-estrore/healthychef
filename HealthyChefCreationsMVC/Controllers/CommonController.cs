@@ -70,7 +70,7 @@ namespace HealthyChefCreationsMVC.Controllers
         public PartialViewResult FooterSection()
         {
             FooterViewModel footerViewModel = new FooterViewModel();
-            return PartialView("~/Views/Shared/_Footer.cshtml",footerViewModel);
+            return PartialView("~/Views/Shared/_Footer.cshtml", footerViewModel);
         }
 
         [ChildActionOnly]
@@ -114,10 +114,20 @@ namespace HealthyChefCreationsMVC.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 120)]
+        [OutputCache(Duration = 60)]
         public PartialViewResult HeaderSection()
         {
             HeaderViewModel headerViewModel = new HeaderViewModel();
+            MembershipUser user = Helpers.LoggedUser;
+            if (user == null || Roles.IsUserInRole(user.UserName, "Customer"))
+            {
+                hccCart cart = (user == null) ? hccCart.GetCurrentCart() : hccCart.GetCurrentCart(user);
+                if (cart != null)
+                {
+                    List<hccCartItem> cartItems = hccCartItem.GetWithoutSideItemsBy(cart.CartID);
+                    headerViewModel.CartCount = cartItems.Count;
+                }
+            }
             return PartialView("~/Views/Shared/_Header.cshtml", headerViewModel);
         }
 
@@ -227,7 +237,7 @@ namespace HealthyChefCreationsMVC.Controllers
             {
                 sm.Add(new Location()
                 {
-                    Url = Request.Url.Scheme + "://" + Request.Url.Authority+n.Url.Remove(0, 1),
+                    Url = Request.Url.Scheme + "://" + Request.Url.Authority + n.Url.Remove(0, 1),
                     LastModified = DateTime.UtcNow,
                     Priority = 0.5D
                 });
