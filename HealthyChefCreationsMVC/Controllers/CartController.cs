@@ -22,12 +22,26 @@ namespace HealthyChefCreationsMVC.Controllers
 {
     public class CartController : Controller
     {
+       
         // GET: Cart
         [HttpGet]
         public ActionResult Index()
         {
-            CartViewModel cartViewModel = new CartViewModel();
-            if(cartViewModel.IsExpiredOrder)
+
+           
+            RemoveCouponCode();
+            
+            CartViewModel cartViewModel = new CartViewModel(0);
+            //var CurrentCart = new hccCart();
+            ////CurrentCart.CouponID = 0;
+            ////CurrentCart.Save();
+                
+            cartViewModel.CurrentCart.CouponID = 0;
+            hccCart hccart = new hccCart();
+           
+            hccart.SubTotalDiscount = 0;
+
+            if (cartViewModel.IsExpiredOrder)
             {
                 if (cartViewModel.IsExpiredCartItems != null)
                 {
@@ -40,6 +54,7 @@ namespace HealthyChefCreationsMVC.Controllers
             }
             return View(cartViewModel);
         }
+      
 
         [HttpGet]
         public ActionResult Checkout()
@@ -438,10 +453,27 @@ namespace HealthyChefCreationsMVC.Controllers
 
             return Json(new { Success = _cartItemDeleted, Message = _message }, JsonRequestBehavior.AllowGet);
         }
+
+        public static void RemoveCouponCodeMethod() {
+            var CurrentCart = new hccCart();
+            MembershipUser user = Helpers.LoggedUser;
+            if (user == null || (user != null && Roles.IsUserInRole(user.UserName, "Customer")))
+            {
+                if (user == null)
+                    CurrentCart = hccCart.GetCurrentCart();
+                else
+                    CurrentCart = hccCart.GetCurrentCart(user);
+            }
+            CurrentCart.CouponID =0;
+            CurrentCart.IsEditCoupon = 1;
+            CurrentCart.Save();
+
+        }
         [HttpPost]
-        public JsonResult AddCouponCode(string CouponCode)
+        public ActionResult AddCouponCode(string CouponCode)
         {
             bool _couponCodeAdded = false;
+            
             string _message = "";
             var CurrentCart = new hccCart();
 
@@ -499,24 +531,42 @@ namespace HealthyChefCreationsMVC.Controllers
                         else
                         {
                             _message = "The coupon code entered is for limited use only, and has already been used by this account.";
+                            return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
                         }
                     }
                     else
                     {
                         _message = "The coupon code entered does not exist or is not active.";
+                        return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
                     }
                 }
                 else
                 {
                     _message = "Your cart is empty, please Login and try";
+                    return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception E)
             {
                 _message = "Error in Adding coupon code " + E.Message;
+                return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
             }
+            CartViewModel cartViewModel = new CartViewModel();
 
-            return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
+            if (cartViewModel.IsExpiredOrder)
+            {
+                if (cartViewModel.IsExpiredCartItems != null)
+                {
+                    foreach (var cartItem in cartViewModel.IsExpiredCartItems)
+                    {
+                        cartItem.Delete(((List<hccRecurringOrder>)Session["autorenew"]));
+                        ViewBag.ExpiredOrderCartitems = "Item(s) removed from cart due to expiration of availability.";
+                    }
+                }
+            }
+            return View("~/Views/cart/index.cshtml", cartViewModel);
+            //return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
+
         }
 
         [HttpPost]
@@ -1117,20 +1167,20 @@ namespace HealthyChefCreationsMVC.Controllers
                         }
                     }
 
-                    if(billProf != null)
-                    {
-                        hccAddress billAddr12 = hccAddress.GetById(billProf.ShippingAddressID.Value);
-                        List<hccCartItem> cartItem = hccCartItem.GeCartItemsByPurchaseNumber(purchaseNum);
-                        if (billAddr12.State == "FL")
-                        {
-                            if (cartItem.FirstOrDefault().TaxRateAssigned > 0)
-                            {
-                                var taxRatePercent = cartItem.FirstOrDefault().TaxRateAssigned / 100;
-                                CurrentCart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * CurrentCart.TaxableAmount), 2);
-                                CurrentCart.Save();
-                            }
-                        }
-                    }
+                    //if(billProf != null)
+                    //{
+                    //    hccAddress billAddr12 = hccAddress.GetById(billProf.ShippingAddressID.Value);
+                    //    List<hccCartItem> cartItem = hccCartItem.GeCartItemsByPurchaseNumber(purchaseNum);
+                    //    if (billAddr12.State == "FL")
+                    //    {
+                    //        if (cartItem.FirstOrDefault().TaxRateAssigned > 0)
+                    //        {
+                    //            var taxRatePercent = cartItem.FirstOrDefault().TaxRateAssigned / 100;
+                    //            CurrentCart.TaxAmount = Math.Round(Convert.ToDecimal(taxRatePercent * CurrentCart.TaxableAmount), 2);
+                    //            CurrentCart.Save();
+                    //        }
+                    //    }
+                    //}
                    
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("window.dataLayer = window.dataLayer || [];");

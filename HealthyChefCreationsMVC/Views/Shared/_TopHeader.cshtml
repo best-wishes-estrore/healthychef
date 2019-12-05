@@ -28,7 +28,7 @@
 <!-- Begin -->
 <script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "21003554" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>
 <!-- End --><!-- header -->
-<div id="header">
+<div id="header" style="display: none;">
     <div class="page_gap container">
         @*shell*@
         <div class="top-navigation Desktop_view">
@@ -58,18 +58,17 @@
                             </a>
                             @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
                             {
-                                <a href="@Url.Action("Login", "Home")" class="btn btn-green">
+                                <a id="alogin" href="@Url.Action("Login", "Home")" class="btn btn-green">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/gold-star.gif" />*@ <i class="fa fa-user"></i><span class="mobile_del">Login</span>
                                 </a>
                                 <input type="hidden" id="hdnauthenticate" value="false" />
                             }
                             @if (HttpContext.Current.User.Identity.IsAuthenticated == true)
-                            {
-                                <input type="hidden" id="hdnauthenticate" value="true" />
+                            { <input type="hidden" id="hdnauthenticate" value="true" /> <p>hai</p>
                                 <a id="aProfile" class="btn btn-green" runat="server" visible="false" href="@Url.Action("Index", "Account")">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/icon-3.png" />*@ <i class="fa fa-user"></i><span class="mobile_del">Profile</span>
                                 </a>
-                                <a href="@Url.Action("Signout", "Home")" class="btn btn-green">
+                                <a id="alogout" href="@Url.Action("Signout", "Home")" class="btn btn-green">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/gold-star.gif" />*@ <i class="fa fa-sign-out"></i><span class="mobile_del">Sign Out</span>
                                 </a>
                             }
@@ -81,7 +80,7 @@
                                 <a href="/admin" class="btn btn-green"><span>Admin</span></a>
                             }
                         </div>
-                    </td>
+</td>
                 </tr>
             </table>
         </div>
@@ -103,9 +102,15 @@
         if ($('#hdnauthenticate').val() == "false") {
             $('.top-navigation').addClass('Extracol');
             $('.navbar-toggle').addClass('mobile-toggle-navbar');
+            $('#alogin').css('visibility', 'visible');
+            $('#alogout').css('visibility', 'hidden');
+            $('#aProfile').css('visibility', 'hidden');
         }
         else {
             $('.top-navigation').removeClass('Extracol');
+            $('#alogin').css('visibility', 'hidden');
+            $('#alogout').css('visibility', 'visible');
+            $('#aProfile').css('visibility', 'visible');
         }
-    });
-</script>
+    }); 
+  </script>

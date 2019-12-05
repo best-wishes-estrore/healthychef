@@ -1626,19 +1626,18 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="AccountCustomPreferences">
+                    <Textbox Name="MktgOptIn">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!AccountCustomPreferences.Value</Value>
+                              <Value>=Fields!MktgOptIn.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1647,7 +1646,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>AccountCustomPreferences</rd:DefaultName>
+                      <rd:DefaultName>MktgOptIn</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

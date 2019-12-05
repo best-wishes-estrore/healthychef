@@ -19,11 +19,11 @@ namespace HealthyChefCreationsMVC.Controllers
             HeaderViewModel headerViewModel = new HeaderViewModel();
             List<string> NavigationIdsList = new List<string>();
             var everydaymealplanschilds = headerViewModel.mySiteMap[1];
-            foreach(var childnode in everydaymealplanschilds.ChildNodes)
+            foreach (var childnode in everydaymealplanschilds.ChildNodes)
             {
                 NavigationIdsList.Add(((System.Web.SiteMapNode)childnode).Key.ToString());
             }
-            
+
             List<ProgramViewModel> everydaymealplansViewModel = new List<ProgramViewModel>();
             for (var i = 0; i < NavigationIdsList.Count(); i++)
             {
@@ -48,11 +48,11 @@ namespace HealthyChefCreationsMVC.Controllers
                 //    programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
                 //    programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
                 //}
-              everydaymealplansViewModel.Add(programViewModel);
+
+                everydaymealplansViewModel.Add(programViewModel);
             }
             return View(everydaymealplansViewModel);
         }
-
 
         [HttpGet]
         public ActionResult WeightLossProgram()
@@ -65,7 +65,7 @@ namespace HealthyChefCreationsMVC.Controllers
                 NavigationIdsList.Add(((System.Web.SiteMapNode)childnode).Key.ToString());
             }
             List<ProgramViewModel> weightlossViewModel = new List<ProgramViewModel>();
-            for (var i=0;i<NavigationIdsList.Count();i++)
+            for (var i = 0; i < NavigationIdsList.Count(); i++)
             {
                 ProgramViewModel programViewModel = new ProgramViewModel();
                 hccProgram hccprogram = hccProgram.GetByMoreInfoId(Convert.ToInt16(NavigationIdsList[i]));
@@ -76,13 +76,12 @@ namespace HealthyChefCreationsMVC.Controllers
                     programViewModel.ImagePath = hccprogram.ImagePath;
                     programViewModel.Description = hccprogram.Description;
                     programViewModel.Price = hccprogram.GetCheapestPlanPrice().ToString("c");
-                    programViewModel.MoreInfoNavID =hccprogram.MoreInfoNavID ?? 0;
+                    programViewModel.MoreInfoNavID = hccprogram.MoreInfoNavID ?? 0;
                 }
                 weightlossViewModel.Add(programViewModel);
             }
             return View(weightlossViewModel);
         }
-
         // GET: Programs
         [HttpGet]
         public ActionResult Index()
@@ -99,7 +98,7 @@ namespace HealthyChefCreationsMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult DetailsbyCheckbox(int Id=0, string programName=null)
+        public ActionResult DetailsbyCheckbox(int Id = 0, string programName = null)
         {
             ProgramDetailsViewModel programDetailsViewModel = new ProgramDetailsViewModel(Id, 0);
             return View("~/Views/Programs/Details.cshtml", programDetailsViewModel);
@@ -108,8 +107,20 @@ namespace HealthyChefCreationsMVC.Controllers
         [HttpPost]
         public ActionResult DetailsbyCalendarId(int Id, int calendarid)
         {
-            var programDetailsViewModel = new ProgramDetailsViewModel(Id, calendarid);
-            return Json(new { Message = RenderRazorViewToString("~/Views/Programs/_ExampleDisplayMenu.cshtml",programDetailsViewModel)}, JsonRequestBehavior.AllowGet);
+            ResponseModel objResponseModel = new ResponseModel();
+            try
+            {
+                var programDetailsViewModel = new ProgramDetailsViewModel(Id, calendarid);
+                return Json(new { Message = RenderRazorViewToString("~/Views/Programs/_ExampleDisplayMenu.cshtml", programDetailsViewModel) }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResponseModel.result = "";
+                objResponseModel.statusCode = 500;
+                objResponseModel.errorMessage = ex.Message;
+                objResponseModel.successMessage = "";
+                return Json(objResponseModel, JsonRequestBehavior.AllowGet);
+            }
         }
         public string RenderRazorViewToString(string viewName, object model)
         {
@@ -413,7 +424,7 @@ namespace HealthyChefCreationsMVC.Controllers
                             UserProfileID = programAddToCartModel.profileId,
                             IsCompleted = false,
                             DiscountAdjPrice = Math.Round(Convert.ToDecimal(Convert.ToDouble(itemPrice) - Convert.ToDouble(itemPrice) * 0.05), 2),
-                            DiscountPerEach= Math.Round(Convert.ToDecimal(Convert.ToDouble(itemPrice) - Convert.ToDouble(adjustmentprice)), 2)
+                            DiscountPerEach = Math.Round(Convert.ToDecimal(Convert.ToDouble(itemPrice) - Convert.ToDouble(adjustmentprice)), 2)
                         };
 
                         Meals obj = new Meals();
@@ -487,8 +498,8 @@ namespace HealthyChefCreationsMVC.Controllers
                                     UserProfileID = newItem.UserProfileID,
                                     AspNetUserID = userCart.AspNetUserID,
                                     PurchaseNumber = userCart.PurchaseNumber,
-                                    TotalAmount = Math.Round(Convert.ToDecimal(Convert.ToDouble(newItem.ItemPrice) -Convert.ToDouble(newItem.ItemPrice) * 0.05), 2)
-                            };
+                                    TotalAmount = Math.Round(Convert.ToDecimal(Convert.ToDouble(newItem.ItemPrice) - Convert.ToDouble(newItem.ItemPrice) * 0.05), 2)
+                                };
                                 //hccrecurringOrder.Save();
                                 lstRo.Add(hccrecurringOrder);
 

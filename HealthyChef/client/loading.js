@@ -33,8 +33,6 @@ function GetApiBaseURL()
     var _baseURL = 'http://localhost:55996/api/';
     //var _baseURL = 'https://admin.healthychefcreations.com/HealthyCHefWebAPI/api/';
     //var _baseURL = 'http://devadmin.healthychefcreations.com/HealthyChefAPI/api/';
-    
-   
     return _baseURL;
 }
 

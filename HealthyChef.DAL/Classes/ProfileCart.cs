@@ -59,7 +59,7 @@ namespace HealthyChef.DAL
             {
                 decimal profSubDiscountAmount = 0.00m;
                 this.CartItemsWithMealSides.ForEach(a => profSubDiscountAmount += (a.DiscountPerEach));
-                    return profSubDiscountAmount;
+                return profSubDiscountAmount;
             }
         }
 
@@ -80,44 +80,50 @@ namespace HealthyChef.DAL
         {
             get
             {
-                var currentcart = hccCart.GetCurrentCart();
                 decimal profSubTax = 0.00m;
+                SubTaxableAmount = 0.00m;
+                SubDiscretionaryTaxAmount = 0.00m;
                 // if shipping address is FL, add tax for taxable items
-                if (ShippingAddress != null
-                    && ShippingAddress.State == "FL")
+                if (ShippingAddress != null && ShippingAddress.State == "FL")
                 {
                     try
                     {
                         TaxLookup taxInfo = TaxLookup.RequestTax(ShippingAddress.PostalCode);
-
                         if (!taxInfo.State.Contains("Error"))
                         {
                             decimal taxRate = decimal.Parse(taxInfo.Sales_Tax_Rate);
 
                             if (this.CartItemsWithMealSides.Count > 0)
                             {
-                                this.CartItemsWithMealSides.ForEach(delegate(hccCartItem cartItem)
+
+                                this.CartItemsWithMealSides.ForEach(delegate (hccCartItem cartItem)
                                 {
                                     if (cartItem.IsTaxable)
                                     {
                                         decimal itemTax = 0.00m;
                                         decimal taxableAmt = 0.00m;
                                         double discountpereachamount = 0.0;
-                                        //if()
-                                        //{
-
-                                        //}
 
                                         //If Item is FamilyStyle
                                         if (cartItem.Plan_IsAutoRenew == true)
                                         {
-                                            discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                            taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            if (cartItem.ItemTypeID == 1)
+                                            {
+                                                discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
+                                                taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            }
+                                            else
+                                            {
+                                                discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.05), 2));
+                                                taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
+                                            }
                                         }
                                         else
                                         {
                                             taxableAmt = cartItem.ItemPrice * cartItem.Quantity;
                                         }
+                                        taxableAmt -= cartItem.DiscountPerEach;
+
                                         if (taxableAmt == cartItem.ItemPrice)
                                         {
                                             itemTax = Math.Round((taxableAmt * (taxRate / 100)), 2);
@@ -131,23 +137,21 @@ namespace HealthyChef.DAL
                                         decimal baseTaxAmt = Math.Round(taxableAmt * .06m, 2);
                                         decimal discTaxAmt = itemTax - baseTaxAmt;
 
-                                        //cartItem.TaxRate = taxRate;
-                                        cartItem.TaxRateAssigned = taxRate;
-                                        cartItem.TaxableAmount = taxableAmt;
-                                        cartItem.DiscretionaryTaxAmount = discTaxAmt;
-                                        cartItem.Save();
-
                                         SubTaxableAmount += taxableAmt;
                                         SubDiscretionaryTaxAmount += discTaxAmt;
+
+                                        cartItem.TaxRateAssigned = taxRate;
+                                        cartItem.TaxableAmount = taxableAmt;
                                         cartItem.DiscretionaryTaxAmount = discTaxAmt;
                                         cartItem.Save();
                                     }
                                 });
                             }
+                            profSubTax = Math.Round((SubTaxableAmount * (taxRate / 100)), 2);
                         }
                         else
                         {
-                            throw new Exception("Tax Lookup could not determine the tax rate for this zip code: " + ShippingAddress.PostalCode); 
+                            throw new Exception("Tax Lookup could not determine the tax rate for this zip code: " + ShippingAddress.PostalCode);
                         }
                     }
                     catch { throw; }
@@ -171,7 +175,7 @@ namespace HealthyChef.DAL
 
                 try
                 {
-                    this.CartItemsWithMealSides.ForEach(delegate(hccCartItem cartItem)
+                    this.CartItemsWithMealSides.ForEach(delegate (hccCartItem cartItem)
                     {
                         if (cartItem.ItemType == Common.Enums.CartItemType.AlaCarte)
                         {
@@ -265,7 +269,7 @@ namespace HealthyChef.DAL
         public DateTime DeliveryDate { get; set; }
         public List<hccCartItem> CartItems { get; set; }
 
-      
+
         public List<hccCartItem> CartItemsWithMealSides
         {
             get
@@ -275,7 +279,7 @@ namespace HealthyChef.DAL
                 if (this.CartItems == null)
                     return cartItems;
 
-                this.CartItems.ForEach(delegate(hccCartItem cartItem)
+                this.CartItems.ForEach(delegate (hccCartItem cartItem)
                 {
                     cartItems.Add(cartItem);
                     cartItems.AddRange(cartItem.MealSideItems);

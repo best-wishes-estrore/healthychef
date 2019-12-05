@@ -21,11 +21,7 @@
     fbq('init', '431320264352127');
     fbq('track', 'PageView');
 
-    $(document).ready(function () {
-        //dummy method need to be here to enable click event, please do not remove this.
-        $('.menu-down').on('click', function () {
-        });
-    });
+   
 </script>
 <noscript>
     <img height="1" width="1" style="display:none"
@@ -34,7 +30,7 @@
 <!-- End Facebook Pixel Code -->
 <!-- Do not delete this script -->
 <!-- Begin -->
-<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "21003554" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"21003554"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
 <!-- End --><!-- header -->
 <div id="header" class="mobile_view">
     <div class="page_gap_mobile container">
@@ -52,7 +48,7 @@
                 </tr>
                 <tr>
                     <td align="left">
-                        <div id="navigation">
+                        <div id="navigation" >
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -64,25 +60,25 @@
                                 {
                                     foreach (var s in _sitemap)
                                     {
-                                        <li id="@s.Title">
+                                        <li id="@s.Title" class="panel">
 
                                             @if (s.Title == "Weight Loss Diets")
                                             {
                                                 @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key" onclick="Getsubmenunavigationofweightloss()">@s.Title</a>*@
                                                 <a class="mainmenu" tabindex="-1" href="/weight-loss-programs.aspx" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"   data-target="#child-@s.Key" role="button"></span>
                                             }
                                             else
                                             if (s.Title == "Everyday Meal Plans")
                                             {
                                                 @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key"  onclick="Getsubmenunavigationofeverydaymealplans()">@s.Title</a>*@
                                                 <a class="mainmenu" href="/everydaymealplans.aspx" tabindex="-1" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"  data-target="#child-@s.Key" role="button"></span>
                                             }
                                             else
                                             {
                                                 <a class="mainmenu" tabindex="-1" href="/@s.Url.Replace(@"~/","")" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"   data-target="#child-@s.Key" role="button"></span>
                                             }
                                             @if (s.HasChildNodes == true)
                                             {
@@ -104,7 +100,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <ul id="child-@s.Key" class="collapse">
+                                                    <ul id="child-@s.Key" class="collapse" >
                                                         @for (int i = 0; i < s.ChildNodes.Count; i++)
                                                         {
                                                             <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/","")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>

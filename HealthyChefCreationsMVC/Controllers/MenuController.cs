@@ -286,17 +286,17 @@ namespace HealthyChefCreationsMVC.Controllers
                     itemAdded = true;
 
                     //get cart count
-                    hccCart cart = null;
-                    if (user == null)
-                        cart = hccCart.GetCurrentCart();
-                    else
-                    {
-                        cart = hccCart.GetCurrentCart(user);
-                    }
+                    //hccCart cart = null;
+                    //if (user == null)
+                    //    cart = hccCart.GetCurrentCart();
+                    //else
+                    //{
+                    //    cart = hccCart.GetCurrentCart(user);
+                    //}
 
-                    if (cart != null)
+                    if (userCart != null)
                     {
-                        List<hccCartItem> cartItems = hccCartItem.GetWithoutSideItemsBy(cart.CartID);
+                        List<hccCartItem> cartItems = hccCartItem.GetWithoutSideItemsBy(userCart.CartID);
                         hccCartItem obj = new hccCartItem();
 
                         CartCount = cartItems.Count;

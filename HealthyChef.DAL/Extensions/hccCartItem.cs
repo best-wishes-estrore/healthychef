@@ -23,18 +23,18 @@ namespace HealthyChef.DAL
             {
                 if (this.ItemTypeID == 1)
                 {
-                    if (this.Plan_IsAutoRenew == true)
+                    if (this.Plan_IsAutoRenew.HasValue && this.Plan_IsAutoRenew.Value)
                     {
                         return Convert.ToDouble(this.ItemPrice) * 0.9;
                     }
                     else
                     {
-                        return Convert.ToDouble(this.ItemPrice);
+                         return Convert.ToDouble(this.ItemPrice);
                     }
                 }
                 else if(this.ItemTypeID == 2)
                 {
-                    if (this.Plan_IsAutoRenew == true)
+                    if (this.Plan_IsAutoRenew.HasValue && this.Plan_IsAutoRenew.Value)
                     {
                         return Convert.ToDouble(this.ItemPrice) * 0.95;
                     }
@@ -58,6 +58,10 @@ namespace HealthyChef.DAL
                     if (this.Plan_IsAutoRenew == true)
                     {
                         return Convert.ToDouble(this.ItemPrice) * 0.9;
+                    }
+                    else if (this.Plan_IsAutoRenew == true && this.DiscountPerEach > 0.00m)
+                    {
+                        return (Convert.ToDouble(this.ItemPrice) * 0.9)- Convert.ToDouble(this.DiscountPerEach);
                     }
                     else
                     {

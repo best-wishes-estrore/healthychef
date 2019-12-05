@@ -7,6 +7,8 @@ namespace HealthyChef.WebModules.Reports.Admin
 {
     public class QueryAll
     {
+        private const int CUSTOM_PREFERNCE_TYPE = 1;
+        private const int STANDARD_PREFERNCE_TYPE = 0;
         public QueryAll(healthychefEntities context, QueryDataObject data)
         {
             Context = context;
@@ -28,7 +30,7 @@ namespace HealthyChef.WebModules.Reports.Admin
 
         public virtual List<ActiveCustomerDto> Process(IQueryable<DAL.hccCart> query)
         {
-            return query.GroupJoin(Context.hccUserProfiles,
+            var query1 = query.GroupJoin(Context.hccUserProfiles,
                       cart => cart.AspNetUserID,
                       profile => profile.MembershipID,
                       (c, p) => new { cart = c, profile = p.DefaultIfEmpty() })
@@ -41,15 +43,16 @@ namespace HealthyChef.WebModules.Reports.Admin
                   .Select(u => new
                   {
                       FirstPurchaseDate = Context.hccCarts.Where(c => u.Select(y => y.cart.AspNetUserID).Contains(c.AspNetUserID)).Min(c => c.PurchaseDate),
-                      LastPurchase = u.FirstOrDefault(x => x.cart.PurchaseDate == u.Max(c => c.cart.PurchaseDate)), 
+                      LastPurchase = u.FirstOrDefault(x => x.cart.PurchaseDate == u.Max(c => c.cart.PurchaseDate)),
                       TotalOrders = u.OrderByDescending(x => x.cart.CartID).Count(),
+                      UserProfileID = u.OrderByDescending(a => a.profile.UserProfileID).FirstOrDefault().profile.UserProfileID
                       //TotalAmount = u.OrderByDescending(x => x.cart.)
                   })
                   .Where(u =>
                       u.LastPurchase.cart.PurchaseDate >= Data.StartTime
                       && u.LastPurchase.cart.PurchaseDate <= Data.EndTime
                       && u.LastPurchase.member.IsApproved)
-                  .Select(u => new ActiveCustomerDto
+                  .Select(u => new
                   {
                       Email = u.LastPurchase.member.Email,
                       CustomerName = u.LastPurchase.profile.LastName + ", " + u.LastPurchase.profile.FirstName,
@@ -62,13 +65,42 @@ namespace HealthyChef.WebModules.Reports.Admin
                       LastPurchaseDate = u.LastPurchase.cart.PurchaseDate,
                       LastPurchaseAmount = u.LastPurchase.cart.TotalAmount,
                       LastPurchaseId = u.LastPurchase.cart.PurchaseNumber,
-                      MktgOptIn = (u.LastPurchase.profile.CanyonRanchCustomer ?? false) ? "Y" : "N",                      
+                      MktgOptIn = (u.LastPurchase.profile.CanyonRanchCustomer ?? false) ? "Y" : "N",
+                      Preferences = Context.hccUserProfilePreferences.Where(upp => upp.UserProfileID == u.UserProfileID)
+                                            .GroupJoin(Context.hccPreferences,
+                                            upp => upp.PreferenceID,
+                                            pp => pp.PreferenceID,
+                                            (upp, pp) => pp.DefaultIfEmpty())
+                                            .SelectMany(pp => pp.Where(y => !y.IsRetired && y.PreferenceType == STANDARD_PREFERNCE_TYPE))
+                                            .Select(p => p.Name),
+                      CustomPreferences = Context.hccUserProfilePreferences.Where(upp => upp.UserProfileID == u.UserProfileID)
+                                            .GroupJoin(Context.hccPreferences,
+                                            upp => upp.PreferenceID,
+                                            pp => pp.PreferenceID,
+                                            (upp, pp) => pp.DefaultIfEmpty())
+                                            .SelectMany(pp => pp.Where(y => !y.IsRetired && y.PreferenceType == CUSTOM_PREFERNCE_TYPE))
+                                            .Select(p => p.Name)
+                  })
+                  .OrderBy(c => c.CustomerName).ToList();
+            return query1.Select(u => new ActiveCustomerDto
+            {
+                Email = u.Email,
+                CustomerName = u.CustomerName,
+                Address = u.Address,
+                ZipCode = u.ZipCode,
+                PhoneNumber = u.PhoneNumber,
+                TotalOrders = u.TotalOrders,
+                //TotalAmount = u.TotalAmount,
+                FirstPurchaseDate = u.FirstPurchaseDate,
+                LastPurchaseDate = u.LastPurchaseDate,
+                LastPurchaseAmount = u.LastPurchaseAmount,
+                AccountPreferences = string.Join(",", u.Preferences),
+                LastPurchaseId = u.LastPurchaseId,
+                MktgOptIn = u.MktgOptIn,
+                AccountCustomPreferences = string.Join(",", u.CustomPreferences)
 
-                  })                  
-                  .OrderBy(c => c.CustomerName)
-                  .ToList();
+            }).ToList();
         }
-
 
         //public virtual List<ActiveCustomerDto> Process(IQueryable<DAL.hccCart> query)
         //{
@@ -120,7 +152,7 @@ namespace HealthyChef.WebModules.Reports.Admin
         //          .Select(u => new ActiveCustomerDto
         //          {
         //              //Context.hccCarts.Where(c => u.Select(y => y.cart.AspNetUserID).Contains(c.AspNetUserID)).Min(c => c.PurchaseDate),
-                      
+
         //              Email = u.Email,
         //              CustomerName = u.CustomerName,
         //              Address = u.Address,
@@ -136,7 +168,7 @@ namespace HealthyChef.WebModules.Reports.Admin
         //              AccountAllergens = u.AccountAllergens,
         //              AccountCustomPreferences = u.AccountCustomPreferences,
         //              ProductType = u.ProductType,
-                      
+
         //              //Address = u.LastPurchase.profile.hccAddressShipping.Address1 + (!string.IsNullOrEmpty(u.LastPurchase.profile.hccAddressShipping.Address2) ? ", " + u.LastPurchase.profile.hccAddressShipping.Address2 : ""),
         //              //ZipCode = u.LastPurchase.profile.hccAddressShipping.PostalCode,
         //              //PhoneNumber = u.LastPurchase.profile.hccAddressShipping.Phone,
@@ -150,7 +182,7 @@ namespace HealthyChef.WebModules.Reports.Admin
         //              //AccountPreferences = u.AccountPreferences.FirstOrDefault(),
         //              //AccountAllergens = u.AccountAllergens.FirstOrDefault()
         //          })
-                  
+
         //          .Where(u=>u.FirstPurchaseDate>=Data.StartTime && u.LastPurchaseDate<=Data.EndTime)
 
         //        )

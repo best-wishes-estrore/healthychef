@@ -1,4 +1,7 @@
-﻿.mc-modal-bg {
+﻿body {
+    overflow: hidden;
+}
+.mc-modal-bg {
     background: #000;
     background-color: #000;
     opacity: 0.65;
@@ -12,10 +15,6 @@
     margin: 0px !important;
 }
 
-/*#examplemenu .btn-green, .btn:active, .btn.active, .btn-green:hover {
-    padding: 5px 20px;
-}*/
-
 .selectprofiledetails .col-md-4, .selectprofiledetails .col-md-8 {
     float: left;
     width: 50%;
@@ -23,7 +22,7 @@
 }
 
 #myCarousel1 {
-    width: 25% !important;
+   /* width: 25% !important;*/
 }
 
 .top-navigation .btn-green, .top-navigation .btn-green:hover {
@@ -65,10 +64,6 @@
     margin: 3px 25px 3px 0px !important;
     padding: 0px !important;
 }
-
-/* .meals .mealItem .main-description { */
-/* margin: 0px 10px !important; */
-/* } */
 
 .navbar-toggle {
     display: block;
@@ -124,7 +119,7 @@
 }
 
 .phoneno {
-    font-size: x-large !important;
+    font-size: large !important;
 }
 
 .mobile_del {
@@ -167,7 +162,7 @@
 }
 
 .content_start td {
-    width: 100% !important;
+   /* width: 100% !important;*/
     float: left;
     padding: 10px;
 }
@@ -182,11 +177,14 @@
 }
 
 .newbutton .page-button-submit {
-    display: none;
+   /* display: none;*/
 }
 
-.mc-modal, .mble_displaynone {
+.mc-modal {
     display: none !important;
+}
+.mble_displaynone {
+   /* display: none !important;*/
 }
 
 .mc-banner {
@@ -198,7 +196,7 @@
 }
 
 .meals .col-md-8 {
-    padding: 0px;
+    /*padding: 0px;*/
 }
 
 .Addselectpopup .divfamilystyleerror {
@@ -238,13 +236,13 @@
     float: right !important;
 }
 
-#familystyleinfo .modal-dialog {
+/*#familystyleinfo .modal-dialog {
     width: 100% !important;
     left: 0px;
     margin: 0px;
     padding: 10px;
 }
-
+    */
 .divfamilystyleerror .pull-left span {
     width: auto !important;
     float: left !important;
@@ -341,7 +339,7 @@
 }
 
 .post .content_col p, .post .content_col h2, .post .content_col h3 {
-    margin-left: 5px !important;
+   /* margin-left: 5px !important;*/
 }
 
 .mycart-page {
@@ -366,14 +364,15 @@
 }
 
 .meals .m-nav span {
-    width: 100%;
+    /*width: 100%;*/
     margin-bottom: 5px !important;
     text-align: left;
 }
 
 .three-cols h3, .three-cols h4 {
     line-height: 2.2;
-    margin-bottom: 13px;
+   /* margin-bottom: 13px;*/
+    margin-bottom: 6px;
 }
 
 #testinomials .col-md-4 {
@@ -400,7 +399,7 @@
 }
 
 #panel8 td {
-    width: 50%;
+   /* width: 50%;*/
     vertical-align: top;
     padding: 7px 10px;
 }
@@ -441,7 +440,7 @@ section h2 {
 }
 
 #tabsClient .btn-green {
-    margin-left: 41%;
+   /* margin-left: 41%;*/
 }
 
 .table_row input[type="checkbox"] {
@@ -501,8 +500,9 @@ section h2 {
 }
 
 .AlphabetsOnly, #panel1 #Email, .cardnumber {
-    width: 50% !important;
+   /* width: 50% !important;*/
 }
+
 
 .expdate p {
     margin: 0px !important;
@@ -573,12 +573,12 @@ section h2 {
 .align_mble tr td:first-child {
     display: none;
 }
-
+/*
 .plan_edit .fieldRow .fieldCol label {
     float: left !important;
-    width: 42%;
+   width: 50%;
     margin: 7px 0px;
-}
+}*/
 
 .align_ment_mble td {
     width: 50% !important;
@@ -606,9 +606,15 @@ section h2 {
     text-align: center;
 }
 
-.gridviewbill td {
+/*.gridviewbill td {
     float: left;
     width: 100%;
+    padding: 10px;
+}*/
+
+.gridviewbill td {
+   /* float: left;*/
+    width: auto;
     padding: 10px;
 }
 
@@ -659,8 +665,9 @@ section h2 {
 }
 
 .menuitems strong b {
-    border-right: 1px solid #ddd;
-    padding: 0px 5px 0px 5px;
+    border-right: 0px solid #ddd;
+    padding: 0px 10px 0px 0px;
+    line-height: 22px;
 }
 
 .left_col #plan-mealtypes tr td {
@@ -669,7 +676,7 @@ section h2 {
 }
 
 .img-responsive {
-    width: 100%;
+   /* width: 100%;*/
 }
 
 .top-footer li a {
@@ -729,10 +736,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     background: #fff !important;
 }
 
+#bs-example-navbar-collapse-1 .panel {
+    margin-bottom: 0px !important;
+}
+
 #yourcart h5 {
     width: 100%;
     float: left;
     margin: 3px 0px 5px 0px;
+    text-align: left;
 }
 
 .article-list {
@@ -740,7 +752,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .background_bg .left_col, .background_bg .right_col {
-    width: 100%;
+   /* width: 100%;*/
     padding: 10px 0px;
 }
 
@@ -787,20 +799,25 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .alignleft img {
     height: auto;
-    width: 100% !important;
+   /*width: 100% !important;*/
 }
 
 .alc-button-submit {
     width: 100%;
     background-size: 110% 200%;
 }
-    .meals .m-nav ul li {
-        width: auto;
-        padding: 0px 10px;
+
+.meals .m-nav ul li {
+    width: 18.75%;
+    padding: 0px 10px;
+}
+
+    .meals .m-nav ul li:first-child {
+       /* width: 25%;*/
     }
 
 .alignleft {
-    width: 100% !important;
+   /* width: 100% !important;*/
 }
 
 .full-page-header .info {
@@ -843,8 +860,8 @@ body.home-page #content {
     }
 
 body.home-page #sidebar {
-    width: 100%;
-    float: left;
+    /*width: 100%;
+    float: left;*/
     padding-left: 0px;
     padding: 10px 0px;
 }
@@ -865,6 +882,7 @@ body.home-page #content .three-cols .image img {
     #fbbtn {
         margin: 10px 0px !important;
     }
+
     .font-myriad-bold-cond {
         font-size: 11px !important;
     }
@@ -997,7 +1015,7 @@ body.home-page #content .three-cols .image img {
         padding: 0px;
         width: 100%;
         float: left;
-        padding-top: 5px;
+        padding: 5px;
     }
 
     .section-middle .price p {
@@ -1400,8 +1418,30 @@ body.home-page #content .three-cols .image img {
         flex-direction: column-reverse !important;
     }
 }*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
+    .menu_data {
+        min-height: 315px;
+    }
+}
 
+
+
+/*@media only screen and (max-width: 600px) {
+    #Yourcartpartialview
+
+{
+    position:absolute;
+    top:100px;
+}
+    .leftsidecart{
+        margin-top:500px;
+    }
+
+}*/
+
+
+
+@media screen and (max-width: 320px) {
     .ui-tabs .ui-tabs-panel {
         padding: 1em 0em;
     }
@@ -1412,8 +1452,9 @@ body.home-page #content .three-cols .image img {
     }
 
     .container {
-        padding:0px 7px;
+        padding: 0px 7px;
     }
+
     .Addselectpopup .pull-right .btn-orange {
         margin-top: 10px;
     }
@@ -1446,13 +1487,26 @@ body.home-page #content .three-cols .image img {
         width: 100%;
         margin-right: 10px;
     }
-
+    .landscape_3 .col-md-4 {
+        width:33.3%;
+        float:left;
+    }
+    #defaultBreakFastMenu.carousel-inner > .item.active {
+        min-height: 150px;
+    }
+    .newmenuprograms .section-middle td:first-child {
+        width: 20%;
+    }
+    .newmenuprograms .section-middle td:last-child {
+        width: 80%;
+    }
     #navigation > ul {
         margin-top: 7% !important;
     }
-   
+
     .meals .mealItem .main-description {
         padding: 0px 10px;
+        width:68%;
     }
 
     .full-page-header .info {
@@ -1481,6 +1535,7 @@ body.home-page #content .three-cols .image img {
         width: 33.3%;
         float: left;
     }
+
     .familystyle_div {
         margin-top: 1% !important;
     }
@@ -1516,6 +1571,7 @@ body.home-page #content .three-cols .image img {
     .cotinue-shopping-button a {
         margin: 5px !important
     }
+
     #myCarousel1 {
         width: 20% !important;
     }
@@ -1551,19 +1607,9 @@ body.home-page #content .three-cols .image img {
             margin-left: 16% !important;
         }
 
-    .section-middle img, .section img {
-        width: 34%;
-        float: left;
-    }
-
     .col_gap .image {
         width: 30% !important;
         float: left;
-    }
-
-    .section .description {
-        width: 64% !important;
-        padding-left: 8px !important;
     }
 
     .content_col .three-cols .col .buttons {
@@ -1578,10 +1624,6 @@ body.home-page #content .three-cols .image img {
 
     #divLoader {
         left: 35% !important;
-    }
-
-    .meals .m-nav ul li {
-        width: 20%;
     }
 
     #planschef .col-md-offset-6 {
@@ -1640,24 +1682,109 @@ body.home-page #content .three-cols .image img {
         margin-left: 25% !important;
     }
 }
+
 #bs-example-navbar-collapse-1 li:last-child {
-    border-bottom:0px solid #fff;
+    border-bottom: 0px solid #fff;
 }
-.menuitemadd td {
-    width:auto;
-}
+
+/*.menuitemadd td {
+        width: auto;
+    }*/
+
 .page_gap_mobile {
-    padding:0px;
+    padding: 0px;
 }
-.menuitemadd .mobile_child {
-    width: 60%;
-}
+
+
 .carousel-content td {
-    width: 100% !important;
-    float: right;
+   /* width: 100% !important;
+    float: right;*/
     margin: 0px auto;
 }
+
 .open ul.drop-down-menu.dropdown-menu {
     width: 80% !important;
     margin: 0px 10% !important;
+}
+
+.active {
+    color: #276f22;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.side-column {
+    display: flex !important;
+}
+
+.newmenuprograms .section-middle td {
+    /*width: 100%;*/
+    float: left;
+}
+
+.left_col .weightloss {
+    padding: 15px;
+}
+
+#yourcart .col-11, #Yourcartpartialview h4 {
+    text-align: left;
+}
+
+#defaultBreakFastMenu.carousel-inner > .item.active .hiderowmenu {
+    border: 1px solid #00800026;
+    padding: 10px;
+}
+.section-middle img {
+    border-radius:0px;
+}
+.menuitemadd td.mobile_child {
+    width: 40%;
+}
+.menuitemadd .cart_check {
+    padding: 0px 4px;
+}
+.meals .mealItem .side-column, .meals .mealItem .side-column input {
+    width: auto;
+    padding: 5px;
+    margin: 4px;
+    line-height: inherit;
+}
+.phoneno i {
+    display: contents;
+}
+
+/*.descriptionTruncateForMobile 
+{
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+.descriptionTruncateForMobile {
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    font-weight:normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.caret {
+    width: 0 !important;
+    height: 0 !important;
+    margin-left: 2px !important;
+    vertical-align: middle !important;
+    border-top: 6px dashed !important;
+    border-top: 4px solid\9 !important;
+    border-right: 6px solid transparent !important;
+    border-left: 6px solid transparent !important;
+    position: absolute !important;
+    right: 10px !important;
+    top: 15px !important;
 }

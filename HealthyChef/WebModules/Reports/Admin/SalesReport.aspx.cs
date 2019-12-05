@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,78 +45,81 @@ namespace HealthyChef.WebModules.Reports.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (this.IsPostBack)
+                return;
+            hccProductionCalendar productionCalendar = ((IEnumerable<hccProductionCalendar>)hccProductionCalendar.GetNext4Calendars()).FirstOrDefault<hccProductionCalendar>();
+            TextBox txtStartDate = this.txtStartDate;
+            DateTime dateTime;
+            string shortDateString1;
+            if (productionCalendar != null)
             {
-                hccProductionCalendar nextProdCal = hccProductionCalendar.GetNext4Calendars().FirstOrDefault();
-
-                txtStartDate.Text = nextProdCal == null ? DateTime.Now.ToShortDateString() : nextProdCal.DeliveryDate.ToShortDateString();
-                txtEndDate.Text = nextProdCal == null ? DateTime.Now.ToShortDateString() : nextProdCal.DeliveryDate.ToShortDateString();
-                BindReport();
+                shortDateString1 = productionCalendar.DeliveryDate.ToShortDateString();
             }
+            else
+            {
+                dateTime = DateTime.Now;
+                shortDateString1 = dateTime.ToShortDateString();
+            }
+            txtStartDate.Text = shortDateString1;
+            TextBox txtEndDate = this.txtEndDate;
+            string shortDateString2;
+            if (productionCalendar != null)
+            {
+                dateTime = productionCalendar.DeliveryDate;
+                shortDateString2 = dateTime.ToShortDateString();
+            }
+            else
+            {
+                dateTime = DateTime.Now;
+                shortDateString2 = dateTime.ToShortDateString();
+            }
+            txtEndDate.Text = shortDateString2;
+            this.BindReport();
         }
 
-        void BindReport()
+        private void BindReport()
         {
-            Page.Validate("MealOrderGroup");
-
-            if (Page.IsValid)
-            {
-                DateTime startDate;
-                bool tryStart = DateTime.TryParse(txtStartDate.Text.Trim(), out startDate);
-                DateTime endDate;
-                bool tryEnd = DateTime.TryParse(txtEndDate.Text.Trim(), out endDate);
-
-                DateTime? searchStart = null;
-                DateTime? searchEnd = null;
-
-                if (tryStart)
-                    searchStart = startDate;
-
-                if (tryEnd)
-                    searchEnd = endDate.AddDays(1);
-
-                var carts = hccCart.GetSalesReportCarts(searchStart.Value, searchEnd.Value);
-                 
-                try
-                {
-                    ReportViewer1.LocalReport.DataSources.Clear();                   
-                    
-                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/WebModules/Reports/SalesReport1.rdlc");
-                    ReportViewer1.LocalReport.SubreportProcessing +=
-                        new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
-                    
-                    Stream resourceStream = Assembly.GetCallingAssembly()
-                        .GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc");
-
-                    ReportViewer1.LocalReport.LoadSubreportDefinition("SalesReport2", resourceStream);
-
-                    ReportDataSource rds1 = new ReportDataSource("SalesReport1", carts);
-                    ReportViewer1.LocalReport.DataSources.Add(rds1);
-
-                    this.ReportViewer1.LocalReport.Refresh();
-                }
-                catch (Exception )
-                {
-                    throw;
-                }
-            }
-        }
-
-        void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
-        {
+            this.Page.Validate("MealOrderGroup");
+            if (!this.Page.IsValid)
+                return;
+            DateTime result1;
+            bool flag1 = DateTime.TryParse(this.txtStartDate.Text.Trim(), out result1);
+            DateTime result2;
+            bool flag2 = DateTime.TryParse(this.txtEndDate.Text.Trim(), out result2);
+            DateTime? nullable1 = new DateTime?();
+            DateTime? nullable2 = new DateTime?();
+            if (flag1)
+                nullable1 = new DateTime?(result1);
+            if (flag2)
+                nullable2 = new DateTime?(result2.AddDays(1.0));
+            List<hcc_SalesReportCarts_Result> salesReportCarts = hccCart.GetSalesReportCarts(nullable1.Value, nullable2.Value);
             try
             {
-                int cartId = int.Parse(e.Parameters[0].Values[0]);
-
-                var items = hccCartItem.GetTaxable(cartId);
-
-                e.DataSources.Add(new ReportDataSource("SalesReport2", items));
+                ReportViewer1.LocalReport.DataSources.Clear();
+                this.ReportViewer1.LocalReport.ReportPath = this.Server.MapPath("~/WebModules/Reports/SalesReport1.rdlc");
+                this.ReportViewer1.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(this.LocalReport_SubreportProcessing);
+                this.ReportViewer1.LocalReport.LoadSubreportDefinition("SalesReport2", Assembly.GetCallingAssembly().GetManifestResourceStream("HealthyChef.WebModules.Reports.SalesReport2.rdlc"));
+                this.ReportViewer1.LocalReport.DataSources.Add(new ReportDataSource("SalesReport1", (IEnumerable)salesReportCarts));
+                this.ReportViewer1.LocalReport.Refresh();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
+
+        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            try
+            {
+                List<hcc_SalesReportCartItems_Result> taxable = hccCartItem.GetTaxable(int.Parse(e.Parameters[0].Values[0]));
+                e.DataSources.Add(new ReportDataSource("SalesReport2", (IEnumerable)taxable));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

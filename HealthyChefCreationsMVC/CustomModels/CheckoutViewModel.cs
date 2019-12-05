@@ -115,57 +115,54 @@ namespace HealthyChefCreationsMVC.CustomModels
 
             this.profCart = new List<ProfileCart>();
             //populate profcarts
-            if (this.cartItems != null)
+
+            if (cartItems != null && cartItems.Count > 0)
             {
-                if (cartItems.Count > 0)
+                List<hccProductionCalendar> pc = new List<hccProductionCalendar>();
+
+                foreach (hccCartItem cartItem in cartItems)
                 {
-                    List<hccProductionCalendar> pc = new List<hccProductionCalendar>();
+                    ProfileCart profCart;
+                    int shippingAddressId;
 
-                    foreach (hccCartItem cartItem in cartItems)
+                    if (cartItem.IsMealSide)
+                        continue;
+
+                    if (!pc.Exists(a => a.DeliveryDate == cartItem.DeliveryDate))
+                        pc.Add(hccProductionCalendar.GetBy(cartItem.DeliveryDate));
+
+                    hccProductionCalendar cpc = pc.SingleOrDefault(a => a.DeliveryDate == cartItem.DeliveryDate);
+
+                    if (cpc != null && (cpc.OrderCutOffDate.AddDays(1) >= DateTime.Now || (HttpContext.Current.Request.Url.OriginalString.Contains("Admin"))))
                     {
-                        ProfileCart profCart;
-                        int shippingAddressId;
-
-                        if (cartItem.IsMealSide)
-                            continue;
-
-                        if (!pc.Exists(a => a.DeliveryDate == cartItem.DeliveryDate))
-                            pc.Add(hccProductionCalendar.GetBy(cartItem.DeliveryDate));
-
-                        hccProductionCalendar cpc = pc.SingleOrDefault(a => a.DeliveryDate == cartItem.DeliveryDate);
-
-                        if (cpc != null && (cpc.OrderCutOffDate.AddDays(1) >= DateTime.Now || (HttpContext.Current.Request.Url.OriginalString.Contains("Admin"))))
+                        if (cartItem.UserProfile != null && (cartItem.UserProfile.UseParentShipping || cartItem.UserProfile.ShippingAddressID.HasValue))
                         {
-                            if (cartItem.UserProfile != null && (cartItem.UserProfile.UseParentShipping || cartItem.UserProfile.ShippingAddressID.HasValue))
-                            {
-                                if (cartItem.UserProfile.UseParentShipping)
-                                    shippingAddressId = parentProfile.ShippingAddressID.Value;
-                                else
-                                    shippingAddressId = cartItem.UserProfile.ShippingAddressID.Value;
-
-                                profCart = this.profCart
-                                    .SingleOrDefault(a => a.ShippingAddressId == shippingAddressId && a.DeliveryDate == cartItem.DeliveryDate);
-                            }
+                            if (cartItem.UserProfile.UseParentShipping)
+                                shippingAddressId = parentProfile.ShippingAddressID.Value;
                             else
-                            {
-                                profCart = this.profCart
-                               .SingleOrDefault(a => a.ShippingAddressId == 0
-                                   && a.DeliveryDate == cartItem.DeliveryDate);
+                                shippingAddressId = cartItem.UserProfile.ShippingAddressID.Value;
 
-                                shippingAddressId = 0;
-                            }
+                            profCart = this.profCart
+                                .SingleOrDefault(a => a.ShippingAddressId == shippingAddressId && a.DeliveryDate == cartItem.DeliveryDate);
+                        }
+                        else
+                        {
+                            profCart = this.profCart
+                           .SingleOrDefault(a => a.ShippingAddressId == 0
+                               && a.DeliveryDate == cartItem.DeliveryDate);
 
-                            if (profCart == null)
-                            {
-                                profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
-                                this.profCart.Add(profCart);
-                            }
-                            profCart.CartItems.Add(cartItem);
-                            CurrentCart.CalculateTotals(this.profCart);
+                            shippingAddressId = 0;
                         }
 
+                        if (profCart == null)
+                        {
+                            profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
+                            this.profCart.Add(profCart);
+                        }
+                        profCart.CartItems.Add(cartItem);
                     }
-                } 
+                }
+                CurrentCart.CalculateTotals(this.profCart);
             }
 
         }
