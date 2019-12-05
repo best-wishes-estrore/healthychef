@@ -1,0 +1,342 @@
+﻿<style>
+    .checkbox {
+  padding-left: 20px;
+}
+.checkbox label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-left: 5px;
+}
+.checkbox label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background-color: transparent;
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.checkbox label::after {
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: 0;
+  margin-left: -20px;
+  padding-left: 3px;
+  padding-top: 2px;
+  font-size: 11px;
+  color: #555555;
+}
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
+  opacity: 0;
+  z-index: 1;
+}
+
+.checkbox input[type="checkbox"]:checked + label::after,
+.checkbox input[type="radio"]:checked + label::after {
+  font-family: "FontAwesome";
+  content: "\f00c";
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::before,
+.checkbox-primary input[type="radio"]:checked + label::before {
+  background-color: transparent;
+  border-color: white;
+}
+.checkbox-primary input[type="checkbox"]:checked + label::after,
+.checkbox-primary input[type="radio"]:checked + label::after {
+  color: #fff;
+}
+</style>
+<section class="banner_part">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 col-xl-6">
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <h1 class="hidden-xs" style="margin-top:0px !important;">
+                            Your <br />
+                            Personal <br />
+                            <span style="color:#31E12B;">Chef</span>
+                        </h1>
+                        <h1 class="visible-xs" style="font-family: 'Roboto black', sans-serif !important;">Your  Personal  <span style="color:#31E12B;">Chef</span></h1>
+                        <p style="background:#edf0df;padding:10px;display:table;font-size:16px;font-weight:bold;" class="mobslidep">Healthy Meals, Made To Order</p>
+                        <p>
+                            Made from scratch, to your specific preferences.
+                            <br /> Try our Weight Loss plans, or order a la carte from Our Menu.
+                        </p>
+                        <div class="slidebutton"><a href="/everydaymealplans.aspx" class="btn_1 plans madeheading" style="margin-right:3px;font-weight:bold;">See Our Specialized Plans </a><a href="#" class="btn_1 ormenu madeheading" style="font-weight:bold;">Orders From The Menu </a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</p>
+<div class="container-fluid madeorder ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-right"><img src="Content/Images/home/chef.png" class="img-responsive hidden-xs" style="height:423px;margin:0 auto;" alt="" /></div>
+            <div class="col-md-4 hidden-xs" style="margin-top:50px;">
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-6 col-xs-6 text-center">
+                        <div class="emptybox text-center" style="border:2px solid #4D4D4D;border-radius:5px;padding:10px;">
+                            <img src="Content/Images/home/gulten.png" class="img-responsive" style="margin:0 auto;" alt="" />
+                            <h5 class="madeheading" style="color:white;">Gluten Free?</h5>
+                            <!-- <input type="checkbox" value="" checked="" style="width: 20px;height: 20px;" />-->
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox2" class="styled" type="checkbox" checked>
+                                <label for="checkbox2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 text-center">
+                        <div class="emptybox text-center" style="border:2px solid #4D4D4D;border-radius:5px;background:#011500;padding:10px;">
+                            <img src="Content/Images/home/lowcard.png" class="img-responsive" style="margin:0 auto;" alt="" />
+                            <h5 class="madeheading" style="color:white;">Low Card?</h5>
+                            <!-- <input type="checkbox" value="" style="width: 20px;height: 20px;" />-->
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox2" class="styled" type="checkbox">
+                                <label for="checkbox2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-6 text-center">
+                        <div class="emptybox text-center" style="border:2px solid #4D4D4D;border-radius:5px;background:#011500;padding:10px;">
+                            <img src="Content/Images/home/veg.png" class="img-responsive" style="margin:0 auto;" alt="" />
+                            <h5 class="madeheading" style="color:white;">Vegetarian?</h5>
+                            <!-- <input type="checkbox" value="" style="width: 20px;height: 20px;" />-->
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox2" class="styled" type="checkbox">
+                                <label for="checkbox2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 text-center">
+                        <div class="emptybox text-center" style="border:2px solid #4D4D4D;border-radius:5px;padding:10px;">
+                            <img src="Content/Images/home/calerioes.png" class="img-responsive" style="margin:0 auto;" alt="" />
+                            <h5 class="madeheading" style="color:white;">1500 Caleroies?</h5>
+                            <!--  <input type="checkbox" value="" style="width: 20px;height: 20px;" />-->
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox2" class="styled" type="checkbox">
+                                <label for="checkbox2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="text" style="color:white;" class="madeheading">Custom:</label>
+                    <input type="text" class="form-control" id="text" style="background:none;border:1px solid #4d4d4d;border-radius:5px;color:#fff;" />
+                </div>
+            </div>
+            <div class="col-md-4 mobilecolorder" style="margin-top: 29px;">
+                <img src="Content/Images/home/madeordercheck.png" class="img-resposnice" alt="" />
+                <h1 style="font-size:55px;font-weight:800;margin-top:0px !important;font-family: 'Roboto black', sans-serif !important;" class="hidden-xs">
+                    <span style="color:white;">Made to</span> <br />
+                    <span style="color:#31E12B;">Order </span>
+                </h1>
+                <h1 style="font-size:55px;font-weight:800;font-family: 'Roboto black', sans-serif !important;" class="visible-xs madetotitile"><span style="color:white;">Made to</span>  <span style="color:#31E12B;">Order </span></h1>
+                <a href="tel:18665752433" class="btn btn-success" style="border-radius:50px;font-size:18px;border-radius:50px;font-family: 'Playfair Display', serif;"> <span class="fa fa-phone phoneicon" style="color:#31E12B;background:#10710D;border-radius:50%;padding:10px;"></span>  Call Your Personal Assistant</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid percent " style="padding:100px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-right">
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <h1 style="color:#31E12B;margin-top:0px !important;font-size:55px;font-weight:800;font-family: 'Roboto black', sans-serif !important;" class="hidden-xs">
+                            100% <br />
+                            <span style="color:#276f22;">
+                                Natural <br />
+                                Ingredients
+                            </span>
+                        </h1>
+                        <h1 style="color:#31E12B;font-size:42px;font-weight:800;text-align:center;font-family: 'Roboto black', sans-serif !important;" class="visible-xs">100% <span style="color:#276f22;"> Natural Ingredients </span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="Content/Images/home/organic.png" class="img-responsive orgimage" style="height:100px;padding-left:50px;margin-bottom:5px;" alt="" />
+                <p class="madeheading" id="iconstick"><!--<img src="/Content/Images/home/tick.png" class="img-responsive" style="float: left;margin-right: 10px;" alt="" />--><i class="fa fa-2x fa-check-circle" style="color:#32e12b;"></i><span>Organic Fruits and Vegetables </span></p>
+                <p class="madeheading" id="iconstick"><i class="fa fa-2x fa-check-circle" style="color:#32e12b;"></i><span>Free Range and Wild Caught Proteins </span></p>
+                <p class="madeheading" id="iconstick"><i class="fa fa-2x fa-check-circle" style="color:#32e12b;"></i><span>No Artificial Additives</span></p>
+                <a href="/browse-menu.aspx" class="btn_1 madeheading" style="font-weight:bold;">See Our Menus </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin-bottom:50px;">
+    <div class="col-md-12 text-center">
+        <h2 style="margin:30px 0;color:#2e3122;font-weight:800;font-size:36px;font-family: 'Roboto black', sans-serif !important;">What The Experts Say</h2>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="carousel " data-ride="carousel" data-type="multi" data-interval="5000" id="myCarousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box" style="background:#fff;padding:25px;border:1px solid #ccc;height: 335px;max-height: 335px;text-align:left;color:#000;">
+                            <img src="/Content/Images/home/health.png" class="img-responsive" style="height:50px;" alt="" />
+                            <br />
+                            <h4 class="madeheading" style="font-weight:bold;">Health Magzine</h4>
+                            <p class="madeheading">Incredibly Tasty! We were impressed that lettuce, raw mushrooms, and shredded carrots in salads and wraps stayed fresh and crisp even after shipping.</p>
+                            <br />
+                            <br />
+                            <br />
+                            <a href="#" class="btn btn-default madeheading" style="border-color: #39aa35;border-radius:24px;color:#5cb812;padding: 10px 20px">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box" style="background:#fff;padding:25px;border:1px solid #ccc;height: 335px;max-height: 335px;text-align:left;color:#000;">
+                            <img src="/Content/Images/home/food.png" class="img-responsive" style="height:50px;" alt="" />
+                            <br />
+                            <h4 class="madeheading" style="font-weight:bold;">Food Network</h4>
+                            <p class="madeheading">[Healthy Chef Creations'] high standards of quality and purity of ingredients are what [their] customers love</p>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                           
+                            <a href="#" class="btn btn-default madeheading" style="border-color: #39aa35;border-radius:24px;color:#5cb812;padding: 10px 20px">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box" style="background:#fff;padding:25px;border:1px solid #ccc;height: 335px;max-height: 335px;text-align:left;color:#000;">
+                            <img src="Content/Images/home/real.png" class="img-responsive" style="height:50px;" alt="" />
+                            <br />
+                            <h4 class="madeheading" style="font-weight:bold;">Real Age</h4>
+                            <p class="madeheading">Can't cook? Can't even boil water? Never fear. Healthy Chef Creations are here. Organic gourmet meals &ndash; delivered. Whether you need a special diet or just gotta eat,</p>
+                            <br />
+                            <br />
+                            <a href="#" class="btn btn-default madeheading" style="border-color: #39aa35;border-radius:24px;color:#5cb812;padding: 10px 20px">Read More <i class="fa fa-caret-right" aria-hidden="true"></i>   </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-menu-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-menu-right"></span></a>
+
+        <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>-->
+    </div>
+</div>
+<div class="container-fluid test mobiletest">
+    <div class="col-md-12 text-center">
+        <i class="fa fa-quote-left fa-2x" aria-hidden="true" style="color:#fff;background:#39aa35;padding: 20px;
+    border-radius: 50px;"></i>
+    </div>
+    <div class="col-md-8 col-md-offset-2" style="margin-top:20px;">
+        <div class="carousel " data-ride="carousel" data-type="multi" data-interval="5000" id="myCarousel1">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="col-md-4 text-center">
+                        <p>
+
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+
+                        </p>
+                        <p style="margin-top:20px;" class="madeheading">The meals are tasty and great.Every day is a flavor experience No regrets</p>
+                        <br>
+
+                        <img src="Content/Images/home/sig1.png" class="img-resposnive" style="margin:0 auto;" alt="" />
+                        <p style="margin-top:20px;" class="madeheading">Healthy mommy plan in Fl</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-4 text-center">
+                        <p>
+
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+
+                        </p>
+                        <p style="margin-top:20px;" class="madeheading">
+                            I can&rsquo;t tell you enough how much I love the food
+                            so far! SO excited about this program and belive me.I've tried tons of them.
+                        </p>
+                        <img src="Content/Images/home/sig2.png" class="img-resposnive" style="margin:0 auto;" alt="" />
+                        <p style="margin-top:20px;" class="madeheading">Low carb diet in TN</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="col-md-4 text-center">
+                        <p>
+
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+                            <span><i class="text-warning fa fa-star"></i></span>
+
+                        </p>
+                        <p style="margin-top:20px;" class="madeheading">
+                            This is the 3rd or 4th food service I&rsquo;ve used over
+                            the years and I have to say that the food is far and away the best I've had.
+                        </p>
+                        <img src="Content/Images/home/sig3.png" class="img-resposnive" style="margin:0 auto;" alt="" />
+                        <p style="margin-top:20px;" class="madeheading">A la carte meals in DC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control visible-xs" href="#myCarousel1" data-slide="prev"><span class="glyphicon glyphicon-menu-left mleft"></span></a>
+        <a class="right carousel-control visible-xs" href="#myCarousel1" data-slide="next"><span class="glyphicon glyphicon-menu-right mright"></span></a>
+
+        <!-- <a class="left carousel-control visible-xs" href="#myCarousel1" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+     <a class="right carousel-control visible-xs" href="#myCarousel1" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>-->
+    </div>
+</div>
+
+<script>
+    $('.carousel[data-type="multi"] .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i = 0; i < 1; i++) {
+            next = next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>

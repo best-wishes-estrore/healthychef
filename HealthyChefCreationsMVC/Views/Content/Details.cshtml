@@ -8,7 +8,7 @@
 }
 <div id="snackbar" style="display:none">Giftcertificate is Added To Cart </div>
 <div id="main">
-<div class="content_tab">
+<div class="content_tab ">
     @if (!string.IsNullOrEmpty(Model.RightTopBox))
     {
         <div class="post content_view">
@@ -160,29 +160,33 @@
     }
     else
     {
-        <div class="post p-gap">
-            @*col-md-12*@
-            <div class="full-page-header">
-                <div class="alignleft">
-                    @if (!string.IsNullOrEmpty(Model.HeaderImage))
-                    {
-                        <div class="heading-image1">
-                            @Html.Raw(Model.HeaderImage)
-                        </div>
-                    }
+<div class="post p-gap ">
+    @*col-md-12*@
+    <div class="full-page-header container ">
+        <div class="alignleft ">
+            @if (!string.IsNullOrEmpty(Model.HeaderImage))
+            {
+                <div class="heading-image1 ">
+                    @Html.Raw(Model.HeaderImage)
                 </div>
-                @if (!string.IsNullOrEmpty(Model.HeaderText))
-                {
-                    <div class="info">
-                        @Html.Raw(Model.HeaderText)
-                    </div>
-                }
-
-            </div>
-            <div class="content_col">
-                @Html.Raw(Model.Body)
-            </div>
+            }
         </div>
+        @if (!string.IsNullOrEmpty(Model.HeaderText))
+        {
+            <div class="info ">
+                @Html.Raw(Model.HeaderText)
+            </div>
+           
+
+        }
+
+    </div>
+   <div class="content_col ">
+       
+           @Html.Raw(Model.Body)
+       
+    </div>
+</div>
     }
 
 </div>

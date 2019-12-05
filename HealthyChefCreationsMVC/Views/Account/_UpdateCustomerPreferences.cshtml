@@ -32,7 +32,7 @@
                                     {
                                         checkedStr = @p.IsSelected ? "checked" : string.Empty;
                                         <td>
-                                            <input id="pref_@p.PreferenceID" type="checkbox" class="alertmessage" name="PreferencesSelected" value="@p.PreferenceID" @checkedStr>
+                                            <input id="pref_@p.PreferenceID" type="checkbox" class="alertmessage" disabled="disabled" name="PreferencesSelected" value="@p.PreferenceID" @checkedStr>
                                             <label for="pref_@p.PreferenceID" class="push" style="text-align: left;">@p.Name</label>
                                         </td>
                                     }
@@ -44,7 +44,7 @@
             </div>
             <div class="fieldRow">
                 <div class="fieldCol">
-                    <input type="submit" name="" value="Save" id="" class="btn btn-green">@*pixels-button-user pixels-button-solid-green-user*@
+                    <input type="submit" name="" value="Save" id="" class="btn btn-green hide">@*pixels-button-user pixels-button-solid-green-user*@
                 </div>
             </div>
             <div class="fieldRow">

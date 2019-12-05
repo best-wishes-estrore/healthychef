@@ -39,18 +39,18 @@
                                 <div id="menuitemsid">
                                     <table class="menuitemadd">
                                         <tr>
-                                            <td align="left" width="60%">
+                                            <td align="left" width="50%">
                                                 <table class="menuitemadd">
                                                     <tr>
                                                         <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <span>QTY:</span>
                                                             <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity">
                                                         </td>
                                                     </tr>
                                                 </table>
                                             </td>
-                                            <td align="right" width="40%">
+                                            <td align="right" width="50%">
                                                 <table class="menuitemadd">
                                                     <tr>
                                                         <td>
@@ -68,7 +68,7 @@
                                                                 </div>
                                                             }
                                                         </td>
-                                                        <td>
+                                                        <td class="text-right">
                                                             <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
@@ -137,8 +137,8 @@
                                                                     }
                                                                 </div>
                                                             }
-                                                        </td>
-                                                        <td><a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                        </td >
+                                                        <td class="text-right"><a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -194,19 +194,21 @@
                                                         <td>
                                                             @if (cartitem.ItemTypeID == 1)
                                                             {
-                                                                <div class="pull-left cart_check" style="padding:5px 10px">
+                                                                <div class="cart_check" >
                                                                     @if (cartitem.Quantity >= 2)
                                                                     {
-                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;" />
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0;" />
                                                                     }
                                                                     else
                                                                     {
                                                                         <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
                                                                     }
                                                                 </div>
+
+                                                               
                                                             }
                                                         </td>
-                                                        <td>
+                                                        <td class="text-right">
                                                             <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
@@ -266,7 +268,7 @@
                                                         <td>
                                                             @if (cartitem.ItemTypeID == 1)
                                                             {
-                                                                <div class="pull-left cart_check" style="padding:5px 10px">
+                                                                <div class="cart_check" style="padding:5px 10px">
                                                                     @if (cartitem.Quantity >= 2)
                                                                     {
                                                                         <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;" />
@@ -278,7 +280,7 @@
                                                                 </div>
                                                             }
                                                         </td>
-                                                        <td>
+                                                        <td class="text-right">
                                                             <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>

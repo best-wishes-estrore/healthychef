@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     @*<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/home.css" rel="stylesheet" />
+    <link href="~/Content/mobilestyle.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/HealthyChefStyles")
@@ -15,7 +17,9 @@
     @Scripts.Render("~/bundles/HealthyChefScripts")
     @Scripts.Render("~/bundles/bootstrap")
 
-    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab&display=swap" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />-->
     <meta name="msvalidate.01" content="36EB1A194C116E88B600C9EB1A332622" />
     <asp:ContentPlaceHolder runat="server" ID="masterHeader"></asp:ContentPlaceHolder>
     @*<meta name="google-site-verification" content="pEdaIoVNdrxoDXJowruYbab9hy2qMQxLxb2gJJKLaJE" />*@
@@ -65,11 +69,12 @@
 
         <div class="page_gap">
             <div class="desktop_view">
-                @if (Request.Browser.IsMobileDevice)
+                @*@if (Request.Browser.IsMobileDevice)
                 {
                     Html.RenderAction("MobileHeaderSection", "Common");
                 }
-                else if (Request.Browser["ScreenPixelsWidth"] == "768")
+                else*@ 
+                @if (Request.Browser["ScreenPixelsWidth"] == "768")
                 {
                     Html.RenderAction("TopHeaderSection", "Common");
                     Html.RenderAction("HeaderSection", "Common");

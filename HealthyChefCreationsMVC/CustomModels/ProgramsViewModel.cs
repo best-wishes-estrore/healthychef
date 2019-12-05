@@ -279,6 +279,10 @@ namespace HealthyChefCreationsMVC.CustomModels
             {
                 cal = hccProductionCalendar.GetById(CurrentCalendarId);
                 menu = cal.GetMenu();
+                if(menu == null)
+                {
+                    throw new Exception("There is no menu associated with the given Calender date, please choose another date.");
+                }
                 hccDefMenuItems = hccMenuItem.GetByMenuId(menu.MenuID);
             }
 
@@ -292,7 +296,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                     hccMenuItems = hccMenuItems.Concat(menuItems).ToList();
                 });
             }
-            return hccMenuItems;
+            return hccMenuItems.Distinct().ToList();
         }
 
         public static string GetImageUrlwithBase(string _imageUrl)

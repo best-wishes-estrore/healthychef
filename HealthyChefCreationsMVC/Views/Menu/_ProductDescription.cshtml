@@ -28,7 +28,7 @@
 
                     </div>
                 </div>
-                <div id="MealDetailsContainer">
+                <div id="MealDetailsContainer" style="margin-top:90px;">
                     <div class="loading-text" id="divLoader" style="display:none">
                         <h1>
                             Adding
@@ -46,12 +46,12 @@
                         <div class="col-md-7">
                             <div class="main-description newbutton">
                                 <h2 class="col-md-7"><span class="food-title">@m.meal.Name</span></h2>
-                                <a class="page-button-submit col-md-5 btn-orange" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
+                                <a class="page-button-submit col-md-5 btn-orange hidden-xs" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
                             </div>
                             <!-- <div class="clearfix"></div> -->
                             <div class="ptb-10">@m.meal.Description</div>
                             <p class=""><em>Allergens: @m.AllergenList</em></p>
-                            <a class="page-button-submit col-md-5 btn-mobile btn-orange" style="padding: 10px;display:none" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
+                            <a class="page-button-submit col-md-5 btn-mobile btn-orange visible-xs" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
 
                             @if (Model.isActive)
                             {
@@ -65,12 +65,13 @@
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
+                                        <br /><br /><br />
                                         <strike style="margin-right:10px" class="strike"><span class="plan-price-text right-align" style="display:none" id="OriginalPriceStrike1_@m.meal.MenuItemID">@m.Price</span></strike><span class="plan-price-text right-align" id="originalprice1_@m.meal.MenuItemID">@m.Price</span><span class="plan-price-text right-align" style="display:none" id="discountedprice1_@m.meal.MenuItemID">@m.DiscountedMockPrice</span><span class="Qty_price"> | QTY:</span>
                                         <input type="number" id="Quantity1_@m.meal.MenuItemID" class="Quantitymenu" onkeydown="return checkShortcut();" onchange="validateQuantity1(@m.meal.MenuItemID)" name="Quantity1" value="1" min="1" />
                                         <br>
                                         <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;">
                                             <span>Family Style requires 2 or more servings.</span>
-                                            <br />
+                                           
                                         </div>
                                         @if (m.mealSizes.Count == 1)
                                         {
@@ -153,7 +154,7 @@
                                                                     @foreach (var ms in m.mealSizes)
                                                                     {
                                                                         <tr class="bg-lime-light">
-                                                                            <td class="left-box" style="width:100%;display: inline-block;">
+                                                                            <td class="left-box" style="width:auto !important;display: inline-block;">
                                                                                 <span class="meal-size" data-price="@ms.Price"><input id="radiocosts_@m.meal.MenuItemID" type="radio" name="sizeId" onchange="adjustRadioValues1(@ms.Price,@m.meal.MenuItemID);" value="@ms.SizeId"></span>
                                                                             </td>
                                                                             <td class="middle-box">
@@ -188,7 +189,7 @@
                                                                     @foreach (var pref in m.prefsList)
                                                                     {
                                                                         <tr>
-                                                                            <td class="left-box" style="width:100%;display: inline-block;">
+                                                                            <td class="left-box" style="width:auto !important;display: inline-block;">
                                                                                 <span class="meal-prefs" data-price="@pref.Preference.Cost"><input id="" type="checkbox" name="prefIds" value="@pref.PreferenceID"></span>
                                                                             </td>
                                                                             <td class="middle-box">
@@ -392,20 +393,21 @@
     }
 
     .newbutton .page-button-submit {
-        width: auto;
+        width: auto !important;
         line-height: 10px;
     }
     <!-- .allergenem { -->
         <!-- float: left; -->
         <!--
     }
-    -->
-    <!-- .ptb-10 { -->
-        <!-- float: left; -->
-        <!-- width: 100%; -->
-        <!--
+   
+    .ptb-10 {
+      /*  float: left; */
+         width: 100%; 
+         display:table;
+       
     }
-    -->
+  
     .color-lightgreen {
         color: #39aa35;
         text-align: left;
