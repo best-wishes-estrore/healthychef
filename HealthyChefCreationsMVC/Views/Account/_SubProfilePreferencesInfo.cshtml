@@ -2,7 +2,7 @@
 @{
     int pindex = 0;
     string checkedStr = string.Empty;
-
+    //var display = @Model.DisplaytoUser.ToString();
 }
 <style>
     .checkbox_1 td {
@@ -18,14 +18,14 @@
             @Html.HiddenFor(m => m.ProfileId)
             <div class="fieldRow">
                 <div class="fieldCol p-20">
-                    <p>Account Preferences shall be applied to all Meal Program orders only. A La Carte meals may be individually customized at checkout.</p>
+                    <p>Account Preferences shall be applied to Custom Meal Programs only.</p>
                     <p class="p-20">
                         @*NOTE: Changes made to food preferences and allergen information in profiles will be applied to future purchases and also to future
         delivery weeks for existing orders, but may not be reflected in your upcoming current delivery week.
         Changes made after a weekly order deadline (i.e., Thursday night) will not be reflected in that week's deliveries.*@
-                        NOTE: Changes made to food preferences in profiles will be applied to future purchases and also to future
-                        delivery weeks for existing orders, but may not be reflected in your upcoming current delivery week.
-                        Changes made after a weekly order deadline (i.e., Thursday night) will not be reflected in that week's deliveries
+                        NOTE: Changes to your Custom Meal Program preferences can be made by calling our customer service center.
+                        If changes are not made by the ordering deadline, they may not be reflected in your next delivery.
+                        Please review with your customer service rep for details.
                     </p>
                     <table id="" class="checkbox_1" border="0" width="100%">
                         <tbody>
@@ -35,7 +35,7 @@
                                     {
                                         checkedStr = @p.IsSelected ? "checked" : string.Empty;
                                         <td>
-                                            <input id="pref_@p.PreferenceID" type="checkbox" name="PreferencesSelected" value="@p.PreferenceID" @checkedStr>
+                                            <input id="pref_@p.PreferenceID" type="checkbox" disabled="disabled" name="PreferencesSelected" value="@p.PreferenceID" @checkedStr>
                                             <label for="pref_@p.PreferenceID" class="push" style="text-align: left;">@p.Name</label>
                                         </td>
                                     }
@@ -47,7 +47,7 @@
             </div>
             <div class="fieldRow">
                 <div class="fieldCol">
-                    <input type="submit" name="" value="Save" id="" class="btn btn-green">@*pixels-button-user pixels-button-solid-green-user*@
+                    <input type="submit"style="display:none" name="" value="Save" id="" class="btn btn-green">@*pixels-button-user pixels-button-solid-green-user*@
                 </div>
             </div>
             <div class="fieldRow">
@@ -89,4 +89,5 @@
             });
         }
     });
+  
 </script>

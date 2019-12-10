@@ -6,11 +6,11 @@
     <asp:Panel ID="pnlPrefs" runat="server" DefaultButton="btnSave">
         <div class="fieldRow">
             <div class="fieldCol">
-                <p>Account Preferences shall be applied to all Meal Program orders only. A La Carte meals may be individually customized at checkout.</p>
+                <p>Account Preferences shall be applied to Custom Meal Programs only.</p>
                 <p>
-                    NOTE: Changes made to food preferences and allergen information in profiles will be applied to future purchases and also to future
-                 delivery weeks for existing orders, but may not be reflected in your upcoming current delivery week.
-                 Changes made after a weekly order deadline (i.e., Thursday night) will not be reflected in that week's deliveries.
+                   NOTE: Changes to your Custom Meal Program preferences can be made by calling our customer service center.
+                    If changes are not made by the ordering deadline, they may not be reflected in your next delivery. 
+                    Please review with your customer service rep for details. 
                 </p>
                 <asp:CheckBoxList ID="cblPreferences" runat="server" RepeatColumns="5" RepeatLayout="Table" CssClass="checkbox_1" />
             </div>

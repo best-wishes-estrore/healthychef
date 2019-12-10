@@ -416,7 +416,7 @@ namespace HealthyChefCreationsMVC.CustomModels
         public List<CustomerPreferenceItem> AllPreferences { get; set; }
 
         public int[] PreferencesSelected { get; set; }
-
+        public bool DisplaytoUser { set; get; }
         public string NotesTitle { set; get; }
         public string DisplayNote { set; get; }
 
@@ -462,6 +462,10 @@ namespace HealthyChefCreationsMVC.CustomModels
                 if (notes.Count > 0)
                 {
                     //pnlNotesDisplay.Visible = true;
+                    if(notes.ToList().Where(x=>x.DisplayToUser==true).ToList().Count > 0)
+                    {
+                        DisplaytoUser = true;
+                    }
                     NotesTitle = HealthyChef.Common.Enums.GetEnumDescription(CurrentNoteType) + "(s)";
                     DisplayNote = notes.Select(a => a.Note).DefaultIfEmpty(string.Empty).Aggregate((a, b) => a + "; " + b);
                 }
@@ -890,7 +894,7 @@ namespace HealthyChefCreationsMVC.CustomModels
 
         public string UserID { get; set; }
         public int ProfileId { get; set; }
-
+        public bool DisplaytoUser { set; get; }
         public string NotesTitle { set; get; }
         public string DisplayNote { set; get; }
 
@@ -941,6 +945,10 @@ namespace HealthyChefCreationsMVC.CustomModels
 
                 if (notes.Count > 0)
                 {
+                    if (notes.ToList().Where(x => x.DisplayToUser == true).ToList().Count > 0)
+                    {
+                        DisplaytoUser = true;
+                    }
                     //pnlNotesDisplay.Visible = true;
                     NotesTitle = HealthyChef.Common.Enums.GetEnumDescription(CurrentNoteType) + "(s)";
                     DisplayNote = notes.Select(a => a.Note).DefaultIfEmpty(string.Empty).Aggregate((a, b) => a + "; " + b);

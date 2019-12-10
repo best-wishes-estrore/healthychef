@@ -57,18 +57,32 @@
                         color: black;
                         font-family: 'MyriadPro-BoldCond', arial, sans-serif;
                     }
+
                     .form-control {
                         width: 30%;
                         padding: 5px 5px;
                     }
+
                     select {
                         line-height: 2 !important;
                     }
+
                     input[type=checkbox] {
                         float: left;
                         display: block;
                     }
+
                     .form-region .form-edit {
+                        display: none;
+                    }
+                    /*#panel1 {
+                        display: block !important;
+                    }
+                    #panel4
+                    {
+                        display:none!important;
+                    }*/
+                    #ctl00_body_ctl00_li_link_05 {
                         display: none;
                     }
                 </style>
@@ -118,13 +132,21 @@
                     });
                 </script>
                 <input type="hidden" name="ctl00$body$ctl00$hdnLastTab" id="hdnLastTab" value="Account">
-
+               
                 <div id="tabsClient" class="m-nav ui-tabs ui-widget ui-widget-content ui-corner-all">
                     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
                         <li id="ctl00_body_ctl00_li_link_01" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="panel1" aria-labelledby="ui-id-1" aria-selected="true"><a href="#panel1" class="profTab ui-tabs-anchor active-meal" role="presentation" tabindex="-1" id="ui-id-1"><span>Account</span></a></li>
                         <li id="ctl00_body_ctl00_li_link_02" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel2" aria-labelledby="ui-id-2" aria-selected="false"><a href="#panel2" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2"><span>Shipping</span></a></li>
                         <li id="ctl00_body_ctl00_li_link_03" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel3" aria-labelledby="ui-id-3" aria-selected="false"><a href="#panel3" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3"><span>Billing</span></a></li>
-                        <li id="ctl00_body_ctl00_li_link_04" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel4" aria-labelledby="ui-id-4" aria-selected="false"><a href="#panel4" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4"><span>Preferences</span></a></li>
+                        @if (Model.CustomerPrefUpdateModel.DisplaytoUser == false)
+                        {
+                            @*<li id="ctl00_body_ctl00_li_link_04" style="display:none;" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel4" aria-labelledby="ui-id-4" aria-selected="false"><a href="#panel4" class="profTab ui-tabs-anchor" role="presentation"  style="display:none;"tabindex="-1" id="ui-id-4"><span>Preferences</span></a></li>*@
+                        }
+                        else
+                        {
+                            <li id="ctl00_body_ctl00_li_link_04" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel4" aria-labelledby="ui-id-4" aria-selected="false" ><a href="#panel4" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4"><span>Preferences</span></a></li>
+                        }
+
                         <li id="ctl00_body_ctl00_li_link_05" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel5" aria-labelledby="ui-id-5" aria-selected="false"><a href="#panel5" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-5"><span>Allergens</span></a></li>
                         <li id="ctl00_body_ctl00_li_link_06" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel6" aria-labelledby="ui-id-6" aria-selected="false"><a href="#panel6" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-6"><span>Sub-Profiles</span></a></li>
                         <li id="ctl00_body_ctl00_li_link_07" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="panel7" aria-labelledby="ui-id-7" aria-selected="false"><a href="#panel7" class="profTab ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-7"><span>Orders</span></a></li>
@@ -134,7 +156,7 @@
                     <div id="panel1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
 
                         @{
-                            Html.RenderPartial("~/Views/Account/_UpdateBasicInfo.cshtml",Model.CustomerBasicInfoModel);
+                            Html.RenderPartial("~/Views/Account/_UpdateBasicInfo.cshtml", Model.CustomerBasicInfoModel);
                         }
 
                     </div>
@@ -156,8 +178,7 @@
                     <div id="panel4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
                         @{
                             Html.RenderPartial("~/Views/Account/_UpdateCustomerPreferences.cshtml", Model.CustomerPrefUpdateModel);
-                        } 
-                        
+                        }
                     </div>
                     <div id="panel5" aria-labelledby="ui-id-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
                         @{
@@ -174,20 +195,20 @@
                     <div id="panel7" aria-labelledby="ui-id-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
                         @{
                             Html.RenderPartial("~/Views/Account/_CustomerOrderInfo.cshtml", Model.CustomerOrderInfoModel);
-                        }                       
+                        }
 
                     </div>
                     <div id="panel9" aria-labelledby="ui-id-9" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
                         @{
                             Html.RenderPartial("~/Views/Account/_CustomerRecurringOrderInfo.cshtml", Model.CustomerRecurringOrderInfoModel);
-                        }                        
+                        }
 
                     </div>
                     <div id="panel8" aria-labelledby="ui-id-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
 
                         @{
                             Html.RenderPartial("~/Views/Account/_UpdateCustomerPassword.cshtml", Model.CustomerUpdatePasswordModel);
-                        }                       
+                        }
 
                     </div>
                 </div>

@@ -27,7 +27,7 @@
         }
     }
 </script>
-<div class="col-md-12">
+<div class="">
     <div id="divLoader" style="display:none;"> <img src="~/Content/Images/ajax-loading.gif" alt="Loader" /> </div>
     <div class="container">
         <div id="" class="mycart-page table_row cart_bg">
@@ -660,8 +660,8 @@
                                                                 else
                                                                 {
 
-                                                                    <input name="CalZipCode" type="text" id="txtCalZipCode" style="width: 120px;" onkeypress="return isNumeric(event)" maxlength=5>
-                                                                    <input type="button" name="SearchZipCode" value="Calculate" id="btnSearchZipCode" onclick="CalculateShipping();">
+                                                                    <input name="CalZipCode" type="text" id="txtCalZipCode" style="width: 89px;" onkeypress="return isNumeric(event)" maxlength=5>
+                                                                    <input type="button" name="SearchZipCode" value="Calculate" id="btnSearchZipCode" onclick="CalculateShipping();" style="margin-top:0px !important;margin-left:5px;">
                                                                 }
                                                             </td>
                                                             <td>
@@ -686,7 +686,7 @@
                                                         </tr>
                                                         <tr id="">
                                                             <td>
-                                                                Est. Sales Tax:
+                                                                Sales Tax:
                                                             </td>
                                                             <td>
                                                                 @if (Model.profCart.Count > 0)
@@ -1274,8 +1274,9 @@ alert(response.d);
         }
     }
 
-    function ApplyCouponCode() {
-        debugger;
+function ApplyCouponCode() {
+debugger;
+$("#divLoader").css('display', '');
 var CouponCode = $('#CouponCodeText').val();
 if (CouponCode === undefined || CouponCode === '') {
 alert('please enter the promo code');
@@ -1285,36 +1286,39 @@ $.ajax({
 type: "POST",
 /**/
 url: '@Url.Action("AddCouponCode", "Cart")',
-    /**/
-    data: '{CouponCode: "' + CouponCode + '"}',
-    //data: {
-    //    CouponCode: CouponCode
-       
-    //},
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function (res) {
-        debugger;
-        //alert(res);
-        $("#wrapper").html(res.responseText);
-        if (res.Message != "Coupon applied successfully") {
-            alert(res.Message);
-        }
-        if (res.Success === true) {
-             /**/
-             // window.location.href = '@Url.Action("Index", "Cart")';
-             /**/
+/**/
+data: '{CouponCode: "' + CouponCode + '"}',
+//data: {
+// CouponCode: CouponCode
+
+//},
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+success: function (res) {
+debugger;
+//alert(res);
+$("#wrapper").html(res.responseText);
+if (res.Message != "Coupon applied successfully") {
+alert(res.Message);
 }
-    },
-    error: function (error) {
-        debugger;
-        $("#wrapper").html(error.responseText);
-    },
+if (res.Success === true) {
+/**/
+// window.location.href = '@Url.Action("Index", "Cart")';
+/**/
+}
+$("#divLoader").css('display', 'none');
+},
+error: function (error) {
+debugger;
+$("#wrapper").html(error.responseText);
+$("#divLoader").css('display', 'none');
+},
 failure: function (response) {
 alert(response.d);
+$("#divLoader").css('display', 'none');
 }
 });
-    }
+}
 
     function DefaultApplyCouponCode() {
         var CouponCode = $('#DefaultCouponCodeText').val();
@@ -1331,10 +1335,10 @@ url: '@Url.Action("AddCouponCode", "Cart")',
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (res) {
-      //  alert(res.Message);
+        alert(res.Message);
         if (res.Success === true) {
              /**/
-             // window.location.href = '@Url.Action("Index", "Cart")';
+              window.location.href = '@Url.Action("Index", "Cart")';
              /**/
 }
 },

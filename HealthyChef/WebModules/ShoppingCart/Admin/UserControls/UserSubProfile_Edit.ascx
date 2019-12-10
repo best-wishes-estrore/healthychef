@@ -72,7 +72,7 @@
         <li runat="server" id="liAddresses"><a href="#tabsSub2" class="profSub">Basic Info</a></li>
         <li runat="server" id="liShipping"><a href="#tabsSub3" class="profSub">Shipping</a></li>
         <li runat="server" id="liPrefs"><a href="#tabsSub4" class="profSub">Preferences</a></li>
-        <li runat="server" id="liAllergens"><a href="#tabsSub5" class="profSub">Allergens</a></li>
+        <li runat="server" id="liAllergens" style="display:none;"><a href="#tabsSub5" class="profSub">Allergens</a></li>
     </ul>
     <div id="tabsSub2">
         <div class="fieldRow">

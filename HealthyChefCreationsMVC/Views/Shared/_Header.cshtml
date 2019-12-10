@@ -11,21 +11,21 @@
         $('.dropdown-toggle').dropdown();
 
         function toggleNavbarMethod() {
-            if ($(window).width() > 768) {
-                $('.navbar .dropdown').on('mouseover', function () {
-                    $('.dropdown-toggle', this).trigger('click');
-                }).on('mouseout', function () {
-                    $('.dropdown-toggle', this).trigger('click').blur();
-                });
-            }
-            else {
-                $('.navbar .dropdown').off('mouseover').off('mouseout');
-            }
+        if ($(window).width() > 768) {
+            $('.navbar .dropdown').on('mouseover', function(){
+                $('.dropdown-toggle', this).trigger('click'); 
+            }).on('mouseout', function(){
+                $('.dropdown-toggle', this).trigger('click').blur();
+            });
         }
+        else {
+            $('.navbar .dropdown').off('mouseover').off('mouseout');
+        }
+    }
 
-        // toggle navbar hover
+     // toggle navbar hover
         toggleNavbarMethod();
-
+        
         // bind resize event
         $(window).resize(toggleNavbarMethod);
     });
@@ -62,7 +62,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <div class="topbar hidden-xs" style="display: flow-root;">
-                    <ul class="nav navbar-nav navbar-right" style="position: relative; z-index: 99999;">
+                    <ul class="nav navbar-nav navbar-right" style="position: relative; z-index: 99999;margin-top:5px;">
                         <li class=""><a href="@Url.Action("Index","Contactus")"><i class="fa fa-envelope" aria-hidden="true" style="color:#39aa35;"></i> Email</a></li>
                         @if (!HttpContext.Current.User.Identity.IsAuthenticated)
                         {
@@ -83,44 +83,44 @@
                     {
                         foreach (var s in _sitemap)
                         {
-                            <li class="@(@s.HasChildNodes ? "dropdown" : "")">
-                                @{
-                                    var title = s.Title;
-                                    var href = s.Url.Replace("~/", "/");
-                                    var clickevent = "";
-                                    if (title == "Weight Loss Diets")
-                                    {
-                                        href = "/weight-loss-programs.aspx";
-                                        clickevent = "Getsubmenunavigationofweightloss()";
-                                    }
-                                    else if (title == "Everyday Meal Plans")
-                                    {
-                                        href = "/everydaymealplans.aspx";
-                                        clickevent = "Getsubmenunavigationofeverydaymealplans()";
-                                    }
+                    <li class="@(@s.HasChildNodes ? "dropdown" : "")">
+                        @{
+                            var title = s.Title;
+                            var href = s.Url.Replace("~/", "/");
+                            var clickevent = "";
+                            if (title == "Weight Loss Diets")
+                            {
+                                href = "/weight-loss-programs.aspx";
+                                clickevent = "Getsubmenunavigationofweightloss()";
+                            }
+                            else if (title == "Everyday Meal Plans")
+                            {
+                                href = "/everydaymealplans.aspx";
+                                clickevent = "Getsubmenunavigationofeverydaymealplans()";
+                            }
 
-                                    <a class="mainmenu" id="NavigationItem_@s.Key"
-                                       onclick="@clickevent" href="@href">
-                                        @title
-                                    </a>
-                                    if (s.HasChildNodes)
+                            <a class="mainmenu" id="NavigationItem_@s.Key"
+                               onclick="@clickevent" href="@href">
+                                @title
+                            </a>
+                            if (s.HasChildNodes)
+                            {
+                                <span class="caret dropdown-toggle visible-xs" data-toggle="dropdown" ></span>
+                                <ul class="dropdown-menu">
+                                    @for (int i = 0; i < s.ChildNodes.Count; i++)
                                     {
-                                        <span class="caret dropdown-toggle visible-xs" data-toggle="dropdown"></span>
-                                        <ul class="dropdown-menu">
-                                            @for (int i = 0; i < s.ChildNodes.Count; i++)
-                                            {
-                                                var childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/", "");
-                                                if (s.ChildNodes[i].Url == "~/browse-menu/dinner.aspx")
-                                                {
-                                                    childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx");
-                                                }
+                                        var childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/", "");
+                                        if (s.ChildNodes[i].Url == "~/browse-menu/dinner.aspx")
+                                        {
+                                            childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx");
+                                        }
 
-                                                <li><a href="@childHref" style="white-space: pre-wrap;padding: 3px 10px;" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
-                                            }
-                                        </ul>
+                                        <li><a href="@childHref" style="white-space: pre-wrap;padding: 3px 10px;" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
                                     }
-                                }
-                            </li>
+                                </ul>
+                            }
+                        }
+                    </li>
                         }
                     }
                     <li class="visible-xs"><a href="@Url.Action("Index","Contactus")"><i class="fa fa-envelope" aria-hidden="true" style="color:#39aa35;"></i> Email</a></li>

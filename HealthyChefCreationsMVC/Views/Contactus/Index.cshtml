@@ -34,7 +34,7 @@
     <em class="layout">&nbsp;</em>
 </div>
 <div class="container">
-    <div class="col-md-8 background_bg">
+    <div class="col-md-8 background_bg cco">
         <div class="more-space">
             <h2>
                 Contact Us
@@ -50,14 +50,14 @@
                     <div class="wm-field wm-field-id-1 wm-field-name-firstname row">
                         @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-4 required" })
                         @Html.TextBoxFor(m => m.FirstName, new { @class = "wm_ShortText  AlphabetsOnly" })
-                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger col-md-offset-4" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger col-md-offset-4",  @style="margin-left:0px !important;" })
                     </div>
 
                     <div class="wm-field wm-field-id-2 wm-field-name-lastname  row">
 
                         @Html.LabelFor(m => m.LastName, new { @class = "col-sm-4 required" })
                         @Html.TextBoxFor(m => m.LastName, new { @class = "wm_ShortText  AlphabetsOnly" })
-                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger col-md-offset-4" })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger col-md-offset-4" ,  @style="margin-left:0px !important;" })
                     </div>
                     <div class="wm-field wm-field-id-3 wm-field-name-address row">
 
@@ -95,7 +95,7 @@
 
                         @Html.LabelFor(m => m.EmailAddress, new { @class = "col-sm-4 required" })
                         @Html.TextBoxFor(m => m.EmailAddress, new { @class = "wm_ShortText" })
-                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger  col-md-offset-4" })
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger  col-md-offset-4",  @style="margin-left:0px !important;" })
                     </div>
                     <div class="wm-field wm-field-id-9 wm-field-name-questioncomments row">
 
