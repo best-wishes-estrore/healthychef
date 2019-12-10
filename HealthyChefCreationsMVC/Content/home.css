@@ -23,34 +23,34 @@
 }
 
 .navbar-default .navbar-nav > li > a:active {
-    color: #fff !important;
-    background: #276f22 !important;
+  /*  color: #fff !important;
+    background: #276f22 !important;*/
 }
 .navbar-default .navbar-nav > .active > a {
-    color: #fff !important;
-    background: #276f22 !important;
+    /*color: #fff !important;
+    background: #276f22 !important;*/
 }
 
     .navbar-default .navbar-nav > .active > a:hover {
         color: #555;
         background-color: #fff;
     }
-
+/*
 .navbar-default .navbar-nav > .active > a {
-    /* color: green;
-    background-color: #fff;*/
+  
     color: #fff !important;
     background: #276f22 !important;
-}
+}*/
 .navbar-collapse {
    
     border-top: transparent !important;
 }
 .navbar-default .navbar-nav > li > a {
     color: #777;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
-    padding: 10px 20px;
+   /* padding: 10px 20px;*/
+    padding: 10px 28px;
     font-family: 'Roboto black', sans-serif !important;
 }
 .nav li:hover a {
@@ -80,10 +80,22 @@ header {
     color: #fff !important;
     background: #276f22 !important;
 }
+ .navbar-nav > li > a:focus {
+    /* color: #333; */
+    /*background-color: transparent;color:#777 !important;*/
+    color: #fff !important;
+    background: #276f22 !important;
+}
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   /*  color: #fff;*/
     text-decoration: none;
    /* background-color: #276f22 !important;*/
+}
+.dropdown-menu li{
+    border-bottom:1px solid green;
+}
+.dropdown-menu li:last-child{
+    border-bottom: 0px solid green;
 }
 .madeheading .fa-2x {
     font-size: 20px !important;
@@ -259,6 +271,7 @@ header {
         z-index: 5;
         display: inline-block;
         color: gray !important;
+        font-size: 25px;
     }
 
     .carousel-control .glyphicon-menu-right {
@@ -268,6 +281,7 @@ header {
         z-index: 5;
         display: inline-block;
         color: gray !important;
+        font-size:25px;
     }
 
     .carousel-control .glyphicon-menu-left.mleft {
@@ -442,7 +456,7 @@ header {
     z-index: 1000;
     display: none;
     float: left;
-    min-width: 124px !important;
+    /*min-width: 124px !important;*/
     padding: 5px 0;
     margin: 2px 0 0;
     font-size: 14px;
@@ -650,6 +664,23 @@ header {
             line-height: 10px;
              display: none !important; 
         }*/
+        .divfamilystyleerror span{
+            font-size:11px !important;
+        }
+        .txtQuantity_item th {
+            text-align: left;
+            padding: 5px;
+            color: #39aa35;
+            font-size: 10px !important;
+        }
+        .txtQuantity_item td {
+            vertical-align: top;
+            padding-top: 7px;
+            font-size: 10px !important;
+        }
+        .radio-prefs tr{
+            display:flex;
+        }
         #tabsClient .btn-green {
             margin-left: 41%;
         }
@@ -1083,4 +1114,32 @@ header {
 }
 p.madeheading{
     font-weight:normal;
+    font-size:14px;
+}
+.m-nav {
+    margin-top: 22px;
+}
+.mealItem img{
+    /*padding:0 10px;*/
+}
+#MealDetailsContainer .col-md-4 img{
+    padding: 0 10px !important;
+}
+#defaultBreakFastMenu.carousel-inner > .item.active .hiderowmenu {
+    border: 0px solid #00800026;
+    padding: 10px;
+}
+.col_gap p {
+    min-height: 178px !important;
+    padding: 0px 5px;
+}
+.paypal {
+    width: 30% !important;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.cotinue-shopping-button a {
+    margin: 5px !important;
+    padding: 5px 15px !important;
+    text-align: center;
 }

@@ -70,7 +70,7 @@
                                         <input type="number" id="Quantity1_@m.meal.MenuItemID" class="Quantitymenu" onkeydown="return checkShortcut();" onchange="validateQuantity1(@m.meal.MenuItemID)" name="Quantity1" value="1" min="1" />
                                         <br>
                                         <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;">
-                                            <span>Family Style requires 2 or more servings.</span>
+                                            <span >Family Style requires 2 or more servings.</span>
                                            
                                         </div>
                                         @if (m.mealSizes.Count == 1)
@@ -730,7 +730,7 @@
                 $("#originalprice1_" + MenuItemID).hide();
                 $("#OriginalPriceStrike1_" + MenuItemID).show();
                 $("#discountedprice1_" + MenuItemID).show();
-                $("#divfamilystyleerror1_" + MenuItemID).css('display', 'block');
+                $("#divfamilystyleerror1_" + MenuItemID).css('display', 'inline-block');
                 var qty = document.getElementById('Quantity1_' + MenuItemID);
                 qty.value = 2;
                 qty.focus();

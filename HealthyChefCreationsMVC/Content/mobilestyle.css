@@ -513,7 +513,7 @@ section h2 {
 }
 
 .table_row .form-control {
-    width: 50% !important;
+   /* width: 50% !important;*/
 }
 
 #MealDetailsContainer .col-md-4 {

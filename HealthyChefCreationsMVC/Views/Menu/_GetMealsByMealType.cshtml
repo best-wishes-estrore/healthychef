@@ -344,9 +344,9 @@
                                 </div>
                                 <div class="align_FS_2_3">
                                     <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float: left;">
-                                        <span style="margin: 3px 5px;font-size:10px;">Family Style requires 2 or more servings.</span>
+                                        <span style="margin: 3px 2px;font-size:13px;">Family Style requires 2 or more servings.</span>
                                     </div>
-                                    <div class="pull-right">
+                                    <div class="pull-right" style="margin-right: -10px;">
                                         @if (m.mealSizes.Count == 1)
                                         {
                                             <input type="button" name="" value="Add to Cart" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
@@ -483,9 +483,9 @@
                     </div>
                     <div class="align_FS_2_3">
                         <div id="divfamilystyleerror_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float:left">
-                            <span style="margin: 3px 5px;font-size:10px;">Family Style requires 2 or more servings.</span>
+                            <span style="margin: 3px 2px;font-size:13px;">Family Style requires 2 or more servings.</span>
                         </div>
-                        <div class="pull-right">
+                        <div class="pull-right" style="margin-right: -10px;">
                             @if (m.mealSizes.Count == 1)
                             {
                                 <input type="button" name="" value="ADD" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">

@@ -3092,7 +3092,7 @@ margin-top:50px;
     #divLoader {
         position: fixed;
         top: 22%;
-        left: 42%;
+        left: 42% !important;
         background: #ffffffc7;
     }
 
