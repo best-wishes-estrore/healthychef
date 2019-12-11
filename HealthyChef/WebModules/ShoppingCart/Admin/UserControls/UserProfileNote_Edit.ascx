@@ -22,8 +22,8 @@
         <div class="fieldCol">
             <asp:TextBox ID="txtNote" runat="server" TextMode="MultiLine" Columns="50" Rows="3"
                 MaxLength="1000" />
-            <asp:RequiredFieldValidator ID="rfvNote" runat="server" ControlToValidate="txtNote"
-                Text="*" Display="None" ErrorMessage="A note is required." SetFocusOnError="true" />
+           <%-- <asp:RequiredFieldValidator ID="rfvNote" runat="server" ControlToValidate="txtNote"
+                Text="*" Display="None" ErrorMessage="A note is required." SetFocusOnError="true" />--%>
         </div>
     </div>
     <div class="fieldRow">

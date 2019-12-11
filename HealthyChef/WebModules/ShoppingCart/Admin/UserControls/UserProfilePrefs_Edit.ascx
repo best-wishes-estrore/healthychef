@@ -8,7 +8,7 @@
             <div class="fieldCol">
                 <p>Account Preferences shall be applied to Custom Meal Programs only.</p>
                 <p>
-                   NOTE: Changes to your Custom Meal Program preferences can be made by calling our customer service center.
+                  <span style="color:red">NOTE: Changes to your Custom Meal Program preferences can be made by calling our customer service center.</span>
                     If changes are not made by the ordering deadline, they may not be reflected in your next delivery. 
                     Please review with your customer service rep for details. 
                 </p>
