@@ -115,7 +115,7 @@
                                             childHref = "/" + s.ChildNodes[i].Url.Replace(@"~/browse-menu/dinner.aspx", "browse-menu.aspx");
                                         }
 
-                                        <li><a href="@childHref" style="padding: 3px 10px;" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
+                                        <li><a href="@childHref" style="white-space: pre-wrap;padding: 3px 10px;" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
                                     }
                                 </ul>
                             }
