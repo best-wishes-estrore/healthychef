@@ -32,7 +32,7 @@
                 </tr>
                 @foreach (var sb in Model.subProfiles)
                 {
-                    string BtnString = sb.IsActive ? "Deactivate" : "Reactivate";
+            string BtnString = sb.IsActive ? "Deactivate" : "Reactivate";
                     <tr>@*id="@sb.UserProfileID"*@
                     <td>@sb.ProfileName</td>
                     <td>@sb.IsActive</td>
@@ -96,7 +96,7 @@
         //$("#panel6 .table-bordered tr:odd").css({
         //    "background-color": "#fff",
         //    "color": "#000"
-        });
+        //});
 
     });
 
@@ -155,23 +155,38 @@
 <div id="divSubTabs" class="nav nav-pills" style="@isProfileSelected">
     @if (Model.CurrentProfileId != 0)
     {
-        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top "><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top active"><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top "><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top active"><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        @*@if (Model.CustomerSubProfilePrefUpdateModel.DisplaytoUser == false)
+        {
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top" style="display:none"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        }
+        else
+        {*@
             <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
-        </ul>
+        @*}*@
+
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
+    </ul>
     }
     else
     {
-        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top active"><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top "><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top active"><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top "><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        @*@if (Model.CustomerSubProfilePrefUpdateModel.DisplaytoUser == false)
+        {
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top" style="display:none"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        }
+        else
+        {*@
             <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
-            <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
-        </ul>
+        @*}*@
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
+    </ul>
     }
     <div class="tab-content">
         @if (Model.CurrentProfileId != 0)
@@ -243,6 +258,7 @@
 
     function subprofileselect(UserProfileID)
     {
+        debugger;
         $.ajax({
             url: '@Url.Action("SelectSubProfileInfo", "Account")',
             type: 'POST',
@@ -250,6 +266,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
+                debugger;
                 if (response != "") {
                     $('#divSubTabs').show();
                     $('#CloseProfileButton').show();
@@ -257,6 +274,14 @@
                     $('#tabsSub2').html(response.SubProfileBasicinfo);
                     $('#tabsSub3').html(response.SubProfilShippinginfo);
                     $('#tabsSub4').html(response.SubProfilPreferenceinfo);
+                    if (response.display == false) {
+                        $('#ctl00_body_ctl00_SubProfileEdit1_liPrefs').hide();
+                       // $('#tabsSub4').hide();
+                        //$('#tabsSub1').show();
+                    }
+                    else {
+                        $('#ctl00_body_ctl00_SubProfileEdit1_liPrefs').show();
+                        }
                     $('#tabsSub5').html(response.SubProfilAllergensinfo);
                 }
             },

@@ -1,27 +1,39 @@
 ﻿@model  HealthyChefCreationsMVC.CustomModels.FooterViewModel
 
 <div id="footer">
-    <div class="col-md-12">
-        <div class="top-footer">
-            @Html.Raw(Model.HtmlString)
+    <div class="container text-center">
+        <div class="fimage">
+            <img src="/Content/Images/home/Healthy-Chef-Logo.png" class="img-responsive" style="margin:0 auto;" />
         </div>
-    </div>
-    <div class="clearfix">&nbsp;</div>
-    <div class="text-center">
-        <div class="copyright">
-            @if (Request.IsSecureConnection)
-            {
-                <img src="https://verify.authorize.net/anetseal/images/secure90x72.gif" alt="Authorize.Net Merchant - Click to Verify" border="0" />
-            }
-            <p class="copy"><a href="/terms-and-conditions.aspx">Terms and Conditions</a>                     &nbsp;&nbsp;                     <a href="/privacy-statement.aspx">Privacy Policy</a></p>
-            <p class="copy">Copyright @DateTime.Today.Year   Healthy Chef Creations</p>
+        <div class="" style="margin-top:50px;padding:20px;">
+            <ul class="list-inline links">
+                <li><a href="/about-us.aspx">About Us</a></li>
+                <li><a href="/about-us/our-food.aspx">Our Food </a></li>
+                <li><a href="/about-us/why-healthy-chef-creations.aspx">Why Healthy Chef Creations</a></li>
+                <li><a href="/order-now.aspx">Get Started</a></li>
+            </ul>
+        </div>
 
+        <div class="links1" style="margin-top:50px;">
+            <ul class="list-inline">
+                <li><a href="/faqs.aspx">FAQS Us</a></li>
+                <li><a href="/gift-certificates.aspx">Gift Certificates </a></li>
 
-            <div class="col-md-3">
-                <script type="text/javascript">
-                    !function () { var a = document.createElement("script"); a.type = "text/javascript", a.async = !0, a.src = "//configusa.veinteractive.com/tags/A08F77AF/E33F/46CC/A80B/924B9E1C4E4D/tag.js"; var b = document.getElementsByTagName("head")[0]; if (b) b.appendChild(a, b); else { var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) } }();
-                </script>
-            </div>
+                <li><a href="/news/newsletters.aspx">Newsletter</a></li>
+                <li><a href="/news/press.aspx">Press Releases </a></li>
+                <li><a href="/news/testimonials.aspx">Testimonials  </a></li>
+                <li><a href="/shareasale.cfm?merchantID=65905">Affiliate Program  </a></li>
+            </ul>
+        </div>
+
+        <div class="links2" style="margin-top:50px;">
+            <ul class="list-inline">
+                <li>Copyright 2019 healthy Chef Creations</li>
+                <li><a href="/terms-and-conditions.aspx">Terms and Conditions </a></li>
+
+                <li><a href="/privacy-statement.aspx">Privacy Policy</a></li>
+
+            </ul>
         </div>
     </div>
 </div>

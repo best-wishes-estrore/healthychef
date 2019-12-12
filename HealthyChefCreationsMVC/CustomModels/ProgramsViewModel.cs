@@ -180,20 +180,20 @@ namespace HealthyChefCreationsMVC.CustomModels
                 //New Implementation for Getting All Weeks Menu Data
                 var allWeeksMenu = GetAllWeeks(calendarid !=0? calendarid:calendar[0].CalendarID,this.ProgramId);
                 List<hccProgramDefaultMenuDetails> programdefaultmenudetailsbymenuitemid = new List<hccProgramDefaultMenuDetails>();
-                foreach (var defaultmenu in allWeeksMenu)
+                foreach (var defaultMenuItemID in allWeeksMenu)
                 {
                     hccProgramDefaultMenuDetails menuItemdetails = new hccProgramDefaultMenuDetails();
-                    hccMenuItem menuItem = hccMenuItem.GetById(defaultmenu.MenuItemID);
+                    hccMenuItem menuItem = hccMenuItem.GetById(defaultMenuItemID);
                     if (menuItem != null)
                     {
-                        hccMenuItemNutritionData menuItemNutritionData = hccMenuItemNutritionData.GetBy(defaultmenu.MenuItemID);
+                        hccMenuItemNutritionData menuItemNutritionData = hccMenuItemNutritionData.GetBy(defaultMenuItemID);
                         if (menuItemNutritionData != null)
                         {
                             menuItemdetails.MenuItemImageUrl = GetImageUrlwithBase(menuItem.ImageUrl);
                             //menuItemdetails.DayNumber = defaultmenu.DayNumber.ToString();
                             menuItemdetails.Description = menuItem.Description;
                             menuItemdetails.MenuItemName = menuItem.Name;
-                            menuItemdetails.MealTypeID = defaultmenu.MealTypeID;
+                            menuItemdetails.MealTypeID = menuItem.MealTypeID;
                             menuItemdetails.Calories = "Calories:" + " " + Convert.ToInt32(menuItemNutritionData.Calories);
                             menuItemdetails.Fat = "Fat:" + " " + Convert.ToInt32(menuItemNutritionData.TotalFat) + "" + "g";
                             menuItemdetails.Protein = "Protein:" + " " + Convert.ToInt32(menuItemNutritionData.Protein) + "" + "g";
@@ -266,39 +266,29 @@ namespace HealthyChefCreationsMVC.CustomModels
         //    return weeksMenu;
         //}
 
-        public List<hccMenuItem> GetAllWeeks(int CurrentCalendarId, int currentProgramId)
+        public List<int> GetAllWeeks(int CurrentCalendarId, int currentProgramId)
         {
-            List<hccMenuItem> hccMenuItems = new List<hccMenuItem>();
-            hccProductionCalendar cal = hccProductionCalendar.GetById(CurrentCalendarId);
-            hccMenu menu = cal.GetMenu();
+            List<int> hccMenuItems = new List<int>();
+            hccMenu menu = null;
+            hccProductionCalendar cal = null;
+            List<hccMenuItem> hccDefMenuItems = null;
 
             this.programMealTypesForDefaultMenu = hccProgramMealType.GetBy(this.Program.ProgramID).Where(x => x.MealTypeID == 10 || x.MealTypeID == 70 || x.MealTypeID == 30 || x.MealTypeID == 50 || x.MealTypeID == 90).Where(x => x.RequiredQuantity >= 0).ToList();
-            if (this.programMealTypesForDefaultMenu.Count > 0)
+            List<hccProgramDefaultMenu> defMenus = hccProgramDefaultMenu.GetBy(CurrentCalendarId, currentProgramId);
+            if (defMenus.Count <= 0)
             {
-                this.programMealTypesForDefaultMenu.ForEach(delegate (hccProgramMealType mealType)
-                {
-                   List<hccMenuItem> menuItems = hccMenuItem.GetByMenuId(menu.MenuID)
-                                           .Where(a => a.MealTypeID == mealType.MealTypeID).OrderBy(a => a.Name).ToList();
-                    hccMenuItems = hccMenuItems.Concat(menuItems).ToList();
-                });
+                cal = hccProductionCalendar.GetById(CurrentCalendarId);
+                menu = cal.GetMenu();
+                hccDefMenuItems = hccMenuItem.GetByMenuId(menu.MenuID);
             }
-            return hccMenuItems;
-        }
 
-        public List<hccMenuItem> GetAllWeeks1(int CurrentCalendarId, int currentProgramId)
-        {
-            List<hccMenuItem> hccMenuItems = new List<hccMenuItem>();
-            List<hccProgramDefaultMenu> defaultMenus = new List<hccProgramDefaultMenu>();
-            hccProductionCalendar cal = hccProductionCalendar.GetById(CurrentCalendarId);
-            hccMenu menu = cal.GetMenu();
-
-            this.programMealTypesForDefaultMenu = hccProgramMealType.GetBy(this.Program.ProgramID).Where(x => x.MealTypeID == 10 || x.MealTypeID == 70 || x.MealTypeID == 30 || x.MealTypeID == 50 || x.MealTypeID == 90).Where(x => x.RequiredQuantity >= 0).ToList();
             if (this.programMealTypesForDefaultMenu.Count > 0)
             {
                 this.programMealTypesForDefaultMenu.ForEach(delegate (hccProgramMealType mealType)
                 {
-                    List<hccMenuItem> menuItems = hccMenuItem.GetByMenuId(menu.MenuID)
-                                            .Where(a => a.MealTypeID == mealType.MealTypeID).OrderBy(a => a.Name).ToList();
+                    List<int> menuItems = defMenus.Count > 0 ? 
+                            defMenus.Where(dm => dm.MealTypeID == mealType.MealTypeID).Select(m => m.MenuItemID).ToList() 
+                            : hccDefMenuItems.Where(dm => dm.MealTypeID == mealType.MealTypeID).Select(m => m.MenuItemID).ToList();
                     hccMenuItems = hccMenuItems.Concat(menuItems).ToList();
                 });
             }

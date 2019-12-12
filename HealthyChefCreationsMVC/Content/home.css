@@ -1,0 +1,1149 @@
+﻿
+/*Navbar part*/
+.navbar-default {
+    background: none !important;
+    border-bottom: none !important;
+}
+
+.navbar {
+    position: relative;
+    min-height: 80px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.navbar-brand {
+    line-height: 40px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 40px;
+}
+
+.navbar-default .navbar-nav > li > a:active {
+  /*  color: #fff !important;
+    background: #276f22 !important;*/
+}
+.navbar-default .navbar-nav > .active > a {
+    /*color: #fff !important;
+    background: #276f22 !important;*/
+}
+
+    .navbar-default .navbar-nav > .active > a:hover {
+        color: #555;
+        background-color: #fff;
+    }
+/*
+.navbar-default .navbar-nav > .active > a {
+  
+    color: #fff !important;
+    background: #276f22 !important;
+}*/
+.navbar-collapse {
+   
+    border-top: transparent !important;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+    font-size: 13px;
+    font-weight: bold;
+   /* padding: 10px 20px;*/
+    padding: 10px 28px;
+    font-family: 'Roboto black', sans-serif !important;
+}
+.nav li:hover a {
+/* background-color:#276f22;*/
+ color:gray !important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: #276f22 !important;
+}
+
+header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /*z-index: 999;*/
+}
+.text-warning {
+    color: #f79323 !important;
+    font-size:20px;
+}
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    /* color: #333; */
+    /*background-color: transparent;color:#777 !important;*/
+    color: #fff !important;
+    background: #276f22 !important;
+}
+ .navbar-nav > li > a:focus {
+    /* color: #333; */
+    /*background-color: transparent;color:#777 !important;*/
+    color: #fff !important;
+    background: #276f22 !important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  /*  color: #fff;*/
+    text-decoration: none;
+   /* background-color: #276f22 !important;*/
+}
+.dropdown-menu li{
+    border-bottom:1px solid green;
+}
+.dropdown-menu li:last-child{
+    border-bottom: 0px solid green;
+}
+.madeheading .fa-2x {
+    font-size: 20px !important;
+    padding-right: 10px !important;
+    vertical-align: middle !important;
+}
+.side-column {
+    /* display: flow-root !important;*/
+    display: block !important;
+}
+/*SECTION PART*/
+.banner_part {
+    height: 580px;
+    position: relative;
+    overflow: hidden;
+    background-image: url(../Content/Images/home/slider1.png);
+    background-repeat: no-repeat !important;
+    background-size: 51% !important;
+    background-position: top right !important;
+}
+
+    .banner_part .banner_text .banner_text_iner {
+        /*display: table-cell;
+    vertical-align: middle;*/
+        padding-top: 100px;
+    }
+
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+
+.banner_part .banner_text {
+    display: table;
+    width: 100%;
+    height: 580px;
+}
+.banner_text a:hover{
+    color:#fff;
+}
+
+.percent a:hover {
+    color: #fff;
+}
+
+.banner_part .banner_text h1 {
+    font-size: 65px;
+    line-height: 1;
+    text-transform: capitalize;
+    color: #276F22 !important;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #222222;
+    /*line-height: 1.273;*/
+    line-height: 1;
+    font-family: 'Roboto black', sans-serif !important;
+}
+
+.banner_part .banner_text p {
+    font-size: 14px;
+    line-height: 1.929;
+    /* font-family: "Roboto", sans-serif;*/
+    font-family: 'Playfair Display', serif;
+    color: #5d5d5d;
+}
+.madeheading  {
+    font-family: 'Playfair Display', serif !important;
+}
+.list-inline li a {
+   font-family: 'Playfair Display', serif !important;
+}
+.list-inline .madeheading {
+    font-size: 15px;
+    color: #a4a4a4;
+}
+#iconstick{
+    font-size:16px;
+}
+
+.banner_part .banner_text .btn_1 {
+    box-shadow: 0px 12px 20px 0px rgba(255, 126, 95, 0.15);
+    /*margin-top: 45px;*/
+}
+
+.btn_1 {
+    display: inline-block;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #fff !important;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    text-transform: capitalize;
+    /* margin-top: 45px;*/
+    background-size: 300% 100%;
+}
+.form_submit {
+    margin-top: 50px;
+}
+.btn_1,
+.banner_part .banner_text .btn_1 {
+    background-color: #39AA35
+}
+
+.test p{
+    color:#000;
+}
+
+.btn-default:hover{
+    background-color:#fff !important;
+}
+.madeorder {
+    /* height:400px;*/
+    /*width:100%;*/
+    background-image: url(../Content/Images/home/section1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.percent {
+    background-image: url(../Content/Images/home/natural.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+}
+
+
+.color-orange {
+    color: #fe9309;
+   /* margin-top: 100px !important;*/
+    margin-bottom: 10px;
+  margin-top:90px !important;
+}
+.more-space .color-orange {
+   /* color: #fe9309;*/
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+/*carousel*/
+.carousel-control {
+    width: 4%;
+}
+
+    .carousel-control.left,
+    .carousel-control.right {
+        
+        background-image: none;
+       /* width: auto !important;*/
+    }
+
+   /* .carousel-control .glyphicon-chevron-left {
+        position: absolute;
+        top: 50%;
+        left: 10% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+    }
+    .carousel-control .glyphicon-chevron-right {
+        position: absolute;
+        top: 50%;
+        left: 75% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+    }*/
+
+    .carousel-control .glyphicon-menu-left {
+        position: absolute;
+        top: 50%;
+        left: 0% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+        font-size: 25px;
+    }
+
+    .carousel-control .glyphicon-menu-right {
+        position: absolute;
+        top: 50%;
+        left: 87% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+        font-size:25px;
+    }
+
+    .carousel-control .glyphicon-menu-left.mleft {
+        position: absolute;
+        top: 25%;
+        left: 0% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+    }
+
+    .carousel-control .glyphicon-menu-right.mright {
+        position: absolute;
+        top: 25%;
+        left: 87% !important;
+        z-index: 5;
+        display: inline-block;
+        color: gray !important;
+    }
+
+    @media (max-width: 767px) {
+        .carousel-inner .active.left {
+        left: -100%;
+    }
+
+    .carousel-inner .next {
+        left: 100%;
+    }
+
+    .carousel-inner .prev {
+        left: -100%;
+    }
+
+    .active > div {
+        display: none;
+    }
+
+        .active > div:first-child {
+            display: block;
+        }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    .carousel-inner .active.left {
+        left: -50%;
+    }
+
+    .carousel-inner .next {
+        left: 50%;
+    }
+
+    .carousel-inner .prev {
+        left: -50%;
+    }
+
+    .active > div {
+        display: none;
+    }
+
+        .active > div:first-child {
+            display: block;
+        }
+
+            .active > div:first-child + div {
+                display: block;
+            }
+}
+
+@media (min-width: 992px) {
+    .carousel-inner .active.left {
+        left: -25%;
+    }
+
+    .carousel-inner .next {
+        left: 25%;
+    }
+
+    .carousel-inner .prev {
+        left: -25%;
+    }
+}
+
+.carousel-control.right,
+.carousel-control.left {
+    background: none !important;
+}
+
+.test {
+    background-image: url(../Content/Images/home/test.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+   /* background-size: contain;*/
+  background-position: bottom ;
+}
+
+.links li a {
+    color: #357931;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Roboto black', sans-serif !important;
+}
+.links li {
+    padding: 5px 40px !important;
+}
+    .links li{
+        border-right:1px solid #ccc !important;
+    }
+        .links li:last-child {
+            border-right: 0px solid #ccc !important;
+        }
+
+        .links {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+.carousel-inner.item {
+    height: 335px;
+    max-height: 335px;
+}
+
+/*/
+@media (max-width: 576px) {
+    .banner_part {
+        background-image: none;
+    }
+
+    .navbar-brand img {
+        width: 200px;
+    }
+    .navbar-default{
+        background:#fff !important;
+    }
+
+    header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+    }
+    .links li {
+        border-right: none !important;
+        border-bottom:1px solid #ccc;
+    }
+        .links li:last-child {
+            border-bottom: none !important;
+        }
+        .links li a {
+            color: #357931;
+            font-size: 12px;
+            font-weight: 600;
+        }
+}
+*/
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #fff !important;
+    white-space: nowrap;
+}
+.dropdown-menu li a {
+    color: #333 !important;
+}
+.dropdown-menu {
+    /*position: absolute !important;*/
+    top: 100% !important;
+    left: 0px !important;
+    z-index: 1000;
+    display: none;
+    float: left;
+    /*min-width: 124px !important;*/
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #276f22 !important;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    background-clip: padding-box;
+}
+.navbar-right .dropdown-menu {
+    /* right: 0; */
+    /* left: auto; */
+   /* background: #276f22;*/
+}
+.Mobile_details {
+    display: none!important;
+}
+.Desktop_details {
+    display: block !important;
+}
+
+.mble_displaynone {
+    display: block !important;
+}
+
+.top{
+    display:none !important;
+}
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+        text-align: center;
+    }
+  
+}
+@media screen and (max-width: 768px) and (min-width: 640px) {
+    #sidebar {
+        width: 100%;
+        float: left;
+        padding-left: 15px;
+    }
+    
+}
+@media only screen and (max-width: 767px) and (min-width: 320px) and (orientation: landscape) {
+    /*.meals .m-nav ul li:first-child {
+        width: 25% !important;
+    }*/
+    .meals .mealItem .main-description {
+        padding: 0px 10px;
+        width: 68% !important;
+    }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: green !important;
+    }
+    .dropdown-menu {
+        border: none !important;
+    }
+
+    .navbar-nav > li > a {
+        border-bottom: 1px solid green;
+    }
+
+        .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+            color: #777 !important;
+            background: none !important;
+        }
+
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+        color: #777 !important;
+        text-decoration: none;
+        background: none !important;
+    }
+
+    .dropdown-menu > li > a {
+        border-bottom: 1px solid green;
+    }
+
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+        /* background-color: #eee;*/
+        border-color: #eee !important;
+    }
+
+    .navbar-nav .open .dropdown-menu {
+        padding: 0 20px !important;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        padding: 10px !important;
+    }
+}
+@media only screen and (min-width : 576px) and (max-width : 1024px) and (orientation : landscape) {
+   /* .meals .m-nav ul li:first-child {
+        width: 25% !important;
+    }*/
+    .side-column {
+        /*   display: flex !important;*/
+        display: inline-flex !important;
+        width: auto !important;
+    }
+    
+    .banner_part {
+        height: 532px !important;
+        position: relative;
+        overflow: hidden;
+        background-image: url(../Content/Images/home/slider1.png);
+        background-repeat: no-repeat !important;
+        background-size: 75% !important; 
+        background-position: top right !important;
+    }
+    .mble_displaynone {
+        display: none !important;
+    }
+    .meals .m-nav ul li {
+        width: auto !important;
+        padding: 0px 20px !important;
+    }
+    .order_meal {
+        margin-top: 90px !important;
+    }
+    .orgimage {
+        padding-left: 0px !important;
+    }
+
+    .madeorder {
+        text-align: center;
+    }
+
+    .content_col h1.madetotitile {
+        /* margin-top: 40px !important;*/
+        margin-top: 6px !important;
+    }
+
+    .mobilecolorder {
+        padding: 20px;
+    }
+
+    .percent {
+        background-image: url(../Content/Images/home/natural.png) !important;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: left 100%;
+        text-align: center;
+    }
+
+    .orgimage {
+        margin: 0 auto;    }
+
+    #myCarousel1 {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    .links li {
+        padding: 3px !important;
+    }
+
+        .links li a {
+            color: #357931;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 0 5px;
+            font-family: 'Roboto black', sans-serif !important;
+        }
+
+    .box img {
+        margin: 0 auto;
+    }
+
+    .box {
+        text-align: center !important;
+    }
+
+    .navbar-nav {
+        background: #fff;
+    }
+      .Mobile_details {
+        display: block !important;
+    }
+
+    .Desktop_details {
+        display: none !important;
+    }
+
+    /* #divLoader {
+        display: block !important;
+    }
+
+    .Desktop_details {
+        display: none ;
+    }*/
+}
+    @media (max-width: 576px) {
+
+       /* .newbutton .page-button-submit {
+            width: auto !important;
+            line-height: 10px;
+             display: none !important; 
+        }*/
+        .divfamilystyleerror span{
+            font-size:11px !important;
+        }
+        .txtQuantity_item th {
+            text-align: left;
+            padding: 5px;
+            color: #39aa35;
+            font-size: 10px !important;
+        }
+        .txtQuantity_item td {
+            vertical-align: top;
+            padding-top: 7px;
+            font-size: 10px !important;
+        }
+        .radio-prefs tr{
+            display:flex;
+        }
+        #tabsClient .btn-green {
+            margin-left: 41%;
+        }
+        .form-control {
+            width: 100% !important;
+            padding: 5px 5px;
+        }
+        .gridviewbill td {
+            float: left;
+            /* width: auto; */
+            padding: 10px;
+        }
+        .meals .m-nav ul {
+            margin: 0;
+            padding: 5px !important;
+            list-style: none;
+        }
+      
+        .nutrition_body td {
+            width: 100% !important;
+            float: left;
+        }
+        .Addselectpopup .form-select-menu tr td {
+            float: left;
+            width: auto !important;
+        }
+            .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color: green !important;
+        }
+        .dropdown-menu{
+            border:none !important;
+        }
+        .navbar-nav > li > a {
+            border-bottom: 1px solid green;
+        }
+        .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+            color: #777 !important;             
+            background: none !important; 
+           
+        }
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+            color: #777 !important;
+            text-decoration: none;
+            background: none !important; 
+        }
+        .dropdown-menu > li > a {
+            border-bottom: 1px solid green;
+        }
+        .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+           /* background-color: #eee;*/
+            border-color: #eee !important;
+        }
+        .navbar-nav .open .dropdown-menu {
+          
+            padding: 0 20px !important;
+        }
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+          
+            padding: 10px !important;
+        }
+        .newbutton .page-button-submit {
+            display: none !important;
+        }
+        .btn-mobile {
+            display: block !important;
+        }
+        .madeheading {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: normal;
+        }
+        .btn-default.madeheading {
+            border-color: #39aa35;
+            border-radius: 24px;
+            color: #5cb812;
+            padding: 10px 30px !important;
+        }
+        .wm_FormBuilder .wm_ShortText {
+            width: 100% !important;
+        }
+        #iconstick{
+            margin:0 27px;
+            line-height:2;
+        }
+        .banner_part .banner_text .banner_text_iner {
+            padding-top: 0px !important;
+        }
+        .plan_edit .fieldRow .fieldCol label {
+            float: left !important;
+            width: 50%;
+            margin: 7px 0px;
+        }
+        .order_meal h2.select-pogramme-header{
+            font-size:26px;
+        }
+
+        .sub-select-pogramme {
+            width: 100% !important;
+            float: left !important;
+            padding-left: 25px !important;
+        }
+
+        .order_meal {
+            padding: 4px;
+            box-shadow: 2px 2px 2px 2px #ddd;
+            border: 2px solid #ddd;
+            /* margin: 5% 0px; */
+            margin: 19% 0px !important;
+            /* border-top: 0px solid #98da6c; */
+        }
+
+        .meals .m-nav ul li {
+          /*  width: 18.75%;*/
+            padding: 0px 10px !important;
+        }
+
+        .banner_part {
+            /* height: 690px !important;*/
+            height: 820px !important;
+            position: relative;
+            overflow: hidden;
+            background-image: url(../Content/Images/home/mobslider1.png) !important;
+            background-repeat: no-repeat;
+            background-size: 120% !important;
+            background-position: bottom center !important;
+            z-index: 9 !important;
+            margin-top: 66px !important;
+        }
+
+        .content_col h1.visible-xs {
+            margin-top: 30px !important;
+        }
+
+        .background_bg {
+            margin-top: 50px !important;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+        }
+
+        .navbar-default {
+            background: #fff !important;
+        }
+
+        .desktop_view {
+            margin-top: 0px !important;
+        }
+
+        header {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .carousel-content td {
+            width: 100% !important;
+            float: right;
+            margin: 0px auto;
+        }
+
+        .hiderowmenu img#imageurl {
+            width: 100% !important;
+            float: left !important;
+            height: 98px !important;
+        }
+
+        .full-page-header .info {
+            float: left;
+            display: inline;
+            width: 100% !important;
+            padding: 0 0 0 10px;
+        }
+
+        .banner_part .banner_text h1 {
+            font-size: 27px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .mobslidep {
+            background: #fff !important;
+            padding: 5px;
+            display: table;
+            font-size: 18px;
+            color: #000;
+            font-weight: bold;
+            margin: 0 auto;
+            font-size: 16px !important;
+        }
+
+        .banner_part .banner_text p {
+            font-size: 14px;
+            line-height: 1.929;
+            font-family: "Roboto", sans-serif;
+            color: #646464;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+
+        .slidebutton {
+            text-align: center;
+        }
+
+        .plans {
+            margin-bottom: 5px;
+        }
+
+        .ormenu {
+            padding: 14px 50px;
+        }
+
+        .madeorder {
+            position: relative;
+            /* height: 400px; */
+            /* width: 100%; */
+            background-image: url(../Content/Images/home/mademobile.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 500px;
+            /* top: -96px;*/
+            top: -110px;
+        }
+
+        .mble_displaynone {
+            display: none !important;
+        }
+
+        .mobiletest {
+            position: relative;
+            /* height: 400px; */
+            /* width: 100%; */
+            background-image: url(../Content/Images/home/mobiletest.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 500px;
+        }
+
+        .orgimage {
+            /* margin:0 auto;*/
+            margin: 20px auto 20px !important;
+            padding-left: 0 !important;
+            height: 120px !important;
+        }
+
+        .box {
+            text-align: center !important;
+        }
+
+            .box img {
+                margin: 0 auto !important;
+            }
+
+        .fa-quote-left {
+            margin-top: 50px !important;
+        }
+
+        .percent a {
+            margin-left: 70px;
+            margin-top: 10px;
+        }
+
+        .side-column {
+            /*   display: flex !important;*/
+            display: inline-flex !important;
+            width: auto !important;
+        }
+
+        .meals .m-nav ul li {
+            width: auto !important;
+            padding:0px 10px !important;
+        }
+        #familystyleinfo .modal-dialog {
+            width: 100% !important;
+            left: 0px !important;
+            margin: 0px;
+            padding: 10px;
+        }
+     
+        .content_start td {
+            width: 100% !important;
+            float: left;
+            padding: 10px;
+        }
+        .mobilecolorder {
+            margin-top: 200px !important;
+            text-align: center !important;
+        }
+
+        .madetotitile {
+            font-size: 34px !important;
+        }
+
+        .content_col .madetotitile {
+            margin-top: 20px !important;
+        }
+
+        .phoneicon {
+            font-size: 18px;
+        }
+
+
+        .percent {
+            background-image: url(../Content/Images/home/naturalpercent.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            /*margin-top: -96px;*/
+            margin-top: -110px;
+            background-position: center;
+            padding: 80px 0 !important;
+        }
+
+        .menulinkitem > p {
+            padding-left: 26px !important;
+        }
+
+        .seeourmenus {
+            text-align: center;
+        }
+
+        .footerinline.list-inline > li {
+            display: block;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+
+        .links li {
+            border-right: none !important;
+            border-bottom: 1px solid #ccc;
+            display: block !important;
+            padding: 15px 30px !important;
+        }
+
+            .links li:last-child {
+                border-bottom: none !important;
+            }
+
+            .links li a {
+                color: #357931;
+                font-size: 12px;
+                font-weight: 800;
+            }
+
+        .Mobile_details {
+            display: block !important;
+        }
+
+        .Desktop_details {
+            display: none !important;
+        }
+
+        .standard_meal .alignleft {
+            width: 100% !important;
+            float: left;
+        }
+
+        .newmenuprograms .section-middle td {
+            width: 100%;
+            float: left;
+        }
+
+        .m-nav {
+            margin-top: 50px !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        banner_part {         
+            height: 820px;
+            position: relative;
+            overflow: hidden;
+            background-image: url(../Content/Images/home/mobslider1.png) !important;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: bottom center;
+            z-index: 9;
+        }
+    }
+
+    .links1 .list-inline > li {
+        display: inline-block;
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+    /*footer*/
+    .list-inline a {
+        color: #a4a4a4;
+        font-size: 15px;
+    }
+
+        .list-inline a:hover {
+            color: green;
+        }
+
+    /*
+#main{
+    margin-top:80px;
+}*/
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+ /*   .navbar-toggle {
+        display: block !important;
+    }
+    .collapse {
+        display: none !important;
+    }*/
+}
+.plan_edit .fieldRow .fieldCol label {
+    float: left !important;
+    /*width: 42%;*/
+    margin: 7px 0px;
+}
+/*
+.newbutton .page-button-submit {
+    width: auto !important;
+    line-height: 10px;
+}
+.ptb-10 {
+   
+    float: left;
+    width: 100%;
+    padding: 10px 0px;
+}*/
+
+.btn-mobile{
+    display:none !important;
+}
+p.madeheading{
+    font-weight:normal;
+    font-size:14px;
+}
+.m-nav {
+    margin-top: 22px;
+}
+.mealItem img{
+    /*padding:0 10px;*/
+}
+#MealDetailsContainer .col-md-4 img{
+    padding: 0 10px !important;
+}
+#defaultBreakFastMenu.carousel-inner > .item.active .hiderowmenu {
+    border: 0px solid #00800026;
+    padding: 10px;
+}
+.col_gap p {
+    min-height: 178px !important;
+    padding: 0px 5px;
+}
+.paypal {
+    width: 30% !important;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.cotinue-shopping-button a {
+    margin: 5px !important;
+    padding: 5px 15px !important;
+    text-align: center;
+}
+.menuitemadd .cart_check {
+    padding: 0px 10px !important;
+    text-align: right;
+}

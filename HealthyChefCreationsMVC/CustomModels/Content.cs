@@ -19,6 +19,7 @@ namespace BayshoreSolutions.WebModules.ContentModule
             ContentTableAdapter contentAdapter = new ContentTableAdapter();
             DataAccessLayer.ContentDataTable contentTable;
 
+
             contentTable = contentAdapter.GetActiveContent(moduleId, culture);
             if (contentTable.Rows.Count > 0)
             {

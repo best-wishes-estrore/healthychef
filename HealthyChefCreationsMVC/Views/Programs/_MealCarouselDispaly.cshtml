@@ -21,7 +21,7 @@
                             <tr class="hiderowmenu">
 
                                 @*<td style="width:80px">Day @defaultplan.DayNumber:</td>*@
-                                <td class="">                                    
+                                <td class="">
                                     <img id="imageurl" class="img-responsive" src="@defaultplan.MenuItemImageUrl" />
                                 </td>
                                 <td class="menuitems" style="text-align: justify;">
@@ -62,21 +62,42 @@
             }
         </div>
         <!-- Left and right controls -->
-        <a class="carousel-left carousel-control left" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]"  data-slide="prev">
+        <a class="carousel-left carousel-control left" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]" data-slide="prev">
             <span class="fa fa-chevron-left top45"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-right carousel-control right" style="margin-right:10px;" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]"  data-slide="next">
+        <a class="carousel-right carousel-control right" style="margin-right:10px;" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]" data-slide="next">
             <span class="fa fa-chevron-right top45"></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
 }
 <script>
+
+    if ($('input[name=mealtype][value=1]').is(':checked')) {
+        $("div[id^='myCarousel-'][id='breakfast']").css("display", "show");
+    }
+    else {
+        $("div[id^='myCarousel-'][id='breakfast']").css("display", "none");
+    }
+
+    if ($('input[name=mealtype][value=2]').is(':checked')) {
+        $("div[id^='myCarousel-'][id='lunch']").show();
+    }
+    else {
+        $("div[id^='myCarousel-'][id='lunch']").hide();
+    }
+
+    if ($('input[name=mealtype][value=3]').is(':checked')) {
+        $("div[id^='myCarousel-'][id='dinner']").show();
+    }
+    else {
+        $("div[id^='myCarousel-'][id='dinner']").hide();
+    }
     //$(document).ready(function () {
     //    $('.menu-carousel').carousel({
     //        pause: true,
     //        interval: false,
-    //    });        
+    //    });
     //})
 </script>

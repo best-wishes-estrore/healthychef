@@ -3,7 +3,7 @@
 <div class="col-title">This Week's Menus</div>
 @if (Model.programdefaultmenudetails.Count > 0)
 {
-<div class="container" id="mealTypeContainer" style="padding: 10px; margin:0;">
+<div class="container" style="padding: 10px; margin:0;">
     @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultBreakfastMenuDetails, new ViewDataDictionary { { "MealType", "Breakfast" }, { "media", ViewData["media"] } })
 
     @Html.Partial("~/Views/Programs/_MealCarouselDispaly.cshtml", Model.DefaultLunchMenuDetails, new ViewDataDictionary { { "MealType", "Lunch" }, { "media", ViewData["media"] } })

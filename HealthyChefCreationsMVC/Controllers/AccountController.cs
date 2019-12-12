@@ -705,8 +705,8 @@ namespace HealthyChefCreationsMVC.Controllers
             {
                 return Json(E.ToString(), JsonRequestBehavior.AllowGet);
             }
-            return Json(new { SubProfileBasicinfo = RenderRazorViewToString("~/Views/Account/_SubProfileBasicInfo.cshtml",CustomerSubProfileBasicInfoModel), SubProfilShippinginfo = RenderRazorViewToString("~/Views/Account/_SubProfileShippingInfo.cshtml", CustomerSubProfileShippinInfoModel), SubProfilPreferenceinfo = RenderRazorViewToString("~/Views/Account/_SubProfilePreferencesInfo.cshtml", CustomerSubProfilePrefUpdateModel), SubProfilAllergensinfo = RenderRazorViewToString("~/Views/Account/_SubProfileAllergensInfo.cshtml", CustomerSubProfileAllergensUpdateModel) }, JsonRequestBehavior.AllowGet);
-        }
+            return Json(new { SubProfileBasicinfo = RenderRazorViewToString("~/Views/Account/_SubProfileBasicInfo.cshtml",CustomerSubProfileBasicInfoModel), SubProfilShippinginfo = RenderRazorViewToString("~/Views/Account/_SubProfileShippingInfo.cshtml", CustomerSubProfileShippinInfoModel), SubProfilPreferenceinfo = RenderRazorViewToString("~/Views/Account/_SubProfilePreferencesInfo.cshtml", CustomerSubProfilePrefUpdateModel), SubProfilAllergensinfo = RenderRazorViewToString("~/Views/Account/_SubProfileAllergensInfo.cshtml", CustomerSubProfileAllergensUpdateModel),display = CustomerSubProfilePrefUpdateModel.DisplaytoUser }, JsonRequestBehavior.AllowGet);
+        }        
         public string RenderRazorViewToString(string viewName, object model)
         {
             ViewData.Model = model;

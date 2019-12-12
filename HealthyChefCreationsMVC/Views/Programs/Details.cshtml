@@ -699,7 +699,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="content_field" style="display:none;">
+                <div class="content_field" style="display:none !important;">
                     <h4>See Our Meal Plans</h4>
                     <div class="col-md-12">
                         <ul class="menu_list">
@@ -711,7 +711,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="content_field" style="display:none;">
+                <div class="content_field" style="display:none !important;" >
                     <h4>This Week’s A La Carte Meals</h4>
                     <div class="col-md-12">
                         <ul class="menu_list">
@@ -1184,17 +1184,12 @@
     $('.mealtype').click(function () {
         var value = [];
         $('.mealtype:checked').each(function () {
-            value.push($(this).val()); 
-            mealTypeSelected();
+            value.push($(this).val());
         });
         if (value.length == 0) {
             window.alert("Please select at least one meal type");
-            $("#mealTypeContainer").hide();
         }
-        else {
-            $("#mealTypeContainer").show();
-        }
-        /*if (value.length == 1 && value[0] == 1) {
+        if (value.length == 1 && value[0] == 1) {
             window.location.href = "/Programs/DetailsbyCheckbox/63/HealthyLivingBreakfast";
         }
         if (value.length == 1 && value[0] == 2) {
@@ -1214,7 +1209,7 @@
         }
         if (value.length == 3) {
             window.location.href = "/meal-programs/healthy-living.aspx";
-        }*/
+        }
     });
 </script>
 
@@ -1264,26 +1259,4 @@
              }
          });
     });
-
-    function mealTypeSelected() {
-        if ($("input:checkbox[name='mealType'][value='1']").is(":checked")) { 
-            $('[id ^=myCarousel][id $=Breakfast]').show();
-        }
-        else {
-            $('[id ^=myCarousel][id $=Breakfast]').hide();
-        }
-        if ($("input:checkbox[name='mealType'][value='2']").is(":checked")) { 
-            $('[id ^=myCarousel][id $=Lunch]').show();
-        }
-        else {
-            $('[id ^=myCarousel][id $=Lunch]').hide();
-        }
-        if ($("input:checkbox[name='mealType'][value='3']").is(":checked")) { 
-            $('[id ^=myCarousel][id $=Dinner]').show();
-        }
-        else {
-            $('[id ^=myCarousel][id $=Dinner]').hide();
-        }
-    }
-
 </script>

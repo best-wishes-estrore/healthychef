@@ -11,7 +11,10 @@
         .search {
             font-size: 11px;
         }
-
+        #liAllergens
+        {
+            display:none;
+        }
             .search input[type=text] {
                 font-size: 11px;
             }
