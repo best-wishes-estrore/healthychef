@@ -21,6 +21,20 @@
     padding-bottom: 20px !important;
 }
 
+.caret {
+    width: 0 !important;
+    height: 0 !important;
+    margin-left: 2px !important;
+    vertical-align: middle !important;
+    border-top: 6px dashed !important;
+    border-top: 4px solid\9 !important;
+    border-right: 6px solid transparent !important;
+    border-left: 6px solid transparent !important;
+    position: absolute !important;
+    right: 10px !important;
+    top: 15px !important;
+}
+
 #myCarousel1 {
    /* width: 25% !important;*/
 }
@@ -138,7 +152,8 @@
 
 .mealItem .col-md-3, .mealItem .col-md-7 {
     margin-bottom: 10px;
-    padding: 0px;
+    padding: 10px;
+   /* margin-right:10px;*/
 }
 
 .dropdown_style {
@@ -766,7 +781,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     z-index: 9999;
     position: absolute;
     width: auto;
-    margin-top: 10%;
+    margin-top: 55px;
 }
 
     #navigation > ul > .open > ul > li > a {
@@ -1568,13 +1583,32 @@ body.home-page #content .three-cols .image img {
         padding: 7px 22px !important;
     }
 
+ 
+
+    #footer {
+        padding-bottom: 0px !important;
+    }
+
+    .banner_part {
+        margin-top: 0px !important;
+    }
+
+    .intercom-app {
+        display: none !important;
+    }
+
+    .list-inline a {
+        color: #a4a4a4;
+        font-size: 15px;
+    }
+
     .cotinue-shopping-button a {
         margin: 5px !important
     }
 
-    #myCarousel1 {
+    /*#myCarousel1 {
         width: 20% !important;
-    }
+    }*/
 
     .select-pogramme h4 span {
         font-weight: bold;
@@ -1744,7 +1778,7 @@ body.home-page #content .three-cols .image img {
     width: 40%;
 }
 .menuitemadd .cart_check {
-    padding: 0px 4px;
+   /* padding: 0px 4px;*/
 }
 .meals .mealItem .side-column, .meals .mealItem .side-column input {
     width: auto;
@@ -1775,16 +1809,4 @@ body.home-page #content .three-cols .image img {
     text-overflow: ellipsis;
 }
 
-.caret {
-    width: 0 !important;
-    height: 0 !important;
-    margin-left: 2px !important;
-    vertical-align: middle !important;
-    border-top: 6px dashed !important;
-    border-top: 4px solid\9 !important;
-    border-right: 6px solid transparent !important;
-    border-left: 6px solid transparent !important;
-    position: absolute !important;
-    right: 10px !important;
-    top: 15px !important;
-}
+

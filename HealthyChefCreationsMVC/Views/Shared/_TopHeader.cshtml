@@ -58,18 +58,17 @@
                             </a>
                             @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
                             {
-                                <a href="@Url.Action("Login", "Home")" class="btn btn-green">
+                                <a id="alogin" href="@Url.Action("Login", "Home")" class="btn btn-green">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/gold-star.gif" />*@ <i class="fa fa-user"></i><span class="mobile_del">Login</span>
                                 </a>
                                 <input type="hidden" id="hdnauthenticate" value="false" />
                             }
                             @if (HttpContext.Current.User.Identity.IsAuthenticated == true)
-                            {
-                                <input type="hidden" id="hdnauthenticate" value="true" />
+                            {<input type="hidden" id="hdnauthenticate" value="true" /> <p>hai</p>
                                 <a id="aProfile" class="btn btn-green" runat="server" visible="false" href="@Url.Action("Index", "Account")">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/icon-3.png" />*@ <i class="fa fa-user"></i><span class="mobile_del">Profile</span>
                                 </a>
-                                <a href="@Url.Action("Signout", "Home")" class="btn btn-green">
+                                <a id="alogout" href="@Url.Action("Signout", "Home")" class="btn btn-green">
                                     @*<img alt="" src="/App_Themes/HealthyChef/images/gold-star.gif" />*@ <i class="fa fa-sign-out"></i><span class="mobile_del">Sign Out</span>
                                 </a>
                             }
@@ -103,9 +102,15 @@
         if ($('#hdnauthenticate').val() == "false") {
             $('.top-navigation').addClass('Extracol');
             $('.navbar-toggle').addClass('mobile-toggle-navbar');
+            $('#alogin').css('visibility', 'visible');
+            $('#alogout').css('visibility', 'hidden');
+            $('#aProfile').css('visibility', 'hidden');
         }
         else {
             $('.top-navigation').removeClass('Extracol');
+            $('#alogin').css('visibility', 'hidden');
+            $('#alogout').css('visibility', 'visible');
+            $('#aProfile').css('visibility', 'visible');
         }
     });
 </script>

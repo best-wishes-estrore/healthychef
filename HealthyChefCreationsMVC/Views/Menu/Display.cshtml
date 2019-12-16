@@ -535,11 +535,11 @@
                                                                         <div class="pull-right" >
                                                                             @if (m.mealSizes.Count == 1)
                                                                             {
-                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()" >
                                                                             }
                                                                             else
                                                                             {
-                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange">
+                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange" >
                                                                             }
                                                                         </div>
                                                                     </div>

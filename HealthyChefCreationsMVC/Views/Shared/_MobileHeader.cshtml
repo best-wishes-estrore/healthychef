@@ -21,7 +21,7 @@
     fbq('init', '431320264352127');
     fbq('track', 'PageView');
 
-   
+
 </script>
 <noscript>
     <img height="1" width="1" style="display:none"
@@ -30,7 +30,7 @@
 <!-- End Facebook Pixel Code -->
 <!-- Do not delete this script -->
 <!-- Begin -->
-<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"21003554"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "21003554" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>
 <!-- End --><!-- header -->
 <div id="header" class="mobile_view">
     <div class="page_gap_mobile container">
@@ -38,17 +38,8 @@
         <div class="top-navigation">
             <table border="0" width="100%">
                 <tr>
-                    <td colspan="3">
-                        <h1 id="logo" class="logo_img">
-                            <a href="/" title="Healthy Chef">
-                                <img src="/App_Themes/HealthyChef/Images/Healthy-Chef-Logo.png" align="left" />
-                            </a>
-                        </h1>
-                    </td>
-                </tr>
-                <tr>
                     <td align="left">
-                        <div id="navigation" >
+                        <div id="navigation">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -66,19 +57,19 @@
                                             {
                                                 @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key" onclick="Getsubmenunavigationofweightloss()">@s.Title</a>*@
                                                 <a class="mainmenu" tabindex="-1" href="/weight-loss-programs.aspx" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"   data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1" data-target="#child-@s.Key" role="button"></span>
                                             }
                                             else
                                             if (s.Title == "Everyday Meal Plans")
                                             {
                                                 @*<a class="mainmenu" tabindex="-1"  id="NavigationItem_@s.Key"  onclick="Getsubmenunavigationofeverydaymealplans()">@s.Title</a>*@
                                                 <a class="mainmenu" href="/everydaymealplans.aspx" tabindex="-1" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"  data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1" data-target="#child-@s.Key" role="button"></span>
                                             }
                                             else
                                             {
                                                 <a class="mainmenu" tabindex="-1" href="/@s.Url.Replace(@"~/","")" id="NavigationItem_@s.Key">@s.Title</a>
-                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1"   data-target="#child-@s.Key" role="button"></span>
+                                                <span class="caret menu-down" data-toggle="collapse" data-parent="#bs-example-navbar-collapse-1" data-target="#child-@s.Key" role="button"></span>
                                             }
                                             @if (s.HasChildNodes == true)
                                             {
@@ -100,7 +91,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <ul id="child-@s.Key" class="collapse" >
+                                                    <ul id="child-@s.Key" class="collapse">
                                                         @for (int i = 0; i < s.ChildNodes.Count; i++)
                                                         {
                                                             <li><a href="/@s.ChildNodes[i].Url.Replace(@"~/","")" id="NavigationItem_@s.ChildNodes[i].Key">@s.ChildNodes[i].Title</a></li>
@@ -114,6 +105,15 @@
                             </ul>
                         </div>
                     </td>
+                    <td colspan="3">
+                        <h1 id="logo" class="logo_img">
+                            <a href="/" title="Healthy Chef">
+                                <img src="/App_Themes/HealthyChef/Images/Healthy-Chef-Logo.png" align="left" />
+                            </a>
+                        </h1>
+                    </td>
+                </tr>
+                <tr style="display:none;">
                     <td align="center">
                         <a href="tel:18665752433" class="phoneno">
                             @*<img alt="" src="/App_Themes/HealthyChef/images/icon-1.png" />*@

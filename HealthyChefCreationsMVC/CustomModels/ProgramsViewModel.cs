@@ -279,7 +279,7 @@ namespace HealthyChefCreationsMVC.CustomModels
             {
                 cal = hccProductionCalendar.GetById(CurrentCalendarId);
                 menu = cal.GetMenu();
-                hccDefMenuItems = hccMenuItem.GetByMenuId(menu.MenuID);
+                hccDefMenuItems = hccMenuItem.GetByMenuId(menu!=null?menu.MenuID:0);
             }
 
             if (this.programMealTypesForDefaultMenu.Count > 0)

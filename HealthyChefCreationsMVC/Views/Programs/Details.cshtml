@@ -170,7 +170,7 @@
     }
 
     #plan-mealtypes tr td {
-        padding: 0px 6px !important;
+        padding: 0px 3px !important;
     }
 
     .left_col #plan-mealtypes {
@@ -1188,6 +1188,7 @@
         });
         if (value.length == 0) {
             window.alert("Please select at least one meal type");
+            return false;
         }
         if (value.length == 1 && value[0] == 1) {
             window.location.href = "/Programs/DetailsbyCheckbox/63/HealthyLivingBreakfast";
