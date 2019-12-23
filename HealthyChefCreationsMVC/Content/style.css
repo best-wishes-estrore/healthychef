@@ -3255,7 +3255,7 @@ margin-top:50px;
     }
 
     .hiderowmenu img#imageurl {
-        width: 150px !important;
+       width: 150px !important;
         float: left !important;
         height: 98px !important;
     }
@@ -4272,7 +4272,7 @@ margin-top:50px;
         }
 
         .menuitemadd .cart_check {
-           /* padding: 0px 10px;*/
+           padding: 0px 10px;
             text-align: right;
         }
 

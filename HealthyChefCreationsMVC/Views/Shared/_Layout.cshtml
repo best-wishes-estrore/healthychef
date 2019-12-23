@@ -34,7 +34,8 @@
             <div class="desktop_view">
                 @if (Request.Browser.IsMobileDevice)
                 {
-                    Html.RenderAction("MobileHeaderSection", "Common");
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
                 }
                 else if (Request.Browser["ScreenPixelsWidth"] == "768")
                 {

@@ -26,13 +26,13 @@
     height: 0 !important;
     margin-left: 2px !important;
     vertical-align: middle !important;
-    border-top: 6px dashed !important;
+    border-top: 8px dashed !important;
     border-top: 4px solid\9 !important;
-    border-right: 6px solid transparent !important;
-    border-left: 6px solid transparent !important;
+    border-right: 8px solid transparent !important;
+    border-left: 8px solid transparent !important;
     position: absolute !important;
     right: 10px !important;
-    top: 15px !important;
+    top: 16px !important;
 }
 
 #myCarousel1 {

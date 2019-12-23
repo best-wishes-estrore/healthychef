@@ -1,4 +1,5 @@
 ﻿@model  HealthyChefCreationsMVC.CustomModels.LoginViewModel
+   
 
 @{
     ViewBag.Title = "Login";
@@ -18,18 +19,18 @@
 @if (Model.IsSubscribe)
 {
     <div class="label_loginstat" style=" width: 80%;margin: 0 auto;">
-        <label style="color:green;font-size:20px; font-weight:bold;margin-left:100px;margin-top:50px;">To Continue: Please Register Or Log In</label>
+        <label style="color:green;font-size:20px; font-weight:bold;margin-left:200px;margin-top:50px;" class="tocont">To Continue: Please Register Or Log In</label>
     </div>
 }
 <div class="login-page container" style="display:block">
-    <div class="col-md-12 form_submit">
+    <div class="col-md-12 form_submit" id="fsubmit" >
           @Html.Partial("~/Views/Home/RegisterModel.cshtml", Model.registrationModel)
         <div class="col-md-2"></div>
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             <div class="login">
                 <div class="col-md-5">
-                    <h2>Login</h2>
+                    <h2 style="margin-top:20px;" class="registermobile">Login</h2>
                     @*<div class="text-center">*@
                     @*<h2 class="header">Account Log In</h2>*@
                     @*<p>New Customers - Please enter your email address only, and click Continue.</p>
@@ -71,7 +72,7 @@
 <div class="col-md-12 loginregister" style="display:none">
     <div class="col-md-6">
         <div class="register">
-            <h2>Register</h2>
+            <h2 >Register</h2>
             <div class="form-group">
                 <div class="col-md-4" style="padding-left:0px">
                     <label class="control-label">First Name</label><br />
@@ -104,7 +105,7 @@
     </div>
     <div class="col-md-6">
         <div class="login">
-            <h2>Login</h2>
+            <h2 >Login</h2>
             <div class="form-group">
                 <label class="control-label">Email</label><br />
                 <input type="text" class="" />

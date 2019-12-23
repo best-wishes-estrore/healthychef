@@ -193,8 +193,16 @@ header {
     /* margin-top: 45px;*/
     background-size: 300% 100%;
 }
+.paypal {
+    width: 30% !important;
+    padding: 0px 10px;
+    cursor: pointer;
+}
 .form_submit {
-    margin-top: 50px;
+margin-top: 50px;
+}
+.registermobile {
+   /* margin-top: 90px !important;*/
 }
 .btn-orange{
     margin-right:-10px;
@@ -242,6 +250,10 @@ header {
 .carousel-control {
     width: 4%;
 }
+    .carousel-control.left {
+       
+       /* z-index: -1;*/
+    }
 
     .carousel-control.left,
     .carousel-control.right {
@@ -382,7 +394,7 @@ header {
 
 .links li a {
     color: #357931;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     font-family: 'Roboto black', sans-serif !important;
 }
@@ -563,6 +575,7 @@ header {
    /* .meals .m-nav ul li:first-child {
         width: 25% !important;
     }*/
+   
     .entity_edit label {
        
         width: 25% !important;
@@ -621,7 +634,7 @@ header {
         margin: 0 auto;    }
 
     #myCarousel1 {
-        width: 100% !important;
+       /* width: 100% !important;*/
         text-align: center;
     }
 
@@ -671,9 +684,40 @@ header {
             line-height: 10px;
              display: none !important; 
         }*/
+       
+        /*.hiderowmenu img#imageurl {
+            width: 100% !important;
+            float: left !important;
+            height: auto !important;
+        }*/
+        .forgot_header .field-validation-error {
+            float: right !important;
+            width: -webkit-fill-available !important;
+            text-align: center !important;
+           /* margin-left: 16.6%;*/
+        }
+        .paypal {
+            width: 50% !important;
+            height:33px;
+        }
+        .registermobile{
+            margin-top:50px !important;
+            text-align:center;
+        }
+        .form_submit {
+            margin-top: 0px !important;
+        }
+        .menuitemadd .cart_check {
+            padding: 0px 7px !important;
+        }
+        .tocont{
+            margin-left:0px !important;
+            font-size:17px !important;
+            margin-top:0px !important;
+        }
 
         .help_line a {
-            margin-right: 54px;
+           /* margin-right: 26px;*/
         }
         #plan-mealtypes tr td {
             padding: 0px 3px !important;
@@ -827,7 +871,7 @@ header {
         }
 
         .content_col h1.visible-xs {
-            margin-top: 66px !important;
+            margin-top: 80px !important;
         }
 
         .background_bg {
@@ -1067,7 +1111,7 @@ header {
         }
        
         .standard_meal {
-            margin-top: 20px !important;
+            margin-top: 70px !important;
         }
         .middle-box{
             line-height:2;
@@ -1096,7 +1140,7 @@ header {
     /*footer*/
     .list-inline a {
         color: #a4a4a4;
-        font-size: 15px;
+        font-size: 18px;
     }
 
         .list-inline a:hover {
@@ -1157,18 +1201,14 @@ p.madeheading{
     min-height: 178px !important;
     padding: 0px 5px;
 }
-.paypal {
-    width: 30% !important;
-    padding: 0px 10px;
-    cursor: pointer;
-}
+
 .cotinue-shopping-button a {
     margin: 5px !important;
     padding: 5px 15px !important;
     text-align: center;
 }
 .menuitemadd .cart_check {
-   /* padding: 0px 10px !important;*/
+  /* padding: 0px 10px !important;*/
     text-align: right;
 }
 
@@ -1188,4 +1228,5 @@ p.madeheading{
     float: left;
     padding-left: 0 !important;
 }
+
 

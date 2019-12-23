@@ -151,6 +151,28 @@ namespace HealthyChefCreationsMVC.CustomModels
 
                         SetAvailableSides(_otherSides);
                         break;
+                    case 6:
+                        CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.BreakfastEntree));
+                        CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.LunchEntree));
+                        CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.DinnerEntree));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.ChildEntree));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.OtherEntree));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Soup));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Salad));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Beverage));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Goods));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Snack));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Supplement));
+                        //CombineDataResults(hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.Miscellaneous));
+                        //List<hcc_AlcMenu2_Result> _hccfSides = hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.OtherSide).ToList<hcc_AlcMenu2_Result>();
+                        var _hccbreakfastSides = hcc.hcc_AlcMenu2(DeliveryDate, (int)Enums.MealTypes.BreakfastSide);
+                        if (_unionResult == null)
+                            _unionResult = _iresult;
+                        else
+                            _iresult = _unionResult;
+                        SetAvailableSides(_hccbreakfastSides);
+                       // SetAvailableSides(_hccfSides);
+                        break;
                     default:
                         break;
                 }
