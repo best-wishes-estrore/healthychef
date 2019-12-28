@@ -354,7 +354,22 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             ddlMealSide2MenuItems.Items.Clear();
 
             var menuItem = hccMenuItem.GetById(menuItemId);
-
+            lblNoOfSideItems.Text =Convert.ToString(menuItem.NoofSideDishes);
+            if (menuItem.NoofSideDishes==0)
+            {
+                ddlMealSide1MenuItems.Enabled = false;
+                ddlMealSide2MenuItems.Enabled = false;
+            }
+            else if (menuItem.NoofSideDishes==1)
+            {
+                ddlMealSide1MenuItems.Enabled = true;
+                ddlMealSide2MenuItems.Enabled = false;
+            }
+            else if (menuItem.NoofSideDishes == 2)
+            {
+                ddlMealSide1MenuItems.Enabled = true;
+                ddlMealSide2MenuItems.Enabled = true;
+            }
             if (menuItem == null)
                 return;
 

@@ -1874,36 +1874,6 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="deliveryDate">No Metadata Documentation available.</param>
-        /// <param name="mealTypeID">No Metadata Documentation available.</param>
-        public ObjectResult<hcc_AlcMenu2_Result> hcc_AlcMenu2(Nullable<global::System.DateTime> deliveryDate, Nullable<global::System.Int32> mealTypeID)
-        {
-            ObjectParameter deliveryDateParameter;
-            if (deliveryDate.HasValue)
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", deliveryDate);
-            }
-            else
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter mealTypeIDParameter;
-            if (mealTypeID.HasValue)
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", mealTypeID);
-            }
-            else
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<hcc_AlcMenu2_Result>("hcc_AlcMenu2", deliveryDateParameter, mealTypeIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="pageNumber">No Metadata Documentation available.</param>
         /// <param name="pageSize">No Metadata Documentation available.</param>
         /// <param name="parentProfileId">No Metadata Documentation available.</param>
@@ -2204,6 +2174,36 @@ namespace HealthyChef.DAL
             }
     
             return base.ExecuteFunction<global::System.String>("GETUSERPREFERENCES", userProfileIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="deliveryDate">No Metadata Documentation available.</param>
+        /// <param name="mealTypeID">No Metadata Documentation available.</param>
+        public ObjectResult<hcc_AlcMenu2_Result> hcc_AlcMenu2(Nullable<global::System.DateTime> deliveryDate, Nullable<global::System.Int32> mealTypeID)
+        {
+            ObjectParameter deliveryDateParameter;
+            if (deliveryDate.HasValue)
+            {
+                deliveryDateParameter = new ObjectParameter("DeliveryDate", deliveryDate);
+            }
+            else
+            {
+                deliveryDateParameter = new ObjectParameter("DeliveryDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter mealTypeIDParameter;
+            if (mealTypeID.HasValue)
+            {
+                mealTypeIDParameter = new ObjectParameter("MealTypeID", mealTypeID);
+            }
+            else
+            {
+                mealTypeIDParameter = new ObjectParameter("MealTypeID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<hcc_AlcMenu2_Result>("hcc_AlcMenu2", deliveryDateParameter, mealTypeIDParameter);
         }
 
         #endregion
@@ -8610,7 +8610,8 @@ namespace HealthyChef.DAL
         /// <param name="costLarge">Initial value of the CostLarge property.</param>
         /// <param name="useCostChild">Initial value of the UseCostChild property.</param>
         /// <param name="costChild">Initial value of the CostChild property.</param>
-        public static hccMenuItem CreatehccMenuItem(global::System.Int32 menuItemID, global::System.String name, global::System.Int32 mealTypeID, global::System.String description, global::System.Boolean isRetired, global::System.Boolean isTaxEligible, global::System.Boolean useCostSmall, global::System.Decimal costSmall, global::System.Boolean useCostRegular, global::System.Decimal costRegular, global::System.Boolean useCostLarge, global::System.Decimal costLarge, global::System.Boolean useCostChild, global::System.Decimal costChild)
+        /// <param name="noofSideDishes">Initial value of the NoofSideDishes property.</param>
+        public static hccMenuItem CreatehccMenuItem(global::System.Int32 menuItemID, global::System.String name, global::System.Int32 mealTypeID, global::System.String description, global::System.Boolean isRetired, global::System.Boolean isTaxEligible, global::System.Boolean useCostSmall, global::System.Decimal costSmall, global::System.Boolean useCostRegular, global::System.Decimal costRegular, global::System.Boolean useCostLarge, global::System.Decimal costLarge, global::System.Boolean useCostChild, global::System.Decimal costChild, global::System.Int32 noofSideDishes)
         {
             hccMenuItem hccMenuItem = new hccMenuItem();
             hccMenuItem.MenuItemID = menuItemID;
@@ -8627,6 +8628,7 @@ namespace HealthyChef.DAL
             hccMenuItem.CostLarge = costLarge;
             hccMenuItem.UseCostChild = useCostChild;
             hccMenuItem.CostChild = costChild;
+            hccMenuItem.NoofSideDishes = noofSideDishes;
             return hccMenuItem;
         }
 
@@ -9140,6 +9142,54 @@ namespace HealthyChef.DAL
         private global::System.Byte[] _ImageData;
         partial void OnImageDataChanging(global::System.Byte[] value);
         partial void OnImageDataChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> DisplayOnWebsite
+        {
+            get
+            {
+                return _DisplayOnWebsite;
+            }
+            set
+            {
+                OnDisplayOnWebsiteChanging(value);
+                ReportPropertyChanging("DisplayOnWebsite");
+                _DisplayOnWebsite = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DisplayOnWebsite");
+                OnDisplayOnWebsiteChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _DisplayOnWebsite;
+        partial void OnDisplayOnWebsiteChanging(Nullable<global::System.Boolean> value);
+        partial void OnDisplayOnWebsiteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoofSideDishes
+        {
+            get
+            {
+                return _NoofSideDishes;
+            }
+            set
+            {
+                OnNoofSideDishesChanging(value);
+                ReportPropertyChanging("NoofSideDishes");
+                _NoofSideDishes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoofSideDishes");
+                OnNoofSideDishesChanged();
+            }
+        }
+        private global::System.Int32 _NoofSideDishes;
+        partial void OnNoofSideDishesChanging(global::System.Int32 value);
+        partial void OnNoofSideDishesChanged();
 
         #endregion
 
@@ -16523,8 +16573,9 @@ namespace HealthyChef.DAL
         /// <param name="useCostChild">Initial value of the UseCostChild property.</param>
         /// <param name="costChild">Initial value of the CostChild property.</param>
         /// <param name="mealTypeID">Initial value of the MealTypeID property.</param>
+        /// <param name="noofSideDishes">Initial value of the NoofSideDishes property.</param>
         /// <param name="allergensList">Initial value of the AllergensList property.</param>
-        public static hcc_AlcMenu2_Result Createhcc_AlcMenu2_Result(global::System.Int32 menuItemID, global::System.String name, global::System.String description, global::System.Boolean useCostRegular, global::System.Decimal costRegular, global::System.Boolean useCostSmall, global::System.Decimal costSmall, global::System.Boolean useCostLarge, global::System.Decimal costLarge, global::System.Boolean useCostChild, global::System.Decimal costChild, global::System.Int32 mealTypeID, global::System.String allergensList)
+        public static hcc_AlcMenu2_Result Createhcc_AlcMenu2_Result(global::System.Int32 menuItemID, global::System.String name, global::System.String description, global::System.Boolean useCostRegular, global::System.Decimal costRegular, global::System.Boolean useCostSmall, global::System.Decimal costSmall, global::System.Boolean useCostLarge, global::System.Decimal costLarge, global::System.Boolean useCostChild, global::System.Decimal costChild, global::System.Int32 mealTypeID, global::System.Int32 noofSideDishes, global::System.String allergensList)
         {
             hcc_AlcMenu2_Result hcc_AlcMenu2_Result = new hcc_AlcMenu2_Result();
             hcc_AlcMenu2_Result.MenuItemID = menuItemID;
@@ -16539,6 +16590,7 @@ namespace HealthyChef.DAL
             hcc_AlcMenu2_Result.UseCostChild = useCostChild;
             hcc_AlcMenu2_Result.CostChild = costChild;
             hcc_AlcMenu2_Result.MealTypeID = mealTypeID;
+            hcc_AlcMenu2_Result.NoofSideDishes = noofSideDishes;
             hcc_AlcMenu2_Result.AllergensList = allergensList;
             return hcc_AlcMenu2_Result;
         }
@@ -17002,6 +17054,30 @@ namespace HealthyChef.DAL
         private global::System.Int32 _MealTypeID;
         partial void OnMealTypeIDChanging(global::System.Int32 value);
         partial void OnMealTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoofSideDishes
+        {
+            get
+            {
+                return _NoofSideDishes;
+            }
+            set
+            {
+                OnNoofSideDishesChanging(value);
+                ReportPropertyChanging("NoofSideDishes");
+                _NoofSideDishes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoofSideDishes");
+                OnNoofSideDishesChanged();
+            }
+        }
+        private global::System.Int32 _NoofSideDishes;
+        partial void OnNoofSideDishesChanging(global::System.Int32 value);
+        partial void OnNoofSideDishesChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

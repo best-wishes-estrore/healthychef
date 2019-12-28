@@ -117,7 +117,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 txtCostLarge.Text = CurrentMenuItem.CostLarge.ToString("f2");
 
                 ddlMealType.SelectedIndex = ddlMealType.Items.IndexOf(ddlMealType.Items.FindByValue(((int)CurrentMenuItem.MealType).ToString()));
-
+                ddlsidedishes.SelectedIndex = ddlsidedishes.Items.IndexOf(ddlsidedishes.Items.FindByValue(((int)CurrentMenuItem.NoofSideDishes).ToString()));
                 hccMenuItemNutritionData nutData = hccMenuItemNutritionData.GetBy(CurrentMenuItem.MenuItemID);
                 if (nutData != null)
                 {
@@ -182,9 +182,10 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 CurrentMenuItem.Name = txtMenuItemName.Text.Trim();
                 CurrentMenuItem.IsTaxEligible = chkIsTaxEligible.Checked;
                 CurrentMenuItem.MealTypeID = int.Parse(ddlMealType.SelectedValue);
-
+                CurrentMenuItem.NoofSideDishes = int.Parse(ddlsidedishes.SelectedValue); 
+                //CurrentMenuItem
                 //Check if File is available.
-                if(Request.Files.Count>0)
+                if (Request.Files.Count>0)
                 {
                     if (MenuItemImage.Value != "")
                     {
@@ -346,6 +347,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 txtTotalFat.Text = string.Empty;
                 //txtTransFat.Text = string.Empty;
                 ddlMealType.ClearSelection();
+                ddlsidedishes.ClearSelection();
                 lstIngredients.Reset();
                 lstPreferences.Reset();
                 //lstMenuItems.Reset();

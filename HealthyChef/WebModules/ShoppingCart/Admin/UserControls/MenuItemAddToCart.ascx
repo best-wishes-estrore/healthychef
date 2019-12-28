@@ -11,9 +11,12 @@
 <asp:RequiredFieldValidator ID="rfvDeliveryDates" runat="server" ControlToValidate="ddlDeliveryDates"
     Text="*" ErrorMessage="A delivery date is required." SetFocusOnError="true" InitialValue="-1" />
 <br />
+
 <asp:DropDownList ID="ddlMenuItems" runat="server" AutoPostBack="true" Enabled="false" />
 <asp:RequiredFieldValidator ID="rfvMenuItems" runat="server" ControlToValidate="ddlMenuItems"
     Text="*" ErrorMessage="A menu item is required." SetFocusOnError="true" InitialValue="-1" />
+<br />
+<label>No of side items:<asp:Label ID="lblNoOfSideItems" runat="server" EnableViewState="false"></asp:Label></label>
 <br />
 <asp:Panel ID="pnlMealSides" runat="server" Visible="false">
     <asp:DropDownList ID="ddlMealSide1MenuItems" runat="server" AutoPostBack="true"/>

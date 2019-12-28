@@ -20,6 +20,7 @@ namespace HealthyChefCreationsMVC.CustomModels
         private IEnumerable<hcc_ProductionDescription_Result> _iresult1;
         private IEnumerable<hcc_AlcMenu2_Result> _unionResult;
         private IEnumerable<hcc_ProductionDescription_Result> _unionResult1;
+        public int NoOfSideDishes { get; set; }
         public List<CartViewModel> cartViewModel { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
@@ -221,6 +222,7 @@ namespace HealthyChefCreationsMVC.CustomModels
         public ViewMenuModel(string ItemName)
         {
             hccMenuItem menuItem = hccMenuItem.GetByItemName(ItemName);
+            this.NoOfSideDishes = menuItem.NoofSideDishes;
             int _MealTYpeID = 0;
             int _MealTypeIdSide = 0;
             //if menuitem price is null

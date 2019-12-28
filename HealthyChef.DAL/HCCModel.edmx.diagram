@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bcda3a82f16b475f8d63a0c25f925bcd" Name="Diagram1" ZoomLevel="130">
+      <Diagram DiagramId="bcda3a82f16b475f8d63a0c25f925bcd" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="HealthyChef.DAL.hccAllergen" Width="1.5" PointX="3.625" PointY="5.5" />
         <EntityTypeShape EntityType="HealthyChef.DAL.hccCoupon" Width="1.5" PointX="6.25" PointY="31.75" />
         <EntityTypeShape EntityType="HealthyChef.DAL.hccDeliverySetting" Width="1.5" PointX="1.375" PointY="0.875" />

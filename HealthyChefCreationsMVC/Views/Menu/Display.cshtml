@@ -75,39 +75,39 @@
 
                     <div class="m-nav" style="text-align: center;">
                         <!--<ul>
-        <li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnBreakfast" value="Breakfast" id="btnBreakfast" class="alc-button-submit active">
+                                <input type="submit" name="ctl00$body$ctl00$btnBreakfast" value="Breakfast" id="btnBreakfast" class="alc-button-submit active">
 
-        </li>
-        <li>
+                            </li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnLunch" value="Lunch" id="btnLunch" class="alc-button-submit">
+                                <input type="submit" name="ctl00$body$ctl00$btnLunch" value="Lunch" id="btnLunch" class="alc-button-submit">
 
-        </li>
-        <li>
+                            </li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnDinner" value="Dinner" id="btnDinner" class="alc-button-submit">
+                                <input type="submit" name="ctl00$body$ctl00$btnDinner" value="Dinner" id="btnDinner" class="alc-button-submit">
 
-        </li>
-        <li>
+                            </li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnChild" value="Child" id="btnChild" class="alc-button-submit">
+                                <input type="submit" name="ctl00$body$ctl00$btnChild" value="Child" id="btnChild" class="alc-button-submit">
 
-        </li>
-        <li>
+                            </li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnDessert" value="Dessert" id="btnDessert" class="alc-button-submit">
+                                <input type="submit" name="ctl00$body$ctl00$btnDessert" value="Dessert" id="btnDessert" class="alc-button-submit">
 
-        </li>
-        <li>
+                            </li>
+                            <li>
 
-            <input type="submit" name="ctl00$body$ctl00$btnOther" value="Other" id="btnOther" class="alc-button-submit">
+                                <input type="submit" name="ctl00$body$ctl00$btnOther" value="Other" id="btnOther" class="alc-button-submit">
 
-        </li>
+                            </li>
 
 
-    </ul>-->
+                        </ul>-->
                         <span style="float:left;color: #276f22;font-weight:bold;font-size:1.6em" class="mble_displaynone">Weekly A La Carte Menus : </span>
 
                         <ul>
@@ -147,12 +147,12 @@
                                     <div style="float: left;">
                                         @*<select name="DeliveryDate" onchange="" id="ddlDeliveryDate" class="date-picker">
 
-                        @foreach (var d in Model.calendar)
-                        {
-                        <option value="@d.DeliveryDate">@d.DeliveryDate.ToString("MMMM d, yyyy (ddd)")</option>
-                        }
+                                            @foreach (var d in Model.calendar)
+                                            {
+                                            <option value="@d.DeliveryDate">@d.DeliveryDate.ToString("MMMM d, yyyy (ddd)")</option>
+                                            }
 
-                        </select>*@
+                                            </select>*@
 
                                         @Html.DropDownList("DeliveryDate", Model.calendarDropdown, new { id = "ddlDeliveryDate", @class = "date-picker", @placeholder = "Select a Delivery Dates" })
                                     </div>
@@ -160,7 +160,7 @@
                             </ul>
                         </fieldset>
                     </div>
-                   
+
                     <div class="col-md-8">
                         <div class="meals">
                             @*<h2>&nbsp;</h2>*@
@@ -301,10 +301,14 @@
                                                                         <div class="fly-column" style="width: 100%;">
                                                                             @if (Model.alcSides != null)
                                                                             {
-                                                                                <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
-                                                                                    <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
-                                                                                    <table class="form-select-menu select-sides" border="0">
-                                                                                        <tbody>
+                                                                                if (m.meal.NoofSideDishes!=0)
+                                                                                {
+                                                                            <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
+                                                                                <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
+                                                                                <table class="form-select-menu select-sides" border="0">
+                                                                                    <tbody>
+                                                                                        @if (m.meal.NoofSideDishes > 0)
+                                                                                        {
                                                                                             <tr>
                                                                                                 <td>
                                                                                                     <select name="sideDish1" id="ddlSide1-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
@@ -315,7 +319,9 @@
                                                                                                     </select>
                                                                                                 </td>
                                                                                             </tr>
-
+                                                                                        }
+                                                                                        @if (m.meal.NoofSideDishes > 1)
+                                                                                        {
                                                                                             <tr class="bg-grey-light">
                                                                                                 <td style="border: none;">
                                                                                                     @if (Model.alcSides != null)
@@ -329,9 +335,14 @@
                                                                                                     }
                                                                                                 </td>
                                                                                             </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
+                                                                                        }
+
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                                }
+                                                                                
 
                                                                             }
                                                                         </div>
@@ -409,6 +420,8 @@
                                                                                     {
                                                                                         <input type="hidden" value="@m.mealSizes[0].SizeId" name="sizeId" />
                                                                                     }
+
+                                                                                  
                                                                                 </div>
                                                                             </td>
                                                                             <td style="vertical-align: top;padding-right: 1em;width: 33.3%">
@@ -445,37 +458,48 @@
                                                                                 <div class="fly-column" style="width: 100%;">
                                                                                     @if (Model.alcSides != null)
                                                                                     {
-                                                                                        <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
-                                                                                            <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
-                                                                                            <table class="form-select-menu select-sides" border="0">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td>
-                                                                                                            <select name="sideDish1" id="ddlSide11-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
-                                                                                                                @foreach (var d in Model.alcSides)
-                                                                                                                {
-                                                                                                                    <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
-                                                                                                                }
-                                                                                                            </select>
-                                                                                                        </td>
-                                                                                                    </tr>
-
-                                                                                                    <tr class="bg-grey-light">
-                                                                                                        <td style="border: none;">
-                                                                                                            @if (Model.alcSides != null)
-                                                                                                            {
-                                                                                                                <select name="sideDish2" id="ddlSide22-@m.meal.MenuItemID" class="meal-side" meal-side="2" style="width:100%;">
-                                                                                                                    @foreach (var d in Model.alcSides)
+                                                                                        if (m.meal.NoofSideDishes != 0)
+                                                                                        {
+                                                                                            <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
+                                                                                                <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
+                                                                                                <table class="form-select-menu select-sides" border="0">
+                                                                                                    <tbody>
+                                                                                                        @if (m.meal.NoofSideDishes > 0)
+                                                                                                        {
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                    <select name="sideDish1" id="ddlSide11-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
+                                                                                                                        @foreach (var d in Model.alcSides)
+                                                                                                                        {
+                                                                                                                            <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                                                        }
+                                                                                                                    </select>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        }
+                                                                                                        @if (m.meal.NoofSideDishes > 0)
+                                                                                                        {
+                                                                                                            <tr class="bg-grey-light">
+                                                                                                                <td style="border: none;">
+                                                                                                                    @if (Model.alcSides != null)
                                                                                                                     {
-                                                                                                                        <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                                                        <select name="sideDish2" id="ddlSide22-@m.meal.MenuItemID" class="meal-side" meal-side="2" style="width:100%;">
+                                                                                                                            @foreach (var d in Model.alcSides)
+                                                                                                                            {
+                                                                                                                                <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                                                            }
+                                                                                                                        </select>
                                                                                                                     }
-                                                                                                                </select>
-                                                                                                            }
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        }
+
+                                                                                                            
+                                                                                                        </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        }
+
 
                                                                                     }
                                                                                 </div>
@@ -532,14 +556,14 @@
                                                                         <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float: left;">
                                                                             <span style="margin: 3px 2px; font-size:13px;">Family Style requires 2 or more servings.</span>
                                                                         </div>
-                                                                        <div class="pull-right" >
+                                                                        <div class="pull-right">
                                                                             @if (m.mealSizes.Count == 1)
                                                                             {
-                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()" >
+                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
                                                                             }
                                                                             else
                                                                             {
-                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange" >
+                                                                                <input type="button" name="" value="Add" onclick="AddMealToCart1(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange">
                                                                             }
                                                                         </div>
                                                                     </div>
@@ -651,7 +675,7 @@
                                                             <div id="divfamilystyleerror_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;float: left;">
                                                                 <span style="margin: 3px 2px;font-size:13px;">Family Style requires 2 or more servings.</span>
                                                             </div>
-                                                            <div class="pull-right" >
+                                                            <div class="pull-right">
                                                                 @if (m.mealSizes.Count == 1)
                                                                 {
                                                                     <input type="button" name="" value="ADD" onclick="AddMealToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
@@ -1230,7 +1254,7 @@
 <div id="LoadingProgress" style="width: 100%; height: 100%; background-color: rgb(102, 102, 102); z-index: 30001; opacity: 0.8;display:none">
     <p style="color: White;margin-left: 25%;">
         Loading, please wait...
-        <img src="~/Content/Images/ajax-loading.gif" >
+        <img src="~/Content/Images/ajax-loading.gif">
     </p>
 </div>
 <div id="snackbar" style="display:none">Product Added To Cart</div>

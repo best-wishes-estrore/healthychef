@@ -63,6 +63,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="fieldRow">
+            <div class="fieldCol">
+                <label style="width:180px">Number of Side Dishes </label>
+                <asp:DropDownList ID="ddlsidedishes" runat="server">
+                    <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                </asp:DropDownList>
+
+            </div>
+        </div>
         <div class="fieldRow">
             <div class="fieldCol">
                 <asp:CheckBox ID="chkIsTaxEligible" runat="server" Text="Sales Tax Eligible" />

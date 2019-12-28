@@ -337,6 +337,8 @@
           <Property Name="GlutenFreeOptionAvailable" Type="bit" />
           <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
           <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="DisplayOnWebsite" Type="bit" />
+          <Property Name="NoofSideDishes" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="hccMenuMenuItems">
           <Key>
@@ -1701,10 +1703,6 @@
             <End Role="hccProgramDefaultMenu" EntitySet="hccProgramDefaultMenus" />
             <End Role="hccProgramDefaultMenuExPref" EntitySet="hccProgramDefaultMenuExPrefs" />
           </AssociationSet>
-          <FunctionImport Name="hcc_AlcMenu2" ReturnType="Collection(HealthyChef.DAL.hcc_AlcMenu2_Result)">
-            <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
-            <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="hccMenuItemNutritionDatas" EntityType="HealthyChef.DAL.hccMenuItemNutritionData" />
           <AssociationSet Name="FK_hcc_MenuItem_NutritionData_hcc_MenuItem" Association="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem">
             <End Role="hccMenuItem" EntitySet="hccMenuItems" />
@@ -1750,6 +1748,10 @@
           </FunctionImport>
           <FunctionImport Name="GETUSERPREFERENCES" ReturnType="Collection(String)">
           <Parameter Name="UserProfileId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="hcc_AlcMenu2" ReturnType="Collection(HealthyChef.DAL.hcc_AlcMenu2_Result)">
+            <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="hccAllergen">
@@ -1868,6 +1870,8 @@
           <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="hccMenuItemNutritionData" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" FromRole="hccMenuItem" ToRole="hccMenuItemNutritionData" />
+          <Property Name="DisplayOnWebsite" Type="Boolean" />
+          <Property Name="NoofSideDishes" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="hccMenu">
           <Key>
@@ -3273,28 +3277,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="hcc_AlcMenu2_Result">
-          <Property Type="String" Name="ImageUrl" Nullable="true" />
-          <Property Type="Binary" Name="ImageData" Nullable="true" />
-          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="Boolean" Name="UseCostRegular" Nullable="false" />
-          <Property Type="Decimal" Name="CostRegular" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostSmall" Nullable="false" />
-          <Property Type="Decimal" Name="CostSmall" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostLarge" Nullable="false" />
-          <Property Type="Decimal" Name="CostLarge" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostChild" Nullable="false" />
-          <Property Type="Decimal" Name="CostChild" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="CanyonRanchRecipe" Nullable="true" />
-          <Property Type="Boolean" Name="CanyonRanchApproved" Nullable="true" />
-          <Property Type="Boolean" Name="VegetarianOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
-          <Property Type="Int32" Name="MealTypeID" Nullable="false" />
-          <Property Type="String" Name="AllergensList" Nullable="false" />
-        </ComplexType>
         <EntityType Name="hccMenuItemNutritionData">
           <Key>
             <PropertyRef Name="MenuItemID" />
@@ -3369,6 +3351,29 @@
           <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
           <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
           <Property Type="Int32" Name="MealTypeID" Nullable="false" />
+          <Property Type="String" Name="AllergensList" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="hcc_AlcMenu2_Result">
+          <Property Type="String" Name="ImageUrl" Nullable="true" />
+          <Property Type="Binary" Name="ImageData" Nullable="true" />
+          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Boolean" Name="UseCostRegular" Nullable="false" />
+          <Property Type="Decimal" Name="CostRegular" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostSmall" Nullable="false" />
+          <Property Type="Decimal" Name="CostSmall" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostLarge" Nullable="false" />
+          <Property Type="Decimal" Name="CostLarge" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostChild" Nullable="false" />
+          <Property Type="Decimal" Name="CostChild" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="CanyonRanchRecipe" Nullable="true" />
+          <Property Type="Boolean" Name="CanyonRanchApproved" Nullable="true" />
+          <Property Type="Boolean" Name="VegetarianOptionAvailable" Nullable="true" />
+          <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
+          <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
+          <Property Type="Int32" Name="MealTypeID" Nullable="false" />
+          <Property Type="Int32" Name="NoofSideDishes" Nullable="false" />
           <Property Type="String" Name="AllergensList" Nullable="false" />
         </ComplexType>
         </Schema>
@@ -3460,6 +3465,8 @@
           <EntitySetMapping Name="hccMenuItems">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccMenuItem">
               <MappingFragment StoreEntitySet="hccMenuItems">
+                <ScalarProperty Name="NoofSideDishes" ColumnName="NoofSideDishes" />
+                <ScalarProperty Name="DisplayOnWebsite" ColumnName="DisplayOnWebsite" />
                 <ScalarProperty Name="ImageData" ColumnName="ImageData" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
@@ -4238,32 +4245,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="hcc_AlcMenu2" FunctionName="HealthyChef.DAL.Store.hcc_AlcMenu2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_AlcMenu2_Result">
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="UseCostRegular" ColumnName="UseCostRegular" />
-                <ScalarProperty Name="CostRegular" ColumnName="CostRegular" />
-                <ScalarProperty Name="UseCostSmall" ColumnName="UseCostSmall" />
-                <ScalarProperty Name="CostSmall" ColumnName="CostSmall" />
-                <ScalarProperty Name="UseCostLarge" ColumnName="UseCostLarge" />
-                <ScalarProperty Name="CostLarge" ColumnName="CostLarge" />
-                <ScalarProperty Name="UseCostChild" ColumnName="UseCostChild" />
-                <ScalarProperty Name="CostChild" ColumnName="CostChild" />
-                <ScalarProperty Name="CanyonRanchRecipe" ColumnName="CanyonRanchRecipe" />
-                <ScalarProperty Name="CanyonRanchApproved" ColumnName="CanyonRanchApproved" />
-                <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
-                <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
-                <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
-                <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
-                <ScalarProperty Name="AllergensList" ColumnName="AllergensList" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="hccMenuItemNutritionDatas">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccMenuItemNutritionData">
               <MappingFragment StoreEntitySet="hccMenuItemNutritionData">
@@ -4322,6 +4303,33 @@
           <FunctionImportMapping FunctionImportName="AvailableDeliveryDatesForItem" FunctionName="HealthyChef.DAL.Store.AvailableDeliveryDatesForItem" />
           <FunctionImportMapping FunctionImportName="GETUSERALLERGENS" FunctionName="HealthyChef.DAL.Store.GETUSERALLERGENS" />
           <FunctionImportMapping FunctionImportName="GETUSERPREFERENCES" FunctionName="HealthyChef.DAL.Store.GETUSERPREFERENCES" />
+          <FunctionImportMapping FunctionImportName="hcc_AlcMenu2" FunctionName="HealthyChef.DAL.Store.hcc_AlcMenu2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_AlcMenu2_Result">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UseCostRegular" ColumnName="UseCostRegular" />
+                <ScalarProperty Name="CostRegular" ColumnName="CostRegular" />
+                <ScalarProperty Name="UseCostSmall" ColumnName="UseCostSmall" />
+                <ScalarProperty Name="CostSmall" ColumnName="CostSmall" />
+                <ScalarProperty Name="UseCostLarge" ColumnName="UseCostLarge" />
+                <ScalarProperty Name="CostLarge" ColumnName="CostLarge" />
+                <ScalarProperty Name="UseCostChild" ColumnName="UseCostChild" />
+                <ScalarProperty Name="CostChild" ColumnName="CostChild" />
+                <ScalarProperty Name="CanyonRanchRecipe" ColumnName="CanyonRanchRecipe" />
+                <ScalarProperty Name="CanyonRanchApproved" ColumnName="CanyonRanchApproved" />
+                <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
+                <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
+                <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
+                <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
+                <ScalarProperty Name="NoofSideDishes" ColumnName="NoofSideDishes" />
+                <ScalarProperty Name="AllergensList" ColumnName="AllergensList" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
