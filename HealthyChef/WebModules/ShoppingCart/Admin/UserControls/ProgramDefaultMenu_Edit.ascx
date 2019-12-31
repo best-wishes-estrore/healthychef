@@ -63,8 +63,100 @@
         else {
             $("#btnSave").removeAttr("enabled");//[BWE]
         }
-
+        BindNoOfSides();
     });
+    function EnableSideddl(type, NoOfside) {
+        var isfirst = true;
+        $('.mealItemDdl').each(function (index) {
+            var ddltype =  $(this).attr("ddltype");
+            if (ddltype == type) {
+                debugger;
+                if (NoOfside == 0) {
+                    $(this).attr('disabled', 'disabled');
+                }
+                if (NoOfside == 2) {
+                    $(this).removeAttr('disabled');
+                 
+                }
+                if (NoOfside == 1) {
+                    if (!isfirst) {
+                       $(this).attr('disabled', 'disabled');
+                    }
+                    if (isfirst) {
+                        $(this).removeAttr('disabled');
+                        isfirst = false
+                    }
+                  
+
+                   
+                }
+            }
+
+        });
+    }
+    function BindNoOfSides() {
+        $('.mealItemDdl').each(function (index) {
+            var ddl = $(this);
+            var ddltype = ddl.attr("ddltype");
+            for (var day = 1; day < 8; day++) {
+                var attrval = "BreakfastEntree-" + day;
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                    var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                     $(lbl).text(NoOfside);
+                    EnableSideddl('BreakfastSide-' + day, NoOfside);
+                     break;
+                }
+                attrval = "LunchEntree-" + day;
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                     var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                    $(lbl).text(NoOfside);
+                     EnableSideddl('LunchSide-' + day, NoOfside);
+                    break;
+                }
+
+                attrval = "DinnerEntree-" + day;
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                    //$(lbl).text(0);
+                    //if ($(this).val().split('-').length > 2) {
+                    //    $(lbl).text($(this).val().split('-')[2]);
+                    //}
+                    var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                    $(lbl).text(NoOfside);
+                     EnableSideddl('DinnerSide-' + day, NoOfside);
+                    break;
+                }
+            }
+
+        });
+    }
+
     function SaveDDLs() {
         MakeUpdateProg(true);
 
@@ -73,6 +165,7 @@
         var cals, fat, prtn, carb, fbr;
 
         $('.mealItemDdl').each(function (index) {
+            debugger;
             var ddl = $(this);
             var ddlVals = ddl.val().toString().split("-");
             var menuItemId = ddlVals[0];
@@ -111,7 +204,7 @@
                 var preferenceId = defMenuPrefsChk[0].attributes[0].value;
 
                 if (defMenuPrefsChkValue) {
-                     
+
                     preferencelist.push(preferenceId);
                     //strJson = strJson + ', "preferenceID": "' + preferenceId + '"';                   
                 }
@@ -191,7 +284,7 @@
     }
 
     $(".mealItemDdl").change(function () {
-         
+        debugger;
         var ddl = $(this);
         var progId = ddl.attr("progId");
         var calId = ddl.attr("calId");
@@ -221,7 +314,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (res) {
-                 
+
                 if (res.d != '') {
                     var pref = res.d.split("*");
                     for (var i = 0; i < pref.length - 1; i++) {
@@ -255,9 +348,10 @@
                 }
             },
             error: function (xhr, msg) {
-                 
+
                 alert('error');
             }
         });
+        BindNoOfSides();
     });
 </script>

@@ -49,6 +49,23 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             }
         }
 
+        public hccMenuItem ReturnNoOfSide(int MenuId)
+        {
+            try
+            {
+                using (var cont = new healthychefEntities())
+                {
+                    return cont.hccMenuItems
+                        .Where(a => a.MenuItemID == MenuId)
+                        .SingleOrDefault();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         protected override void LoadForm()
         {
             try
@@ -107,9 +124,21 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                            && a.Attributes["ord"] == selection.Ordinal.ToString())
                        .SingleOrDefault();
 
+                   
                     if (ddl != null)
                     {
-                        string value = selection.MenuItemID.ToString() + "-" + selection.MenuItemSizeID.ToString();
+                        hccMenuItem hccmenuitem = ReturnNoOfSide(selection.MenuItemID);
+                        string value = string.Empty;
+                        if (hccmenuitem == null)
+                        {
+                             value = selection.MenuItemID.ToString() + "-" + selection.MenuItemSizeID.ToString()+"-"+0;
+                             value = selection.MenuItemID.ToString() + "-" + selection.MenuItemSizeID.ToString()+"-"+0;
+                        }
+                        else
+                        {
+                             value = selection.MenuItemID.ToString() + "-" + selection.MenuItemSizeID.ToString() + "-" + hccmenuitem.NoofSideDishes;
+                        }
+                        
 
                         ddl.SelectedIndex = ddl.Items.IndexOf(ddl.Items.FindByValue(value));
                         ddl.Attributes.Add("defMenuId", selection.DefaultMenuID.ToString());
@@ -174,12 +203,12 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 });
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
         }
-
+       
         protected override void SaveForm()
         {
             // Save handled via Jquery.Ajax
@@ -197,6 +226,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
         void BindDropDownLists()
         {
+            var sideId = 1; 
             if (CurrentProgramId > 0 && CurrentCalendarId > 0)
             {
                 hccProductionCalendar cal = hccProductionCalendar.GetById(CurrentCalendarId);
@@ -224,6 +254,8 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             pnlDay.Controls.Add(pName);
                             pnlDay.Controls.Add(new HtmlGenericControl("hr"));
 
+                          
+
                             requiredMealTypes.ForEach(delegate (hccProgramMealType mealType)
                             {
                                 if (day == 1) // list on the first item
@@ -235,6 +267,8 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                     HtmlGenericControl mealTypespan = new HtmlGenericControl("h4");
                                     mealTypespan.InnerHtml = "<b>" + ((Enums.MealTypes)mealType.MealTypeID).ToString() + "</b>";
                                     pnlDay.Controls.Add(mealTypespan);
+
+
                                 }
                                 else
                                 {
@@ -242,7 +276,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                     mealTypespan.InnerHtml = "<div>&nbsp;</div>";
                                     pnlDay.Controls.Add(mealTypespan);
                                 }
-
+                                
                                 int i = 1;
                                 while (i <= mealType.RequiredQuantity)
                                 {
@@ -253,35 +287,49 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                     ddlMealItem.Attributes.Add("day", day.ToString());
                                     ddlMealItem.Attributes.Add("type", mealType.MealTypeID.ToString());
                                     ddlMealItem.Attributes.Add("ord", i.ToString());
-
+                                    ddlMealItem.Attributes.Add("ddltype", ((Enums.MealTypes)mealType.MealTypeID).ToString()+"-"+day);
+                                    
                                     List<hccMenuItem> menuItems = hccMenuItem.GetByMenuId(menu.MenuID)
                                         .Where(a => a.MealTypeID == mealType.MealTypeID).OrderBy(a => a.Name).ToList();
-
+                                    
                                     List<ListItem> menuItemsWithSizes = new List<ListItem>();
+
+                                    
                                     menuItems.ForEach(delegate (hccMenuItem mainItem)
                                     {
-                                        menuItemsWithSizes.Add(new ListItem(mainItem.Name + " : "
-                                            + Enums.CartItemSize.ChildSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.ChildSize).ToString()));
+                                        ListItem l1 = new ListItem(mainItem.Name + " : "
+                                             + Enums.CartItemSize.ChildSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.ChildSize).ToString()+"-"+mainItem.NoofSideDishes);
+                                        l1.Attributes.Add("data-Noofside", Convert.ToString(mainItem.NoofSideDishes));
+                                        menuItemsWithSizes.Add(l1);
 
-                                        menuItemsWithSizes.Add(new ListItem(mainItem.Name + " : "
-                                            + Enums.CartItemSize.SmallSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.SmallSize).ToString()));
+                                        ListItem l2 = new ListItem(mainItem.Name + " : "
+                                            + Enums.CartItemSize.SmallSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.SmallSize).ToString() + "-" + mainItem.NoofSideDishes);
+                                        l2.Attributes.Add("data-Noofside", Convert.ToString(mainItem.NoofSideDishes));
 
-                                        menuItemsWithSizes.Add(new ListItem(mainItem.Name + " : "
-                                            + Enums.CartItemSize.RegularSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.RegularSize).ToString()));
+                                        menuItemsWithSizes.Add(l2);
+                                        ListItem l3 = new ListItem(mainItem.Name + " : "
+                                            + Enums.CartItemSize.RegularSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.RegularSize).ToString() + "-" + mainItem.NoofSideDishes);
+                                        l3.Attributes.Add("data-Noofside", Convert.ToString(mainItem.NoofSideDishes));
+                                        menuItemsWithSizes.Add(l3);
 
-                                        menuItemsWithSizes.Add(new ListItem(mainItem.Name + " : "
-                                            + Enums.CartItemSize.LargeSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.LargeSize).ToString()));
-
+                                        ListItem l4 = new ListItem(mainItem.Name + " : "
+                                            + Enums.CartItemSize.LargeSize.ToString(), mainItem.MenuItemID.ToString() + "-" + ((int)Enums.CartItemSize.LargeSize).ToString() + "-" + mainItem.NoofSideDishes);
+                                        l4.Attributes.Add("data-Noofside", Convert.ToString(mainItem.NoofSideDishes));
+                                        menuItemsWithSizes.Add(l4);
+                                      
                                     });
 
                                     ddlMealItem.DataSource = menuItemsWithSizes;
                                     ddlMealItem.DataTextField = "Text";
                                     ddlMealItem.DataValueField = "Value";
+                                    
+
+
                                     ddlMealItem.DataBind();
 
                                     ddlMealItem.Items.Insert(0, new ListItem("None", "0"));
                                     pnlDay.Controls.Add(ddlMealItem);
-
+                                  
                                     CheckBoxList menuitempreferencescheckBoxList = new CheckBoxList();
                                     menuitempreferencescheckBoxList.CssClass = "mealItemchk";
                                     menuitempreferencescheckBoxList.Attributes.Add("calId", CurrentCalendarId.ToString());
@@ -293,10 +341,49 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
 
                                     pnlDay.Controls.Add(new HtmlGenericControl("p"));
-                                    i++;
-                                }
 
+                                    foreach (var item in menuItems)
+                                    {
+                                        if (Convert.ToString(item.MealType) == "BreakfastEntree")
+                                        {
+                                            HtmlGenericControl PNofsides = new HtmlGenericControl("p");
+                                            var sideID = sideId;
+                                            PNofsides.InnerHtml = "<center id=centreBreakfastEntree" + day + "><b>Number Of Sides:<label id=lblBreakfastEntree-" + day + ">lblBreakfastEntree-" + day + "</center>";
+                                           
+
+                                            pnlDay.Controls.Add(PNofsides);
+                                        }
+                                        if ( Convert.ToString(item.MealType) == "LunchEntree")
+                                        {
+                                            HtmlGenericControl PNofsides = new HtmlGenericControl("p");
+                                            var sideID = sideId;
+                                            PNofsides.InnerHtml = "<center id=centreLunchEntree" + day + "><b>Number Of Sides:<label id=lblLunchEntree-" + day + ">lblLunchEntree-" + day + "</center>";
+
+
+                                            pnlDay.Controls.Add(PNofsides);
+                                        }
+                                        if ( Convert.ToString(item.MealType) == "DinnerEntree")
+                                        {
+                                            HtmlGenericControl PNofsides = new HtmlGenericControl("p");
+                                            var sideID = sideId;
+                                            PNofsides.InnerHtml = "<center id=centreDinnerEntree" + day + "><b>Number Of Sides:<label id=lblDinnerEntree-" + day + ">lblDinnerEntree-" + day +"</center>";
+                                 
+
+                                            pnlDay.Controls.Add(PNofsides);
+                                        }
+
+                                        break;
+
+                                    }
+
+                                    //pnlDay.Controls.Add(new HtmlGenericControl("hr"));
+
+                                    i++;
+
+                                }
+                                
                                 pnlDay.Controls.Add(new HtmlGenericControl("hr"));
+                                sideId++;
                             });
 
                             HtmlGenericControl nut = new HtmlGenericControl("div");
@@ -313,7 +400,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
                             pnlDefaultMenu.Controls.Add(pnlDay);
                         }
-
+                       
                         if (cal.DeliveryDate < DateTime.Now)
                         {
                             pnlDefaultMenu.Enabled = true;                     //[BWE]
@@ -329,7 +416,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             }
         }
     }
-
+ 
     public class DailyNutrition
     {
         public decimal DayNumber { get; set; }
