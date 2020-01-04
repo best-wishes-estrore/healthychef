@@ -186,7 +186,100 @@
     <img src="/App_Themes/HealthyChef/Images/Spinning_wheel_throbber.gif" alt="Loading..." />Loading....
 </div>--%>
 <script type="text/javascript">
+
+
+    function EnableSideddl(type, NoOfside) {
+        var isfirst = true;
+        $('.mealItemDdl').each(function (index) {
+            var ddltype =  $(this).attr("ddltype");
+            if (ddltype == type) {
+                debugger;
+                if (NoOfside == 0) {
+                    $(this).attr('disabled', 'disabled');
+                }
+                if (NoOfside == 2) {
+                    $(this).removeAttr('disabled');
+                 
+                }
+                if (NoOfside == 1) {
+                    if (!isfirst) {
+                       $(this).attr('disabled', 'disabled');
+                    }
+                    if (isfirst) {
+                        $(this).removeAttr('disabled');
+                        isfirst = false
+                    }
+                  
+
+                   
+                }
+            }
+
+        });
+    }
+    function BindNoOfSides() {
+        debugger;
+        $('.mealItemDdl').each(function (index) {
+            debugger;
+            var ddl = $(this);
+            var ddltype = ddl.attr("ddltype");
+            for (var day = 1; day < 8; day++) {
+                var attrval = "BreakfastEntree";
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                    var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                    $(lbl + '-' + day).text(NoOfside);
+                    EnableSideddl('BreakfastSide', NoOfside);
+                  
+                }
+                attrval = "LunchEntree";
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                     var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                    $(lbl + '-' + day).text(NoOfside);
+                     EnableSideddl('LunchSide', NoOfside);
+                    
+                }
+
+                attrval = "DinnerEntree";
+
+                if (attrval == ddltype) {
+                    debugger;
+                    var val = $(this).val();
+                    var lbl = "#lbl" + attrval;
+                   
+                    var NoOfside = 0;
+                   
+                    if ($(this).val().split('-').length > 2) {
+                        NoOfside = $(this).val().split('-')[2];
+                      
+                    }
+                     $(lbl + '-' + day).text(NoOfside);
+                    EnableSideddl('DinnerSide', NoOfside);
+                   
+                }
+            }
+
+        });
+    }
     $(document).ready(function () {
+        debugger;
         if ($("#pnlDefaultMenu").is(":visible") && !($("#chkIsComplete").is(":disabled"))) {
             $("#btnSave").show();
             $("#btnreset").show();
@@ -197,6 +290,7 @@
         else {
             $("#btnSave").hide();
             $("#btnreset").hide();
+     
         }
 
         //set meal day redFont
@@ -326,7 +420,11 @@
                 mealDay.addClass("redFont");
             }
             else { mealDay.removeClass("redFont"); }
+
+             BindNoOfSides();
         });
+
+        BindNoOfSides();
     });
 
     function SaveDDLs() {

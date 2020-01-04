@@ -138,9 +138,9 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
                     hccCartItemCalendar cartCal = hccCartItemCalendar.GetBy(CurrentCartItem.CartItemID, cal.CalendarID);
 
-                    if(cartCal != null)
+                    if (cartCal != null)
                         chkIsComplete.Checked = cartCal.IsFulfilled;
-                    
+
                     chkIsCancelledDisplay.Checked = CurrentCartItem.IsCancelled;
 
                     lvwAllrgs.DataSource = profile.GetAllergens();
@@ -167,7 +167,22 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 throw;
             }
         }
-
+        public hccMenuItem ReturnNoOfSide(int MenuId)
+        {
+            try
+            {
+                using (var cont = new healthychefEntities())
+                {
+                    return cont.hccMenuItems
+                        .Where(a => a.MenuItemID == MenuId)
+                        .SingleOrDefault();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
         void BindForm()
         {
             if (defaultMenuSelections.Count == 0)
@@ -187,7 +202,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             divItemContainers =
                 pnlDefaultMenu.Controls.OfType<HtmlGenericControl>().Where(a => a.Attributes["class"] == "divItemContainer").ToList();
 
-            divItemContainers.ForEach(delegate(HtmlGenericControl ctrl)
+            divItemContainers.ForEach(delegate (HtmlGenericControl ctrl)
             { divDdls.AddRange(ctrl.Controls.OfType<HtmlGenericControl>().Where(a => a.Attributes["class"] == "divDdl")); });
 
             divDdls.ForEach(a => ddls.AddRange(a.Controls.OfType<DropDownList>()));
@@ -203,7 +218,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             {
                 hccCartItemCalendar cartCalendar = hccCartItemCalendar.GetBy(this.PrimaryKeyIndex, CurrentCalendarId);
 
-                defaultMenuSelections.ForEach(delegate(hccProgramDefaultMenu defaultSelection)
+                defaultMenuSelections.ForEach(delegate (hccProgramDefaultMenu defaultSelection)
                 {
                     try
                     {
@@ -214,8 +229,20 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
                         if (ddl != null)
                         {
+                            hccMenuItem hccmenuitem = ReturnNoOfSide(defaultSelection.MenuItemID);
                             int menuItemId = defaultSelection.MenuItemID;
-                            string value = menuItemId.ToString() + "-" + defaultSelection.MenuItemSizeID.ToString();
+                            string value = string.Empty;
+                            value = menuItemId.ToString() + "-" + defaultSelection.MenuItemSizeID.ToString();
+                            if (hccmenuitem == null)
+                            {
+                                
+                                value = menuItemId.ToString() + "-" + defaultSelection.MenuItemSizeID.ToString() + '-' + 0;
+                            }
+                            else
+                            {
+                                value = menuItemId.ToString() + "-" + defaultSelection.MenuItemSizeID.ToString() + '-' + hccmenuitem.NoofSideDishes;
+                            }
+
                             int DefaultMenuExceptID = 0;
                             int cartcalendarid = 0;
                             // bold face the default selection
@@ -228,11 +255,19 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             if (menuItemExc != null)
                             {
                                 menuItemId = menuItemExc.MenuItemID;
-                                value = menuItemId.ToString() + "-" + menuItemExc.MenuItemSizeID.ToString();
+                                hccmenuitem = ReturnNoOfSide(menuItemId);
+                                if (hccmenuitem == null)
+                                {
+                                    value = menuItemId.ToString() + "-" + menuItemExc.MenuItemSizeID.ToString() + '-' +0;
+                                }
+                                else
+                                {
+                                    value = menuItemId.ToString() + "-" + menuItemExc.MenuItemSizeID.ToString() + '-' + hccmenuitem.NoofSideDishes;
+                                }
                                 DefaultMenuExceptID = menuItemExc.DefaultMenuExceptID;
                                 cartcalendarid = menuItemExc.CartCalendarID;
                             }
-
+                           
                             ddl.SelectedIndex = ddl.Items.IndexOf(ddl.Items.FindByValue(value));
                             ddl.Attributes.Add("defMenuId", defaultSelection.DefaultMenuID.ToString());
                             ddl.Attributes.Add("defMenuExceptionId", DefaultMenuExceptID.ToString());
@@ -285,7 +320,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                         }
                                         else
                                         {
-                                            nutInfo = string.Format("Calories: {0}, Fat: {1}, Protein: {2},  Carbohydrates: {3}, Fiber: {4},Sodium: {5}", 0, 0, 0, 0, 0,0);
+                                            nutInfo = string.Format("Calories: {0}, Fat: {1}, Protein: {2},  Carbohydrates: {3}, Fiber: {4},Sodium: {5}", 0, 0, 0, 0, 0, 0);
                                         }
 
                                         divNuts.InnerText = nutInfo;
@@ -410,7 +445,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                     divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Fats##", "0");
                     divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Ptrns##", "0");
                     divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Carbs##", "0");
-                    divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Fbrs##", "0"); 
+                    divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Fbrs##", "0");
                     divTotalNutrition.InnerHtml = divTotalNutrition.InnerHtml.Replace("##Sod##", "0");
 
                 }
@@ -468,7 +503,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                         pnlDefaultMenu.Controls.Add(pName);
                         pnlDefaultMenu.Controls.Add(new HtmlGenericControl("hr"));
 
-                        requiredMealTypes.ForEach(delegate(hccProgramMealType mealType)
+                        requiredMealTypes.ForEach(delegate (hccProgramMealType mealType)
                         {
                             HtmlGenericControl liType = new HtmlGenericControl("li");
                             liType.InnerText = ((Enums.MealTypes)mealType.MealTypeID).ToString() + ": " + mealType.RequiredQuantity.ToString();
@@ -476,6 +511,8 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             HtmlGenericControl mealTypespan = new HtmlGenericControl("span");
                             mealTypespan.InnerHtml = "<b>" + ((Enums.MealTypes)mealType.MealTypeID).ToString() + "</b>";
                             pnlDefaultMenu.Controls.Add(mealTypespan);
+                            
+
 
                             int i = 1;
                             while (i <= mealType.RequiredQuantity)
@@ -497,13 +534,13 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                 ddlMealItem.Attributes.Add("day", day.ToString());
                                 ddlMealItem.Attributes.Add("type", mealType.MealTypeID.ToString());
                                 ddlMealItem.Attributes.Add("ord", i.ToString());
-
+                                ddlMealItem.Attributes.Add("ddltype", ((Enums.MealTypes)mealType.MealTypeID).ToString());
                                 List<hccMenuItem> menuItems = hccMenuItem.GetByMenuId(menu.MenuID)
                                     .Where(a => a.MealTypeID == mealType.MealTypeID).OrderBy(a => a.Name).ToList();
 
                                 List<ListItem> menuItemsWithSizes = new List<ListItem>();
 
-                                menuItems.ForEach(delegate(hccMenuItem mainItem)
+                                menuItems.ForEach(delegate (hccMenuItem mainItem)
                                 {
                                     hccMenuItem menuItem = hccMenuItem.GetById(mainItem.MenuItemID);
                                     bool hasAllergen = false;
@@ -518,31 +555,31 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                         if (matchAllergens.Count > 0)
                                             hasAllergen = true;
                                     }
-
+                                   
                                     lItem = new ListItem(mainItem.Name + " : "
                                         + Enums.CartItemSize.ChildSize.ToString(), mainItem.MenuItemID.ToString() + "-"
-                                        + ((int)Enums.CartItemSize.ChildSize).ToString());
+                                        + ((int)Enums.CartItemSize.ChildSize).ToString() + '-' + mainItem.NoofSideDishes);
                                     if (hasAllergen)
                                         lItem.Attributes["class"] += " redFont";
                                     menuItemsWithSizes.Add(lItem);
 
                                     lItem = new ListItem(mainItem.Name + " : "
                                         + Enums.CartItemSize.SmallSize.ToString(), mainItem.MenuItemID.ToString() + "-"
-                                        + ((int)Enums.CartItemSize.SmallSize).ToString());
+                                        + ((int)Enums.CartItemSize.SmallSize).ToString() + '-' + mainItem.NoofSideDishes);
                                     if (hasAllergen)
                                         lItem.Attributes["class"] += " redFont";
                                     menuItemsWithSizes.Add(lItem);
 
                                     lItem = new ListItem(mainItem.Name + " : "
                                         + Enums.CartItemSize.RegularSize.ToString(), mainItem.MenuItemID.ToString() + "-"
-                                        + ((int)Enums.CartItemSize.RegularSize).ToString());
+                                        + ((int)Enums.CartItemSize.RegularSize).ToString() + '-' + mainItem.NoofSideDishes);
                                     if (hasAllergen)
                                         lItem.Attributes["class"] += " redFont";
                                     menuItemsWithSizes.Add(lItem);
 
                                     lItem = new ListItem(mainItem.Name + " : "
                                         + Enums.CartItemSize.LargeSize.ToString(), mainItem.MenuItemID.ToString() + "-"
-                                        + ((int)Enums.CartItemSize.LargeSize).ToString());
+                                        + ((int)Enums.CartItemSize.LargeSize).ToString() + '-' + mainItem.NoofSideDishes);
                                     if (hasAllergen)
                                         lItem.Attributes["class"] += " redFont";
                                     menuItemsWithSizes.Add(lItem);
@@ -557,6 +594,19 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                 ddlMealItem.Items.Insert(0, new ListItem("None", "0"));
 
                                 divDdl.Controls.Add(ddlMealItem);
+
+
+                                if (((Enums.MealTypes)mealType.MealTypeID).ToString() == "BreakfastEntree"|| ((Enums.MealTypes)mealType.MealTypeID).ToString() == "LunchEntree"|| ((Enums.MealTypes)mealType.MealTypeID).ToString() == "DinnerEntree")
+                                {
+                                    HtmlGenericControl PNofsides = new HtmlGenericControl("p");
+                                    var lblid = "lbl" + ((Enums.MealTypes)mealType.MealTypeID).ToString();
+
+                                    PNofsides.InnerHtml = "<b>Number Of Sides:<label id="+lblid+"-" + day + ">"+lblid+"-" + day + "";
+
+
+                                pnlDefaultMenu.Controls.Add(PNofsides);
+                                }
+
 
                                 // container for nutrition
                                 HtmlGenericControl divNuts = new HtmlGenericControl("div");
@@ -619,7 +669,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             }
 
             hccCartItemCalendar cartCal = hccCartItemCalendar.GetBy(CurrentCartItem.CartItemID, CurrentCalendarId);
-            CurrentDaysWithAllergens(cartCal.CartCalendarID).ForEach(delegate(int a)
+            CurrentDaysWithAllergens(cartCal.CartCalendarID).ForEach(delegate (int a)
             {
                 ListItem item = rdoDays.Items.FindByValue(a.ToString());
                 if (item != null)
@@ -648,7 +698,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             BindForm();
 
             hccCartItemCalendar cartCal = hccCartItemCalendar.GetBy(CurrentCartItem.CartItemID, CurrentCalendarId);
-            CurrentDaysWithAllergens(cartCal.CartCalendarID).ForEach(delegate(int a)
+            CurrentDaysWithAllergens(cartCal.CartCalendarID).ForEach(delegate (int a)
                 {
 
                     ListItem item = rdoDays.Items.FindByValue(a.ToString());
@@ -666,7 +716,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 int lastTypeId = 0;
 
                 defaultMenuSelections.Where(a => a.DayNumber == i)
-                    .OrderBy(a => a.MealTypeID).ToList().ForEach(delegate(hccProgramDefaultMenu defaultSelection)
+                    .OrderBy(a => a.MealTypeID).ToList().ForEach(delegate (hccProgramDefaultMenu defaultSelection)
                     {
                         int menuItemId = defaultSelection.MenuItemID;
                         int menuItemSizeId = defaultSelection.MenuItemSizeID;
