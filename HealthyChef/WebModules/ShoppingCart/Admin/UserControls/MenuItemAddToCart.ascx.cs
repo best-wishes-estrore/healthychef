@@ -24,12 +24,42 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
             btnSave.Click += base.SubmitButtonClick;
             btnCancel.Click += base.CancelButtonClick;
+
+
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+            }
+            if ((ddlMenuItems.SelectedValue == "" || ddlMenuItems.SelectedValue == "-1"))
+            {
+                Session["NoOfSide"] = null;
+            }
+            if (Session["NoOfSide"] != null)
+            {
+
+                int NoofSideDishes = Convert.ToInt32(Session["NoOfSide"]);
+                lblNoOfSideItems.Text = Convert.ToString(Session["NoOfSide"]);
+
+                if (NoofSideDishes == 0)
+                {
+                    ddlMealSide1MenuItems.Enabled = false;
+                    ddlMealSide2MenuItems.Enabled = false;
+                }
+                else if (NoofSideDishes == 1)
+                {
+                    ddlMealSide1MenuItems.Enabled = true;
+                    ddlMealSide2MenuItems.Enabled = false;
+                }
+                else if (NoofSideDishes == 2)
+                {
+                    ddlMealSide1MenuItems.Enabled = true;
+                    ddlMealSide2MenuItems.Enabled = true;
+                }
+
 
             }
         }
@@ -161,9 +191,9 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 {
                     hccMenuItem menuItem = hccMenuItem.GetById(int.Parse(ddlMenuItems.SelectedValue));
                     var itemSize = (Enums.CartItemSize)(int.Parse(ddlOptions.SelectedValue));
-                    if(chkFamilyStyle.Checked)
+                    if (chkFamilyStyle.Checked)
                     {
-                            isFamilyStyle = true;
+                        isFamilyStyle = true;
                     }
                     int profileId = 0;
                     if (divProfiles.Visible)
@@ -189,7 +219,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             Meal_ShippingCost = hccDeliverySetting.GetBy(menuItem.MealType).ShipCost,
                             UserProfileID = profileId,
                             Quantity = int.Parse(txtQuantity.Text.Trim()),
-                            Plan_IsAutoRenew= isFamilyStyle,
+                            Plan_IsAutoRenew = isFamilyStyle,
                             IsCompleted = false
                         };
 
@@ -207,7 +237,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             }
                         }
 
-                        var  prefsString = string.Empty;
+                        var prefsString = string.Empty;
 
                         if (prefsList.Count > 0)
                             prefsString = prefsList
@@ -224,7 +254,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                             cartItem.Save();
 
                             if (cartItem.CartItemID > 0)
-                                prefsList.ForEach(delegate(hccCartItemMealPreference cartPref)
+                                prefsList.ForEach(delegate (hccCartItemMealPreference cartPref)
                                 {
                                     cartPref.CartItemID = cartItem.CartItemID;
                                     cartPref.Save();
@@ -350,17 +380,20 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
         void BindMealSidesMenuItems(int menuItemId)
         {
+
+
             ddlMealSide1MenuItems.Items.Clear();
             ddlMealSide2MenuItems.Items.Clear();
 
             var menuItem = hccMenuItem.GetById(menuItemId);
-            lblNoOfSideItems.Text =Convert.ToString(menuItem.NoofSideDishes);
-            if (menuItem.NoofSideDishes==0)
+            Session["NoOfSide"] = menuItem.NoofSideDishes;
+            lblNoOfSideItems.Text = Convert.ToString(menuItem.NoofSideDishes);
+            if (menuItem.NoofSideDishes == 0)
             {
                 ddlMealSide1MenuItems.Enabled = false;
                 ddlMealSide2MenuItems.Enabled = false;
             }
-            else if (menuItem.NoofSideDishes==1)
+            else if (menuItem.NoofSideDishes == 1)
             {
                 ddlMealSide1MenuItems.Enabled = true;
                 ddlMealSide2MenuItems.Enabled = false;
@@ -383,7 +416,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 return;
 
             //var menuItems = hccMenuItem.GetByMenuId(cal.MenuID).Where(a => (a.UseCostChild || a.UseCostLarge || a.UseCostRegular || a.UseCostSmall) && a.MealType == hccMenuItem.EntreeSideMealTypes[menuItem.MealType] && !a.IsRetired).ToList();//!a.IsRetired Manoj
-            var menuItems = hccMenuItem.GetByMenuId(cal.MenuID).Where(a =>  a.MealType == hccMenuItem.EntreeSideMealTypes[menuItem.MealType] && !a.IsRetired).ToList();//!a.IsRetired Manoj
+            var menuItems = hccMenuItem.GetByMenuId(cal.MenuID).Where(a => a.MealType == hccMenuItem.EntreeSideMealTypes[menuItem.MealType] && !a.IsRetired).ToList();//!a.IsRetired Manoj
 
             BindMealSideMenuItems(ddlMealSide1MenuItems, menuItems);
             BindMealSideMenuItems(ddlMealSide2MenuItems, menuItems);
@@ -418,7 +451,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
 
                 if (itemSizes.Count > 0)
                 {
-                    itemSizes.ForEach(delegate(Tuple<string, int> sizeItem)
+                    itemSizes.ForEach(delegate (Tuple<string, int> sizeItem)
                     {
                         Enums.CartItemSize cis = ((Enums.CartItemSize)(sizeItem.Item2));
 
