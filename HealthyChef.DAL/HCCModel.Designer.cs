@@ -2205,6 +2205,77 @@ namespace HealthyChef.DAL
     
             return base.ExecuteFunction<hcc_AlcMenu2_Result>("hcc_AlcMenu2", deliveryDateParameter, mealTypeIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="isSelected">No Metadata Documentation available.</param>
+        /// <param name="menuItemId">No Metadata Documentation available.</param>
+        /// <param name="menuId">No Metadata Documentation available.</param>
+        public int IsDisplayOnShoppingSiteUsingBoolCodition(Nullable<global::System.Boolean> isSelected, Nullable<global::System.Int32> menuItemId, Nullable<global::System.Int32> menuId)
+        {
+            ObjectParameter isSelectedParameter;
+            if (isSelected.HasValue)
+            {
+                isSelectedParameter = new ObjectParameter("IsSelected", isSelected);
+            }
+            else
+            {
+                isSelectedParameter = new ObjectParameter("IsSelected", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter menuItemIdParameter;
+            if (menuItemId.HasValue)
+            {
+                menuItemIdParameter = new ObjectParameter("menuItemId", menuItemId);
+            }
+            else
+            {
+                menuItemIdParameter = new ObjectParameter("menuItemId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter menuIdParameter;
+            if (menuId.HasValue)
+            {
+                menuIdParameter = new ObjectParameter("menuId", menuId);
+            }
+            else
+            {
+                menuIdParameter = new ObjectParameter("menuId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("IsDisplayOnShoppingSiteUsingBoolCodition", isSelectedParameter, menuItemIdParameter, menuIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="menuItemId">No Metadata Documentation available.</param>
+        /// <param name="menuId">No Metadata Documentation available.</param>
+        public ObjectResult<Nullable<global::System.Int32>> IsDisplayonWebsiteList(Nullable<global::System.Int32> menuItemId, Nullable<global::System.Int32> menuId)
+        {
+            ObjectParameter menuItemIdParameter;
+            if (menuItemId.HasValue)
+            {
+                menuItemIdParameter = new ObjectParameter("menuItemId", menuItemId);
+            }
+            else
+            {
+                menuItemIdParameter = new ObjectParameter("menuItemId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter menuIdParameter;
+            if (menuId.HasValue)
+            {
+                menuIdParameter = new ObjectParameter("menuId", menuId);
+            }
+            else
+            {
+                menuIdParameter = new ObjectParameter("menuId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Nullable<global::System.Int32>>("IsDisplayonWebsiteList", menuItemIdParameter, menuIdParameter);
+        }
 
         #endregion
 

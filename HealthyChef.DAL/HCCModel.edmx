@@ -347,6 +347,7 @@
           </Key>
           <Property Name="MenuItemID" Type="int" Nullable="false" />
           <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="DisplayOnShoppingSite" Type="bit" />
         </EntityType>
         <EntityType Name="hccMenus">
           <Key>
@@ -1225,6 +1226,15 @@
           <Parameter Name="aStartDate" Type="datetime" Mode="In" />
           <Parameter Name="aEndDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="IsDisplayOnShoppingSiteUsingBoolCodition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IsSelected" Type="bit" Mode="In" />
+          <Parameter Name="menuItemId" Type="int" Mode="In" />
+          <Parameter Name="menuId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IsDisplayonWebsiteList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="menuItemId" Type="int" Mode="In" />
+          <Parameter Name="menuId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HealthyChefDALStoreContainer">
           <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hccAddresses" EntityType="Self.hccAddresses" Schema="dbo" store:Type="Tables" />
@@ -1752,6 +1762,15 @@
           <FunctionImport Name="hcc_AlcMenu2" ReturnType="Collection(HealthyChef.DAL.hcc_AlcMenu2_Result)">
             <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
             <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IsDisplayOnShoppingSiteUsingBoolCodition">
+            <Parameter Name="IsSelected" Mode="In" Type="Boolean" />
+            <Parameter Name="menuItemId" Mode="In" Type="Int32" />
+            <Parameter Name="menuId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IsDisplayonWebsiteList" ReturnType="Collection(Int32)">
+            <Parameter Name="menuItemId" Mode="In" Type="Int32" />
+            <Parameter Name="menuId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="hccAllergen">
@@ -4330,6 +4349,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IsDisplayOnShoppingSiteUsingBoolCodition" FunctionName="HealthyChef.DAL.Store.IsDisplayOnShoppingSiteUsingBoolCodition" />
+          <FunctionImportMapping FunctionImportName="IsDisplayonWebsiteList" FunctionName="HealthyChef.DAL.Store.IsDisplayonWebsiteList" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

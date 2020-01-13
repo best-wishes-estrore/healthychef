@@ -102,7 +102,7 @@ namespace HealthyChef.DAL
                     Servings = cartItem.Quantity.ToString();
                     Preferences = hccCartItemMealPreference.GetPrefsBy(cartItem.CartItemID)
                         .Select(a => a.Name).DefaultIfEmpty("None").Aggregate((c, d) => c + ", " + d);
-                    Sides = "None";
+                    Sides = "";
 
                     if (hccMenuItem.EntreeMealTypes.Contains(MealType) && cartItem.MealSideMenuItems.Count > 0)
                     {
@@ -450,7 +450,7 @@ namespace HealthyChef.DAL
                                     Servings = cartItem.Quantity.ToString(),
                                     MenuItem = selItem,
                                     Quantity = cartItem.Quantity,
-                                    Sides = "None"
+                                    Sides = ""
                                 };
 
                                 if (cartItem.SnapShipAddrId.HasValue)
@@ -518,7 +518,7 @@ namespace HealthyChef.DAL
                                         Servings = cartItem.Quantity.ToString(),
                                         MenuItem = selItem,
                                         Quantity = cartItem.Quantity,
-                                        Sides = "None"
+                                        Sides = ""
                                     };
 
                                     if (cartItem.SnapShipAddrId.HasValue)

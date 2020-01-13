@@ -15,6 +15,14 @@
     {
         background-color: #fff;
     }
+    .block {
+            Font-Size:10px ;
+            Width:300px;
+            height:150px;
+            width:200px;
+            border:1px solid aliceblue;
+            overflow-y:scroll;
+        }
 </style>
 
 <fieldset>
@@ -56,8 +64,9 @@
                         </span>
                     </td>
                     <td>
-                        <asp:ListBox runat="server" ID="lstSelectedItems" Font-Size="10px" Width="300px"
-                            SelectionMode="Multiple" Rows="12" />
+                         <div class="block">
+                        <asp:CheckBoxList runat="server" ID="lstSelectedItems"  Font-Size="10px" Width="200px"  RepeatLayout="Table" ></asp:CheckBoxList>
+                        </div>
                     </td>
                     <td width="200px">
                         <div style="display: inline-block; height: 15px; width: 15px; background-color: #ff6a00;margin:0px 10px" />

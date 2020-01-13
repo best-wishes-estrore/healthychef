@@ -61,7 +61,7 @@ namespace HealthyChef.WebModules.Components.HealthyChef
             {
                 _SelectionMode = value;
                 lstAvailableItems.SelectionMode = value;
-                lstSelectedItems.SelectionMode = value;
+                //lstSelectedItems.SelectedValue = value;
 
                 if (value == ListSelectionMode.Single)
                 {
@@ -134,13 +134,18 @@ namespace HealthyChef.WebModules.Components.HealthyChef
             allItems.ForEach(a => a.Enabled = !selectedItems.Contains(a.Value));
         }
 
-        void lstSelectedItems_DataBound(object sender, EventArgs e)
+        public void lstSelectedItems_DataBound(object sender, EventArgs e)
         {
-            ListBox lstSelectedItems = (ListBox)sender;
-            List<ListItem> items = lstSelectedItems.Items.OfType<ListItem>().ToList();
+            hccMenu c = new hccMenu();
 
-            items.ForEach(delegate(ListItem item)
+            CheckBoxList lstSelectedItems = (CheckBoxList)sender;
+            List<ListItem> items = lstSelectedItems.Items.OfType<ListItem>().ToList();
+            List<hccMenuItem> list = lstSelectedItems.DataSource as List<hccMenuItem>;
+
+            //List<hccMenuItem> menuitems = new List<hccMenuItem>(items.Cast<hccMenuItem>().ToList());
+            items.ForEach(delegate (ListItem item)
             {
+
                 if (EntityType == typeof(hccMenuItem))
                 {
                     hccMenuItem t1 = hccMenuItem.GetById(int.Parse(item.Value));
@@ -149,7 +154,8 @@ namespace HealthyChef.WebModules.Components.HealthyChef
 
                     List<hccIngredient> ings = t1.GetIngredients();
 
-                    ings.ForEach(delegate(hccIngredient ing) { if (ing.IsRetired) { item.Attributes.Add("class", "retired_child"); } });
+                    ings.ForEach(delegate (hccIngredient ing) { if (ing.IsRetired) { item.Attributes.Add("class", "retired_child"); } });
+
                 }
                 else if (EntityType == typeof(hccPreference))
                 {
@@ -172,6 +178,21 @@ namespace HealthyChef.WebModules.Components.HealthyChef
                 else
                 {//do nothing
                 }
+                int menuItemId = 0;
+                var menuId = Request.QueryString["MenuId"].ToString();
+                if (menuId != null)
+                {
+                    menuItemId = c.getItems(int.Parse(item.Value), menuId);
+                    if (int.Parse(item.Value) == menuItemId)
+                    {
+                        item.Selected = true;
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+
             });
         }
 
@@ -219,6 +240,14 @@ namespace HealthyChef.WebModules.Components.HealthyChef
                 lstSelectedItems.Items.Add(new ListItem(item.Text, item.Value));
                 item.Enabled = false;
             }
+            if (items.Count > 0)
+            {
+                for (int i = 0; i < lstSelectedItems.Items.Count; i++)
+                {
+                    lstSelectedItems.Items[i].Selected = true;
+                }
+
+            }
         }
 
         protected void OnSelectSelected()
@@ -229,6 +258,16 @@ namespace HealthyChef.WebModules.Components.HealthyChef
             {
                 lstSelectedItems.Items.Add(new ListItem(item.Text, item.Value));
                 item.Enabled = false;
+                lstSelectedItems.Items.OfType<ListItem>().ToList().ForEach(delegate (ListItem selectedItems)
+                {
+                    if (item.Value == selectedItems.Value)
+                    {
+                        if (!selectedItems.Selected)
+                        {
+                            selectedItems.Selected = true;
+                        }
+                    }
+                });
             }
         }
 
@@ -240,6 +279,11 @@ namespace HealthyChef.WebModules.Components.HealthyChef
         public List<int> GetSelectedKeys()
         {
             return lstSelectedItems.Items.OfType<ListItem>().Select(a => int.Parse(a.Value)).ToList();
+        }
+
+        public List<ListItem> GetCheckBoxSelectedItems()
+        {
+            return lstSelectedItems.Items.OfType<ListItem>().ToList();
         }
 
         public void Reset()

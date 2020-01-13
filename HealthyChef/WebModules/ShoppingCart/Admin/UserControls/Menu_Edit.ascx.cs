@@ -139,6 +139,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             {
                 List<int> selKeys = picker.GetSelectedKeys();
                 List<hccMenuItem> newItemList = new List<hccMenuItem>();
+                List<ListItem> listItems = picker.GetCheckBoxSelectedItems();
 
                 selKeys.ForEach(delegate(int key)
                 {
@@ -147,6 +148,13 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 });
 
                 CurrentMenu.AddItems(newItemList);
+
+                listItems.ForEach(delegate (ListItem selectedItems)
+                {
+                    int menuItemId = Convert.ToInt32(selectedItems.Value);
+
+                    CurrentMenu.IsSelectedFalse(menuItemId, selectedItems.Selected);
+                });
             }
         }
 

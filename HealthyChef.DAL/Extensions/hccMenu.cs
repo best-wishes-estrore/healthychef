@@ -150,6 +150,43 @@ namespace HealthyChef.DAL
             }
         }
 
+        public int getItems(int menuItemId, string MenuId)
+        {
+            try
+            {
+                using (var cont = new healthychefEntities())
+                {
+                    int menuItemIdData = 0;
+                    var data = cont.IsDisplayonWebsiteList(menuItemId, Convert.ToInt32(MenuId));
+
+                    foreach (var newdata in data)
+                    {
+                        menuItemIdData = newdata.Value;
+                    }
+                    return menuItemIdData;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void IsSelectedFalse(int menuItemId, bool SelectedItemValue)
+        {
+            try
+            {
+
+                using (var cont = new healthychefEntities())
+                {
+                    var data = cont.IsDisplayOnShoppingSiteUsingBoolCodition(SelectedItemValue, menuItemId, this.MenuID);
+                }
+            }
+            catch (Exception ex)
+            { throw; }
+        }
+
         public void RemoveItems()
         {
             try
