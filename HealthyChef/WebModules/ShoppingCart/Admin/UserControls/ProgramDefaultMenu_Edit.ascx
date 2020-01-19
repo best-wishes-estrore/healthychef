@@ -28,6 +28,10 @@
         width: 100%;
         font-size: 10px;
     }
+     select {
+        font-weight:normal !important;
+    }
+ 
 </style>
 <div class="col-sm-12 lengend">
     <div class="fieldRow">
@@ -70,7 +74,7 @@
         $('.mealItemDdl').each(function (index) {
             var ddltype =  $(this).attr("ddltype");
             if (ddltype == type) {
-                debugger;
+               
                 if (NoOfside == 0) {
                     $(this).attr('disabled', 'disabled');
                 }
@@ -102,7 +106,7 @@
                 var attrval = "BreakfastEntree-" + day;
 
                 if (attrval == ddltype) {
-                    debugger;
+                    //debugger;
                     var val = $(this).val();
                     var lbl = "#lbl" + attrval;
                     var NoOfside = 0;
@@ -118,7 +122,7 @@
                 attrval = "LunchEntree-" + day;
 
                 if (attrval == ddltype) {
-                    debugger;
+                  //  debugger;
                     var val = $(this).val();
                     var lbl = "#lbl" + attrval;
                      var NoOfside = 0;
@@ -135,7 +139,7 @@
                 attrval = "DinnerEntree-" + day;
 
                 if (attrval == ddltype) {
-                    debugger;
+                   // debugger;
                     var val = $(this).val();
                     var lbl = "#lbl" + attrval;
                     //$(lbl).text(0);
@@ -165,7 +169,7 @@
         var cals, fat, prtn, carb, fbr;
 
         $('.mealItemDdl').each(function (index) {
-            debugger;
+          //  debugger;
             var ddl = $(this);
             var ddlVals = ddl.val().toString().split("-");
             var menuItemId = ddlVals[0];
@@ -284,7 +288,7 @@
     }
 
     $(".mealItemDdl").change(function () {
-        debugger;
+       // debugger;
         var ddl = $(this);
         var progId = ddl.attr("progId");
         var calId = ddl.attr("calId");

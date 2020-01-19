@@ -14,7 +14,7 @@ namespace HealthyChef.DAL.Extensions
     {
         #region Manage Shipping Zones
 
-        public static int AddUpdateShippingZone(int ZoneID, string ZoneName, string TypeName, string Multiplier, string MinFee, string MaxFee, bool DefaultshipZone, bool IsPickupShippingZone)
+        public static int AddUpdateShippingZone(int ZoneID, string ZoneName, string TypeName, string Multiplier, string MinFee, string MaxFee, bool DefaultshipZone, bool IsPickupShippingZone,int OrderMinimum)
         {
             try
             {
@@ -38,6 +38,7 @@ namespace HealthyChef.DAL.Extensions
                             cmd.Parameters.AddWithValue("@MaxFee", Convert.ToDecimal(maxFee));
                             cmd.Parameters.AddWithValue("@IsDefaultShippingZone", DefaultshipZone);
                             cmd.Parameters.AddWithValue("@IsPickupShippingZone", IsPickupShippingZone);
+                            cmd.Parameters.AddWithValue("@OrderMinimum", OrderMinimum);
                             object t = cmd.ExecuteScalar();
                             cmd.Dispose();
                             conn.Close();

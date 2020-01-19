@@ -235,7 +235,7 @@
                     if (Model.isUserLoggedIn)
                     {
                         <span style="padding-right: 15px;display:none;">
-                            Billing Address:&nbsp;
+                            Shipping Address:&nbsp;
                             <a href="/my-profile.aspx/3" id="" class="form-show">[&nbsp;Edit&nbsp;]</a>
                             <br>
                             <span id="">@Html.Raw(Model.BillingAddress)</span>
@@ -282,13 +282,13 @@
                                 <table style="width: 100%; padding: 0px; margin:10px 0px;" class="txtQuantity_item">
                                     <thead>
                                         @*<tr visible="true" style="height: 0px;">
-                                            <th style="width:50%;height: 0px;"></th>
-                                            <th style="width:80px;height: 0px;"></th>
-                                            <th style="width: 80px; height: 0px;"></th>
-                                            <th style="width: 80px; height: 0px;"></th>
-                                            <th style="width: 80px; height: 0px;"></th>
-                                            <th style="width: 100px; height: 0px;"></th>
-                                        </tr>*@
+                                                <th style="width:50%;height: 0px;"></th>
+                                                <th style="width:80px;height: 0px;"></th>
+                                                <th style="width: 80px; height: 0px;"></th>
+                                                <th style="width: 80px; height: 0px;"></th>
+                                                <th style="width: 80px; height: 0px;"></th>
+                                                <th style="width: 100px; height: 0px;"></th>
+                                            </tr>*@
                                         <tr id="" style="background:#ddd;">
                                             <th style="width:50%">Product</th>
                                             <th style="width:80px">Family Style</th>
@@ -379,15 +379,15 @@
                                                             {
                                                                 if (Item.ItemName.Contains("Dinner"))
                                                                 {
-                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
                                                                 }
                                                                 else if (Item.ItemName.Contains("Lunch"))
                                                                 {
-                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
                                                                 }
                                                                 else if (Item.ItemName.Contains("Breakfast"))
                                                                 {
-                                                                  <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
+                                                                    <span id="ItemName" style="color:gray;">@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[1]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[3]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[4] @Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[5]-@Item.ItemName.Replace("w/ Profile Preferences", "").Split('-')[6]</span>
                                                                 }
                                                                 else if (Item.ItemName.Split('-').Length == 5 && Item.ItemName.Contains("Healthy Living"))
                                                                 {
@@ -495,7 +495,7 @@
                                                         if (Model.CurrentCardInfo != null || Model.CurrentCardInfo == null)
                                                         {
                                                             <span style="padding-right: 15px;">
-                                                                Billing Address:&nbsp;
+                                                                Shipping Address:&nbsp;
                                                                 <a href="/my-profile.aspx/3" id="" class="form-show">[&nbsp;Edit&nbsp;]</a>
                                                                 <br>
                                                                 <span id="">@Html.Raw(Model.BillingAddress)</span>
@@ -621,27 +621,31 @@
                                                             <td style="vertical-align:top">
                                                                 @if (Model.Discount == "$0.00")
                                                                 {
-                                                                    <span id="" style="color:black;">@Model.Discount</span>
+                                                                    <span id="spanDiscount" style="color:black;">@Model.Discount</span>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <span id="" style="color:red;"> - @Model.Discount</span>
+                                                                    <span id="spanDiscount" style="color:red;"> - @Model.Discount</span>
                                                                 }
                                                             </td>
                                                         </tr>
 
                                                         <tr id="lblDiscount">
                                                             <td>
-                                                                Sub Total:
+                                                                <b>  Product Total:</b>
                                                             </td>
                                                             <td style="vertical-align:top">
                                                                 @if (Model.profCart.Count > 0)
                                                                 {
-                                                                    <span id="lblsubtotal">@Model.mockSubTotal</span>
+                                                                    <b>
+                                                                        <span id="lblsubtotal">@Model.mockSubTotal</span>
+                                                                    </b>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <span id="lblsubtotal">@decimal.Zero.ToString("c")</span>
+                                                                    <b>
+                                                                        <span id="lblsubtotal">@decimal.Zero.ToString("c")</span>
+                                                                    </b>
                                                                 }
                                                             </td>
                                                         </tr>
@@ -734,6 +738,22 @@
                                                             </td>
                                                         </tr>
 
+                                                        <tr id="" class="bgcolor" style="display:none;">
+                                                            <td>
+                                                                Order Minimum:
+                                                            </td>
+                                                            <td>
+                                                                @if (@Session["OrderMinimum"].ToString() != "0")
+                                                                {
+                                                                <span id="spanOrderMinimum">@Session["OrderMinimum"].ToString()</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span id="">0</span>
+                                                                }
+                                                            </td>
+                                                        </tr>
+
                                                         <tr id="" style="display:none;">
                                                             @*class="bgcolor">*@
                                                             <td>
@@ -753,7 +773,7 @@
                                                             </td>
                                                         </tr>
                                                         @*@if (Model.ActiveCoupon != null)
-        {*@
+                                                            {*@
 
 
                                                         <tr id="lblDiscountedSubTotal" style="display:none;">
@@ -784,7 +804,7 @@
                                                                 @if (Model.parentProfile != null)
                                                                 {
                                                                     @*var RemainingAcctountBalance = Model.parentProfile.AccountBalance - Model.creditAppliedToBalance;
-                    <span id="">@RemainingAcctountBalance.ToString("c")</span>*@
+                                                                        <span id="">@RemainingAcctountBalance.ToString("c")</span>*@
                                                                     <span id="">@Model.RemainAcctBalance </span>
                                                                 }
                                                                 else
@@ -832,7 +852,7 @@
                                                                 @*@{var _profileTotal = currentcart.SubTotalAdj + currentcart.SubTax + currentcart.SubShipping;}*@
 
                                                                 @*@{var _profileTotal = 0}
-                <span id="">@_profileTotal.ToString("c")</span>*@
+                                                                    <span id="">@_profileTotal.ToString("c")</span>*@
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -1002,17 +1022,17 @@
                         <div class="clear"></div>
                         <div class="cotinue-shopping-button">
                             @*<input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnContinue" value="Continue Shopping" id="ctl00_body_ctl00_CartDisplay1_btnContinue" class="pixels-button-double pixels-button-double-orange">
-        &nbsp;
-        <input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnClearCart" value="Empty Cart" id="ctl00_body_ctl00_CartDisplay1_btnClearCart" class="pixels-button pixels-button-solid-grey">
-        &nbsp;
-        <input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnCheckOut" value="Check Out" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$body$ctl00$CartDisplay1$btnCheckOut&quot;, &quot;&quot;, true, &quot;CheckoutGroup&quot;, &quot;&quot;, false, false))" id="ctl00_body_ctl00_CartDisplay1_btnCheckOut" class="pixels-button pixels-button-solid-green">*@
+                                &nbsp;
+                                <input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnClearCart" value="Empty Cart" id="ctl00_body_ctl00_CartDisplay1_btnClearCart" class="pixels-button pixels-button-solid-grey">
+                                &nbsp;
+                                <input type="submit" name="ctl00$body$ctl00$CartDisplay1$btnCheckOut" value="Check Out" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$body$ctl00$CartDisplay1$btnCheckOut&quot;, &quot;&quot;, true, &quot;CheckoutGroup&quot;, &quot;&quot;, false, false))" id="ctl00_body_ctl00_CartDisplay1_btnCheckOut" class="pixels-button pixels-button-solid-green">*@
                             @*@if (Model.IsExpiredOrder)
-        {
-            <a href="@Url.Action("CartCheckout", "Cart")" class="btn btn-orange" style="float:right;margin:0px 5px;text-transform:capitalize;display:none;">Continue</a>
-            <a href="@Url.Action("Details", "Content", new { Id = 7 })" class="btn btn-default" style="float:right;margin:0px 5px;display:none;">Keep Shopping</a>
-        }
-        else
-        {*@
+                                {
+                                    <a href="@Url.Action("CartCheckout", "Cart")" class="btn btn-orange" style="float:right;margin:0px 5px;text-transform:capitalize;display:none;">Continue</a>
+                                    <a href="@Url.Action("Details", "Content", new { Id = 7 })" class="btn btn-default" style="float:right;margin:0px 5px;display:none;">Keep Shopping</a>
+                                }
+                                else
+                                {*@
 
                             @if (Model.lblFeedbackCart != null && (Model.lblFeedbackCart.Contains("Tax Lookup could not determine the tax rate for this zip code:")))
                             {
@@ -1054,29 +1074,33 @@
     </div>
 </div>
 <div class="clearfix"></div>
+
 <div id="familystylepopup" class="modal fade" role="dialog" style="display:none">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             @*<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>*@
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>*@
             <div class="modal-body">
                 <input type="hidden" id="hdnfamilystyle" value="" />
-                    <span>Family Style requires at least 2 servings.</span><br />
-                        <span style="padding: 5px;"><b>Increase to 2?</b></span>
-                        <a id="increaseItemQuantity" onclick="increaseItemQuantityFS(true)"><b>Yes</b></a>
-                        <a id="increaseItemQuantityNo" onclick="increaseItemQuantityFS(false)"><b>No</b></a>
-                </div>
+                <span>Family Style requires at least 2 servings.</span><br />
+                <span style="padding: 5px;"><b>Increase to 2?</b></span>
+                <a id="increaseItemQuantity" onclick="increaseItemQuantityFS(true)"><b>Yes</b></a>
+                <a id="increaseItemQuantityNo" onclick="increaseItemQuantityFS(false)"><b>No</b></a>
+            </div>
             @*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>*@
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
         </div>
 
     </div>
 </div>
-<script type="text/javascript">
+
+
+
+    <script type="text/javascript">
     //$(document).ready(function () {
     //    $("#divLoader").css('display', 'block');
     //    $('body').css("opacity", '0.5');
@@ -1087,7 +1111,19 @@
     //});
     function BtnCheckoutPage()
     {
-         //debugger;
+        debugger;
+        var OrderMinimum =  parseFloat($("#spanOrderMinimum").text());
+        var ProductTotal = parseFloat($("#lblsubtotal").text().replace("$", "").replace(",", ""));
+        var DiscountAmount = parseFloat($("#spanDiscount").text().replace("$", "").replace("-", ""));
+        var TotalDeduction = ProductTotal + DiscountAmount;
+        if (OrderMinimum > ProductTotal) {
+            var requiredAmount = OrderMinimum - TotalDeduction;
+            requiredAmount = requiredAmount.toFixed(2);
+            var message = "Your Product Total is less than the $" + OrderMinimum + " minimum required to ship your product   Please add $" + requiredAmount+" more to complete your order.  "
+            alert(message);
+            return false;
+        }
+
         $("#divLoader").css('display', '');
         $('body').css("opacity", '0.9');
        window.location.href = '@Url.Action("CartCheckout", "Cart")';
@@ -1138,7 +1174,7 @@ alert(response.d);
 
 
     function DeleteCartItem(cartItemId) {
-        
+
 
         var _confirm = confirm('Are you sure that you want to remove this item from the cart?');
         var x = document.getElementById("snackbar1");
@@ -1265,7 +1301,7 @@ alert(response.d);
         var cartItemId = document.getElementById("hdnfamilystyle").value;
         if (isIncrease) {
             UpdateCartItemQuantityFS(cartItemId, 2);
-            
+
             $("#familystylepopup").modal("hide");
         }
         else {
@@ -1473,167 +1509,170 @@ alert(response.d);
 
     }
 
-</script>
-<script>
-    function maxLengthCheck(object) {
-        if (object.value.length > object.maxLength)
-            object.value = object.value.slice(0, object.maxLength)
-    }
-    $("input[type='number']").attr({
-        "max": 99,
-        "min": 1
-    });
-    function isNumeric(evt) {
-        //var theEvent = evt || window.event;
-        //var key = theEvent.keyCode || theEvent.which;
-        //key = String.fromCharCode(key);
-        //var regex = /1-9]|\./;
-        //if (!regex.test(key)) {
-        //    theEvent.returnValue = false;
-        //    if (theEvent.preventDefault) theEvent.preventDefault();
-        //}
+    </script>
+    <script>
+        function maxLengthCheck(object) {
+            if (object.value.length > object.maxLength)
+                object.value = object.value.slice(0, object.maxLength)
+        }
+        $("input[type='number']").attr({
+            "max": 99,
+            "min": 1
+        });
+        function isNumeric(evt) {
+            //var theEvent = evt || window.event;
+            //var key = theEvent.keyCode || theEvent.which;
+            //key = String.fromCharCode(key);
+            //var regex = /1-9]|\./;
+            //if (!regex.test(key)) {
+            //    theEvent.returnValue = false;
+            //    if (theEvent.preventDefault) theEvent.preventDefault();
+            //}
 
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        if ((charCode == 46) || (charCode != 46 && charCode > 31
-            && (charCode < 48 || charCode > 57)))
-            return false;
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if ((charCode == 46) || (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57)))
+                return false;
 
-        return true;
+            return true;
 
-    }
-</script>
+        }
+    </script>
 
 
-<style>
-    #snackbar1 {
-        visibility: hidden;
-        min-width: 250px;
-        background-color: #276f22;
-        color: #fff;
-        text-align: center;
-        border-radius: 2px;
-        padding: 5px 16px;
-        position: fixed;
-        z-index: 1;
-        left: 0px;
-        top: 0px;
-        font-size: 17px;
-        width: 100%;
-    }
-
-    .color-orange {
-        color: #276f22;
-    }
-
-    .bgcolor {
-        background: #10d5e033;
-        padding: 10px;
-        /*border: 1px solid #276f22;*/
-    }
-
-        .bgcolor table {
+    <style>
+        #snackbar1 {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #276f22;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 5px 16px;
+            position: fixed;
+            z-index: 1;
+            left: 0px;
+            top: 0px;
+            font-size: 17px;
             width: 100%;
         }
 
-            .bgcolor table td {
-                padding: 5px;
+        .color-orange {
+            color: #276f22;
+        }
+
+        .bgcolor {
+            background: #10d5e033;
+            padding: 10px;
+            /*border: 1px solid #276f22;*/
+        }
+
+            .bgcolor table {
+                width: 100%;
             }
 
-    #CouponCodeText, #RedeemedGiftText {
-        width: 40%;
-        float: left;
-        margin-right: 4px;
-    }
+                .bgcolor table td {
+                    padding: 5px;
+                }
 
-    .bgcolor1 td {
-        padding: 10px 0px;
-    }
-
-    .bgcolor1 {
-        float: right;
-        width: 100%;
-        margin-top: 20px;
-    }
-    #familystylepopup .modal-dialog {
-        left: 0%;
-        top: 13%;
-        text-align: center;
-        width: 400px;
-        font-size: 18px;
-        color:red;
-    }
-        #familystylepopup .modal-dialog a {
-            color: red;
-            text-decoration: underline;
-            padding: 6px;
+        #CouponCodeText, #RedeemedGiftText {
+            width: 40%;
+            float: left;
+            margin-right: 4px;
         }
+
+        .bgcolor1 td {
+            padding: 10px 0px;
+        }
+
+        .bgcolor1 {
+            float: right;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #familystylepopup .modal-dialog {
+            left: 0%;
+            top: 13%;
+            text-align: center;
+            width: 400px;
+            font-size: 18px;
+            color: red;
+        }
+
+            #familystylepopup .modal-dialog a {
+                color: red;
+                text-decoration: underline;
+                padding: 6px;
+            }
+
         .redeemgift {
             width: 56%;
             float: left;
         }
 
-    .btn-default, .btn-default:hover, .btn-default:focus {
-        border-radius: 5px;
-        color: #72bb3b !important;
-        border: 1px solid #39aa35;
-        text-transform: capitalize;
-        padding: 5px 15px;
-        background: #fff;
-    }
+        .btn-default, .btn-default:hover, .btn-default:focus {
+            border-radius: 5px;
+            color: #72bb3b !important;
+            border: 1px solid #39aa35;
+            text-transform: capitalize;
+            padding: 5px 15px;
+            background: #fff;
+        }
 
-    #snackbar1.show {
-        visibility: visible;
-        /*-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        #snackbar1.show {
+            visibility: visible;
+            /*-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
                 animation: fadein 0.5s, fadeout 0.5s 2.5s;*/
-        transition: all 0.5s;
-        -webkit-transition: all 0.5s;
-    }
-
-    @@-webkit-keyframes fadein {
-        from {
-            top: 0;
-            opacity: 0;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
         }
 
-        to {
-            top: 30px;
-            opacity: 1;
-        }
-    }
+        @@-webkit-keyframes fadein {
+            from {
+                top: 0;
+                opacity: 0;
+            }
 
-    @@keyframes fadein {
-        from {
-            top: 0;
-            opacity: 0;
-        }
-
-        to {
-            top: 30px;
-            opacity: 1;
-        }
-    }
-
-    @@-webkit-keyframes fadeout {
-        from {
-            top: 30px;
-            opacity: 1;
+            to {
+                top: 30px;
+                opacity: 1;
+            }
         }
 
-        to {
-            top: 0;
-            opacity: 0;
-        }
-    }
+        @@keyframes fadein {
+            from {
+                top: 0;
+                opacity: 0;
+            }
 
-    @@keyframes fadeout {
-        from {
-            top: 30px;
-            opacity: 1;
+            to {
+                top: 30px;
+                opacity: 1;
+            }
         }
 
-        to {
-            top: 0;
-            opacity: 0;
+        @@-webkit-keyframes fadeout {
+            from {
+                top: 30px;
+                opacity: 1;
+            }
+
+            to {
+                top: 0;
+                opacity: 0;
+            }
         }
-    }
-</style>
+
+        @@keyframes fadeout {
+            from {
+                top: 30px;
+                opacity: 1;
+            }
+
+            to {
+                top: 0;
+                opacity: 0;
+            }
+        }
+    </style>

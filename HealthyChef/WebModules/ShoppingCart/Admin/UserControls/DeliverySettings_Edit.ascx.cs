@@ -258,7 +258,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             try
             {
                 var zipcode = 0;
-                int pn = hccShippingZone.AddUpdateShippingZone(zipcode, txtZoneName.Text, txtShippingDesc.Text, txtMultiplier.Text, txtMinFee.Text, txtMaxFee.Text, chkIsDefaultShippingZone.Checked, chkIsPickupShippingZone.Checked);
+                int pn = hccShippingZone.AddUpdateShippingZone(zipcode, txtZoneName.Text, txtShippingDesc.Text, txtMultiplier.Text, txtMinFee.Text, txtMaxFee.Text, chkIsDefaultShippingZone.Checked, chkIsPickupShippingZone.Checked,Convert.ToInt32(txtOrderMinium.Text));
                 if (pn > 0)
                 {
                     this.ClearShippingZone();
@@ -334,7 +334,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != shippingZonesGrid.EditIndex)
             {
-                (e.Row.Cells[7].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this row?');";
+                (e.Row.Cells[8].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this row?');";
             }
         }
         /// <summary>
@@ -364,6 +364,17 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             string MinFee = (row.FindControl("txtMinFee") as TextBox).Text;
             string MaxFee = (row.FindControl("txtMaxFee") as TextBox).Text;
             bool check = (row.FindControl("chkDefaultShippingZone") as CheckBox).Checked;
+            string OrderMinimumtext = (row.FindControl("txtOrderMinimum") as TextBox).Text;
+            int OrderMinimum = 0;
+            if (string.IsNullOrEmpty(OrderMinimumtext))
+            {
+                OrderMinimum = 0;
+            }
+            else
+            {
+                OrderMinimum = Convert.ToInt32(OrderMinimumtext);
+
+            }
             bool IsPickupcheck = (row.FindControl("chkPickupShippingZone") as CheckBox).Checked;
             string TypeName = (row.FindControl("txtShippingDesc") as TextBox).Text;
 
@@ -381,7 +392,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                     int pn = 0;
                     if (_minfee < _maxfee)
                     {
-                        pn = hccShippingZone.AddUpdateShippingZone(ZoneId, Zonename, TypeName, Multiplier, MinFee, MaxFee, check, IsPickupcheck);
+                        pn = hccShippingZone.AddUpdateShippingZone(ZoneId, Zonename, TypeName, Multiplier, MinFee, MaxFee, check, IsPickupcheck, OrderMinimum);
                         if (pn > 0)
                         {
                             shippingZonesGrid.EditIndex = -1;

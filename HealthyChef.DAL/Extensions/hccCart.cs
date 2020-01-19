@@ -906,7 +906,7 @@ namespace HealthyChef.DAL
                 string profileRow = "<tr style='color: #39aa35;border: 1px solid #cccccc; background-color: #dddddd;font-size:18px;'><td style='padding:5px;'><span style='font-size: 16px;'>Delivery:&nbsp;{1}</span></td><td style='padding:5px'>Profile:&nbsp;{0}</td><td style='padding:5px'></td><td style='padding:5px'></td><td style='padding:5px'></td></tr>";
                 string itemRow = "<tr style='background-color:#ffffff;'><td>{0}</td><td>{1}</td><td style='text-align:center;'>{2}</td><td style='text-align:center;'>{3}</td><td style='text-align:right;'>{4}</td></tr>";//< td style = 'text-align:right;' >{ 5}</ td >
                 string itemRowAlt = "<tr style='background-color:#f5f5f5;'><td>{0}</td><td>{1}</td><td style='text-align:center;'>{2}</td><td style='text-align:center;'>{3}</td><td style='text-align:right;'>{4}</td></tr>";//<td style='text-align:right;'>{5}</td>
-                string subTotalRow = "<tr><td colspan='5' style='text-align:right; padding: 5px; font-weight: bold;'>Profile Sub-Total:&nbsp;{0}</td></tr>";
+                string subTotalRow = "<tr><td colspan='5' style='text-align:right; padding: 5px; font-weight: bold;'>Profile Product-Total:&nbsp;{0}</td></tr>";
                 // subTotalMeal = "<tr><td colspan='6' style='text-align:right; padding: 2px; font-weight: bold;'>Profile Sub-TotalMeal:&nbsp;{0}</td></tr>";
                 string formatToUse = itemRow;
 
@@ -1095,7 +1095,7 @@ namespace HealthyChef.DAL
                     sb.Append(sb2.ToString());
                     sb.Append("<table class='summary_heading' align='right'><tbody><tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Original Price:</td><td align='right'>" + (this.SubTotalAmount).ToString("c") + "</td></tr>"); //<td>&nbsp;</td>
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Discount:</td><td align='right' style='color:red;'>- " + this.SubTotalDiscount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Subtotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
+                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Producttotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Tax:</td><td align='right'>" + this.TaxAmount.ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Shipping:</td><td align='right'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Total:</td><td align='right'>" + this.TotalAmount.ToString("c") + "</td></tr>");
@@ -1123,7 +1123,7 @@ namespace HealthyChef.DAL
                     //sb.Append("<table class='summary_heading'><tbody>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Original Price:</td><td align='right'>" + (this.SubTotalAmount).ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Discount:</td><td align='right' style='color:red;'>- " + this.SubTotalDiscount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Subtotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
+                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>ProductTotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Tax:</td><td align='right'>" + this.TaxAmount.ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Shipping:</td><td align='right'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
                     sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Total:</td><td align='right'>" + this.TotalAmount.ToString("c") + "</td></tr>");

@@ -30,8 +30,10 @@ namespace HealthyChefCreationsMVC.CustomModels
         public string Tax { get; set; }
         public string Shipping { get; set; }
 
+        public string Zipcode { get; set; }
+        public string ZoneId { get; set; }
 
-      
+        public int OrderMinimum { get; set; }
         public hccCoupon ActiveCoupon
         {
             get
@@ -193,6 +195,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                         }
                     }
                 }
+                this.Zipcode = txtCalZipCode;
                 IsExpiredCartItems = new List<hccCartItem>();
                 this.profCart = new List<ProfileCart>();
                 //populate profcarts

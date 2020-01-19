@@ -243,7 +243,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                     {
                         List<hccProgramMealType> mt = hccProgramMealType.GetBy(program.ProgramID);
                         List<hccProgramMealType> requiredMealTypes = mt.Where(a => a.RequiredQuantity > 0).ToList();
-
+                      
                         // Display for 7 days
                         for (int day = 1; day <= 7; day++)
                         {
@@ -268,7 +268,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                                     mealTypespan.InnerHtml = "<b>" + ((Enums.MealTypes)mealType.MealTypeID).ToString() + "</b>";
                                     pnlDay.Controls.Add(mealTypespan);
 
-
+                                    
                                 }
                                 else
                                 {

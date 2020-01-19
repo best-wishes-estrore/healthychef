@@ -4,7 +4,6 @@
     .HiddenCol {
         display: none;
     }
-
 </style>
 <script type="text/javascript">
     $(function () {
@@ -26,7 +25,7 @@
     };
 
     function BoxSavevalidation() {
-        
+
         var _txtBoxName = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtBoxName');
         var _txtDIM_W = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtDIM_W');
         var _txtDIM_L = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtDIM_L');
@@ -86,7 +85,7 @@
     };
 
     function shippingZoneValidation() {
-         
+
         var _txtZoneName = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtZoneName');
         var _txtMultiplier = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtMultiplier');
         var _txtShippingDesc = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtShippingDesc');
@@ -128,7 +127,7 @@
     };
 
     function LookUpZipCodeValidation() {
-         
+
         var _txtZipCode = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtZipCode');
 
         if ($("#ctl00_Body_DeliverySettingsEdit1_txtZipCode").val() == "") {
@@ -149,7 +148,7 @@
     };
 
     function SaveZipCodeValidation() {
-         
+
         var _txtZipCode = document.getElementById('ctl00_Body_DeliverySettingsEdit1_txtZipCode');
 
         if ($("#ctl00_Body_DeliverySettingsEdit1_txtZipCode").val() == "") {
@@ -170,7 +169,7 @@
     };
 
     function GetPrice(evt) {
-         
+
         var Cost = $(evt).val();
         var Multiplier = parseFloat($('#ctl00_Body_DeliverySettingsEdit1_lblShipMultiplier').text());
         var Price = parseFloat(Cost) * parseFloat(Multiplier);
@@ -180,7 +179,7 @@
     }
 
     function ValidateZipCode(event) {
-         
+
         var ZipCode = $('#ctl00_Body_DeliverySettingsEdit1_txtShippingZipCode').val();
         if (ZipCode == "") {
             alert("Please Enter Value")
@@ -221,9 +220,10 @@
         <div id="shipping">
             <asp:UpdatePanel ID="Upanelshipping" runat="server">
                 <ContentTemplate>
-                    <table  class="aling_table1" style="float: left; width: 60%;margin-top: 15px;">
+                    <table class="aling_table1" style="float: left; width: 60%; margin-top: 15px;">
                         <tr>
-                            <td><label class="col-sm-12">Zip Code :</label></td>
+                            <td>
+                                <label class="col-sm-12">Zip Code :</label></td>
                             <td>
                                 <asp:TextBox ID="txtShippingZipCode" runat="server" />
                                 <asp:Button ID="btnShippingSearch" runat="server" CssClass="btn btn-info" Text="Search" OnClick="btnShippingSearch_Click" OnClientClick="return ValidateZipCode(this);" />
@@ -232,16 +232,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label class="col-sm-12">Is Pickup :</label></td>
+                            <td>
+                                <label class="col-sm-12">Is Pickup :</label></td>
                             <td>
                                 <asp:CheckBox ID="chkIsPickup" CssClass="pull-left checkbox-straight" runat="server" onclick="forRentClicked(this)" />
 
-                               <p class="pull-left checkbox-straight"> Pickup Fee </p>
+                                <p class="pull-left checkbox-straight">Pickup Fee </p>
                                 <asp:TextBox ID="txtPickupFee" runat="server" CssClass="pull-left checkbox-straight"></asp:TextBox>
                                 <asp:Button ID="btnSave1" runat="server" CssClass="btn btn-info checkbox-straight" Text="Save" OnClick="btnSave1_Click" /></td>
                         </tr>
                         <tr>
-                            <td><label class="col-sm-12">Zone Name :</label></td>
+                            <td>
+                                <label class="col-sm-12">Zone Name :</label></td>
                             <td>
                                 <asp:Label ID="lblShippingZone" runat="server" Style="display: none;"></asp:Label>
                                 <asp:DropDownList runat="server" ID="ddlShippingZone" AutoPostBack="true" CausesValidation="false" OnSelectedIndexChanged="ddlShipingZone_SelectedIndexChanged"></asp:DropDownList>
@@ -249,15 +251,16 @@
                             </td>
                         </tr>
                     </table>
-                  <div class="alert alert-success" style="float: right; width: 40%;">
+                    <div class="alert alert-success" style="float: right; width: 40%;">
                         <strong>Use this area</strong>
                         <p>* To search for Zip Code information</p>
                         <p>* To enable pickups from any Zip Code</p>
-                        <p>* To set the fee for Pickups</p>                       
+                        <p>* To set the fee for Pickups</p>
                     </div>
                     <table>
                         <tr>
-                            <td><label class="col-sm-12">Min Fee Per Shipment</label></td>
+                            <td>
+                                <label class="col-sm-12">Min Fee Per Shipment</label></td>
                             <td>:</td>
                             <td>
                                 <asp:Label ID="lblMinShippingFeeOrder" runat="server"></asp:Label>
@@ -268,7 +271,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label class="col-sm-12">Max Fee Per Shipment</label></td>
+                            <td>
+                                <label class="col-sm-12">Max Fee Per Shipment</label></td>
                             <td>:</td>
                             <td>
                                 <asp:Label ID="lblMaxShippingFeeOrder" runat="server"></asp:Label>
@@ -279,7 +283,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label class="col-sm-12">Multiplier</label></td>
+                            <td>
+                                <label class="col-sm-12">Multiplier</label></td>
                             <td>:</td>
                             <td>
                                 <asp:Label ID="lblShipMultiplier" runat="server"></asp:Label></td>
@@ -370,7 +375,7 @@
         <div id="shippingZones">
             <asp:UpdatePanel ID="UpanelshippingZones" runat="server">
                 <ContentTemplate>
-                   <asp:GridView ID="shippingZonesGrid"  CssClass="table table-bordered table-hover" runat="server" AutoGenerateColumns="false" EmptyDataText="No records has been added."
+                    <asp:GridView ID="shippingZonesGrid" CssClass="table table-bordered table-hover" runat="server" AutoGenerateColumns="false" EmptyDataText="No records has been added."
                         DataKeyNames="ZoneID"
                         OnRowDataBound="OnRowDataBound" OnRowEditing="OnRowEditing" OnRowCancelingEdit="OnRowCancelingEdit"
                         OnRowUpdating="OnRowUpdating" OnRowDeleting="OnRowDeleting">
@@ -432,7 +437,19 @@
                                     <asp:CheckBox ID="chkDefaultShippingZone" runat="server" Checked='<%# Eval("IsDefaultShippingZone").ToString() == "true" ? true :false %>' />
                                 </EditItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="OrderMinimum" ItemStyle-Width="150">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblOrderMinimum" runat="server" Text='<%# Eval("OrderMinimum") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtOrderMinimum" runat="server" Text='<%# Eval("OrderMinimum") %>' MaxLength="4"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="revOrderMinimum" runat="server"
+                                        ControlToValidate="txtOrderMinimum" ErrorMessage="Please Enter Only Numbers & upto Maxvalue 9999"
+                                        ValidationExpression="^\d+$"  ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>
 
+                                 
+                                </EditItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="PickupShippingZone" ItemStyle-Width="150">
                                 <HeaderStyle CssClass="HiddenCol" />
                                 <ItemTemplate>
@@ -498,45 +515,59 @@
                         </p>
                         <table class="aling_table table_format">
                             <tr>
-                                <td><label>Shipping Zone</label></td>
+                                <td>
+                                    <label>Shipping Zone</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtZoneName" runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Shipping Description</label></td>
+                                <td>
+                                    <label>Shipping Description</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtShippingDesc" runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Multiplier</label></td>
+                                <td>
+                                    <label>Multiplier</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtMultiplier" runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>MinFee</label></td>
+                                <td>
+                                    <label>MinFee</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtMinFee" runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>MaxFee</label></td>
+                                <td>
+                                    <label>MaxFee</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:TextBox ID="txtMaxFee" runat="server" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>Is Default</label></td>
+                                <td>
+                                    <label>Is Default</label></td>
                                 <td>:</td>
                                 <td>
                                     <asp:CheckBox ID="chkIsDefaultShippingZone" runat="server" />
+                                </td>
+                            </tr>
+                               <tr>
+                                <td>
+                                    <label>OrderMinium</label></td>
+                                <td>:</td>
+                                <td>
+                                    <asp:TextBox ID="txtOrderMinium" runat="server" MaxLength="4" />
                                 </td>
                             </tr>
                             <tr>
@@ -547,7 +578,7 @@
                             <tr>
                                 <td>
                                     <asp:Button ID="btnSaveShippingZone" runat="server" OnClick="btnSaveShippingZone_Click" OnClientClick="return shippingZoneValidation();" Text="Add Shipping Zone" Visible="false" />
-                                    <button type="button" ng-click="AddOrUpdateShippingZone();" class="btn btn-info" >Add Shipping Zone</button>
+                                    <button type="button" ng-click="AddOrUpdateShippingZone();" class="btn btn-info">Add Shipping Zone</button>
                                 </td>
                             </tr>
                             <tr>
@@ -570,7 +601,7 @@
             </asp:UpdatePanel>
         </div>
 
-        <div id="zipCodes" style="margin-top:15px">
+        <div id="zipCodes" style="margin-top: 15px">
             <asp:UpdatePanel ID="UpanelzipCodes" runat="server">
                 <Triggers>
                     <asp:PostBackTrigger ControlID="btnNewCSVUpload" />
@@ -606,8 +637,8 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td class="m-2" style="width:71%;">
-                                <table  class="aling_table">
+                            <td class="m-2" style="width: 71%;">
+                                <table class="aling_table">
                                     <tr>
                                         <td>
                                             <asp:FileUpload ID="FileUpload1" runat="server" />
@@ -621,7 +652,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width:200px">
+                                        <td style="width: 200px">
                                             <asp:LinkButton ID="lnkbtnCsvDownload" runat="server" OnClick="lnkbtnCsvDownload_Click">Download_Csv Template</asp:LinkButton>
                                         </td>
                                     </tr>
@@ -691,7 +722,7 @@
             </asp:UpdatePanel>
         </div>
 
-        <div id="boxes" style="margin-top:15px">
+        <div id="boxes" style="margin-top: 15px">
             <asp:UpdatePanel ID="Upanelboxes" runat="server">
                 <ContentTemplate>
                     <table class="aling_table">
@@ -818,7 +849,7 @@
                             <asp:CommandField ButtonType="Link" CausesValidation="True" ValidationGroup="BoxSizeEditValidate" ShowEditButton="true" ShowDeleteButton="true" ItemStyle-Width="150" />
                         </Columns>
                     </asp:GridView>
-                     <%-- <div>
+                    <%-- <div>
                     <table ng-show="MessageBoxSizes.length!=0" class="table table-bordered table-hover">
                         <thead>
                             <tr align="left">
@@ -928,7 +959,7 @@
 
             $http({
                 method: "GET",
-                url: GetApiBaseURL() +  "GetAllMessageboxSizes"
+                url: GetApiBaseURL() + "GetAllMessageboxSizes"
             }).then(function mySuccess(response) {
                 $scope.MessageBoxSizes = response.data;
                 console.log(response.data.length);
@@ -937,29 +968,29 @@
             });
 
             $scope.GetDetails = function (index) {
-                 
+
             };
-            
-            $scope.AddOrUpdateShippingZone = function ()
-            {
-                if (shippingZoneValidation())
-                {
+
+            $scope.AddOrUpdateShippingZone = function () {
+                debugger;
+                if (shippingZoneValidation()) {
                     var ZoneName = $('#ctl00_Body_DeliverySettingsEdit1_txtZoneName').val();
                     var ShippingDesc = $('#ctl00_Body_DeliverySettingsEdit1_txtShippingDesc').val();
                     var Multiplier = $('#ctl00_Body_DeliverySettingsEdit1_txtMultiplier').val();
                     var MinFee = $('#ctl00_Body_DeliverySettingsEdit1_txtMinFee').val();
                     var MaxFee = $('#ctl00_Body_DeliverySettingsEdit1_txtMaxFee').val();
                     var isDefault = $('#ctl00_Body_DeliverySettingsEdit1_chkIsDefaultShippingZone').prop('checked');
-
-                    var ShippingZonedata = { ZoneName: ZoneName, Multiplier: Multiplier, MinFee: MinFee, MaxFee: MaxFee, IsDefaultShippingZone: isDefault, Description: ShippingDesc };
+                    var OrderMinimum = $('#ctl00_Body_DeliverySettingsEdit1_txtOrderMinium').val();
+                    var ShippingZonedata = { ZoneName: ZoneName, Multiplier: Multiplier, MinFee: MinFee, MaxFee: MaxFee, IsDefaultShippingZone: isDefault, Description: ShippingDesc ,OrderMinimum:OrderMinimum};
 
                     $http({
                         method: "POST",
                         url: GetApiBaseURL() + "AddOrUpdateShippingZone",
                         data: ShippingZonedata
                     }).then(function mySuccess(response) {
-                         
+
                         if (response.data.IsSuccess) {
+                            debugger;
                             alert(response.data.Message);
 
                             $('#ctl00_Body_DeliverySettingsEdit1_txtZoneName').val('');
@@ -967,6 +998,7 @@
                             $('#ctl00_Body_DeliverySettingsEdit1_txtMultiplier').val('');
                             $('#ctl00_Body_DeliverySettingsEdit1_txtMinFee').val('');
                             $('#ctl00_Body_DeliverySettingsEdit1_txtMaxFee').val('');
+                            $('#ctl00_Body_DeliverySettingsEdit1_txtOrderMinium').val('');
                             $('#ctl00_Body_DeliverySettingsEdit1_chkIsDefaultShippingZone').prop('checked', false);
 
                             $scope.GetAllShippingZone();
@@ -978,11 +1010,10 @@
                         alert(response.data.Message);
                     });
                 }
-                else
-                {
+                else {
                     return false;
                 }
-                
+
             }
 
         });
@@ -992,7 +1023,13 @@
 <%# Eval("MealTypeName") %>
 <script>
     $(document).ready(function () {
+        $(document).on('keypress', '#ctl00_Body_DeliverySettingsEdit1_txtOrderMinium', function (event) {
 
+          $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        })
         $(document).on('change', '#ctl00_Body_DeliverySettingsEdit1_shippingZonesGrid tr td input', function () {
             var td_index = $(this).closest('td').index();
             var tr_value = $(this).closest('tr');

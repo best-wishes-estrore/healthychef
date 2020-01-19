@@ -623,4 +623,7 @@
     fieldset p {
         margin: 0 0 6px !important;
     }
+    .divItemContainer{
+        font-weight:normal;
+    }
 </style>
