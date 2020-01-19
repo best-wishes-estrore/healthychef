@@ -8,13 +8,17 @@ namespace HealthyChefWebAPI.CustomModels
 {
     public class UserAccount
     {
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsLockedOut { get; set; }
+        public bool IsOnline { get; set; }
         public string Role { get; set; }
         public string DeliveryDate { get; set; }
+        public string Phone { get; set; }
+        public int Totalrecords { get; set; }
     }
 
     public class UpdateCardInfo

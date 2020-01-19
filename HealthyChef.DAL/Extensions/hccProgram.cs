@@ -17,7 +17,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccPrograms", this);
                     object oldObj;
@@ -55,9 +55,7 @@ namespace HealthyChef.DAL
 
         public decimal GetCheapestPlanPrice()
         {
-            var plans = hccProgramPlan.GetBy(this.ProgramID, true);
-            int numberofweeks = plans.Where(x => x.NumWeeks < 5).Max(x => x.NumWeeks);
-            plans = hccProgramPlan.GetBy(this.ProgramID, true).Where(x=>x.NumWeeks<= numberofweeks).ToList();
+            var plans = hccProgramPlan.GetBy(this.ProgramID, true).ToList();
             decimal p = 0.00m;
 
             if (plans.Count > 0)
@@ -91,7 +89,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPrograms.ToList();
                 }
@@ -112,7 +110,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     if (isActive.HasValue)
                     {
@@ -133,25 +131,11 @@ namespace HealthyChef.DAL
             }
         }
 
-        public static List<hccCartItem> GetCartItemsByCartId(int cartId, DateTime deliveryDate)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    return cont.hccCartItems.Where(c => c.CartID == cartId && c.ItemPrice> 0 && c.DeliveryDate== deliveryDate).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
         public static hccProgram GetBy(string programName)
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPrograms
                         .Where(a => a.Name == programName)
@@ -163,29 +147,12 @@ namespace HealthyChef.DAL
                 throw;
             }
         }
-        public static hccProgram GetByMoreInfoId(int Moreinfoid)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    return cont.hccPrograms
-                        .Where(a => a.MoreInfoNavID == Moreinfoid&&a.DisplayOnWebsite==true&&a.IsActive==true)
-                        .SingleOrDefault();
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
 
         public static hccProgram GetById(int id)
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPrograms.SingleOrDefault(a => a.ProgramID == id);
                 }
@@ -208,52 +175,25 @@ namespace HealthyChef.DAL
 
                 mealItems.ForEach(delegate(MealItemReportItem result)
                 {
-                    if (result.PlanId != 0)
+                    if (retVals.Count(a => a.DeliveryDate == result.DeliveryDate
+                        && a.PlanId == result.PlanId) == 0)
                     {
-                        if (retVals.Count(a => a.DeliveryDate == result.DeliveryDate && a.PlanId == result.PlanId) == 0)
+                        ProgramPlanCountItemHolder newVal = new ProgramPlanCountItemHolder
                         {
-                            ProgramPlanCountItemHolder newVal = new ProgramPlanCountItemHolder
-                            {
-                                DeliveryDate = result.DeliveryDate,
-                                PlanId = result.PlanId
-                            };
+                            DeliveryDate = result.DeliveryDate,
+                            PlanId = result.PlanId
+                        };
 
-                            retVals.Add(newVal);
-                        }
-                    }
-                    else
-                    {
-                        if (retVals.Count(a => a.DeliveryDate == result.DeliveryDate && a.PlanId == result.PlanId && a.IsFamilyStyle==result.IsFamilyStyle ) == 0)
-                        {
-                            ProgramPlanCountItemHolder newVal = new ProgramPlanCountItemHolder
-                            {
-                                DeliveryDate = result.DeliveryDate,
-                                PlanId = result.PlanId,
-                                IsFamilyStyle=result.IsFamilyStyle,
-                                CartId=result.CartId
-                            };
-
-                            retVals.Add(newVal);
-                        }
+                        retVals.Add(newVal);
                     }
                 });
-                int UpdateOrderCount = 0;
-                int UpdateCount = 0;
-                bool IsUpdate = false;
-                List<int> CartIds;
-                hccCartItem hcccartItem = new hccCartItem();
-                List<hccCartItem> hcccartItems = new List<hccCartItem>();
+
                 retVals.ForEach(delegate(ProgramPlanCountItemHolder holder)
                 {
-                    if (holder.PlanId == 0 && holder.IsFamilyStyle==false)
+                    if (holder.PlanId == 0)
                     {
-                        holder.PlanName = "ALC Individual Portions";
-                        holder.ProgramName = "ALC Individual Portions";
-                    }
-                    else if (holder.PlanId == 0 && holder.IsFamilyStyle == true)
-                    {
-                        holder.PlanName = "ALC Family Style";
-                        holder.ProgramName = "ALC Family Style";
+                        holder.PlanName = "ALC";
+                        holder.ProgramName = "ALC";
                     }
                     else
                     {
@@ -273,19 +213,7 @@ namespace HealthyChef.DAL
                     var oc = mealItems.Where(a => a.DeliveryDate == holder.DeliveryDate
                         && a.PlanId == holder.PlanId)
                         .GroupBy(a => a.OrderNumber).Distinct();
-                    if (holder.PlanId == 0 && holder.IsFamilyStyle == false)
-                    {
-                        oc = mealItems.Where(a => a.DeliveryDate == holder.DeliveryDate
-                        && a.PlanId == holder.PlanId && a.IsFamilyStyle==holder.IsFamilyStyle)
-                        .GroupBy(a => a.OrderNumber).Distinct();
-                    }
-                    else if (holder.PlanId == 0 && holder.IsFamilyStyle == true)
-                    {
-                        oc = mealItems.Where(a => a.DeliveryDate == holder.DeliveryDate
-                        && a.PlanId == holder.PlanId && a.IsFamilyStyle == holder.IsFamilyStyle)
-                        .GroupBy(a => a.OrderNumber).Distinct();
-                    }
-                        holder.OrderCount = oc.Count();
+                    holder.OrderCount = oc.Count();
 
                     int mealCount = 0;
                     oc.ToList().ForEach(delegate(IGrouping<string, MealItemReportItem> orderNumGroup)
@@ -299,50 +227,8 @@ namespace HealthyChef.DAL
                     });
 
                     holder.MealCount = mealCount;
-                    if (holder.PlanId == 0 && holder.IsFamilyStyle == false)
-                    {
-                        CartIds = mealItems.Where(x => x.PlanId == 0 && x.DeliveryDate == holder.DeliveryDate).Select(x => x.CartId).Distinct().ToList();
-                        foreach (var id in CartIds)
-                        {
-                            hcccartItems = GetCartItemsByCartId(id, holder.DeliveryDate);
-
-                            if (hcccartItems.Count() > 1)
-                            {
-                                foreach (var item in hcccartItems)
-                                {
-                                    if (item.Plan_IsAutoRenew == true && item.ItemTypeID == 1)
-                                    {
-                                        UpdateOrderCount++;
-                                    }
-                                    else if(item.Plan_IsAutoRenew==false && item.ItemTypeID==1)
-                                    {
-                                        IsUpdate = true;
-                                    }
-                                }
-                                if(UpdateOrderCount>0 && IsUpdate)
-                                {
-                                    UpdateCount++;
-                                    UpdateOrderCount = 0;
-                                }
-                            }
-                            IsUpdate = false;
-                        }
-                        if (UpdateCount > 0)
-                        {
-                            var items = retVals.Where(x => x.PlanName == "ALC Individual Portions" && x.DeliveryDate == holder.DeliveryDate).FirstOrDefault();
-                            items.OrderCount = items.OrderCount - UpdateCount;
-                            UpdateCount = 0;
-                            //foreach (var item in retVals)
-                            //{
-                            //    if (item.PlanName == "ALC Individual Portions" && item.DeliveryDate==holder.DeliveryDate)
-                            //    {
-                            //        item.OrderCount = item.OrderCount - UpdateOrderCount;
-                            //    }
-                            //}
-                        }
-                    }
                 });
-                
+
                 return retVals.OrderBy(a => a.DeliveryDate).ThenBy(a => a.ProgramName).ThenBy(a => a.PlanName).ToList();
 
             }
@@ -361,8 +247,7 @@ namespace HealthyChef.DAL
         public string PlanName { get; set; }
         public int OrderCount { get; set; }
         public int MealCount { get; set; }
-        public bool IsFamilyStyle { get; set; }
-        public int CartId { get; set; }
+
         public ProgramPlanCountItemHolder()
         { }
     }

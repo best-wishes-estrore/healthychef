@@ -37,7 +37,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccAddresses", this);
                     object oldObj;
@@ -61,7 +61,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccAddresses", this);
                     object oldObj;
@@ -82,7 +82,7 @@ namespace HealthyChef.DAL
             try
             {
 
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccAddresses.SingleOrDefault(a => a.AddressID == addressId);
                 }

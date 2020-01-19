@@ -16,7 +16,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccUserProfilePreferences", this);
                     object oldObj;
@@ -43,7 +43,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     hccUserProfilePreference t = cont.hccUserProfilePreferences
                         .Where(a => a.PreferenceID == this.PreferenceID && a.UserProfileID == this.UserProfileID)
@@ -68,7 +68,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfilePreferences
                         .Where(a => a.IsActive == isActive)
@@ -86,7 +86,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfilePreferences
                         .Where(a => a.IsActive == isActive && a.UserProfileID == userProfileId)

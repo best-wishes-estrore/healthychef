@@ -20,7 +20,7 @@ namespace HealthyChef.DAL
         public int ItemsCount { get; set; }
         public string SpecialInstructions { get; set; }
         public string OrderNumber { get; set; }
-        public string IsFamily { get; set; }
+
         public PackingSlip() { }
 
         public static List<PackingSlip> GeneratePackingSlips(DateTime deliveryDate)
@@ -71,21 +71,7 @@ namespace HealthyChef.DAL
                             ps.Customer = ps.LastName;
                             ps.OrderProfile = agItem.CartItem.UserProfile.ProfileName;
                         }
-                        if (agItem.CartItem != null)
-                        {
-                            if (agItem.CartItem.Plan_IsAutoRenew == true && agItem.CartItem.ItemTypeID == 1)
-                            {
-                                ps.IsFamily = "Yes";
-                            }
-                            else if (agItem.CartItem.Plan_IsAutoRenew == false && agItem.CartItem.ItemTypeID == 1)
-                            {
-                                ps.IsFamily = "No";
-                            }
-                            else
-                            {
-                                ps.IsFamily = "N/A";
-                            }
-                        }
+
                         if (agItem.CartItem.SnapShipAddrId.HasValue)
                         {
                             hccAddress shipAddr = hccAddress.GetById(agItem.CartItem.SnapShipAddrId.Value);

@@ -18,7 +18,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccRecurringOrders", this);
                     object oldObj;
@@ -49,7 +49,7 @@ namespace HealthyChef.DAL
                 //var results = new List<hcc_GetExpiringOrders_Result>();
                 var results = new List<hccRecurringOrder>();
 
-                using (var conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                using (var conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                 {
                     using (var cmd = new SqlCommand("hcc_GetExpiringOrders", conn))
                     {
@@ -93,74 +93,12 @@ namespace HealthyChef.DAL
         public static List<hccRecurringOrder> GetTestExpiringOrders()
         {
             var results = new List<hccRecurringOrder>();
-            using (var cont = new healthychefEntities())
+            using (var cont = new healthychefEntitiesAPI())
             {
                 return results = cont.hccRecurringOrders.ToList();
             }
         }
-        public static hccRecurringOrder GetByCartItemId(int cartItemId)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    return cont.hccRecurringOrders
-                        .SingleOrDefault(i => i.CartItemID == cartItemId);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
-        public void Delete()
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    System.Data.EntityKey key = cont.CreateEntityKey("hccRecurringOrders", this);
-                    object originalItem = null;
 
-                    if (cont.TryGetObjectByKey(key, out originalItem))
-                    {
-                        hccRecurringOrder item = cont.hccRecurringOrders
-                            .Where(a => a.CartItemID == this.CartItemID).SingleOrDefault();
-
-                        if (item != null)
-                        {
-                            cont.hccRecurringOrders.DeleteObject(item);
-                            cont.SaveChanges();
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public static void DeleteByCartId(int CartId)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    hccRecurringOrder item = cont.hccRecurringOrders
-                            .Where(a => a.CartID == CartId).SingleOrDefault();
-                    if (item != null)
-                    {
-                        cont.hccRecurringOrders.DeleteObject(item);
-                        cont.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }

@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="ShareDb">
-  <ConnectionProperties>
-    <Extension>SQL</Extension>
-    <ConnectString>Data Source=192.168.29.91;Initial Catalog=LiveHealthychefcreationsAPI</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>da29b4e1-1a2a-4a14-a839-f82940b4ea87</DataSourceID>
-</RptDataSource>

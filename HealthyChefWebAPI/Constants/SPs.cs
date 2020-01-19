@@ -29,5 +29,8 @@ namespace HealthyChefWebAPI.Constants
         public const string GetAllShippingZone = "GetAllShippingZone";
         public const string GETITEMS = "GETITEMS";
 
+        public const string LocalConnStr = @"data source=RS-27-078\SQLEXPRESS;initial catalog=LiveHealthychefcreations;Integrated Security=True;";
+        public const string DecConnStr = @"data source=VA1ZYWWHECHFD01;initial catalog=LiveHealthychefcreationsAPI;Integrated Security=True;";
+
     }
 }

@@ -27,7 +27,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccCartSnapshots", this);
                     object oldObj;
@@ -85,7 +85,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartSnapshots
                         .FirstOrDefault(c => c.CartId == cartId);

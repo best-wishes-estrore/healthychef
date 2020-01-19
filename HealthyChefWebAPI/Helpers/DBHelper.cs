@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -766,6 +767,26 @@ namespace HealthyChefWebAPI.Helpers
                 return _newGuid;
             }
             return _newGuid;
+        }
+
+        public static string GetConnectionString()
+        {
+            string _connString = string.Empty;
+
+            string txtpath = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Connectionstring.txt");
+            //string txtpath = Server @"~/Connectionstring.txt";
+            try
+            {
+                if (File.Exists(txtpath))
+                {
+                    _connString = System.IO.File.ReadAllText(txtpath);
+                }
+            }
+            catch (Exception e)
+            {
+                return _connString;
+            }
+            return _connString;
         }
     }
 }

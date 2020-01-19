@@ -62,6 +62,8 @@ namespace HealthyChefWebAPI.CustomModels
         public DateTime DeliveryDateObj { get; set; }
         public CartItemType ItemType { get; set; }
         public string Status { get; set; }
+        public string CustomerEmail { get; set; }
+
 
         public bool Postpone
         {
@@ -75,7 +77,8 @@ namespace HealthyChefWebAPI.CustomModels
         {
             get
             {
-                return DeliveryDateObj.ToShortDateString();
+                //return DeliveryDateObj.ToShortDateString();
+                return DeliveryDateObj.ToString("MM/dd/yyyy");
             }
         }
 

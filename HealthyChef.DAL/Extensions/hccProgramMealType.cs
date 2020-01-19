@@ -16,7 +16,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccProgramMealTypes", this);
                     object oldObj;
@@ -43,7 +43,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramMealTypes
                         .Where(a => a.ProgramID == programId)

@@ -27,7 +27,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccCoupons", this);
                     object oldObj;
@@ -64,7 +64,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCoupons.FirstOrDefault(a => a.CouponID == couponId);
                 }
@@ -79,7 +79,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCoupons
                         .OrderBy(a => a.RedeemCode)
@@ -96,7 +96,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCoupons
                         .Where(a => a.IsActive)
@@ -114,7 +114,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCoupons
                         .Where(a => !a.IsActive)
@@ -132,7 +132,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCoupons
                         .SingleOrDefault(a => a.RedeemCode.ToUpper() == redeemCode.ToUpper());
@@ -177,7 +177,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCarts.Where(a => a.CouponID == couponId && a.AspNetUserID == aspNetUserID).ToList();
                 }

@@ -15,20 +15,9 @@ namespace HealthyChefWebAPI.CustomModels
         public bool IsCancelled { get; set; }
         public string OrderNumber { get; set; }
         public int ItemCount { get; set; }
-        public int StatusId { get; set; }
-
-        public string Status
-        {
-            get
-            {
-                return getStatus();
-            }
-        }
-
-        private string getStatus()
-        {
-            return Enums.GetEnumDescription(((Enums.CartStatus)this.StatusId));
-        }
-
+        public bool Status{ get; set; }
+        public int CartID { get; set; }
+        public int StatusID { get; set; }
+       
     }
 }

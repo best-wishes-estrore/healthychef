@@ -15,16 +15,70 @@ namespace HealthyChefWebAPI.Repository
 {
     public class OrderManagementRepository
     {
-        public static string GetAllPurchases()
+       
+        public static string GetAllPurchases(SearchParamsForPurchases searchParams)
         {
             try
             {
                 List<PurchaseDetails> retVals = new List<PurchaseDetails>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
-                    using (SqlCommand cmd = new SqlCommand(SPs.GETALLPURCHASES, conn))
+                    using (SqlCommand cmd = new SqlCommand("GETALLPURCHASES3", conn))
                     {
+                        if (!string.IsNullOrEmpty(searchParams.email))
+                        {
+                            SqlParameter prm1 = new SqlParameter("@email", SqlDbType.NVarChar);
+                            prm1.Value = searchParams.email;
+                            cmd.Parameters.Add(prm1);
+                        }
+
+                        if (!string.IsNullOrEmpty(searchParams.purchaseNumber))
+                        {
+                            SqlParameter prm2 = new SqlParameter("@purchaseNumber", SqlDbType.NVarChar);
+                            prm2.Value = searchParams.purchaseNumber;
+                            cmd.Parameters.Add(prm2);
+                        }
+
+                       
+                        if (!string.IsNullOrEmpty(searchParams.Purchasedate))
+                        {
+                            SqlParameter prm3 = new SqlParameter("@purchaseDate", SqlDbType.NVarChar);
+                            prm3.Value = searchParams.Purchasedate;
+                            cmd.Parameters.Add(prm3);
+                        }
+
+                        if (!string.IsNullOrEmpty(searchParams.lastName))
+                        {
+                            SqlParameter prm4 = new SqlParameter("@lastName", SqlDbType.NVarChar);
+                            prm4.Value = searchParams.lastName;
+                            cmd.Parameters.Add(prm4);
+                        }
+
+                        if (!string.IsNullOrEmpty(searchParams.deliveryDate))
+                        {
+                            SqlParameter prm5 = new SqlParameter("@deliveryDate", SqlDbType.NVarChar);
+                            prm5.Value = searchParams.deliveryDate;
+                            cmd.Parameters.Add(prm5);
+                        }
+
+                        SqlParameter prm6 = new SqlParameter("@statusId", SqlDbType.Int);
+                        prm6.Value = searchParams.StatusId;
+                        cmd.Parameters.Add(prm6);
+                        
+                        SqlParameter prm7 = new SqlParameter("@PageNumber", SqlDbType.Int);
+                        prm7.Value = searchParams.pagenumber;
+                        cmd.Parameters.Add(prm7);
+
+                        SqlParameter prm8 = new SqlParameter("@PageSize", SqlDbType.Int);
+                        prm8.Value = searchParams.pagesize;
+                        cmd.Parameters.Add(prm8);
+
+                        SqlParameter prm9 = new SqlParameter("@totalrecord", SqlDbType.Int);
+                        prm9.Value = searchParams.totalrecords;
+                        cmd.Parameters.Add(prm9);
+
                         cmd.CommandTimeout = 180;
                         cmd.CommandType = CommandType.StoredProcedure;
                         conn.Open();
@@ -44,20 +98,27 @@ namespace HealthyChefWebAPI.Repository
                                 StatusID = DBUtil.GetIntField(t, "StatusID"),
                                 TotalAmount = DBUtil.GetDecimalField(t, "TotalAmount"),
                                 DeliveryDate = DBUtil.GetCharField(t, "DeliveryDate"),
+                                TotalRecords= DBUtil.GetIntField(t, "totalrecords")
                             });
                         }
 
                         conn.Close();
                     }
                 }
-
+               
                 retVals = retVals.OrderByDescending(d => d.PurchaseNumber).ToList();
-
+                if (retVals.Count != 0)
+                {
+                    if (retVals[0].TotalRecords == 0)
+                    {
+                        retVals[0].TotalRecords = retVals.Count;
+                    }
+                }
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception E)
             {
-                return string.Empty;
+                return E.Message;
             }
 
         }
@@ -70,7 +131,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<OrderFullFillMent> retVals = new List<OrderFullFillMent>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETORDERFULLFILLMENT", conn))
                     {
@@ -135,9 +197,8 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
-
         }
 
         /// <summary>
@@ -150,22 +211,27 @@ namespace HealthyChefWebAPI.Repository
         /// <param name="includeSnapshots"></param>
         /// <param name="includeGiftCerts"></param>
         /// <returns></returns>
-        public static string GetOrderFullfillmentDetails(string deliveryDateString = "")
+        public static string GetOrderFullfillmentDetails(SearchParamsForOrderFulfillment searchParamsForOrderFulfillment)
         {
             string Content = string.Empty;
             List<OrderFullFillMentDetails> retVals = new List<OrderFullFillMentDetails>();
-
-            string lastName = string.Empty;
-            string email = string.Empty;
-            int? purchNum = null;
+            
             bool includeSnapshots = false;
             bool includeGiftCerts = true;
+            string lastName = null;
+            if (!string.IsNullOrWhiteSpace(searchParamsForOrderFulfillment.lastName.Trim())) { lastName = searchParamsForOrderFulfillment.lastName.Trim(); }
+
+            string email = null;
+            if (!string.IsNullOrWhiteSpace(searchParamsForOrderFulfillment.email.Trim())) { email = searchParamsForOrderFulfillment.email.Trim(); }
+
+            int? purchNum = null;
+            if (!string.IsNullOrWhiteSpace(searchParamsForOrderFulfillment.purchaseNumber.Trim())) { purchNum = int.Parse(searchParamsForOrderFulfillment.purchaseNumber.Trim()); }
 
             DateTime? deliveryDate = null;
-            if (!string.IsNullOrEmpty(deliveryDateString))
+            if (!string.IsNullOrEmpty(searchParamsForOrderFulfillment.deliveryDate))
             {
                 DateTime d = new DateTime();
-                bool _isParsed = DateTime.TryParse(deliveryDateString.Trim(), out d);
+                bool _isParsed = DateTime.TryParse(searchParamsForOrderFulfillment.deliveryDate.Trim(), out d);
                 if (_isParsed)
                 {
                     deliveryDate = d;
@@ -174,7 +240,7 @@ namespace HealthyChefWebAPI.Repository
 
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI(WebConfigurationManager.ConnectionStrings["healthychefEntities"].ConnectionString))
                 {
                     List<AggrCartItem> aggrItems = new List<AggrCartItem>();
 
@@ -273,6 +339,16 @@ namespace HealthyChefWebAPI.Repository
 
                     aggrItems.AddRange(AggrCartItem.GetFromRange(progs, includeSnapshots));
 
+                    if (searchParamsForOrderFulfillment.ddlStatusId != 0)
+                    {
+                        aggrItems = aggrItems.Where(a => a.SimpleStatus == searchParamsForOrderFulfillment.ddlStatusValue).ToList();
+                    }
+
+                    if (searchParamsForOrderFulfillment.ddlTypesId != 0)
+                    {
+                        aggrItems = aggrItems.Where(a => a.CartItem.ItemTypeID== searchParamsForOrderFulfillment.ddlTypesId).ToList();
+                    }
+
                     aggrItems = aggrItems.OrderBy(a => a.CartItem.OrderNumber).ThenBy(a => a.DeliveryDate).ToList();
 
                     foreach (var ai in aggrItems)
@@ -288,21 +364,32 @@ namespace HealthyChefWebAPI.Repository
                         _ofd.CartItemID = ai.CartItem.CartItemID;
                         _ofd.CartID = ai.CartItem.CartID;
 
+                        if(ai.CartItem != null)
+                        {
+                            if(ai.CartItem.UserProfile != null)
+                            {
+                                if(ai.CartItem.UserProfile.ASPUser != null)
+                                {
+                                    _ofd.CustomerEmail = ai.CartItem.UserProfile.ASPUser.Email;
+                                }
+                            }
+                        }
+
                         retVals.Add(_ofd);
                     }
-
+                    retVals = retVals.OrderBy(d => DateTime.Parse(d.DeliveryDate)).ToList();
                     Content = DBHelper.ConvertDataToJson(retVals);
                 }
             }
             catch (Exception ex)
             {
-                return "";
+                return ex.Message;
             }
 
             return Content;
         }
 
-
+        
 
         public static string GetRecurringOrder()
         {
@@ -310,7 +397,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<RecurringOrder> retVals = new List<RecurringOrder>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GetRecurringOrder", conn))
                     {
@@ -341,14 +429,25 @@ namespace HealthyChefWebAPI.Repository
                         conn.Close();
                     }
                 }
+                DateTime MinCutOffDate = retVals.Where(x=>x.MaxCutOffDate != null)
+                                                    .Min(x=>x.MaxCutOffDate) ?? DateTime.MinValue;
+                MinCutOffDate = MinCutOffDate.AddDays(1);
+                foreach (var retval in retVals)
+                {                    
+                    if (retval.MaxCutOffDate < DateTime.Now && DateTime.Now > MinCutOffDate || DateTime.Now > Convert.ToDateTime(retval.MaxCutOffDate).AddDays(1))
+                    {
+                        if(retval.quantity>0)
+                        retval.Recurringready = true;
+                    } 
 
+                }
                 retVals = retVals.OrderBy(d => d.maxdeliverydate).ToList();
 
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -358,7 +457,9 @@ namespace HealthyChefWebAPI.Repository
             try
             {
                 List<Cancellations> retVals = new List<Cancellations>();
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                List<Tuple<int, string,int>> totalordernumbers = new List<Tuple<int, string,int>>();
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETCANCELLATIONSORDER", conn))
                     {
@@ -369,34 +470,37 @@ namespace HealthyChefWebAPI.Repository
 
                         IDataReader t = cmd.ExecuteReader();
                         while (t.Read())
-                        {
-                            retVals.Add(new Cancellations()
-                            {
-                                ProfileName = DBUtil.GetCharField(t, "ProfileName"),
-                                ItemName = DBUtil.GetCharField(t, "ItemName"),
-                                Quantity = DBUtil.GetIntField(t, "Quantity"),
-                                DeliveryDate = DBUtil.GetDateField(t, "DeliveryDate"),
-                                IsCancelled = DBUtil.GetBoolField(t, "IsCancelled"),
-                                OrderNumber = DBUtil.GetCharField(t, "OrderNumber"),
-                                ItemCount = DBUtil.GetIntField(t, "ItemCount"),
-                                StatusId = DBUtil.GetIntField(t, "StatusId")
-
-                            });
-
-                        }
+                         {
+                            totalordernumbers.Add(new Tuple<int, string,int>(DBUtil.GetIntField(t, "CartID"), DBUtil.GetCharField(t, "OrderNumber"), DBUtil.GetIntField(t, "StatusID")));
+                         }
                         conn.Close();
                     }
                 }
-                retVals = retVals.OrderByDescending(d => d.OrderNumber).ToList();
+                List<string> ordernumbers= totalordernumbers.Select(a => a.Item2).Distinct().ToList();
+                foreach (var order in ordernumbers)
+                {
+                    List<hccCartItem> cartitems = hccCartItem.GetBy(totalordernumbers[0].Item1);
+                    List<hccCartItem> ordItems = cartitems.Where(a => a.OrderNumber == order).ToList();
+                    int cnt = cartitems.Count(a => a.OrderNumber == order);
+                    int cntNotCancelled = cartitems.Count(a => a.OrderNumber == order && !a.IsCancelled);
+                    retVals.Add(new Cancellations()
+                    {
+                        StatusID = totalordernumbers.Where(x=>x.Item2== order).FirstOrDefault().Item3,
+                        OrderNumber = order,
+                        Status = (cntNotCancelled == 0),
+                        ItemCount =cnt
+                    });
+                }
+                retVals = retVals.OrderBy(d => d.OrderNumber).ToList();
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
         }
 
-        public static PostHttpResponse CancelCartItems(int PurchaseNumber, string OrderNumber)
+        public static PostHttpResponse CancelCartItems(int PurchaseNumber, string OrderNumber,bool iscancel)
         {
             var res = new PostHttpResponse();
             try
@@ -408,7 +512,7 @@ namespace HealthyChefWebAPI.Repository
                     List<hccCartItem> cartitems = hccCartItem.GetBy(cart.CartID);
 
                     List<hccCartItem> ordItems = cartitems.Where(a => a.OrderNumber == OrderNumber).ToList();
-                    ordItems.ForEach(delegate (hccCartItem item) { item.IsCancelled = true; item.Save(); });
+                    ordItems.ForEach(delegate (hccCartItem item) { item.IsCancelled = iscancel; item.Save(); });
 
                     if (cartitems.Count(a => !a.IsCancelled) == 0)
                     {
@@ -466,10 +570,11 @@ namespace HealthyChefWebAPI.Repository
                             }
                             cartItemResponse.ItemName = cartitem.ItemName;
                             cartItemResponse.Quantity = cartitem.Quantity;
-                            cartItemResponse.DeliveryDate = cartitem.DeliveryDate;
+                            cartItemResponse.DeliveryDate = cartitem.DeliveryDate.ToShortDateString();
                             cartItemResponse.IsCancelled = cartitem.IsCancelled;
                             cartItemResponse.CartItemID = cartitem.CartItemID;
                             cartItemResponse.CartID = cartitem.CartID;
+                            cartItemResponse.OrderNumber = OrderNumber;
                             _cartitemsdetailsadded.Add(cartItemResponse);
                         }
                     }
@@ -480,11 +585,11 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
         }
 
-        public static PostHttpResponse CancelItemDetails(int cancelcartitemid)
+        public static PostHttpResponse CancelItemDetails(int cancelcartitemid,bool iscancel)
         {
             var res = new PostHttpResponse();
             try
@@ -493,7 +598,7 @@ namespace HealthyChefWebAPI.Repository
                 if (item != null)
                 {
 
-                    item.IsCancelled = true;
+                    item.IsCancelled = iscancel;
                     item.Save();
 
                     res.IsSuccess = true;
@@ -519,7 +624,7 @@ namespace HealthyChefWebAPI.Repository
             bool IsDeleted = false;
             try
             {
-                using (var hcE = new healthychefEntities())
+                using (var hcE = new healthychefEntitiesAPI())
                 {
                     var rOrder = hcE.hccRecurringOrders.FirstOrDefault(i => i.CartID == cartid && i.CartItemID == cartitemid);
                     if (rOrder != null)

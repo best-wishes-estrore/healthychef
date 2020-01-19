@@ -17,7 +17,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccMenuItemNutritionDatas", this);
 
@@ -47,7 +47,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey(this.EntityKey.EntitySetName, this);
                     object originalItem = null;
@@ -71,7 +71,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var prefs = cont.hccMenuItemNutritionDatas
                         .Where(a => a.MenuItemID == menuItemId)

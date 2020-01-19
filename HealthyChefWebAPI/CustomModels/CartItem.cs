@@ -17,7 +17,7 @@ namespace HealthyChefWebAPI.CustomModels
         public int Quantity { get; set; }
         public bool IsTaxable { get; set; }
         public string OrderNumber { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public string DeliveryDate { get; set; }
         public string Gift_RedeemCode { get; set; }
         public Guid Gift_IssuedTo { get; set; }
         public DateTime Gift_IssuedDate { get; set; }

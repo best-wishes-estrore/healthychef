@@ -18,7 +18,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccPreferences", this);
                     object oldObj;
@@ -58,7 +58,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences.ToList();
                 }
@@ -73,7 +73,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var p = cont.hccPreferences
                         .Where(a => a.PreferenceType == (int)prefType)
@@ -96,7 +96,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var p = cont.hccPreferences
                         .Where(a => a.PreferenceType == prefType
@@ -116,7 +116,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences
                         .SingleOrDefault(a => a.PreferenceID == preferenceId);
@@ -132,7 +132,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences
                         .Where(a => !a.IsRetired)
@@ -150,7 +150,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences
                         .Where(a => !a.IsRetired && a.PreferenceType == prefTypeId)
@@ -168,7 +168,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences
                         .Where(a => a.IsRetired)
@@ -186,7 +186,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccPreferences
                         .Where(a => a.IsRetired && a.PreferenceType == prefTypeId)

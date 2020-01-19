@@ -1,2 +1,0 @@
-# healthychef
-Healthy chef creations

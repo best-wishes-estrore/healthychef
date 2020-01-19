@@ -16,7 +16,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccProgramDefaultMenus", this);
                     object oldObj;
@@ -44,7 +44,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccProgramDefaultMenus", this);
                     object oldObj;
@@ -64,7 +64,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramDefaultMenus
                         .OrderBy(a => a.CalendarID)
@@ -85,7 +85,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramDefaultMenus
                         .Where(a => a.DefaultMenuID == defaultMenuID)
@@ -102,7 +102,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramDefaultMenus
                         .Where(a => a.ProgramID == programId && a.CalendarID == calendarId)
@@ -120,7 +120,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramDefaultMenus
                         .Where(a => a.ProgramID == programId && a.CalendarID == calendarId && a.DayNumber <= numDays)
@@ -138,7 +138,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramDefaultMenus
                         .Where(a => a.ProgramID == programId

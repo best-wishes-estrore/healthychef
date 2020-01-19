@@ -190,7 +190,6 @@
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="TaxRate" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsDefaultCouponRemoved" Type="bit" />
-          <Property Name="IsEditCoupon" Type="int" />
         </EntityType>
         <EntityType Name="hccCartSnapshot">
           <Key>
@@ -297,12 +296,11 @@
             <PropertyRef Name="MenuItemID" />
           </Key>
           <Property Name="MenuItemID" Type="int" Nullable="false" />
-          <Property Name="Calories" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TotalFat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TotalCarbohydrates" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="DietaryFiber" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Protein" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Sodium" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Calories" Type="int" Nullable="false" />
+          <Property Name="TotalFat" Type="int" Nullable="false" />
+          <Property Name="TotalCarbohydrates" Type="int" Nullable="false" />
+          <Property Name="DietaryFiber" Type="int" Nullable="false" />
+          <Property Name="Protein" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="hccMenuItemPreferences">
           <Key>
@@ -335,8 +333,6 @@
           <Property Name="VegetarianOptionAvailable" Type="bit" />
           <Property Name="VeganOptionAvailable" Type="bit" />
           <Property Name="GlutenFreeOptionAvailable" Type="bit" />
-          <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
-          <Property Name="ImageData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="hccMenuMenuItems">
           <Key>
@@ -1108,17 +1104,6 @@
         <Function Name="aspnet_WebEvent_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventId" Type="char" Mode="In" />
         </Function>
-        <Function Name="AvailableDeliveryDatesForItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ItemName" Type="varchar" Mode="In" />
-          <Parameter Name="StartDate" Type="datetime" Mode="In" />
-          <Parameter Name="EndDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="GETUSERALLERGENS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserProfileId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="GETUSERPREFERENCES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserProfileId" Type="int" Mode="In" />
-        </Function>
         <Function Name="hcc_AlcMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DeliveryDate" Type="datetime" Mode="In" />
           <Parameter Name="MealTypeID" Type="int" Mode="In" />
@@ -1137,19 +1122,10 @@
           <Parameter Name="TaxRate" Type="smallmoney" Mode="In" />
           <Parameter Name="NewCartID" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="hcc_GetAllItemsForNextDeliverDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="start" Type="datetime" Mode="In" />
-          <Parameter Name="end" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="hcc_GetExpiringOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="hcc_IsCanyonRanchCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CartId" Type="int" Mode="In" />
           <Parameter Name="UserProfileId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="hcc_MenuItemsByDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="start" Type="datetime" Mode="In" />
-          <Parameter Name="end" Type="datetime" Mode="In" />
-          <Parameter Name="includeAlaCarte" Type="bit" Mode="In" />
         </Function>
         <Function Name="hcc_OrderFulfillSearch_ALCnGC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="delivDate" Type="datetime" Mode="In" />
@@ -1182,15 +1158,6 @@
         <Function Name="hcc_OrderFulfillSearch_Programs_ByRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startDate" Type="datetime" Mode="In" />
           <Parameter Name="endDate" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="hcc_ProductFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="start" Type="datetime" Mode="In" />
-          <Parameter Name="end" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="hcc_ProductionDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ItemName" Type="varchar" Mode="In" />
-          <Parameter Name="MealTypeID" Type="int" Mode="In" />
-          <Parameter Name="DeliveryDate" Type="date" Mode="In" />
         </Function>
         <Function Name="hcc_PurchasesSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="nvarchar" Mode="In" />
@@ -1431,6 +1398,14 @@
     <edmx:ConceptualModels>
       <Schema Namespace="HealthyChef.DAL" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="healthychefEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="hcc_UserProfileSearch" ReturnType="Collection(Guid)">
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="purchNum" Mode="In" Type="Int32" />
+            <Parameter Name="delivDate" Mode="In" Type="DateTime" />
+            <Parameter Name="roles" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="hccAllergens" EntityType="HealthyChef.DAL.hccAllergen" />
           <EntitySet Name="hccCoupons" EntityType="HealthyChef.DAL.hccCoupon" />
           <EntitySet Name="hccDeliverySettings" EntityType="HealthyChef.DAL.hccDeliverySetting" />
@@ -1613,6 +1588,11 @@
           <FunctionImport Name="hcc_OrderFulfillSearch_Programs_ByOrderNumber" EntitySet="hccCartItemCalendars" ReturnType="Collection(HealthyChef.DAL.hccCartItemCalendar)">
           <Parameter Name="OrderNumber" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="hccMenuItemNutritionDatas" EntityType="HealthyChef.DAL.hccMenuItemNutritionData" />
+          <AssociationSet Name="FK_hcc_MenuItem_NutritionData_hcc_MenuItem" Association="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem">
+            <End Role="hccMenuItem" EntitySet="hccMenuItems" />
+            <End Role="hccMenuItemNutritionData" EntitySet="hccMenuItemNutritionDatas" />
+          </AssociationSet>
           <EntitySet Name="hccCartSnapshots" EntityType="HealthyChef.DAL.hccCartSnapshot" />
           <FunctionImport Name="aspnet_WebEvent_Get" ReturnType="Collection(HealthyChef.DAL.aspnet_WebEvent_Get_Result)">
           <Parameter Name="eventId" Mode="In" Type="String" />
@@ -1623,6 +1603,12 @@
             <Parameter Name="purchNum" Mode="In" Type="Int32" />
             <Parameter Name="lastName" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="hcc_CloneOrder">
+            <Parameter Name="CartID" Mode="In" Type="Int32" />
+            <Parameter Name="CartItemId" Mode="In" Type="Int32" />
+            <Parameter Name="TaxRate" Mode="In" Type="Decimal" />
+            <Parameter Name="NewCartID" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="hccRecurringOrders" EntityType="HealthyChef.DAL.hccRecurringOrder" />
           <FunctionImport Name="hcc_RecurringOrderByDeliveryDate" ReturnType="Collection(HealthyChef.DAL.hcc_RecurringOrderByDeliveryDate_Result)" />
@@ -1646,32 +1632,27 @@
             <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="hcc_GetExpiringOrders" ReturnType="Collection(HealthyChef.DAL.hcc_GetExpiringOrders_Result)" />
+          <FunctionImport Name="hcc_AlcMenu2" ReturnType="Collection(HealthyChef.DAL.hcc_AlcMenu2_Result)">
+            <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="hccCarts" EntityType="HealthyChef.DAL.hccCart" />
           <AssociationSet Name="FK_hccCarts_hccCoupons" Association="HealthyChef.DAL.FK_hccCarts_hccCoupons">
             <End Role="hccCoupon" EntitySet="hccCoupons" />
             <End Role="hccCart" EntitySet="hccCarts" />
           </AssociationSet>
           <EntitySet Name="hccCartALCMenuItems" EntityType="HealthyChef.DAL.hccCartALCMenuItem" />
-          <FunctionImport Name="hcc_UserProfileSearch" ReturnType="Collection(Guid)">
-            <Parameter Name="lastName" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="phone" Mode="In" Type="String" />
-            <Parameter Name="purchNum" Mode="In" Type="Int32" />
-            <Parameter Name="delivDate" Mode="In" Type="DateTime" />
-            <Parameter Name="roles" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_OrderFulfillSearch_ALCnGC" ReturnType="Collection(HealthyChef.DAL.hcc_OrderFulfillSearch_ALCnGC_Result)">
-            <Parameter Name="delivDate" Mode="In" Type="DateTime" />
-            <Parameter Name="purchNum" Mode="In" Type="Int32" />
-            <Parameter Name="lastName" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_OrderFulfillSearch_ALCnGC_ByRange" ReturnType="Collection(HealthyChef.DAL.hcc_OrderFulfillSearch_ALCnGC_ByRange_Result)">
-            <Parameter Name="startDate" Mode="In" Type="DateTime" />
-            <Parameter Name="endDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="hccCartItems" EntityType="HealthyChef.DAL.hccCartItem" />
+          <EntitySet Name="hccProgramDefaultMenuExPrefs" EntityType="HealthyChef.DAL.hccProgramDefaultMenuExPref" />
+          <AssociationSet Name="FK__hccProgra__Prefe__77A09B57" Association="HealthyChef.DAL.FK__hccProgra__Prefe__77A09B57">
+            <End Role="hccPreference" EntitySet="hccPreferences" />
+            <End Role="hccProgramDefaultMenuExPref" EntitySet="hccProgramDefaultMenuExPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hccProgra__Defau__76AC771E" Association="HealthyChef.DAL.FK__hccProgra__Defau__76AC771E">
+            <End Role="hccProgramDefaultMenu" EntitySet="hccProgramDefaultMenus" />
+            <End Role="hccProgramDefaultMenuExPref" EntitySet="hccProgramDefaultMenuExPrefs" />
+          </AssociationSet>
           <EntitySet Name="hccCartMenuExPrefs" EntityType="HealthyChef.DAL.hccCartMenuExPref" />
+          <EntitySet Name="hccCartItems" EntityType="HealthyChef.DAL.hccCartItem" />
           <AssociationSet Name="FK_hccCartALCMenuItem_hccCartItems_CartItemID" Association="HealthyChef.DAL.FK_hccCartALCMenuItem_hccCartItems_CartItemID">
             <End Role="hccCartItem" EntitySet="hccCartItems" />
             <End Role="hccCartALCMenuItem" EntitySet="hccCartALCMenuItems" />
@@ -1684,7 +1665,7 @@
             <End Role="hccCartItem" EntitySet="hccCartItems" />
             <End Role="hccCartItemMealPreference" EntitySet="hccCartItemMealPreferences" />
           </AssociationSet>
-          <AssociationSet Name="FK__hccCartMe__CartI__73D00A73" Association="HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73">
+          <AssociationSet Name="FK__hccCartMe__CartI__77A09B57" Association="HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57">
             <End Role="hccCartItem" EntitySet="hccCartItems" />
             <End Role="hccCartMenuExPref" EntitySet="hccCartMenuExPrefs" />
           </AssociationSet>
@@ -1692,64 +1673,15 @@
             <End Role="hccCart" EntitySet="hccCarts" />
             <End Role="hccCartItem" EntitySet="hccCartItems" />
           </AssociationSet>
-          <EntitySet Name="hccProgramDefaultMenuExPrefs" EntityType="HealthyChef.DAL.hccProgramDefaultMenuExPref" />
-          <AssociationSet Name="FK__hccProgra__Prefe__77A09B57" Association="HealthyChef.DAL.FK__hccProgra__Prefe__77A09B57">
-            <End Role="hccPreference" EntitySet="hccPreferences" />
-            <End Role="hccProgramDefaultMenuExPref" EntitySet="hccProgramDefaultMenuExPrefs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__hccProgra__Defau__76AC771E" Association="HealthyChef.DAL.FK__hccProgra__Defau__76AC771E">
-            <End Role="hccProgramDefaultMenu" EntitySet="hccProgramDefaultMenus" />
-            <End Role="hccProgramDefaultMenuExPref" EntitySet="hccProgramDefaultMenuExPrefs" />
-          </AssociationSet>
-          <FunctionImport Name="hcc_AlcMenu2" ReturnType="Collection(HealthyChef.DAL.hcc_AlcMenu2_Result)">
-            <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
-            <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
+          <FunctionImport Name="hcc_OrderFulfillSearch_ALCnGC" ReturnType="Collection(HealthyChef.DAL.hcc_OrderFulfillSearch_ALCnGC_Result)">
+            <Parameter Name="delivDate" Mode="In" Type="DateTime" />
+            <Parameter Name="purchNum" Mode="In" Type="Int32" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="hccMenuItemNutritionDatas" EntityType="HealthyChef.DAL.hccMenuItemNutritionData" />
-          <AssociationSet Name="FK_hcc_MenuItem_NutritionData_hcc_MenuItem" Association="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem">
-            <End Role="hccMenuItem" EntitySet="hccMenuItems" />
-            <End Role="hccMenuItemNutritionData" EntitySet="hccMenuItemNutritionDatas" />
-          </AssociationSet>
-          <FunctionImport Name="hcc_SubProfileSearch" ReturnType="Collection(HealthyChef.DAL.hcc_SubProfileSearch_Result)">
-            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-            <Parameter Name="ParentProfileId" Mode="In" Type="Int32" />
-            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_CloneOrder">
-            <Parameter Name="CartID" Mode="In" Type="Int32" />
-            <Parameter Name="CartItemId" Mode="In" Type="Int32" />
-            <Parameter Name="TaxRate" Mode="In" Type="Decimal" />
-            <Parameter Name="NewCartID" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_MenuItemsByDateRange">
-            <Parameter Name="start" Mode="In" Type="DateTime" />
-            <Parameter Name="end" Mode="In" Type="DateTime" />
-            <Parameter Name="includeAlaCarte" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_ProductFeed" ReturnType="Collection(HealthyChef.DAL.hcc_ProductFeed_Result)">
-            <Parameter Name="start" Mode="In" Type="DateTime" />
-            <Parameter Name="end" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_ProductionDescription" ReturnType="Collection(HealthyChef.DAL.hcc_ProductionDescription_Result)">
-            <Parameter Name="ItemName" Mode="In" Type="String" />
-            <Parameter Name="MealTypeID" Mode="In" Type="Int32" />
-            <Parameter Name="DeliveryDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="hcc_GetAllItemsForNextDeliverDates" ReturnType="Collection(Int32)">
-            <Parameter Name="start" Mode="In" Type="DateTime" />
-            <Parameter Name="end" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="AvailableDeliveryDatesForItem" ReturnType="Collection(DateTime)">
-            <Parameter Name="ItemName" Mode="In" Type="String" />
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="GETUSERALLERGENS" ReturnType="Collection(String)">
-          <Parameter Name="UserProfileId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GETUSERPREFERENCES" ReturnType="Collection(String)">
-          <Parameter Name="UserProfileId" Mode="In" Type="Int32" />
+          <FunctionImport Name="hcc_OrderFulfillSearch_ALCnGC_ByRange" ReturnType="Collection(HealthyChef.DAL.hcc_OrderFulfillSearch_ALCnGC_ByRange_Result)">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="hccAllergen">
@@ -1860,14 +1792,12 @@
           <NavigationProperty Name="hccMenuItemPreferences" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_Preferences_hcc_MenuItem" FromRole="hccMenuItem" ToRole="hccMenuItemPreference" />
           <NavigationProperty Name="hccMenus" Relationship="HealthyChef.DAL.hccMenuMenuItems" FromRole="hccMenuItem" ToRole="hccMenu" />
           <NavigationProperty Name="hccProgramDefaultMenus" Relationship="HealthyChef.DAL.FK_hccProgramDefaultMenus_hccMenuItems" FromRole="hccMenuItem" ToRole="hccProgramDefaultMenu" />
+          <NavigationProperty Name="hccMenuItemNutritionData" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" FromRole="hccMenuItem" ToRole="hccMenuItemNutritionData" />
           <Property Type="Boolean" Name="CanyonRanchRecipe" />
           <Property Type="Boolean" Name="CanyonRanchApproved" />
           <Property Type="Boolean" Name="VegetarianOptionAvailable" />
           <Property Type="Boolean" Name="VeganOptionAvailable" />
           <Property Type="Boolean" Name="GlutenFreeOptionAvailable" />
-          <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="hccMenuItemNutritionData" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" FromRole="hccMenuItem" ToRole="hccMenuItemNutritionData" />
         </EntityType>
         <EntityType Name="hccMenu">
           <Key>
@@ -2838,6 +2768,30 @@
           <Property Type="Decimal" Name="TaxableAmount" Nullable="false" Precision="10" />
           <Property Type="Decimal" Name="DiscretionaryTaxAmount" Nullable="true" Precision="10" />
         </ComplexType>
+        <EntityType Name="hccMenuItemNutritionData">
+          <Key>
+            <PropertyRef Name="MenuItemID" />
+          </Key>
+          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
+          <Property Type="Int32" Name="Calories" Nullable="false" />
+          <Property Type="Int32" Name="TotalFat" Nullable="false" />
+          <Property Type="Int32" Name="TotalCarbohydrates" Nullable="false" />
+          <Property Type="Int32" Name="DietaryFiber" Nullable="false" />
+          <Property Type="Int32" Name="Protein" Nullable="false" />
+          <NavigationProperty Name="hccMenuItem" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" FromRole="hccMenuItemNutritionData" ToRole="hccMenuItem" />
+        </EntityType>
+        <Association Name="FK_hcc_MenuItem_NutritionData_hcc_MenuItem">
+          <End Type="HealthyChef.DAL.hccMenuItem" Role="hccMenuItem" Multiplicity="1" />
+          <End Type="HealthyChef.DAL.hccMenuItemNutritionData" Role="hccMenuItemNutritionData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="hccMenuItem">
+              <PropertyRef Name="MenuItemID" />
+            </Principal>
+            <Dependent Role="hccMenuItemNutritionData">
+              <PropertyRef Name="MenuItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="hccCartSnapshot">
           <Key>
             <PropertyRef Name="CartSnapId" />
@@ -2980,6 +2934,26 @@
           <Property Type="Int32" Name="CartItemID" Nullable="true" />
           <Property Type="Int32" Name="UserProfileID" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="hcc_AlcMenu2_Result">
+          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Boolean" Name="UseCostRegular" Nullable="false" />
+          <Property Type="Decimal" Name="CostRegular" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostSmall" Nullable="false" />
+          <Property Type="Decimal" Name="CostSmall" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostLarge" Nullable="false" />
+          <Property Type="Decimal" Name="CostLarge" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="UseCostChild" Nullable="false" />
+          <Property Type="Decimal" Name="CostChild" Nullable="false" Precision="10" />
+          <Property Type="Boolean" Name="CanyonRanchRecipe" Nullable="true" />
+          <Property Type="Boolean" Name="CanyonRanchApproved" Nullable="true" />
+          <Property Type="Boolean" Name="VegetarianOptionAvailable" Nullable="true" />
+          <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
+          <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
+          <Property Type="Int32" Name="MealTypeID" Nullable="false" />
+          <Property Type="String" Name="AllergensList" Nullable="false" />
+        </ComplexType>
         <EntityType Name="hccCart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -3015,7 +2989,6 @@
           <Property Type="Guid" Name="ModifiedBy" />
           <NavigationProperty Name="hccCoupon" Relationship="HealthyChef.DAL.FK_hccCarts_hccCoupons" FromRole="hccCart" ToRole="hccCoupon" />
           <NavigationProperty Name="hccCartItems" Relationship="HealthyChef.DAL.FK_hcc_CartItems_hcc_Carts" FromRole="hccCart" ToRole="hccCartItem" />
-          <Property Name="IsEditCoupon" Type="Int32" />
         </EntityType>
         <Association Name="FK_hccCarts_hccCoupons">
           <End Type="HealthyChef.DAL.hccCoupon" Role="hccCoupon" Multiplicity="0..1" />
@@ -3039,6 +3012,160 @@
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="hccCartItem" Relationship="HealthyChef.DAL.FK_hccCartALCMenuItem_hccCartItems_CartItemID" FromRole="hccCartALCMenuItem" ToRole="hccCartItem" />
         </EntityType>
+        <EntityType Name="hccProgramDefaultMenuExPref">
+          <Key>
+            <PropertyRef Name="ProgramDefaultExprefId" />
+          </Key>
+          <Property Name="ProgramDefaultExprefId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DefaultMenuId" Type="Int32" />
+          <Property Name="PreferenceId" Type="Int32" />
+          <NavigationProperty Name="hccPreference" Relationship="HealthyChef.DAL.FK__hccProgra__Prefe__77A09B57" FromRole="hccProgramDefaultMenuExPref" ToRole="hccPreference" />
+          <NavigationProperty Name="hccProgramDefaultMenu" Relationship="HealthyChef.DAL.FK__hccProgra__Defau__76AC771E" FromRole="hccProgramDefaultMenuExPref" ToRole="hccProgramDefaultMenu" />
+        </EntityType>
+        <Association Name="FK__hccProgra__Prefe__77A09B57">
+          <End Type="HealthyChef.DAL.hccPreference" Role="hccPreference" Multiplicity="0..1" />
+          <End Type="HealthyChef.DAL.hccProgramDefaultMenuExPref" Role="hccProgramDefaultMenuExPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccPreference">
+              <PropertyRef Name="PreferenceID" />
+            </Principal>
+            <Dependent Role="hccProgramDefaultMenuExPref">
+              <PropertyRef Name="PreferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hccProgra__Defau__76AC771E">
+          <End Type="HealthyChef.DAL.hccProgramDefaultMenu" Role="hccProgramDefaultMenu" Multiplicity="0..1" />
+          <End Type="HealthyChef.DAL.hccProgramDefaultMenuExPref" Role="hccProgramDefaultMenuExPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccProgramDefaultMenu">
+              <PropertyRef Name="DefaultMenuID" />
+            </Principal>
+            <Dependent Role="hccProgramDefaultMenuExPref">
+              <PropertyRef Name="DefaultMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="hccCartMenuExPref">
+          <Key>
+            <PropertyRef Name="CartMenuExPrefID" />
+          </Key>
+          <Property Name="CartMenuExPrefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartItemID" Type="Int32" />
+          <Property Name="DayNumber" Type="Int32" Nullable="false" />
+          <Property Name="IsModified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hccCartItem" Relationship="HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57" FromRole="hccCartMenuExPref" ToRole="hccCartItem" />
+        </EntityType>
+        <EntityType Name="hccCartItem">
+          <Key>
+            <PropertyRef Name="CartItemID" />
+          </Key>
+          <Property Name="CartItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="UserProfileID" Type="Int32" Nullable="false" />
+          <Property Name="ItemTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ItemDesc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ItemPrice" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="IsTaxable" Type="Boolean" Nullable="false" />
+          <Property Name="OrderNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gift_RedeemCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Gift_IssuedTo" Type="Guid" />
+          <Property Name="Gift_IssuedDate" Type="DateTime" Precision="3" />
+          <Property Name="Gift_RedeemedBy" Type="Guid" />
+          <Property Name="Gift_RedeemedDate" Type="DateTime" Precision="3" />
+          <Property Name="Gift_RecipientAddressId" Type="Int32" />
+          <Property Name="Gift_RecipientEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gift_RecipientMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Meal_MenuItemID" Type="Int32" />
+          <Property Name="Meal_MealSizeID" Type="Int32" />
+          <Property Name="Meal_ShippingCost" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Plan_PlanID" Type="Int32" />
+          <Property Name="Plan_ProgramOptionID" Type="Int32" />
+          <Property Name="Plan_IsAutoRenew" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="IsFulfilled" Type="Boolean" Nullable="false" />
+          <Property Name="DiscountPerEach" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="DiscountAdjPrice" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="SnapBillAddrId" Type="Int32" />
+          <Property Name="SnapShipAddrId" Type="Int32" />
+          <Property Name="TaxRate" Type="Decimal" Precision="9" Scale="4" />
+          <Property Name="TaxableAmount" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="DiscretionaryTaxAmount" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="TaxRateAssigned" Type="Decimal" Precision="9" Scale="4" />
+          <NavigationProperty Name="hccCartALCMenuItems" Relationship="HealthyChef.DAL.FK_hccCartALCMenuItem_hccCartItems_CartItemID" FromRole="hccCartItem" ToRole="hccCartALCMenuItem" />
+          <NavigationProperty Name="hccCartItemCalendars" Relationship="HealthyChef.DAL.FK_hccCartItemCalendars_hccCartItems" FromRole="hccCartItem" ToRole="hccCartItemCalendar" />
+          <NavigationProperty Name="hccCartItemMealPreferences" Relationship="HealthyChef.DAL.FK_hccCartItemALCPrefs_hccCartItems" FromRole="hccCartItem" ToRole="hccCartItemMealPreference" />
+          <NavigationProperty Name="hccCartMenuExPrefs" Relationship="HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57" FromRole="hccCartItem" ToRole="hccCartMenuExPref" />
+          <NavigationProperty Name="hccCart" Relationship="HealthyChef.DAL.FK_hcc_CartItems_hcc_Carts" FromRole="hccCartItem" ToRole="hccCart" />
+        </EntityType>
+        <Association Name="FK_hccCartALCMenuItem_hccCartItems_CartItemID">
+          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HealthyChef.DAL.hccCartALCMenuItem" Role="hccCartALCMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccCartItem">
+              <PropertyRef Name="CartItemID" />
+            </Principal>
+            <Dependent Role="hccCartALCMenuItem">
+              <PropertyRef Name="CartItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hccCartItemCalendars_hccCartItems">
+          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1" />
+          <End Type="HealthyChef.DAL.hccCartItemCalendar" Role="hccCartItemCalendar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccCartItem">
+              <PropertyRef Name="CartItemID" />
+            </Principal>
+            <Dependent Role="hccCartItemCalendar">
+              <PropertyRef Name="CartItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hccCartItemALCPrefs_hccCartItems">
+          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1" />
+          <End Type="HealthyChef.DAL.hccCartItemMealPreference" Role="hccCartItemMealPreference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccCartItem">
+              <PropertyRef Name="CartItemID" />
+            </Principal>
+            <Dependent Role="hccCartItemMealPreference">
+              <PropertyRef Name="CartItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hccCartMe__CartI__77A09B57">
+          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="0..1" />
+          <End Type="HealthyChef.DAL.hccCartMenuExPref" Role="hccCartMenuExPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccCartItem">
+              <PropertyRef Name="CartItemID" />
+            </Principal>
+            <Dependent Role="hccCartMenuExPref">
+              <PropertyRef Name="CartItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hcc_CartItems_hcc_Carts">
+          <End Type="HealthyChef.DAL.hccCart" Role="hccCart" Multiplicity="1" />
+          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hccCart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="hccCartItem">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <ComplexType Name="hcc_OrderFulfillSearch_ALCnGC_Result">
           <Property Type="Int32" Name="CartItemID" Nullable="false" />
           <Property Type="Int32" Name="CartID" Nullable="false" />
@@ -3119,264 +3246,13 @@
           <Property Type="Decimal" Name="DiscretionaryTaxAmount" Nullable="true" Precision="10" />
           <Property Type="Decimal" Name="TaxRateAssigned" Nullable="true" Precision="9" Scale="4" />
         </ComplexType>
-        <EntityType Name="hccCartItem">
-          <Key>
-            <PropertyRef Name="CartItemID" />
-          </Key>
-          <Property Name="CartItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CartID" Type="Int32" Nullable="false" />
-          <Property Name="UserProfileID" Type="Int32" Nullable="false" />
-          <Property Name="ItemTypeID" Type="Int32" Nullable="false" />
-          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ItemDesc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="ItemPrice" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="IsTaxable" Type="Boolean" Nullable="false" />
-          <Property Name="OrderNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Gift_RedeemCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="Gift_IssuedTo" Type="Guid" />
-          <Property Name="Gift_IssuedDate" Type="DateTime" Precision="3" />
-          <Property Name="Gift_RedeemedBy" Type="Guid" />
-          <Property Name="Gift_RedeemedDate" Type="DateTime" Precision="3" />
-          <Property Name="Gift_RecipientAddressId" Type="Int32" />
-          <Property Name="Gift_RecipientEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Gift_RecipientMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Meal_MenuItemID" Type="Int32" />
-          <Property Name="Meal_MealSizeID" Type="Int32" />
-          <Property Name="Meal_ShippingCost" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="Plan_PlanID" Type="Int32" />
-          <Property Name="Plan_ProgramOptionID" Type="Int32" />
-          <Property Name="Plan_IsAutoRenew" Type="Boolean" />
-          <Property Name="CreatedBy" Type="Guid" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
-          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
-          <Property Name="IsFulfilled" Type="Boolean" Nullable="false" />
-          <Property Name="DiscountPerEach" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
-          <Property Name="DiscountAdjPrice" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
-          <Property Name="SnapBillAddrId" Type="Int32" />
-          <Property Name="SnapShipAddrId" Type="Int32" />
-          <Property Name="TaxRate" Type="Decimal" Precision="9" Scale="4" />
-          <Property Name="TaxableAmount" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="DiscretionaryTaxAmount" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="TaxRateAssigned" Type="Decimal" Precision="9" Scale="4" />
-          <NavigationProperty Name="hccCartALCMenuItems" Relationship="HealthyChef.DAL.FK_hccCartALCMenuItem_hccCartItems_CartItemID" FromRole="hccCartItem" ToRole="hccCartALCMenuItem" />
-          <NavigationProperty Name="hccCartItemCalendars" Relationship="HealthyChef.DAL.FK_hccCartItemCalendars_hccCartItems" FromRole="hccCartItem" ToRole="hccCartItemCalendar" />
-          <NavigationProperty Name="hccCartItemMealPreferences" Relationship="HealthyChef.DAL.FK_hccCartItemALCPrefs_hccCartItems" FromRole="hccCartItem" ToRole="hccCartItemMealPreference" />
-          <NavigationProperty Name="hccCartMenuExPrefs" Relationship="HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73" FromRole="hccCartItem" ToRole="hccCartMenuExPref" />
-          <NavigationProperty Name="hccCart" Relationship="HealthyChef.DAL.FK_hcc_CartItems_hcc_Carts" FromRole="hccCartItem" ToRole="hccCart" />
-        </EntityType>
-        <EntityType Name="hccCartMenuExPref">
-          <Key>
-            <PropertyRef Name="CartMenuExPrefID" />
-          </Key>
-          <Property Name="CartMenuExPrefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CartItemID" Type="Int32" />
-          <Property Name="DayNumber" Type="Int32" Nullable="false" />
-          <Property Name="IsModified" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="hccCartItem" Relationship="HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73" FromRole="hccCartMenuExPref" ToRole="hccCartItem" />
-        </EntityType>
-        <Association Name="FK_hccCartALCMenuItem_hccCartItems_CartItemID">
-          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HealthyChef.DAL.hccCartALCMenuItem" Role="hccCartALCMenuItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccCartItem">
-              <PropertyRef Name="CartItemID" />
-            </Principal>
-            <Dependent Role="hccCartALCMenuItem">
-              <PropertyRef Name="CartItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hccCartItemCalendars_hccCartItems">
-          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1" />
-          <End Type="HealthyChef.DAL.hccCartItemCalendar" Role="hccCartItemCalendar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccCartItem">
-              <PropertyRef Name="CartItemID" />
-            </Principal>
-            <Dependent Role="hccCartItemCalendar">
-              <PropertyRef Name="CartItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hccCartItemALCPrefs_hccCartItems">
-          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="1" />
-          <End Type="HealthyChef.DAL.hccCartItemMealPreference" Role="hccCartItemMealPreference" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccCartItem">
-              <PropertyRef Name="CartItemID" />
-            </Principal>
-            <Dependent Role="hccCartItemMealPreference">
-              <PropertyRef Name="CartItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__hccCartMe__CartI__73D00A73">
-          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="0..1" />
-          <End Type="HealthyChef.DAL.hccCartMenuExPref" Role="hccCartMenuExPref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccCartItem">
-              <PropertyRef Name="CartItemID" />
-            </Principal>
-            <Dependent Role="hccCartMenuExPref">
-              <PropertyRef Name="CartItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hcc_CartItems_hcc_Carts">
-          <End Type="HealthyChef.DAL.hccCart" Role="hccCart" Multiplicity="1" />
-          <End Type="HealthyChef.DAL.hccCartItem" Role="hccCartItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccCart">
-              <PropertyRef Name="CartID" />
-            </Principal>
-            <Dependent Role="hccCartItem">
-              <PropertyRef Name="CartID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="hccProgramDefaultMenuExPref">
-          <Key>
-            <PropertyRef Name="ProgramDefaultExprefId" />
-          </Key>
-          <Property Name="ProgramDefaultExprefId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DefaultMenuId" Type="Int32" />
-          <Property Name="PreferenceId" Type="Int32" />
-          <NavigationProperty Name="hccPreference" Relationship="HealthyChef.DAL.FK__hccProgra__Prefe__77A09B57" FromRole="hccProgramDefaultMenuExPref" ToRole="hccPreference" />
-          <NavigationProperty Name="hccProgramDefaultMenu" Relationship="HealthyChef.DAL.FK__hccProgra__Defau__76AC771E" FromRole="hccProgramDefaultMenuExPref" ToRole="hccProgramDefaultMenu" />
-        </EntityType>
-        <Association Name="FK__hccProgra__Prefe__77A09B57">
-          <End Type="HealthyChef.DAL.hccPreference" Role="hccPreference" Multiplicity="0..1" />
-          <End Type="HealthyChef.DAL.hccProgramDefaultMenuExPref" Role="hccProgramDefaultMenuExPref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccPreference">
-              <PropertyRef Name="PreferenceID" />
-            </Principal>
-            <Dependent Role="hccProgramDefaultMenuExPref">
-              <PropertyRef Name="PreferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__hccProgra__Defau__76AC771E">
-          <End Type="HealthyChef.DAL.hccProgramDefaultMenu" Role="hccProgramDefaultMenu" Multiplicity="0..1" />
-          <End Type="HealthyChef.DAL.hccProgramDefaultMenuExPref" Role="hccProgramDefaultMenuExPref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hccProgramDefaultMenu">
-              <PropertyRef Name="DefaultMenuID" />
-            </Principal>
-            <Dependent Role="hccProgramDefaultMenuExPref">
-              <PropertyRef Name="DefaultMenuId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="hcc_AlcMenu2_Result">
-          <Property Type="String" Name="ImageUrl" Nullable="true" />
-          <Property Type="Binary" Name="ImageData" Nullable="true" />
-          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="Boolean" Name="UseCostRegular" Nullable="false" />
-          <Property Type="Decimal" Name="CostRegular" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostSmall" Nullable="false" />
-          <Property Type="Decimal" Name="CostSmall" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostLarge" Nullable="false" />
-          <Property Type="Decimal" Name="CostLarge" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostChild" Nullable="false" />
-          <Property Type="Decimal" Name="CostChild" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="CanyonRanchRecipe" Nullable="true" />
-          <Property Type="Boolean" Name="CanyonRanchApproved" Nullable="true" />
-          <Property Type="Boolean" Name="VegetarianOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
-          <Property Type="Int32" Name="MealTypeID" Nullable="false" />
-          <Property Type="String" Name="AllergensList" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="hccMenuItemNutritionData">
-          <Key>
-            <PropertyRef Name="MenuItemID" />
-          </Key>
-          <Property Name="MenuItemID" Type="Int32" Nullable="false" />
-          <Property Name="Calories" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalFat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalCarbohydrates" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="DietaryFiber" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Protein" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Sodium" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="hccMenuItem" Relationship="HealthyChef.DAL.FK_hcc_MenuItem_NutritionData_hcc_MenuItem" FromRole="hccMenuItemNutritionData" ToRole="hccMenuItem" />
-        </EntityType>
-        <Association Name="FK_hcc_MenuItem_NutritionData_hcc_MenuItem">
-          <End Type="HealthyChef.DAL.hccMenuItem" Role="hccMenuItem" Multiplicity="1" />
-          <End Type="HealthyChef.DAL.hccMenuItemNutritionData" Role="hccMenuItemNutritionData" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="hccMenuItem">
-              <PropertyRef Name="MenuItemID" />
-            </Principal>
-            <Dependent Role="hccMenuItemNutritionData">
-              <PropertyRef Name="MenuItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="hcc_SubProfileSearch_Result">
-          <Property Type="Int32" Name="UserProfileID" Nullable="false" />
-          <Property Type="Int32" Name="ParentProfileID" Nullable="true" />
-          <Property Type="Guid" Name="MembershipID" Nullable="false" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="String" Name="ProfileName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="BillingAddressID" Nullable="true" />
-          <Property Type="Int32" Name="ShippingAddressID" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="16" />
-          <Property Type="Guid" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="16" />
-          <Property Type="Guid" Name="ModifiedBy" Nullable="true" />
-          <Property Type="String" Name="AuthNetProfileID" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="AccountBalance" Nullable="false" Precision="10" />
-          <Property Type="Int32" Name="DefaultCouponId" Nullable="true" />
-          <Property Type="Boolean" Name="UseParentShipping" Nullable="false" />
-          <Property Type="Boolean" Name="CanyonRanchCustomer" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="hcc_ProductFeed_Result">
-          <Property Type="Int32" Name="MenuItemId" Nullable="true" />
-          <Property Type="String" Name="ItemTitle" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="ItemDescription" Nullable="true" />
-          <Property Type="Int32" Name="ItemPrice" Nullable="true" />
-          <Property Type="String" Name="ItemImageLink" Nullable="true" />
-          <Property Type="Int32" Name="MenuID" Nullable="true" />
-          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="hcc_ProductionDescription_Result">
-          <Property Type="String" Name="ImageUrl" Nullable="true" />
-          <Property Type="Binary" Name="ImageData" Nullable="true" />
-          <Property Type="Int32" Name="MenuItemID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="Boolean" Name="UseCostRegular" Nullable="false" />
-          <Property Type="Decimal" Name="CostRegular" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostSmall" Nullable="false" />
-          <Property Type="Decimal" Name="CostSmall" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostLarge" Nullable="false" />
-          <Property Type="Decimal" Name="CostLarge" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="UseCostChild" Nullable="false" />
-          <Property Type="Decimal" Name="CostChild" Nullable="false" Precision="10" />
-          <Property Type="Boolean" Name="CanyonRanchRecipe" Nullable="true" />
-          <Property Type="Boolean" Name="CanyonRanchApproved" Nullable="true" />
-          <Property Type="Boolean" Name="VegetarianOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="VeganOptionAvailable" Nullable="true" />
-          <Property Type="Boolean" Name="GlutenFreeOptionAvailable" Nullable="true" />
-          <Property Type="Int32" Name="MealTypeID" Nullable="false" />
-          <Property Type="String" Name="AllergensList" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HealthyChefDALStoreContainer" CdmEntityContainer="healthychefEntities">
+          <FunctionImportMapping FunctionImportName="hcc_UserProfileSearch" FunctionName="HealthyChef.DAL.Store.hcc_UserProfileSearch" />
           <EntitySetMapping Name="hccAllergens">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccAllergen">
               <MappingFragment StoreEntitySet="hccAllergens">
@@ -3460,8 +3336,6 @@
           <EntitySetMapping Name="hccMenuItems">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccMenuItem">
               <MappingFragment StoreEntitySet="hccMenuItems">
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
                 <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
                 <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
@@ -3868,6 +3742,18 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="hcc_OrderFulfillSearch_Programs_ByOrderNumber" FunctionName="HealthyChef.DAL.Store.hcc_OrderFulfillSearch_Programs_ByOrderNumber">
           </FunctionImportMapping>
+          <EntitySetMapping Name="hccMenuItemNutritionDatas">
+            <EntityTypeMapping TypeName="HealthyChef.DAL.hccMenuItemNutritionData">
+              <MappingFragment StoreEntitySet="hccMenuItemNutritionData">
+                <ScalarProperty Name="Protein" ColumnName="Protein" />
+                <ScalarProperty Name="DietaryFiber" ColumnName="DietaryFiber" />
+                <ScalarProperty Name="TotalCarbohydrates" ColumnName="TotalCarbohydrates" />
+                <ScalarProperty Name="TotalFat" ColumnName="TotalFat" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="hccCartSnapshots">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccCartSnapshot">
               <MappingFragment StoreEntitySet="hccCartSnapshot">
@@ -3923,6 +3809,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="hcc_OrderFulfillSearch_Programs" FunctionName="HealthyChef.DAL.Store.hcc_OrderFulfillSearch_Programs" />
+          <FunctionImportMapping FunctionImportName="hcc_CloneOrder" FunctionName="HealthyChef.DAL.Store.hcc_CloneOrder" />
           <EntitySetMapping Name="hccRecurringOrders">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccRecurringOrder">
               <MappingFragment StoreEntitySet="hccRecurringOrder">
@@ -4040,10 +3927,33 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="hcc_AlcMenu2" FunctionName="HealthyChef.DAL.Store.hcc_AlcMenu2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_AlcMenu2_Result">
+                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UseCostRegular" ColumnName="UseCostRegular" />
+                <ScalarProperty Name="CostRegular" ColumnName="CostRegular" />
+                <ScalarProperty Name="UseCostSmall" ColumnName="UseCostSmall" />
+                <ScalarProperty Name="CostSmall" ColumnName="CostSmall" />
+                <ScalarProperty Name="UseCostLarge" ColumnName="UseCostLarge" />
+                <ScalarProperty Name="CostLarge" ColumnName="CostLarge" />
+                <ScalarProperty Name="UseCostChild" ColumnName="UseCostChild" />
+                <ScalarProperty Name="CostChild" ColumnName="CostChild" />
+                <ScalarProperty Name="CanyonRanchRecipe" ColumnName="CanyonRanchRecipe" />
+                <ScalarProperty Name="CanyonRanchApproved" ColumnName="CanyonRanchApproved" />
+                <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
+                <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
+                <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
+                <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
+                <ScalarProperty Name="AllergensList" ColumnName="AllergensList" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="hccCarts">
             <EntityTypeMapping TypeName="HealthyChef.DAL.hccCart">
               <MappingFragment StoreEntitySet="hccCarts">
-                <ScalarProperty Name="IsEditCoupon" ColumnName="IsEditCoupon" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="DiscretionaryTaxAmount" ColumnName="DiscretionaryTaxAmount" />
@@ -4086,7 +3996,69 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="hcc_UserProfileSearch" FunctionName="HealthyChef.DAL.Store.hcc_UserProfileSearch" />
+          <EntitySetMapping Name="hccProgramDefaultMenuExPrefs">
+            <EntityTypeMapping TypeName="HealthyChef.DAL.hccProgramDefaultMenuExPref">
+              <MappingFragment StoreEntitySet="hccProgramDefaultMenuExPrefs">
+                <ScalarProperty Name="PreferenceId" ColumnName="PreferenceId" />
+                <ScalarProperty Name="DefaultMenuId" ColumnName="DefaultMenuId" />
+                <ScalarProperty Name="ProgramDefaultExprefId" ColumnName="ProgramDefaultExprefId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hccCartMenuExPrefs">
+            <EntityTypeMapping TypeName="HealthyChef.DAL.hccCartMenuExPref">
+              <MappingFragment StoreEntitySet="hccCartMenuExPrefs">
+                <ScalarProperty Name="IsModified" ColumnName="IsModified" />
+                <ScalarProperty Name="DayNumber" ColumnName="DayNumber" />
+                <ScalarProperty Name="CartItemID" ColumnName="CartItemID" />
+                <ScalarProperty Name="CartMenuExPrefID" ColumnName="CartMenuExPrefID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hccCartItems">
+            <EntityTypeMapping TypeName="HealthyChef.DAL.hccCartItem">
+              <MappingFragment StoreEntitySet="hccCartItems">
+                <ScalarProperty Name="TaxRateAssigned" ColumnName="TaxRateAssigned" />
+                <ScalarProperty Name="DiscretionaryTaxAmount" ColumnName="DiscretionaryTaxAmount" />
+                <ScalarProperty Name="TaxableAmount" ColumnName="TaxableAmount" />
+                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+                <ScalarProperty Name="SnapShipAddrId" ColumnName="SnapShipAddrId" />
+                <ScalarProperty Name="SnapBillAddrId" ColumnName="SnapBillAddrId" />
+                <ScalarProperty Name="DiscountAdjPrice" ColumnName="DiscountAdjPrice" />
+                <ScalarProperty Name="DiscountPerEach" ColumnName="DiscountPerEach" />
+                <ScalarProperty Name="IsFulfilled" ColumnName="IsFulfilled" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Plan_IsAutoRenew" ColumnName="Plan_IsAutoRenew" />
+                <ScalarProperty Name="Plan_ProgramOptionID" ColumnName="Plan_ProgramOptionID" />
+                <ScalarProperty Name="Plan_PlanID" ColumnName="Plan_PlanID" />
+                <ScalarProperty Name="Meal_ShippingCost" ColumnName="Meal_ShippingCost" />
+                <ScalarProperty Name="Meal_MealSizeID" ColumnName="Meal_MealSizeID" />
+                <ScalarProperty Name="Meal_MenuItemID" ColumnName="Meal_MenuItemID" />
+                <ScalarProperty Name="Gift_RecipientMessage" ColumnName="Gift_RecipientMessage" />
+                <ScalarProperty Name="Gift_RecipientEmail" ColumnName="Gift_RecipientEmail" />
+                <ScalarProperty Name="Gift_RecipientAddressId" ColumnName="Gift_RecipientAddressId" />
+                <ScalarProperty Name="Gift_RedeemedDate" ColumnName="Gift_RedeemedDate" />
+                <ScalarProperty Name="Gift_RedeemedBy" ColumnName="Gift_RedeemedBy" />
+                <ScalarProperty Name="Gift_IssuedDate" ColumnName="Gift_IssuedDate" />
+                <ScalarProperty Name="Gift_IssuedTo" ColumnName="Gift_IssuedTo" />
+                <ScalarProperty Name="Gift_RedeemCode" ColumnName="Gift_RedeemCode" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="IsTaxable" ColumnName="IsTaxable" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+                <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CartItemID" ColumnName="CartItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="hcc_OrderFulfillSearch_ALCnGC" FunctionName="HealthyChef.DAL.Store.hcc_OrderFulfillSearch_ALCnGC">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_OrderFulfillSearch_ALCnGC_Result">
@@ -4175,153 +4147,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="hccCartItems">
-            <EntityTypeMapping TypeName="HealthyChef.DAL.hccCartItem">
-              <MappingFragment StoreEntitySet="hccCartItems">
-                <ScalarProperty Name="TaxRateAssigned" ColumnName="TaxRateAssigned" />
-                <ScalarProperty Name="DiscretionaryTaxAmount" ColumnName="DiscretionaryTaxAmount" />
-                <ScalarProperty Name="TaxableAmount" ColumnName="TaxableAmount" />
-                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
-                <ScalarProperty Name="SnapShipAddrId" ColumnName="SnapShipAddrId" />
-                <ScalarProperty Name="SnapBillAddrId" ColumnName="SnapBillAddrId" />
-                <ScalarProperty Name="DiscountAdjPrice" ColumnName="DiscountAdjPrice" />
-                <ScalarProperty Name="DiscountPerEach" ColumnName="DiscountPerEach" />
-                <ScalarProperty Name="IsFulfilled" ColumnName="IsFulfilled" />
-                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
-                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Plan_IsAutoRenew" ColumnName="Plan_IsAutoRenew" />
-                <ScalarProperty Name="Plan_ProgramOptionID" ColumnName="Plan_ProgramOptionID" />
-                <ScalarProperty Name="Plan_PlanID" ColumnName="Plan_PlanID" />
-                <ScalarProperty Name="Meal_ShippingCost" ColumnName="Meal_ShippingCost" />
-                <ScalarProperty Name="Meal_MealSizeID" ColumnName="Meal_MealSizeID" />
-                <ScalarProperty Name="Meal_MenuItemID" ColumnName="Meal_MenuItemID" />
-                <ScalarProperty Name="Gift_RecipientMessage" ColumnName="Gift_RecipientMessage" />
-                <ScalarProperty Name="Gift_RecipientEmail" ColumnName="Gift_RecipientEmail" />
-                <ScalarProperty Name="Gift_RecipientAddressId" ColumnName="Gift_RecipientAddressId" />
-                <ScalarProperty Name="Gift_RedeemedDate" ColumnName="Gift_RedeemedDate" />
-                <ScalarProperty Name="Gift_RedeemedBy" ColumnName="Gift_RedeemedBy" />
-                <ScalarProperty Name="Gift_IssuedDate" ColumnName="Gift_IssuedDate" />
-                <ScalarProperty Name="Gift_IssuedTo" ColumnName="Gift_IssuedTo" />
-                <ScalarProperty Name="Gift_RedeemCode" ColumnName="Gift_RedeemCode" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="IsTaxable" ColumnName="IsTaxable" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
-                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
-                <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
-                <ScalarProperty Name="CartID" ColumnName="CartID" />
-                <ScalarProperty Name="CartItemID" ColumnName="CartItemID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="hccCartMenuExPrefs">
-            <EntityTypeMapping TypeName="HealthyChef.DAL.hccCartMenuExPref">
-              <MappingFragment StoreEntitySet="hccCartMenuExPrefs">
-                <ScalarProperty Name="IsModified" ColumnName="IsModified" />
-                <ScalarProperty Name="DayNumber" ColumnName="DayNumber" />
-                <ScalarProperty Name="CartItemID" ColumnName="CartItemID" />
-                <ScalarProperty Name="CartMenuExPrefID" ColumnName="CartMenuExPrefID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="hccProgramDefaultMenuExPrefs">
-            <EntityTypeMapping TypeName="HealthyChef.DAL.hccProgramDefaultMenuExPref">
-              <MappingFragment StoreEntitySet="hccProgramDefaultMenuExPrefs">
-                <ScalarProperty Name="PreferenceId" ColumnName="PreferenceId" />
-                <ScalarProperty Name="DefaultMenuId" ColumnName="DefaultMenuId" />
-                <ScalarProperty Name="ProgramDefaultExprefId" ColumnName="ProgramDefaultExprefId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="hcc_AlcMenu2" FunctionName="HealthyChef.DAL.Store.hcc_AlcMenu2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_AlcMenu2_Result">
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="UseCostRegular" ColumnName="UseCostRegular" />
-                <ScalarProperty Name="CostRegular" ColumnName="CostRegular" />
-                <ScalarProperty Name="UseCostSmall" ColumnName="UseCostSmall" />
-                <ScalarProperty Name="CostSmall" ColumnName="CostSmall" />
-                <ScalarProperty Name="UseCostLarge" ColumnName="UseCostLarge" />
-                <ScalarProperty Name="CostLarge" ColumnName="CostLarge" />
-                <ScalarProperty Name="UseCostChild" ColumnName="UseCostChild" />
-                <ScalarProperty Name="CostChild" ColumnName="CostChild" />
-                <ScalarProperty Name="CanyonRanchRecipe" ColumnName="CanyonRanchRecipe" />
-                <ScalarProperty Name="CanyonRanchApproved" ColumnName="CanyonRanchApproved" />
-                <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
-                <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
-                <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
-                <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
-                <ScalarProperty Name="AllergensList" ColumnName="AllergensList" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="hccMenuItemNutritionDatas">
-            <EntityTypeMapping TypeName="HealthyChef.DAL.hccMenuItemNutritionData">
-              <MappingFragment StoreEntitySet="hccMenuItemNutritionData">
-                <ScalarProperty Name="Sodium" ColumnName="Sodium" />
-                <ScalarProperty Name="Protein" ColumnName="Protein" />
-                <ScalarProperty Name="DietaryFiber" ColumnName="DietaryFiber" />
-                <ScalarProperty Name="TotalCarbohydrates" ColumnName="TotalCarbohydrates" />
-                <ScalarProperty Name="TotalFat" ColumnName="TotalFat" />
-                <ScalarProperty Name="Calories" ColumnName="Calories" />
-                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="hcc_CloneOrder" FunctionName="HealthyChef.DAL.Store.hcc_CloneOrder" />
-          <FunctionImportMapping FunctionImportName="hcc_MenuItemsByDateRange" FunctionName="HealthyChef.DAL.Store.hcc_MenuItemsByDateRange" />
-          <FunctionImportMapping FunctionImportName="hcc_ProductFeed" FunctionName="HealthyChef.DAL.Store.hcc_ProductFeed">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_ProductFeed_Result">
-                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
-                <ScalarProperty Name="ItemTitle" ColumnName="ItemTitle" />
-                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
-                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
-                <ScalarProperty Name="ItemImageLink" ColumnName="ItemImageLink" />
-                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="hcc_ProductionDescription" FunctionName="HealthyChef.DAL.Store.hcc_ProductionDescription">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HealthyChef.DAL.hcc_ProductionDescription_Result">
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-                <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="UseCostRegular" ColumnName="UseCostRegular" />
-                <ScalarProperty Name="CostRegular" ColumnName="CostRegular" />
-                <ScalarProperty Name="UseCostSmall" ColumnName="UseCostSmall" />
-                <ScalarProperty Name="CostSmall" ColumnName="CostSmall" />
-                <ScalarProperty Name="UseCostLarge" ColumnName="UseCostLarge" />
-                <ScalarProperty Name="CostLarge" ColumnName="CostLarge" />
-                <ScalarProperty Name="UseCostChild" ColumnName="UseCostChild" />
-                <ScalarProperty Name="CostChild" ColumnName="CostChild" />
-                <ScalarProperty Name="CanyonRanchRecipe" ColumnName="CanyonRanchRecipe" />
-                <ScalarProperty Name="CanyonRanchApproved" ColumnName="CanyonRanchApproved" />
-                <ScalarProperty Name="VegetarianOptionAvailable" ColumnName="VegetarianOptionAvailable" />
-                <ScalarProperty Name="VeganOptionAvailable" ColumnName="VeganOptionAvailable" />
-                <ScalarProperty Name="GlutenFreeOptionAvailable" ColumnName="GlutenFreeOptionAvailable" />
-                <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
-                <ScalarProperty Name="AllergensList" ColumnName="AllergensList" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="hcc_GetAllItemsForNextDeliverDates" FunctionName="HealthyChef.DAL.Store.hcc_GetAllItemsForNextDeliverDates" />
-          <FunctionImportMapping FunctionImportName="AvailableDeliveryDatesForItem" FunctionName="HealthyChef.DAL.Store.AvailableDeliveryDatesForItem" />
-          <FunctionImportMapping FunctionImportName="GETUSERALLERGENS" FunctionName="HealthyChef.DAL.Store.GETUSERALLERGENS" />
-          <FunctionImportMapping FunctionImportName="GETUSERPREFERENCES" FunctionName="HealthyChef.DAL.Store.GETUSERPREFERENCES" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

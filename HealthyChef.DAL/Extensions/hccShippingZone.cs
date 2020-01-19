@@ -14,7 +14,7 @@ namespace HealthyChef.DAL.Extensions
     {
         #region Manage Shipping Zones
 
-        public static int AddUpdateShippingZone(int ZoneID, string ZoneName, string TypeName, string Multiplier, string MinFee, string MaxFee, bool DefaultshipZone, bool IsPickupShippingZone)
+        public static int AddUpdateShippingZone(int ZoneID, string ZoneName, string TypeName, string Multiplier, string MinFee, string MaxFee, bool DefaultshipZone, bool IsPickupShippingZone,int OrderMinimum)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertShippingZone", conn))
                         {
@@ -38,6 +38,8 @@ namespace HealthyChef.DAL.Extensions
                             cmd.Parameters.AddWithValue("@MaxFee", Convert.ToDecimal(maxFee));
                             cmd.Parameters.AddWithValue("@IsDefaultShippingZone", DefaultshipZone);
                             cmd.Parameters.AddWithValue("@IsPickupShippingZone", IsPickupShippingZone);
+                            cmd.Parameters.AddWithValue("@OrderMinimum", OrderMinimum);
+                            
                             object t = cmd.ExecuteScalar();
                             cmd.Dispose();
                             conn.Close();
@@ -65,7 +67,7 @@ namespace HealthyChef.DAL.Extensions
         public DataTable BindGrid()
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZoneList"))
@@ -95,7 +97,7 @@ namespace HealthyChef.DAL.Extensions
                 int retVal = 0;
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                    string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_DeleteShippingZone", con))
@@ -130,7 +132,7 @@ namespace HealthyChef.DAL.Extensions
 
         public string GetDefaultshippingZone()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
 
@@ -164,7 +166,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertBoxSize", conn))
                         {
@@ -203,7 +205,7 @@ namespace HealthyChef.DAL.Extensions
         public DataTable BindGridBoxSizes()
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetBoxSizeList"))
@@ -231,7 +233,7 @@ namespace HealthyChef.DAL.Extensions
                 int retVal = 0;
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                    string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_DeleteBoxSize", con))
@@ -269,7 +271,7 @@ namespace HealthyChef.DAL.Extensions
         public DataTable BindGridZipCodesNew()
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 //using (SqlCommand cmd = new SqlCommand("hcc_GetZipCodesListNew"))
@@ -294,7 +296,7 @@ namespace HealthyChef.DAL.Extensions
         public DataTable BindGridZipCodes()
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetZipCodesList"))//Changes required //Sp_helptext
@@ -318,7 +320,7 @@ namespace HealthyChef.DAL.Extensions
         public List<hccZipCodes> BindGridDownloadZipCodes()
         {
             List<hccZipCodes> list_zipcodes = new List<hccZipCodes>();
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetZipCodesList"))////Changes required //Sp_helptext
@@ -350,7 +352,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertZipCodeLatest", conn))
                         {
@@ -389,7 +391,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertZipCodeNew", conn)) //Changes required //Sp_helptext
                         {
@@ -429,7 +431,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertZipCode", conn))//Changes required //Sp_helptext
                         {
@@ -468,7 +470,7 @@ namespace HealthyChef.DAL.Extensions
                 int retVal = 0;
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                    string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_DeleteZipCode", con))//Changes required //Sp_helptext
@@ -504,7 +506,7 @@ namespace HealthyChef.DAL.Extensions
         {
             try
             {
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -531,7 +533,7 @@ namespace HealthyChef.DAL.Extensions
             int userCount = 0;
             try
             {
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZoneByZipCodeNew", conn))
                     {
@@ -558,7 +560,7 @@ namespace HealthyChef.DAL.Extensions
             int userCount = 0;
             try
             {
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand("Select Count(*) from [dbo].[hccZipCodes] where ZipCode=@ZipCode", conn))
                     {
@@ -592,7 +594,7 @@ namespace HealthyChef.DAL.Extensions
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertBoxtoShippingZoneFee", conn))
                         {
@@ -635,7 +637,7 @@ namespace HealthyChef.DAL.Extensions
                 int retVal = 0;
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                    string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_DeleteBoxtoShippingZoneFee", con))
@@ -669,7 +671,7 @@ namespace HealthyChef.DAL.Extensions
 
         public DataTable BindGridShippingZoneByZoneID(int ZoneID)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZoneDelails", con))
@@ -694,7 +696,7 @@ namespace HealthyChef.DAL.Extensions
             try
             {
                 int userCount = 1;
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     SqlCommand cmd = new SqlCommand("hcc_GetNoofWeeks", con);
@@ -719,7 +721,7 @@ namespace HealthyChef.DAL.Extensions
             try
             {
                 int userCount = 0;
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     SqlCommand cmd = new SqlCommand("update hccZipCodestemp set ZoneID=@ZoneID where ZipCode=@ZipCode", con);
@@ -740,7 +742,7 @@ namespace HealthyChef.DAL.Extensions
 
         public DataSet BindZoneByZipCode(string ZipCode) //Bind Zone by Zip Code into Dropdown
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZoneByZipCode", con))
@@ -763,7 +765,7 @@ namespace HealthyChef.DAL.Extensions
         public string GetZipCodeByZoneName(string ZipCode) //Bind Zone by Zip Code into text box (Manoj)
         {
             string id;
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetZipcodebyZoneName", con))
@@ -785,7 +787,7 @@ namespace HealthyChef.DAL.Extensions
         public DataSet BindZoneGetShippingZone()
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZone", con))
@@ -808,7 +810,7 @@ namespace HealthyChef.DAL.Extensions
         public DataSet BindZoneByZipCodeNew(string ZipCode) //Bind Zone by Zip Code into Dropdown
         {
 
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetShippingZoneByZipCodeNew", con))
@@ -831,7 +833,7 @@ namespace HealthyChef.DAL.Extensions
 
         public DataTable BindBoxToShippingzonePickupFee(string PickupFee, int ZoneID)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("insert into hccBoxtoShippingZoneFee(PickupFee)values(@PickupFee)", con))
@@ -858,7 +860,7 @@ namespace HealthyChef.DAL.Extensions
         {
             try
             {
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     //UPDATE Customers SET City = 'Hamburg' WHERE CustomerID = 1;
@@ -893,7 +895,7 @@ namespace HealthyChef.DAL.Extensions
         {
             try
             {
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     //UPDATE Customers SET City = 'Hamburg' WHERE CustomerID = 1;
@@ -926,7 +928,7 @@ namespace HealthyChef.DAL.Extensions
         {
             try
             {
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     //UPDATE Customers SET City = 'Hamburg' WHERE CustomerID = 1;
@@ -958,7 +960,7 @@ namespace HealthyChef.DAL.Extensions
 
         public DataTable BindBoxToShippingZoneFee(int ZoneID)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("hcc_GetBoxShippingZoneFee", con))
@@ -984,7 +986,7 @@ namespace HealthyChef.DAL.Extensions
             try
             {
                 int userCount = 0;
-                string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     SqlCommand cmd = new SqlCommand("update hccCartItems set ItemName=@ItemName where CartItemID=@CartItemID", con);
@@ -1008,7 +1010,7 @@ namespace HealthyChef.DAL.Extensions
         //Shipping Zone DropDown List
         public DataSet ShippingZoneDDL()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 SqlCommand cmd = new SqlCommand("Select ZoneID,ZoneName FROM hccShippingZone", con);
@@ -1022,7 +1024,7 @@ namespace HealthyChef.DAL.Extensions
         //ShippingZoneID Dropdown list for Shippingzone
         public DataSet ShippingZoneID()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 SqlCommand cmd = new SqlCommand("select Id, TypeName from hccShipmentType", con);
@@ -1036,7 +1038,7 @@ namespace HealthyChef.DAL.Extensions
         //Shipping Zip Code DropDown List
         public DataSet ZipCodeDDL()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 SqlCommand cmd = new SqlCommand("Select ZipZoneID,ZipCode FROM hccZipCodes", con);
@@ -1064,7 +1066,7 @@ namespace HealthyChef.DAL.Extensions
 
         public DataSet ZipCodeDDLNew()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 SqlCommand cmd = new SqlCommand("Select ZipZoneID,ZipCodeFrom,ZipCodeTo FROM hccZipCodes_temp", con);
@@ -1086,7 +1088,7 @@ namespace HealthyChef.DAL.Extensions
         }
         private void connection()
         {
-            sqlconn = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            sqlconn = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             con = new SqlConnection(sqlconn);
         }
 
@@ -1120,7 +1122,7 @@ namespace HealthyChef.DAL.Extensions
 
         public void InsertExcelDataTemp(DataTable table)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -1145,7 +1147,7 @@ namespace HealthyChef.DAL.Extensions
 
         public void InsertExcelDataNew(DataTable table)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
 
             DataTable dt = new DataTable();
             dt.Columns.Add(
@@ -1261,7 +1263,7 @@ new DataColumn()
 
         public void InsertExcelData(DataTable table)
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 //creating object of SqlBulkCopy    
@@ -1289,7 +1291,7 @@ new DataColumn()
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_UpsertShipmentType", conn))
                         {
@@ -1329,7 +1331,7 @@ new DataColumn()
 
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("SELECT ZoneID FROM hccShippingZone WHERE ZoneName = @ZoneName", conn))
                         {
@@ -1362,7 +1364,7 @@ new DataColumn()
 
         public DataTable BindGridShippingClass()
         {
-            string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+            string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("select * from hccShipmentType"))
@@ -1389,7 +1391,7 @@ new DataColumn()
                 int retVal = 0;
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    string constr = WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString;
+                    string constr = WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_DeleteShipmentType", con))

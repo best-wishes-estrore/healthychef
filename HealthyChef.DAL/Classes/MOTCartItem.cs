@@ -59,7 +59,6 @@ namespace HealthyChef.DAL
         public string PackSlipString { get { return this.GetPackListString(); } }
         public int Index { get; set; }
         public string OrderNumber { get; set; }
-        public string FamilyStyle { get; set; }
 
         public MOTCartItem() { }
 
@@ -75,7 +74,7 @@ namespace HealthyChef.DAL
                     CartItemId = cartItem.CartItemID;
                     OrderNumber = cartItem.OrderNumber + "-ALC";
                     DeliveryDate = cartItem.DeliveryDate;
-                    
+
                     if (cartItem.UserProfile != null)
                     {
                         CustomerName = cartItem.UserProfile.ParentProfileName;
@@ -113,14 +112,6 @@ namespace HealthyChef.DAL
                     {
                         hccAddress addr = hccAddress.GetById(cartItem.SnapShipAddrId.Value);
                         DeliveryMethod = ((Enums.DeliveryTypes)addr.DefaultShippingTypeID).ToString();
-                    }
-                    if(cartItem.Plan_IsAutoRenew==true)
-                    {
-                        FamilyStyle = "Yes";
-                    }
-                    else if(cartItem.Plan_IsAutoRenew == false)
-                    {
-                        FamilyStyle = "No";
                     }
                 }
             }
@@ -714,8 +705,7 @@ namespace HealthyChef.DAL
             sb.Append("Portion Size: <strong>" + PortionSize + "</strong><br>");
             //sb.Append("Allergens: " + Allergens + "<br>");
             sb.Append("Servings: " + Servings + "<br>");
-            sb.Append("Preferences: <strong><em>" + (string.IsNullOrWhiteSpace(Preferences) ? "None" : Preferences) + "</em></strong><br>");
-            sb.Append("Family Style: <strong><em>" + (string.IsNullOrWhiteSpace(FamilyStyle) ? "N/A" : FamilyStyle) + "</em></strong>");
+            sb.Append("Preferences: <strong><em>" + (string.IsNullOrWhiteSpace(Preferences) ? "None" : Preferences) + "</em></strong>");
             return sb.ToString();
         }
 

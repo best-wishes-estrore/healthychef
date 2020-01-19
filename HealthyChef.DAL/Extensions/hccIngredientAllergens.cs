@@ -16,7 +16,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccIngredientAllergens", this);
                     object oldObj;
@@ -43,7 +43,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     hccIngredientAllergen t = cont.hccIngredientAllergens
                         .Where(a => a.AllergenID == this.AllergenID && a.IngredientID == this.IngredientID)
@@ -68,7 +68,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccIngredientAllergens
                         .Where(a => a.IngredientID == ingredientId)
@@ -85,7 +85,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccIngredientAllergens
                         .Where(a => a.IngredientID == ingredientId)
@@ -104,7 +104,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var t = cont.hccIngredientAllergens
                         .Where(a => a.IngredientID == ingredientId).ToList();

@@ -95,15 +95,15 @@ namespace HealthyChefWebAPI
 
             config.Routes.MapHttpRoute(
             name: "GetPastCalender",
-            routeTemplate: "api/GetPastCalender",
-            defaults: new { controller = "ProductionManagement", action = "GetPastCalender" }
+            routeTemplate: "api/GetPastCalender/{startDate}/{endDate}",
+            defaults: new { controller = "ProductionManagement", action = "GetPastCalender", startDate = RouteParameter.Optional, endDate = RouteParameter.Optional }
             );
 
 
             config.Routes.MapHttpRoute(
             name: "GetFutureCalender",
-            routeTemplate: "api/GetFutureCalender",
-            defaults: new { controller = "ProductionManagement", action = "GetFutureCalender" }
+            routeTemplate: "api/GetFutureCalender/{startDate}/{endDate}",
+            defaults: new { controller = "ProductionManagement", action = "GetFutureCalender", startDate = RouteParameter.Optional, endDate = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
@@ -121,15 +121,22 @@ namespace HealthyChefWebAPI
 
             config.Routes.MapHttpRoute(
             name: "GetRedeemdedCerts",
-            routeTemplate: "api/GetRedeemdedCerts",
-            defaults: new { controller = "ProductionManagement", action = "GetRedeemdedCerts" }
+            routeTemplate: "api/GetRedeemdedCerts/{startDate}/{endDate}",
+            defaults: new { controller = "ProductionManagement", action = "GetRedeemdedCerts", startDate = RouteParameter.Optional, endDate = RouteParameter.Optional }
             );
+
+            // config.Routes.MapHttpRoute(
+            //  name: "GetIssuedCerts",
+            //  routeTemplate: "api/GetIssuedCerts",
+            //  defaults: new { controller = "ProductionManagement", action = "GetIssuedCerts" }
+            //);
 
             config.Routes.MapHttpRoute(
              name: "GetIssuedCerts",
-             routeTemplate: "api/GetIssuedCerts",
-             defaults: new { controller = "ProductionManagement", action = "GetIssuedCerts" }
+             routeTemplate: "api/GetIssuedCerts/{startDate}/{endDate}",
+             defaults: new { controller = "ProductionManagement", action = "GetIssuedCerts", startDate = RouteParameter.Optional, endDate = RouteParameter.Optional }
            );
+
             #endregion 
 
             #region Cancellationorder
@@ -151,8 +158,8 @@ namespace HealthyChefWebAPI
             #region OrderFullFillMent region
             config.Routes.MapHttpRoute(
                 name: "GetOrderFullfillment",
-                routeTemplate: "api/GetOrderFullfillment/{deliveryDate}",
-                defaults: new { controller = "OrderManagement", action = "GetOrderFullfillment", deliveryDate = RouteParameter.Optional }
+                routeTemplate: "api/GetOrderFullfillment",
+                defaults: new { controller = "OrderManagement", action = "GetOrderFullfillment"}
               );
             #endregion
 
@@ -172,6 +179,18 @@ namespace HealthyChefWebAPI
                 routeTemplate: "api/GetUserAccounts",
                 defaults: new { controller = "UserAccounts", action = "GetUserAccounts" }
               );
+
+            config.Routes.MapHttpRoute(
+              name: "GetUserAccountsByRole",
+              routeTemplate: "api/GetUserAccountsByRole/{roleid}",
+              defaults: new { controller = "UserAccounts", action = "GetUserAccountsByRole", roleid = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+             name: "SearchGetUserAccounts",
+             routeTemplate: "api/SearchGetUserAccounts",
+             defaults: new { controller = "UserAccounts", action = "SearchGetUserAccounts" }
+           );
             #endregion
 
             //Posting
@@ -276,7 +295,7 @@ namespace HealthyChefWebAPI
 
             config.Routes.MapHttpRoute(
             name: "CancelItemDetails",
-            routeTemplate: "api/CancelItemDetails/{cartitemid}",
+            routeTemplate: "api/CancelItemDetails/{cartitemid}/{iscancel}",
             defaults: new { controller = "OrderManagement", action = "CancelItemDetails" }
             );
 
@@ -288,7 +307,7 @@ namespace HealthyChefWebAPI
 
             config.Routes.MapHttpRoute(
              name: "CancelCartItems",
-             routeTemplate: "api/CancelCartItems/{PurchaseNumber}/{OrderNumber}",
+             routeTemplate: "api/CancelCartItems/{PurchaseNumber}/{OrderNumber}/{iscancel}",
              defaults: new { controller = "OrderManagement", action = "CancelCartItems" }
            );
 
@@ -336,6 +355,12 @@ namespace HealthyChefWebAPI
             name: "AddOrUpdatePreferenceForUser",
             routeTemplate: "api/AddOrUpdatePreferenceForUser",
             defaults: new { controller = "UserAccounts", action = "AddOrUpdatePreferenceForUser" }
+            );
+
+            config.Routes.MapHttpRoute(
+            name: "UpdateShippingAddressforsubprofile",
+            routeTemplate: "api/UpdateShippingAddressforsubprofile",
+            defaults: new { controller = "UserAccounts", action = "UpdateShippingAddressforsubprofile" }
             );
 
             #endregion

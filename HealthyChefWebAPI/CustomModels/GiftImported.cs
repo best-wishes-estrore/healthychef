@@ -10,7 +10,7 @@ namespace HealthyChefWebAPI.CustomModels
     {
        public int ImportId { get; set; }
        public long Code { get; set; }
-       public decimal Amount { get; set; }
+       public string Amount { get; set; }
        public string DateAdded { get; set; }
        public string DateExpires { get; set; }
     }

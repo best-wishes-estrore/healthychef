@@ -28,22 +28,33 @@ namespace HealthyChefWebAPI.CustomModels
         public string ItemName { get; set; }
         public string Description { get; set; }
         public int MealTypeId { get; set; }
-        public decimal CostChild { get; set; }
-        public decimal CostRegular { get; set; }
-        public decimal CostLarge { get; set; }
-        public decimal CostSmall { get; set; }
+        public string CostChild { get; set; }
+        public string CostRegular { get; set; }
+        public string CostLarge { get; set; }
+        public string CostSmall { get; set; }
         public bool IsTaxEligible { get; set; }
         public bool IsRetired { get; set; }
 
-        public int Caleries { get; set; }
-        public int DietaryFiber { get; set; }
-        public int Protein { get; set; }
-        public int TotalCarbohydrates { get; set; }
-        public int TotalFat { get; set; }
+        public string Caleries { get; set; }
+        public string DietaryFiber { get; set; }
+        public string Protein { get; set; }
+        public string TotalCarbohydrates { get; set; }
+        public string TotalFat { get; set; }
 
         public List<int> selectedIngredients { get; set; }
         public List<int> selectedPrefs { get; set; }
         public List<int> usedInMenus { get; set; }
+
+        public bool UseCostChild { get; set; }
+        public bool UseCostSmall { get; set; }
+        public bool UseCostRegular { get; set; }
+        public bool UseCostLarge { get; set; }
+
+        public bool CanyonRanchRecipe { get; set; }
+        public bool CanyonRanchApproved { get; set; }
+        public bool VegetarianOptionAvailable { get; set; }
+        public bool VeganOptionAvailable { get; set; }
+        public bool GlutenFreeOptionAvailable { get; set; }
     }
 
 }

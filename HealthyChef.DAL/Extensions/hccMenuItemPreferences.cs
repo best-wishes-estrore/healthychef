@@ -18,7 +18,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccMenuItemPreferences", this);
 
@@ -46,7 +46,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey(this.EntityKey.EntitySetName, this);
                     object originalItem = null;
@@ -70,7 +70,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var prefs = cont.hccMenuItemPreferences
                         .Where(a => a.MenuItemID == menuItemId)
@@ -89,7 +89,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     hccMenuItemPreference pref = cont.hccMenuItemPreferences
                         .Where(a => a.PreferenceID == preferenceId && a.MenuItemID == menuItemId)

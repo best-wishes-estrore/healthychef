@@ -16,19 +16,21 @@ namespace HealthyChefWebAPI.Controllers
     {
         [HttpGet]
         [ActionName("GetIssuedCerts")]
-        public HttpResponseMessage GetIssuedCerts()
+        public HttpResponseMessage GetIssuedCerts(string startDate = null, string endDate = null)
         {         
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetIssuedCerts(startDate,endDate);
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetIssuedCerts(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -36,20 +38,21 @@ namespace HealthyChefWebAPI.Controllers
 
         [HttpGet]
         [ActionName("GetRedeemdedCerts")]
-        public HttpResponseMessage GetRedeemdedCerts()
+        public HttpResponseMessage GetRedeemdedCerts(string startDate = null, string endDate = null)
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetRedeemdedCerts(startDate, endDate);
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetRedeemdedCerts(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
-
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
             return response;
         }
 
@@ -60,15 +63,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetImported();
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetImported(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -80,15 +85,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetMenus();
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetMenus(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
 
@@ -96,19 +103,21 @@ namespace HealthyChefWebAPI.Controllers
 
         [HttpGet]
         [ActionName("GetFutureCalender")]
-        public HttpResponseMessage GetFutureCalender()
+        public HttpResponseMessage GetFutureCalender(string startDate = null, string endDate = null)
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetFutureCalender(startDate,endDate);
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetFutureCalender(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -116,19 +125,21 @@ namespace HealthyChefWebAPI.Controllers
 
         [HttpGet]
         [ActionName("GetPastCalender")]
-        public HttpResponseMessage GetPastCalender()
+        public HttpResponseMessage GetPastCalender(string startDate = null, string endDate = null)
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ProductionManagementRepository.GetPastCalender(startDate, endDate);
+
             response.Content = new StringContent(
-                                ProductionManagementRepository.GetPastCalender(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }

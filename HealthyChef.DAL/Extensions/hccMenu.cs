@@ -17,7 +17,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccMenus", this);
                     object oldObj;
@@ -41,7 +41,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenus
                         .OrderBy(a => a.Name)
@@ -58,7 +58,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenus.SingleOrDefault(a => a.MenuID == menuId);
                 }
@@ -75,7 +75,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenus.SingleOrDefault(a => a.Name == menuName);
                 }
@@ -91,7 +91,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var m = cont.hccMenuItems.SingleOrDefault(a => a.MenuItemID == menuItemId);
 
@@ -135,7 +135,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return GetMenuItems(isRetired)
                         .Where(a => a.MealTypeID == (int)mealType)
@@ -154,7 +154,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var t = cont.hccMenus.SingleOrDefault(a => a.MenuID == this.MenuID);
                     List<hccMenuItem> items = t.hccMenuItems.ToList();
@@ -173,7 +173,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var t = cont.hccMenus.SingleOrDefault(a => a.MenuID == this.MenuID);
                     addItems.ForEach(delegate(hccMenuItem addItem)

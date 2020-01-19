@@ -229,7 +229,7 @@ namespace HealthyChef.Common
 
         public enum DeliveryTypes : int
         {
-            [Description("Shipping")]
+            [Description("Overnight Shipping")]
             Delivery = 1,
             [Description("Customer Pickup")]
             LocalPickUp = 2,

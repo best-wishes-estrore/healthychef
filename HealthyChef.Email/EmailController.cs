@@ -1,64 +1,112 @@
-using HealthyChef.Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Web.Configuration;
 using System.Net.Configuration;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Web;
-using System.Web.Configuration;
+using System.IO;
+using System.ComponentModel;
+using HealthyChef.Common;
+using System.Net;
 
 namespace HealthyChef.Email
 {
+    /// <summary>
+    /// Summary description for MessagingController
+    /// </summary>
     public class EmailController
     {
-        private System.Configuration.Configuration config;
-        private MailSettingsSectionGroup mailSettings;
+        Configuration config;
+        MailSettingsSectionGroup mailSettings;
 
         public EmailController()
         {
-            this.config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-            this.mailSettings = (MailSettingsSectionGroup)this.config.GetSectionGroup("system.net/mailSettings");
+            config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+            mailSettings = (MailSettingsSectionGroup)config.GetSectionGroup("system.net/mailSettings");
         }
 
-        protected bool SendMail(string fromAddr, string toAddr, string subject, string message, bool isHtml, List<Attachment> attachments)
+        /// <summary>
+        /// Send null value for fromAddress to use web.config from system.net/mailSettings/smtp:from value.
+        /// Send null value for attachments, if no attachments.
+        /// </summary>
+        /// <param name="fromAddr"></param>
+        /// <param name="toAddr"></param>
+        /// <param name="subject"></param>
+        /// <param name="message"></param>
+        /// <param name="isHtml"></param>
+        /// <returns></returns>
+        protected bool SendMail(string fromAddr, string toAddr, string subject, string message,
+            bool isHtml, List<Attachment> attachments)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(toAddr))
+                if (string.IsNullOrWhiteSpace(toAddr)) // send it back to yourself? sure why not
                     toAddr = fromAddr;
-                MailMessage message1 = new MailMessage();
+
+                MailMessage msg = new MailMessage();
+
+                // if fromAddr is null the default email address in the <system.net><mailSettings> 
+                // section in the web.config will be used.
                 if (!string.IsNullOrEmpty(fromAddr))
                 {
-                    message1.From = new MailAddress(fromAddr);
+                    msg.From = new MailAddress(fromAddr);
                 }
-                else
+
+                // toAddr can be a string of semi-colon or comma delimited email addresses.
+                if (!String.IsNullOrEmpty(toAddr))
                 {
-                    message1.From = new MailAddress("info@healthychefcreations.com");
-                }
-                if (!string.IsNullOrEmpty(toAddr))
-                {
-                    string str = toAddr.Trim();
-                    char[] chArray = new char[2] { ';', ',' };
-                    foreach (string address in str.Split(chArray))
+                    string[] toList = toAddr.Trim().Split(';', ',');
+                    foreach (string to in toList)
                     {
-                        if (!string.IsNullOrWhiteSpace(address))
-                            message1.To.Add(new MailAddress(address));
+                        if (!string.IsNullOrWhiteSpace(to))
+                            msg.To.Add(new MailAddress(to));
                     }
                 }
+
+                // iterate attachments
                 if (attachments != null && attachments.Count > 0)
                 {
-                    foreach (Attachment attachment in attachments)
-                        message1.Attachments.Add(attachment);
+                    foreach (Attachment attch in attachments)
+                    {
+                        msg.Attachments.Add(attch);
+                    }
                 }
-                message1.Subject = subject;
-                message1.Body = message;
-                message1.IsBodyHtml = isHtml;
+
+                //if (HttpContext.Current.Request.IsLocal)
+                //{
+                //    msg.To.Clear();
+                //    msg.To.Add("rcreecy@bayshoresolutions.com");
+                //}
+                                
+                msg.Subject = subject;
+                msg.Body = message;
+                msg.IsBodyHtml = isHtml;
+
                 try
                 {
-                    new SmtpClient().Send(message1);
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Host = "smtpout.secureserver.net";
+                    smtp.Port = 465;
+                    smtp.EnableSsl = true;
+                    smtp.Credentials = new NetworkCredential("noreply@healthychefcreations.com", "hccn0r3p7y");
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                    //smtp.UseDefaultCredentials = false;
+                    //smtp.Host = "smtp.gmail.com";
+                    //smtp.Port = 587;
+                    //smtp.EnableSsl = true;
+                    //smtp.Timeout = 20000;
+                    //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //smtp.Credentials = new NetworkCredential("noreply@healthychefcreations.com", "hccn0r3p7y");
+
+                    smtp.Send(msg);
                     return true;
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     throw ex;
                 }
@@ -73,7 +121,9 @@ namespace HealthyChef.Email
         {
             try
             {
-                return this.SendMail((string)null, WebConfigurationManager.AppSettings["AdministratorEmails"].ToString(), subject, body, false, (List<Attachment>)null);
+                string toAddr = WebConfigurationManager.AppSettings["AdministratorEmails"].ToString();
+
+                return SendMail(null, toAddr, subject, body, false, null); 
             }
             catch
             {
@@ -85,8 +135,9 @@ namespace HealthyChef.Email
         {
             try
             {
-                string body1 = body + "<br /><br />Message:<br />" + ex.Message + "<br /><br />Stack Trace:<br />" + ex.StackTrace;
-                return this.SendMail_ToAdmin(subject, body1);
+                string emailBody = body + "<br /><br />Message:<br />" + ex.Message + "<br /><br />Stack Trace:<br />" + ex.StackTrace;
+
+                return SendMail_ToAdmin(subject, emailBody); ;
             }
             catch
             {
@@ -98,18 +149,18 @@ namespace HealthyChef.Email
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(toAddress))
-                    throw new ArgumentNullException(nameof(toAddress), "MessagingController.SendNewUserEmail: toAddress is blank.");
-                if (string.IsNullOrWhiteSpace(password))
-                    throw new ArgumentNullException(nameof(password), "MessagingController.SendNewUserEmail: password is blank.");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine("Your new Healthy Chef Creations account has been created. Your user name is your email address. Your password is: " + password + "<br /><br />");
-                stringBuilder.AppendLine("You may log in at any time to place orders, buy gift certificates, manage your profile and food preferences, or change your password via the My Profile page.  Simply click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and the password you created during your account set up process.<br /><br />");
-                stringBuilder.AppendLine("<a href='" + Helpers.GetSiteRoot() + "/login.aspx'>Click Here</a> to log in to your Healthy Chef Creations account.<br /><br />");
-                stringBuilder.AppendLine("If you have any questions, believe you received this message in error, or did not create a Healthy Chef Creations account, please contact our Customer Service representatives at 866-575-2433.<br /><br />");
-                stringBuilder.AppendLine("We look forward to feeding you!<br /><br />");
-                stringBuilder.AppendLine("The Healthy Chef");
-                return this.SendMail((string)null, toAddress, "Healthy Chef Creations - New User Created", stringBuilder.ToString(), true, (List<Attachment>)null);
+                if (string.IsNullOrWhiteSpace(toAddress)) { throw new ArgumentNullException("toAddress", "MessagingController.SendNewUserEmail: toAddress is blank."); }
+                if (string.IsNullOrWhiteSpace(password)) { throw new ArgumentNullException("password", "MessagingController.SendNewUserEmail: password is blank."); }
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Your new Healthy Chef Creations account has been created. Your user name is your email address. Your password is: " + password + "<br /><br />");
+                sb.AppendLine("You may log in at any time to place orders, buy gift certificates, manage your profile and food preferences, or change your password via the My Profile page.  Simply click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and the password you created during your account set up process.<br /><br />");
+                sb.AppendLine("<a href='" + Helpers.GetSiteRoot() + "/login.aspx'>Click Here</a> to log in to your Healthy Chef Creations account.<br /><br />");
+                sb.AppendLine("If you have any questions, believe you received this message in error, or did not create a Healthy Chef Creations account, please contact our Customer Service representatives at 866-575-2433.<br /><br />");
+                sb.AppendLine("We look forward to feeding you!<br /><br />");
+                sb.AppendLine("The Healthy Chef");
+
+                return SendMail(null, toAddress, "Healthy Chef Creations - New User Created", sb.ToString(), true, null);
             }
             catch
             {
@@ -121,16 +172,17 @@ namespace HealthyChef.Email
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(toAddress))
-                    throw new ArgumentNullException(nameof(toAddress), "MessagingController.SendMail_PasswordChanged: toAddress is blank.");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine("Your Healthy Chef Creations password has been changed.<br><br>");
-                stringBuilder.AppendLine("You may log in at any time to place orders, buy gift certificates, manage your profile and food preferences, or change your password via the My Profile page. Simply click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and the password you created during your account set up process.<br><br>");
-                stringBuilder.AppendLine("<a href='" + Helpers.GetSiteRoot() + "/login.aspx'>Click Here</a> to log in to your Healthy Chef Creations account.<br><br>");
-                stringBuilder.AppendLine("If you have any questions, believe you received this message in error, or did not change your Healthy Chef Creations password, please contact our Customer Service representatives at 866-575-2433.<br><br>");
-                stringBuilder.AppendLine("We look forward to feeding you!<br /><br />");
-                stringBuilder.AppendLine("The Healthy Chef");
-                return this.SendMail((string)null, toAddress, "Healthy Chef Creations - Password Changed", stringBuilder.ToString(), true, (List<Attachment>)null);
+                if (string.IsNullOrWhiteSpace(toAddress)) { throw new ArgumentNullException("toAddress", "MessagingController.SendMail_PasswordChanged: toAddress is blank."); }
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Your Healthy Chef Creations password has been changed.<br><br>");
+                sb.AppendLine("You may log in at any time to place orders, buy gift certificates, manage your profile and food preferences, or change your password via the My Profile page. Simply click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and the password you created during your account set up process.<br><br>");
+                sb.AppendLine("<a href='" + Helpers.GetSiteRoot() + "/login.aspx'>Click Here</a> to log in to your Healthy Chef Creations account.<br><br>");
+                sb.AppendLine("If you have any questions, believe you received this message in error, or did not change your Healthy Chef Creations password, please contact our Customer Service representatives at 866-575-2433.<br><br>");
+                sb.AppendLine("We look forward to feeding you!<br /><br />");
+                sb.AppendLine("The Healthy Chef");
+
+                return SendMail(null, toAddress, "Healthy Chef Creations - Password Changed", sb.ToString(), true, null);
             }
             catch
             {
@@ -142,25 +194,19 @@ namespace HealthyChef.Email
         {
             try
             {
-                var siteUrl = Helpers.GetSiteRoot();
-                var subUrl = "/login.aspx";
-                if(siteUrl.Contains("admin"))
-                {
-                    subUrl = "/AdminLogin.aspx";
-                }
-                if (string.IsNullOrWhiteSpace(toAddress))
-                    throw new ArgumentNullException(nameof(toAddress), "MessagingController.SendMail_PasswordReset: toAddress is blank.");
-                if (string.IsNullOrWhiteSpace(password))
-                    throw new ArgumentNullException(nameof(password), "MessagingController.SendMail_PasswordReset: password is blank.");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine("The password for your Healthy Chef Creations account has been reset.<br><br>");
-                stringBuilder.AppendLine("Your new Temporary Password is: " + password + "<br/><br/>");
-                stringBuilder.AppendLine("Please click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and your Temporary Password.  Then select the Password tab under My Profile to create a new password for your account.<br><br>");
-                stringBuilder.AppendLine("<a href='" + Helpers.GetSiteRoot() + subUrl +"'>Click Here</a> to log in to your Healthy Chef Creations account.<br><br>");
-                stringBuilder.AppendLine("If you have any questions, believe you received this message in error, or did not change your Healthy Chef Creations password, please contact our Customer Service representatives at 866-575-2433.<br><br>");
-                stringBuilder.AppendLine("Thank you,<br /><br />");
-                stringBuilder.AppendLine("The Healthy Chef");
-                return this.SendMail((string)null, toAddress, "Healthy Chef Creations - Password Reset", stringBuilder.ToString(), true, (List<Attachment>)null);
+                if (string.IsNullOrWhiteSpace(toAddress)) { throw new ArgumentNullException("toAddress", "MessagingController.SendMail_PasswordReset: toAddress is blank."); }
+                if (string.IsNullOrWhiteSpace(password)) { throw new ArgumentNullException("password", "MessagingController.SendMail_PasswordReset: password is blank."); }
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("The password for your Healthy Chef Creations account has been reset.<br><br>");
+                sb.AppendLine("Your new Temporary Password is: " + password + "<br/><br/>");
+                sb.AppendLine("Please click the link below or go to www.HealthyChefCreations.com, click Member Login and enter your email address and your Temporary Password.  Then select the Password tab under My Profile to create a new password for your account.<br><br>");
+                sb.AppendLine("<a href='" + Helpers.GetSiteRoot() + "/login.aspx'>Click Here</a> to log in to your Healthy Chef Creations account.<br><br>");
+                sb.AppendLine("If you have any questions, believe you received this message in error, or did not change your Healthy Chef Creations password, please contact our Customer Service representatives at 866-575-2433.<br><br>");
+                sb.AppendLine("Thank you,<br /><br />");
+                sb.AppendLine("The Healthy Chef");
+
+                return SendMail(null, toAddress, "Healthy Chef Creations - Password Reset", sb.ToString(), true, null);
             }
             catch
             {
@@ -170,13 +216,35 @@ namespace HealthyChef.Email
 
         public bool SendMail_OrderConfirmationCustomer(string toAddress, string customerName, string orderHtml)
         {
-            string message = string.Empty;
+            string sMessage = string.Empty;
+            //to user saying thank you                            
             try
             {
-                string fileText = Helpers.GetFileText("~/HtmlTemplates/OrderConfirmation_Customer.htm");
-                if (fileText.Length > 0)
-                    message = fileText.Replace("#NAME#", customerName).Replace("#ORDERINFO#", orderHtml).Replace("#STOREEMAIL#", "<a href='mailto:" + this.mailSettings.Smtp.From + "'>" + this.mailSettings.Smtp.From + "</a>").Replace("<img src=\"/App_Themes/HealthyChef/Images/pullmanholt_logo2.gif\" />", "<img src=\"" + Helpers.GetSiteRoot() + "/App_Themes/HealthyChef/Images/pullmanholt_logo2.gif\" />");
-                return this.SendMail((string)null, toAddress, "Healthy Chef Creations - Order Confirmation", message, true, (List<Attachment>)null);
+                //load up the template
+                string template = Helpers.GetFileText("~/HtmlTemplates/OrderConfirmation_Customer.htm");
+
+                if (template.Length > 0)
+                {
+                    //run some tag replacements. First with the name
+                    sMessage = template;
+                    sMessage = sMessage.Replace("#NAME#", customerName);
+
+                    //ordernumber
+                    sMessage = sMessage.Replace("#ORDERINFO#", orderHtml);
+
+                    //admin email
+                    sMessage = sMessage.Replace("#STOREEMAIL#", "<a href='mailto:" + mailSettings.Smtp.From + "'>" + mailSettings.Smtp.From + "</a>");
+
+                    //link
+                    //sMessage = sMessage.Replace("#LINK#", "<a href='" + Helpers.GetSiteRoot() + "'>Our Store</a>");
+
+                    string imageTag = "<img src=\"" + Helpers.GetSiteRoot() + "/App_Themes/HealthyChef/Images/pullmanholt_logo2.gif\" />";
+                    sMessage = sMessage.Replace("<img src=\"/App_Themes/HealthyChef/Images/pullmanholt_logo2.gif\" />", imageTag);
+                }
+
+                return SendMail(null, toAddress, "Healthy Chef Creations - Order Confirmation", sMessage, true, null);
+
+
             }
             catch
             {
@@ -188,15 +256,33 @@ namespace HealthyChef.Email
         {
             try
             {
-                string empty = string.Empty;
+                string sMessage = string.Empty;
                 string toAddr = WebConfigurationManager.AppSettings["EmailNewOrderMerchantToAddress"].ToString();
-                string fileText = Helpers.GetFileText("~/HtmlTemplates/OrderConfirmation_Merchant.htm");
-                if (fileText.Length <= 0)
-                    return;
-                string str1 = fileText.Replace("#NAME#", customerName).Replace("#ORDER#", orderHtml);
-                string str2 = Helpers.GetSiteRoot() + "/WebModules/ShoppingCart/Admin/Purchases.aspx?id=" + orderId.ToString();
-                string message = str1.Replace("#LINK#", "<a href='" + str2 + "'>" + str2 + "</a>").Replace("<img src=\"/App_Themes/HealthyChef/Images/logo.png\" />", "<img src=\"" + Helpers.GetSiteRoot() + "/App_Themes/HealthyChef/Images/logo.png\" />");
-                new EmailController().SendMail((string)null, toAddr, "Healthy Chef Creations - Order Notice", message, true, (List<Attachment>)null);
+
+                //load up the template
+                string template = Helpers.GetFileText("~/HtmlTemplates/OrderConfirmation_Merchant.htm");
+
+                if (template.Length > 0)
+                {
+                    //run some tag replacements. First with the name
+                    sMessage = template;
+
+                    sMessage = sMessage.Replace("#NAME#", customerName);
+
+                    //ordernumber
+                    sMessage = sMessage.Replace("#ORDER#", orderHtml);
+
+                    //items
+                    string linkStr = Helpers.GetSiteRoot() + "/WebModules/ShoppingCart/Admin/Purchases.aspx?id=" + orderId.ToString();
+                    sMessage = sMessage.Replace("#LINK#", "<a href='" + linkStr + "'>" + linkStr + "</a>");
+
+                    string imageTag = "<img src=\"" + Helpers.GetSiteRoot() + "/App_Themes/HealthyChef/Images/logo.png\" />";
+                    sMessage = sMessage.Replace("<img src=\"/App_Themes/HealthyChef/Images/logo.png\" />", imageTag);
+
+                    //send it off!
+                    EmailController mc = new EmailController();
+                    mc.SendMail(null, toAddr, "Healthy Chef Creations - Order Notice", sMessage, true, null);
+                }
             }
             catch
             {
@@ -208,17 +294,38 @@ namespace HealthyChef.Email
         {
             try
             {
-                bool flag = false;
-                string fileText = Helpers.GetFileText("~/HtmlTemplates/OrderRefund_Customer.htm");
-                if (fileText.Length > 0 && !string.IsNullOrEmpty(toAddress))
+
+
+                bool success = false;
+
+                //load up the template
+                //there is a text template too...
+                string template = Helpers.GetFileText("~/HtmlTemplates/OrderRefund_Customer.htm");
+
+                if ((template.Length > 0) && (!String.IsNullOrEmpty(toAddress)))
                 {
-                    string message = fileText.Replace("#NAME#", toAddress).Replace("#ORDERINFO#", orderHtml).Replace("#STOREEMAIL#", "<a href='mailto:" + this.mailSettings.Smtp.From + "'>" + this.mailSettings.Smtp.From + "</a>").Replace("#LINK#", "<a href='" + Helpers.GetSiteRoot() + "'>Our Store</a>");
-                    flag = new EmailController().SendMail((string)null, toAddress, "Healthy Chef Creations - Order Refund Notification", message, true, (List<Attachment>)null);
+                    //run some tag replacements. First with the name
+                    string sMessage = template;
+                    sMessage = sMessage.Replace("#NAME#", toAddress);
+                    //ordernumber
+                    sMessage = sMessage.Replace("#ORDERINFO#", orderHtml);
+                    //admin email
+                    sMessage = sMessage.Replace("#STOREEMAIL#", "<a href='mailto:" + mailSettings.Smtp.From + "'>" + mailSettings.Smtp.From + "</a>");
+                    //link
+                    sMessage = sMessage.Replace("#LINK#", "<a href='" + Helpers.GetSiteRoot() + "'>Our Store</a>");
+                    //setup the mailer
+
+                    //send it off!
+                    EmailController mc = new EmailController();
+                    success = mc.SendMail(null, toAddress, "Healthy Chef Creations - Order Refund Notification",
+                        sMessage, true, null);
+
                 }
-                return flag;
+                return success;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+
                 throw;
             }
         }
@@ -227,50 +334,61 @@ namespace HealthyChef.Email
         {
             try
             {
-                bool flag = false;
-                string fileText = Helpers.GetFileText("~/HtmlTemplates/OrderShip_Customer.htm");
-                if (fileText.Length > 0 && !string.IsNullOrEmpty(toAddress))
+
+
+                bool success = false;
+
+                //load up the template
+                //there is a text template too...
+                string template = Helpers.GetFileText("~/HtmlTemplates/OrderShip_Customer.htm");
+
+                if ((template.Length > 0) && (!String.IsNullOrEmpty(toAddress)))
                 {
-                    string message = fileText.Replace("#NAME#", customerName).Replace("#ORDERINFO#", orderHtml).Replace("#STOREEMAIL#", "<a href='mailto:" + this.mailSettings.Smtp.From + "'>" + this.mailSettings.Smtp.From + "</a>").Replace("#LINK#", "<a href='" + Helpers.GetSiteRoot() + "'>Our Store</a>");
-                    flag = new EmailController().SendMail((string)null, toAddress, "Healthy Chef Creations - Shipment Notification", message, true, (List<Attachment>)null);
+                    //run some tag replacements. First with the name
+                    string sMessage = template;
+                    sMessage = sMessage.Replace("#NAME#", customerName);
+                    //ordernumber
+                    sMessage = sMessage.Replace("#ORDERINFO#", orderHtml);
+                    //admin email
+                    sMessage = sMessage.Replace("#STOREEMAIL#", "<a href='mailto:" + mailSettings.Smtp.From + "'>" + mailSettings.Smtp.From + "</a>");
+                    //link
+                    sMessage = sMessage.Replace("#LINK#", "<a href='" + Helpers.GetSiteRoot() + "'>Our Store</a>");
+                    //tracking info
+
+                    //if (order.OrderItemCount > 0)
+                    //{
+                    //    string trackingMsg = "";
+
+                    //    List<OrderTrackingNumber> trackNums = order.TrackingNumbers;
+
+                    //    if (trackNums.Count > 0)
+                    //    {
+                    //        if (trackNums.Count == 1)
+                    //            trackingMsg = "<br />Your shipment tracking number is below:";
+                    //        else
+                    //            trackingMsg = "<br />Your shipment tracking numbers are below:";
+
+                    //        foreach (OrderTrackingNumber trackNum in order.TrackingNumbers)
+                    //        {
+                    //            string linkURL = "http://wwwapps.ups.com/etracking/tracking.cgi?tracknum=" + trackNum.TrackingNumber;
+                    //            trackingMsg += ".&nbsp;&nbsp;<a href='" + linkURL + "'>View your UPS tracking info by clicking here.</a>";
+
+                    //            trackingMsg += "<br />";
+                    //        }
+                    //    }
+
+                    //    sMessage = sMessage.Replace("#TRACKINGNUMBER#", trackingMsg);
+                    //}
+
+                    //send it off!
+                    EmailController mc = new EmailController();
+                    success = mc.SendMail(null, toAddress, "Healthy Chef Creations - Shipment Notification", sMessage, true, null);
                 }
-                return flag;
+                return success;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
-            }
-        }
-        public bool SendMail_ContactUs(string firstName, string lastName, string address, string city, string state, string zipcode, string phone, string email, string question)
-        {
-            string sMessage = string.Empty;
-            string toAddress = "info@healthychefcreations.com"; 
-            //string toAddress = "vineeth.m@bestwishesestore.com";
-            try
-            {
-                string template = Helpers.GetFileText("~/HtmlTemplates/ContactUs.htm");
-                if (template.Length > 0)
-                {
-                    sMessage = template;
-                    if (firstName != null) { sMessage = sMessage.Replace("#firstName#", firstName); } else { sMessage = sMessage.Replace("#firstName#", ""); }
-                    if (lastName != null) { sMessage = sMessage.Replace("#lastName#", lastName); } else { sMessage = sMessage.Replace("#lastName#", ""); }
-                    if (address != null) { sMessage = sMessage.Replace("#address#", address); } else { sMessage = sMessage.Replace("#address#", ""); }
-                    if (city != null) { sMessage = sMessage.Replace("#city#", city); } else { sMessage = sMessage.Replace("#city#", ""); }
-                    if (state != null) { sMessage = sMessage.Replace("#state#", state); } else { sMessage = sMessage.Replace("#state#", ""); }
-                    if (zipcode != null) { sMessage = sMessage.Replace("#postalCode#", zipcode); } else { sMessage = sMessage.Replace("#postalCode#", ""); }
-                    if (phone != null) { sMessage = sMessage.Replace("#phoneNumber#", phone); } else { sMessage = sMessage.Replace("#phoneNumber#", ""); }
-                    if (email != null) { sMessage = sMessage.Replace("#email#", email); } else { sMessage = sMessage.Replace("#email#", ""); }
-                    if (question != null) { sMessage = sMessage.Replace("#QustionComments#", question); } else { sMessage = sMessage.Replace("#QustionComments#", ""); }
-                    sMessage = sMessage.Replace("#submitedOn#", DateTime.Now.ToString());
-                    return SendMail((string)null, toAddress, "Healthy Chef Creations - Contact Us", sMessage, true, null);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch
-            {
+
                 throw;
             }
         }

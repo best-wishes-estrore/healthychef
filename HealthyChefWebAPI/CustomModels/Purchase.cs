@@ -54,7 +54,7 @@ namespace HealthyChefWebAPI.CustomModels
         public int StatusID { get; set; }
         public decimal TotalAmount { get; set; }
         public string DeliveryDate { get; set; }
-
+        public int TotalRecords { get; set; }
 
         public string CustomerName
         {

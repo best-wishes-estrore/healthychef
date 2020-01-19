@@ -14,44 +14,49 @@ namespace HealthyChefWebAPI.Controllers
     //[Authorize(Roles = "Administrators")]
     public class OrderManagementController : ApiController
     {
-        [HttpGet]
+        [HttpPost]
         [ActionName("GetAllPurchases")]
-        public HttpResponseMessage GetAllPurchases(SearchParams searchParams)
+        public HttpResponseMessage GetAllPurchases(SearchParamsForPurchases searchParams)
         {
-            searchParams = searchParams ?? new SearchParams();
+            // searchParams = searchParams ?? new SearchParams();
 
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
-            
+
+            var _content = OrderManagementRepository.GetAllPurchases(searchParams);
+
             response.Content = new StringContent(
-                                OrderManagementRepository.GetAllPurchases(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
+
 
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("GetOrderFullfillment")]
-        public HttpResponseMessage GetOrderFullfillment(string deliveryDate = null)
+        public HttpResponseMessage GetOrderFullfillment(SearchParamsForOrderFulfillment searchParamsForOrderFulfillment)
         {
 
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = OrderManagementRepository.GetOrderFullfillmentDetails(searchParamsForOrderFulfillment);
+
             response.Content = new StringContent(
-                                //OrderManagementRepository.GetOrderFullfillment(),
-                                OrderManagementRepository.GetOrderFullfillmentDetails(deliveryDate),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
+
 
             return response;
         }
@@ -63,15 +68,18 @@ namespace HealthyChefWebAPI.Controllers
         {            
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = OrderManagementRepository.GetRecurringOrder();
+
             response.Content = new StringContent(
-                                OrderManagementRepository.GetRecurringOrder(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
+
 
             return response;
         }
@@ -85,25 +93,28 @@ namespace HealthyChefWebAPI.Controllers
             
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = OrderManagementRepository.GetCancellation(PurchaseNumber);
+
             response.Content = new StringContent(
-                                OrderManagementRepository.GetCancellation(PurchaseNumber),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
+
 
             return response;
         }
 
         [HttpPost]
         [ActionName("CancelCartItems")]
-        public HttpResponseMessage CancelCartItems(int PurchaseNumber, string OrderNumber)
+        public HttpResponseMessage CancelCartItems(int PurchaseNumber, string OrderNumber, bool iscancel)
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
-            var _op = OrderManagementRepository.CancelCartItems(PurchaseNumber, OrderNumber);
+            var _op = OrderManagementRepository.CancelCartItems(PurchaseNumber, OrderNumber,iscancel);
             response.StatusCode = _op.StatusCode;
 
             response.Content = new StringContent(
@@ -131,10 +142,10 @@ namespace HealthyChefWebAPI.Controllers
 
         [HttpPost]
         [ActionName("CancelItemDetails")]
-        public HttpResponseMessage CancelItemDetails(int cartitemid)
+        public HttpResponseMessage CancelItemDetails(int cartitemid, bool iscancel)
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
-            var _op = OrderManagementRepository.CancelItemDetails(cartitemid);
+            var _op = OrderManagementRepository.CancelItemDetails(cartitemid,iscancel);
             response.StatusCode = _op.StatusCode;
 
             response.Content = new StringContent(

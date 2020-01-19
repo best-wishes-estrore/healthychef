@@ -21,12 +21,20 @@ namespace HealthyChefWebAPI.Helpers
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
+        public bool isValid { get; set; }
 
         public PostHttpResponse()
         {
             IsSuccess = false;
-            Message = "Invalid Request";
+            Message = ""; //"Invalid Request";
             StatusCode = HttpStatusCode.BadRequest;
+            isValid = true;
+        }
+
+        public void AddValidationError(string _validationError)
+        {
+            Message = Message ?? "";
+            Message += string.Format("{0} {1}", Environment.NewLine, _validationError);
         }
     }
 }

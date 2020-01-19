@@ -14,7 +14,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var key = cont.CreateEntityKey("hccCartALCMenuItems", this);
                     object oldObj;
@@ -46,7 +46,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var key = cont.CreateEntityKey("hccCartALCMenuItems", this);
                     object originalItem = null;
@@ -70,7 +70,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartALCMenuItems.FirstOrDefault(c => c.ParentCartItemID == parentCartItemId && c.CartItemID == cartItemId);
                 }
@@ -85,7 +85,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartALCMenuItems.FirstOrDefault(c => c.CartItemID == cartItemId);
                 }
@@ -100,7 +100,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartALCMenuItems.FirstOrDefault(c => c.ParentCartItemID == parentCartItemId && c.Ordinal == ordinal);
                 }

@@ -15,13 +15,14 @@ namespace HealthyChefWebAPI.Repository
     public class ProductionManagementRepository
     {
 
-        public static string GetIssuedCerts()
+        public static string GetIssuedCerts(string _startDate = null, string _endDate = null)
         {
             try
             {
                 List<GiftIssued> retVals = new List<GiftIssued>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETISSUEDCERTIFICATES", conn))
                     {
@@ -37,11 +38,12 @@ namespace HealthyChefWebAPI.Repository
                             {
                                 CartItemId = DBUtil.GetIntField(t, "CartItemId"),
                                 RedeemCode = DBUtil.GetCharField(t, "RedeemCode"),
-                                Amount=DBUtil.GetDecimalField(t, "Amount"),
-                                FirstName=DBUtil.GetCharField(t, "FirstName"),
-                                Lastname=DBUtil.GetCharField(t, "Lastname"),
-                                IssuedDate=DBUtil.GetCharField(t, "IssuedDate"),
-                                SendToRecipient=DBUtil.GetBoolField(t, "SendToRecipient")
+                                Amount = DBUtil.GetDecimalField(t, "Amount").ToString("c"),
+                                FirstName = DBUtil.GetCharField(t, "FirstName"),
+                                Lastname = DBUtil.GetCharField(t, "Lastname"),
+                                IssuedDate = DBUtil.GetCharField(t, "IssuedDate"),
+                                SendToRecipient = DBUtil.GetBoolField(t, "SendToRecipient"),
+                                IssuedDateObj = DBUtil.GetDateTimeField(t, "IssuedDateObj")
                             });
                         }
 
@@ -49,24 +51,56 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderByDescending(d => d.IssuedDate).ToList();
+                retVals = retVals.OrderBy(a => a.CartItemId).ToList();
 
+                //Filter Records By StartDate and EndDate.
+                DateTime startDateObj = new DateTime();
+                DateTime endDateObj = new DateTime();
+                bool _validStartDate = false;
+                bool _validEndDate = false;
+                if (!string.IsNullOrEmpty(_startDate))
+                {
+                    _validStartDate = DateTime.TryParse(_startDate, out startDateObj);
+                }
+                if (!string.IsNullOrEmpty(_endDate))
+                {
+                    _validEndDate = DateTime.TryParse(_endDate, out endDateObj);
+                }
+
+                if (_validStartDate)
+                    retVals = retVals.Where(a => a.IssuedDateObj >= startDateObj.Date).ToList();
+
+                if (_validEndDate)
+                    retVals = retVals.Where(a => a.IssuedDateObj <= endDateObj.AddDays(1)).ToList();
+                if (retVals.Count > 0)
+                {
+                    var giftCerts = hccCartItem.GetGiftsByRedeemed(false);
+                    string IssuedTota = giftCerts.Sum(a => a.ItemPrice).ToString();
+                    var giftissue = new GiftIssued()
+                    {
+                        //IssuedTotal = String.Format("Total:${0:0.####}", IssuedTota)
+                        IssuedTotal= "Total:"+Math.Round(Convert.ToDouble(IssuedTota), 2).ToString("c")
+                };
+
+                    retVals.Add(giftissue);
+                }
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
 
-        public static string GetRedeemdedCerts()
+        public static string GetRedeemdedCerts(string _startDate = null, string _endDate = null)
         {
             try
             {
                 List<GiftRedeemed> retVals = new List<GiftRedeemed>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETREDEMEEDCERTIFICATES", conn))
                     {
@@ -82,11 +116,12 @@ namespace HealthyChefWebAPI.Repository
                             {
                                 CartItemId = DBUtil.GetIntField(t, "CartItemId"),
                                 RedeemCode = DBUtil.GetCharField(t, "RedeemCode"),
-                                Amount = DBUtil.GetDecimalField(t, "Amount"),
+                                Amount = DBUtil.GetDecimalField(t, "Amount").ToString("c"),
                                 IssuedTo = DBUtil.GetCharField(t, "IssuedTo"),
                                 IssuedDate = DBUtil.GetCharField(t, "IssuedDate"),
                                 RedeemedBy = DBUtil.GetCharField(t, "RedeemedBy"),
-                                RedeemedDate = DBUtil.GetCharField(t, "RedeemedDate")
+                                RedeemedDate = DBUtil.GetCharField(t, "RedeemedDate"),
+                                IssuedDateObj = DBUtil.GetDateTimeField(t, "IssuedDateObj")
                             });
                         }
 
@@ -94,13 +129,33 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderByDescending(d => d.IssuedDate).ToList();
+                retVals = retVals.OrderBy(a => a.CartItemId).ToList();
+
+                //Filter Records By StartDate and EndDate.
+                DateTime startDateObj = new DateTime();
+                DateTime endDateObj = new DateTime();
+                bool _validStartDate = false;
+                bool _validEndDate = false;
+                if (!string.IsNullOrEmpty(_startDate))
+                {
+                    _validStartDate = DateTime.TryParse(_startDate, out startDateObj);
+                }
+                if (!string.IsNullOrEmpty(_endDate))
+                {
+                    _validEndDate = DateTime.TryParse(_endDate, out endDateObj);
+                }
+
+                if (_validStartDate)
+                    retVals = retVals.Where(a => a.IssuedDateObj >= startDateObj.Date).ToList();
+
+                if (_validEndDate)
+                    retVals = retVals.Where(a => a.IssuedDateObj <= endDateObj.AddDays(1)).ToList();
 
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -111,7 +166,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<GiftImported> retVals = new List<GiftImported>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETIMPORTEDCERTIFICATES", conn))
                     {
@@ -127,8 +183,8 @@ namespace HealthyChefWebAPI.Repository
                             {
                                 ImportId = DBUtil.GetIntField(t, "ImportId"),
                                 Code =DBUtil.GetLongField(t,"Code"),
-                                Amount=DBUtil.GetDecimalField(t,"Amount"),
-                                DateAdded=DBUtil.GetCharField(t,"DateAdded"),
+                                Amount = DBUtil.GetDecimalField(t, "Amount").ToString("c"),
+                                DateAdded =DBUtil.GetCharField(t,"DateAdded"),
                                 DateExpires=DBUtil.GetCharField(t,"DateExpires")
                             });
                         }
@@ -138,12 +194,12 @@ namespace HealthyChefWebAPI.Repository
                 }
 
                 retVals = retVals.OrderByDescending(d => d.Code).ToList();
-
+                
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -154,7 +210,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Menus> retVals = new List<Menus>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETMENUS", conn))
                     {
@@ -184,18 +241,20 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                //return string.Empty;
+                return Ex.Message;
             }
 
         }
 
-        public static string GetFutureCalender()
+        public static string GetFutureCalender(string _startDate = null, string _endDate = null)
         {
             try
             {
                 List<FutureCalender> retVals = new List<FutureCalender>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETFUTURECALENDER", conn))
                     {
@@ -213,7 +272,8 @@ namespace HealthyChefWebAPI.Repository
                                 Name =DBUtil.GetCharField(t, "Name"),
                                 DeliveryDate=DBUtil.GetCharField(t, "DeliveryDate"),
                                 OrderCutOffDate=DBUtil.GetCharField(t, "OrderCutOffDate"),
-                                Menu=DBUtil.GetCharField(t, "Menu")
+                                Menu=DBUtil.GetCharField(t, "Menu"),
+                                DeliveryDateObj = DBUtil.GetDateTimeField(t, "DeliveryDateObj")
                             });
                         }
 
@@ -221,24 +281,45 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderBy(d => d.DeliveryDate).ToList();
+                //retVals = retVals.OrderBy(d => d.DeliveryDate).ToList();
+
+                //Filter Records By StartDate and EndDate.
+                DateTime startDateObj = new DateTime();
+                DateTime endDateObj = new DateTime();
+                bool _validStartDate = false;
+                bool _validEndDate = false;
+                if (!string.IsNullOrEmpty(_startDate))
+                {
+                    _validStartDate = DateTime.TryParse(_startDate, out startDateObj);
+                }
+                if (!string.IsNullOrEmpty(_endDate))
+                {
+                    _validEndDate = DateTime.TryParse(_endDate, out endDateObj);
+                }
+
+                if (_validStartDate)
+                    retVals = retVals.Where(a => a.DeliveryDateObj >= startDateObj).ToList();
+
+                if (_validEndDate)
+                    retVals = retVals.Where(a => a.DeliveryDateObj <= endDateObj).ToList();
 
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
 
-        public static string GetPastCalender()
+        public static string GetPastCalender(string _startDate = null, string _endDate = null)
         {
             try
             {
                 List<PastCalender> retVals = new List<PastCalender>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETPASTCALENDER", conn))
                     {
@@ -256,7 +337,8 @@ namespace HealthyChefWebAPI.Repository
                                 Name = DBUtil.GetCharField(t, "Name"),
                                 DeliveryDate = DBUtil.GetCharField(t, "DeliveryDate"),
                                 OrderCutOffDate = DBUtil.GetCharField(t, "OrderCutOffDate"),
-                                Menu = DBUtil.GetCharField(t, "Menu")
+                                Menu = DBUtil.GetCharField(t, "Menu"),
+                                DeliveryDateObj = DBUtil.GetDateTimeField(t, "DeliveryDateObj")
                             });
                         }
 
@@ -264,13 +346,33 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderByDescending(d => d.DeliveryDate).ToList();
+                //retVals = retVals.OrderByDescending(d => d.DeliveryDate).ToList();
+
+                //Filter Records By StartDate and EndDate.
+                DateTime startDateObj = new DateTime();
+                DateTime endDateObj = new DateTime();
+                bool _validStartDate = false;
+                bool _validEndDate = false;
+                if (!string.IsNullOrEmpty(_startDate))
+                {
+                    _validStartDate = DateTime.TryParse(_startDate, out startDateObj);
+                }
+                if (!string.IsNullOrEmpty(_endDate))
+                {
+                    _validEndDate = DateTime.TryParse(_endDate, out endDateObj);
+                }
+
+                if (_validStartDate)
+                    retVals = retVals.Where(a => a.DeliveryDateObj >= startDateObj).ToList();
+
+                if (_validEndDate)
+                    retVals = retVals.Where(a => a.DeliveryDateObj <= endDateObj).ToList();
 
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -281,8 +383,16 @@ namespace HealthyChefWebAPI.Repository
             ProductionCalenderResult calendarResult = new ProductionCalenderResult();
             bool IsUpdate = false;
             bool IsCalendarNameExistcheck = false;
+            bool IsCalendarExistcheck = false;
             try
             {
+                //validating
+                calendarResult = new ProductionCalenderResult(_calendar);
+                if (!calendarResult.isValid)
+                {
+                    return calendarResult;
+                }
+
                 hccProductionCalendar calendar = hccProductionCalendar.GetById(_calendar.CalendarId);
                 if (calendar != null)
                 {
@@ -291,40 +401,58 @@ namespace HealthyChefWebAPI.Repository
                     {
                         IsCalendarNameExistcheck = IsCalendarRecordExist(_calendar.Name);
                     }
+                    if (calendar.DeliveryDate != Convert.ToDateTime(_calendar.DeliveryDatestring) && calendar.OrderCutOffDate != Convert.ToDateTime(_calendar.OrderCutOffDatestring))
+                    {
+                        IsCalendarExistcheck = IsCalendarExist(_calendar.DeliveryDate, _calendar.OrderCutOffDate);
+                    }
                 }
                 else
                 {
                     IsUpdate = false;
                     calendar = new hccProductionCalendar();
                     IsCalendarNameExistcheck = IsCalendarRecordExist(_calendar.Name);
+                    IsCalendarExistcheck = IsCalendarExist(Convert.ToDateTime(_calendar.DeliveryDatestring), Convert.ToDateTime(_calendar.OrderCutOffDatestring));
+
                 }
-                if (IsCalendarNameExistcheck)
+                if (Convert.ToDateTime(_calendar.DeliveryDatestring) < DateTime.Now)
                 {
-                    calendarResult.Message = "There is already a calendar that uses the name entered.";
+                    calendarResult.Message = "Delivery Date must be greater than today's date.";
+                }
+                else if (Convert.ToDateTime(_calendar.DeliveryDatestring) < Convert.ToDateTime(_calendar.OrderCutOffDatestring))
+                {
+                    calendarResult.Message = "Order cut-off date must be less than delivery date.";
                 }
                 else
                 {
-                    calendar.Name = _calendar.Name;
-                    calendar.MenuID = _calendar.MenuId;
-                    calendar.DeliveryDate = _calendar.DeliveryDate;
-                    calendar.OrderCutOffDate = _calendar.OrderCutOffDate;
-                    calendar.Description = _calendar.Description;
-                    calendar.Save();
-                    //prepare result
-                    calendarResult.CalendarId = calendar.CalendarID;
-                    calendarResult.Name = calendar.Name;
-                    calendarResult.Description = calendar.Description;
-                    calendarResult.MenuId = calendar.MenuID;
-                    calendarResult.DeliveryDate = calendar.DeliveryDate;
-                    calendarResult.OrderCutOffDate = calendar.OrderCutOffDate;
+                    if (IsCalendarNameExistcheck || IsCalendarExistcheck)
+                    {
+                        calendarResult.Message = "Delivery Date is already exist.";
+                    }
+                    else
+                    {
+                        calendar.Name = _calendar.Name;
+                        calendar.MenuID = _calendar.MenuId;
+                        calendar.DeliveryDate = Convert.ToDateTime(_calendar.DeliveryDatestring);
+                        calendar.OrderCutOffDate = Convert.ToDateTime(_calendar.OrderCutOffDatestring);
+                        calendar.Description = _calendar.Description;
+                        calendar.Save();
+                        //prepare result
+                        calendarResult.CalendarId = calendar.CalendarID;
+                        calendarResult.Name = calendar.Name;
+                        calendarResult.Description = calendar.Description;
+                        calendarResult.MenuId = calendar.MenuID;
+                        calendarResult.DeliveryDate = calendar.DeliveryDate;
+                        calendarResult.OrderCutOffDate = calendar.OrderCutOffDate;
 
-                    //prepare response
-                    calendarResult.StatusCode = System.Net.HttpStatusCode.OK;
-                    calendarResult.IsSuccess = true;
-                    calendarResult.Message = IsUpdate ? "Calendar Updated Successfully " + DateTime.Now.ToString() + "" : "Calendar Added Successfully " + DateTime.Now.ToString() + "";
+                        //prepare response
+                        calendarResult.StatusCode = System.Net.HttpStatusCode.OK;
+                        calendarResult.IsSuccess = true;
+                        calendarResult.Message = IsUpdate ? "Calendar Updated Successfully " + DateTime.Now.ToString() + "" : "Calendar Added Successfully " + DateTime.Now.ToString() + "";
 
+                    }
                 }
-                return calendarResult;
+                    return calendarResult;
+                
             }
             catch (Exception Ex)
             {
@@ -351,7 +479,7 @@ namespace HealthyChefWebAPI.Repository
                     // _cartitem.CartID = cart.CartID;
                     if (_cartitem.CartID != 0)
                     {
-                        _cartitem.ItemPrice = _giftCertificate.Amount;
+                        _cartitem.ItemPrice =Convert.ToDecimal(_giftCertificate.Amount);
                         //recipient info
                         _cartitem.Gift_RecipientEmail = _giftCertificate.ReceipientEmail;
                         _cartitem.Gift_RecipientMessage = _giftCertificate.ReceipientMessage;
@@ -494,6 +622,23 @@ namespace HealthyChefWebAPI.Repository
             if (calendarlst.Count != 0)
             {
                 if (calendarlst.Where(x => x.Name == Name).ToList().Count() != 0)
+                {
+                    exist = true;
+                }
+            }
+            else
+            {
+                exist = false;
+            }
+            return exist;
+        }
+        public static bool IsCalendarExist(DateTime deliverydate,DateTime ordercutoffdate)
+        {
+            bool exist = false;
+            var calendarlst = hccProductionCalendar.GetAll();
+            if (calendarlst.Count != 0)
+            {
+                if (calendarlst.Where(x => x.DeliveryDate == deliverydate&&x.OrderCutOffDate==ordercutoffdate).ToList().Count() != 0)
                 {
                     exist = true;
                 }

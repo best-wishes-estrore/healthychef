@@ -1,4 +1,5 @@
-﻿using HealthyChefWebAPI.Helpers;
+﻿using HealthyChef.DAL;
+using HealthyChefWebAPI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,14 @@ namespace HealthyChefWebAPI.CustomModels
     {
         public int CartItemId { get; set; }
         public string RedeemCode { get; set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string FirstName { get; set; }
         public string Lastname { get; set; }
         public string IssuedDate { get; set; }
         public bool SendToRecipient { get; set; }
+        public DateTime IssuedDateObj { get; set; }
+        public string IssuedTotal { get; set; }
+      
 
         public string IssuedTo
         {
@@ -39,18 +43,19 @@ namespace HealthyChefWebAPI.CustomModels
     {
         public int CartItemId { get; set; }
         public string RedeemCode { get; set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string IssuedTo { get; set; }
         public string IssuedDate { get; set; }
         public string RedeemedBy { get; set; }
         public string RedeemedDate { get; set; }
+        public DateTime IssuedDateObj { get; set; }
     }
     //Post
     public class GiftCertificates
     {
         public int CartId { get; set; }
         public int CartItemId { get; set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address1 { get; set; }
@@ -85,6 +90,6 @@ namespace HealthyChefWebAPI.CustomModels
         public int AddressTypeID { get; set; }
     }
 
-   
+
 
 }

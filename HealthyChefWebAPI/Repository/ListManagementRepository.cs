@@ -20,7 +20,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Programs> retVals = new List<Programs>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETACTIVEPROGRAMS", conn))
                     {
@@ -51,7 +52,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -62,7 +63,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<MealPreferences> retVals = new List<MealPreferences>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETMEALPREFS", conn))
                     {
@@ -87,13 +89,13 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderBy(d => d.PreferenceID).ToList();
+                retVals = retVals.OrderBy(d => d.Name).ToList();
 
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -104,7 +106,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<CustomerPreferences> retVals = new List<CustomerPreferences>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETCUSTMERPREFS", conn))
                     {
@@ -135,7 +138,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -146,7 +149,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Plan> retVals = new List<Plan>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETPLANS", conn))
                     {
@@ -178,13 +182,14 @@ namespace HealthyChefWebAPI.Repository
                     }
                 }
 
-                retVals = retVals.OrderBy(d => d.PlanID).ToList();
-
+                retVals = retVals.OrderBy(a => a.ProgramName)
+                                .ThenBy(a => a.NumWeeks)
+                                .ThenBy(a => a.NumDaysPerWeek).ToList();
                 return DBHelper.ConvertDataToJson(retVals);
             }
             catch (Exception Ex)
             {
-                return string.Empty;
+                return Ex.Message;
             }
 
         }
@@ -195,7 +200,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Allergens> retVals = new List<Allergens>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GetAllAllergens", conn))
                     {
@@ -225,7 +231,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
 
         }
@@ -236,7 +242,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Coupon> retVals = new List<Coupon>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GetAllCoupons", conn))
                     {
@@ -274,7 +281,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
 
         }
@@ -285,7 +292,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Ingredients> retVals = new List<Ingredients>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GetAllIngredient", conn))
                     {
@@ -315,7 +323,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
 
         }
@@ -326,7 +334,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<MessageBox> retVals = new List<MessageBox>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("hcc_GetBoxSizeList", conn))
                     {
@@ -358,7 +367,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
 
         }
@@ -369,7 +378,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<ShippingZone> retVals = new List<ShippingZone>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GetAllShippingZone", conn))
                     {
@@ -403,7 +413,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
 
         }
@@ -414,7 +424,8 @@ namespace HealthyChefWebAPI.Repository
             {
                 List<Items> retVals = new List<Items>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                //using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(DBUtil.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("GETITEMS", conn))
                     {
@@ -450,7 +461,7 @@ namespace HealthyChefWebAPI.Repository
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return ex.Message;
             }
         }
 
@@ -461,8 +472,16 @@ namespace HealthyChefWebAPI.Repository
             AllergensItem _allergenAdded = new AllergensItem();
             bool isupdate = false;
             bool _isAllergenExists = false;
+            
             try
             {
+                //validation
+                _allergenAdded = new AllergensItem(_allergen);
+                if(!_allergenAdded.isValid)
+                {
+                    return _allergenAdded;
+                }
+
                 hccAllergen allergen = hccAllergen.GetById(_allergen.AllergenID);
                 if (allergen != null)
                 {
@@ -539,13 +558,21 @@ namespace HealthyChefWebAPI.Repository
             bool _isCouponExists = false;
             try
             {
+                //validation
+                _couponAdded = new CouponItem(_coupon);
+                if (!_couponAdded.isValid)
+                {
+                    return _couponAdded;
+                }
+
+
                 hccCoupon coupon = hccCoupon.GetById(_coupon.CouponID);
 
                 if (coupon == null)
                 {
                     coupon = new hccCoupon
                     {
-                        CreatedBy = (Guid)HealthyChef.Common.Helpers.LoggedUser.ProviderUserKey,
+                        CreatedBy = _coupon.CreatedBy,
                         CreatedDate = DateTime.Now,
                         IsActive = true
                     };
@@ -616,7 +643,7 @@ namespace HealthyChefWebAPI.Repository
             try
             {
                 var zipcode = 0;
-                int pn = hccShippingZone.AddUpdateShippingZone(zipcode, _shippingZone.ZoneName, _shippingZone.Description, _shippingZone.Multiplier, _shippingZone.MinFee.ToString(), _shippingZone.MaxFee.ToString(), _shippingZone.IsDefaultShippingZone, _shippingZone.IsPickupShippingZone);
+                int pn = hccShippingZone.AddUpdateShippingZone(zipcode, _shippingZone.ZoneName, _shippingZone.Description, _shippingZone.Multiplier, _shippingZone.MinFee.ToString(), _shippingZone.MaxFee.ToString(), _shippingZone.IsDefaultShippingZone, _shippingZone.IsPickupShippingZone,_shippingZone.OrderMinimum);
                 if (pn > 0)
                 {
                     _shippingZoneAdded.IsSuccess = true;
@@ -684,8 +711,14 @@ namespace HealthyChefWebAPI.Repository
             bool _isIngredientExists = false;
             try
             {
-                hccIngredient Ingredient = hccIngredient.GetById(_ingredient.IngredientID);
+                //validation
+                _ingredientAdded = new IngredientItem(_ingredient);
+                if (!_ingredientAdded.isValid)
+                {
+                    return _ingredientAdded;
+                }
 
+                hccIngredient Ingredient = hccIngredient.GetById(_ingredient.IngredientID);
 
                 if (Ingredient == null)
                 {
@@ -774,6 +807,13 @@ namespace HealthyChefWebAPI.Repository
             bool _isItemExists = false;
             try
             {
+                //validation
+                _res = ValidateItem(_item);
+                if(!_res.isValid)
+                {
+                    return _res;
+                }
+
                 hccMenuItem CurrentMenuItem = hccMenuItem.GetById(_item.MenuItemId);
 
                 hccMenuItemNutritionData nutData = null;
@@ -806,21 +846,32 @@ namespace HealthyChefWebAPI.Repository
                     CurrentMenuItem.Name = _item.ItemName;
                     CurrentMenuItem.Description = _item.Description;
                     CurrentMenuItem.MealTypeID = _item.MealTypeId;
-                    CurrentMenuItem.CostChild = _item.CostChild;
-                    CurrentMenuItem.CostRegular = _item.CostRegular;
-                    CurrentMenuItem.CostSmall = _item.CostSmall;
-                    CurrentMenuItem.CostLarge = _item.CostLarge;
+                    CurrentMenuItem.CostChild = Convert.ToDecimal(_item.CostChild);
+                    CurrentMenuItem.CostRegular = Convert.ToDecimal(_item.CostRegular);
+                    CurrentMenuItem.CostSmall = Convert.ToDecimal(_item.CostSmall);
+                    CurrentMenuItem.CostLarge = Convert.ToDecimal(_item.CostLarge);
                     CurrentMenuItem.IsTaxEligible = _item.IsTaxEligible;
                     //CurrentMenuItem.IsRetired = _item.IsRetired;
+
+                    CurrentMenuItem.UseCostChild = _item.UseCostChild;
+                    CurrentMenuItem.UseCostSmall = _item.UseCostSmall;
+                    CurrentMenuItem.UseCostRegular = _item.UseCostRegular;
+                    CurrentMenuItem.UseCostLarge = _item.UseCostLarge;
+
+                    CurrentMenuItem.CanyonRanchRecipe = _item.CanyonRanchRecipe;
+                    CurrentMenuItem.CanyonRanchApproved = _item.CanyonRanchApproved;
+                    CurrentMenuItem.VegetarianOptionAvailable = _item.VegetarianOptionAvailable;
+                    CurrentMenuItem.VeganOptionAvailable = _item.VeganOptionAvailable;
+                    CurrentMenuItem.GlutenFreeOptionAvailable = _item.GlutenFreeOptionAvailable;
 
                     CurrentMenuItem.Save();
 
                     //Save the nutrition data
-                    nutData.Calories = _item.Caleries;
-                    nutData.DietaryFiber = _item.DietaryFiber;
-                    nutData.Protein = _item.Protein;
-                    nutData.TotalCarbohydrates = _item.TotalCarbohydrates;
-                    nutData.TotalFat = _item.TotalFat;
+                    nutData.Calories =Convert.ToInt16 (_item.Caleries);
+                    nutData.DietaryFiber = Convert.ToInt16(_item.DietaryFiber);
+                    nutData.Protein = Convert.ToInt16(_item.Protein);
+                    nutData.TotalCarbohydrates = Convert.ToInt16(_item.TotalCarbohydrates);
+                    nutData.TotalFat = Convert.ToInt16(_item.TotalFat);
                     nutData.MenuItemID = CurrentMenuItem.MenuItemID;
 
                     nutData.Save();
@@ -883,6 +934,75 @@ namespace HealthyChefWebAPI.Repository
             return Exists;
         }
 
+        public static PostHttpResponse ValidateItem(ItemPost _item)
+        {
+            PostHttpResponse _res = new PostHttpResponse();
+            if(_item.MealTypeId == -1)
+            {
+                _res.AddValidationError("Item MealType is Required");
+                _res.isValid = false;
+            }
+            if (string.IsNullOrEmpty(_item.ItemName))
+            {
+                _res.AddValidationError("Item Name is Required");
+                _res.isValid = false;
+            }
+            if (_item.CostChild == "")
+            {
+                _res.AddValidationError("CostChild is Required");
+                _res.isValid = false;
+            }
+            if (_item.CostSmall == "")
+            {
+                _res.AddValidationError("CostSmall is Required");
+                _res.isValid = false;
+            }
+            if (_item.CostRegular == "")
+            {
+                _res.AddValidationError("CostRegular is Required");
+                _res.isValid = false;
+            }
+            if (_item.CostLarge == "")
+            {
+                _res.AddValidationError("CostLarge is Required");
+                _res.isValid = false;
+            }
+            if (string.IsNullOrEmpty(_item.Description))
+            {
+                _res.AddValidationError("Item Description is Required");
+                _res.isValid = false;
+            }
+
+            //nutrition data
+            if (_item.Caleries == "")
+            {
+                _res.AddValidationError("Item Caleries is Required in Nutrition Info");
+                _res.isValid = false;
+            }
+            if (_item.TotalCarbohydrates == "")
+            {
+                _res.AddValidationError("Item Total Carbohydrates is Required in Nutrition Info");
+                _res.isValid = false;
+            }
+            if (_item.Protein == "")
+            {
+                _res.AddValidationError("Item Protein is Required in Nutrition Info");
+                _res.isValid = false;
+            }
+            if (_item.TotalFat == "")
+            {
+                _res.AddValidationError("Item Total Fat is Required in Nutrition Info");
+                _res.isValid = false;
+            }
+            if (_item.DietaryFiber == "")
+            {
+                _res.AddValidationError("Item Dietary Fiber is Required in Nutrition Info");
+                _res.isValid = false;
+            }
+
+            return _res;
+        }
+
         public static PlanItem AddOrUpdatePlan(Plan _plan)
         {
             PlanItem _planAdded = new PlanItem();
@@ -890,6 +1010,13 @@ namespace HealthyChefWebAPI.Repository
             bool _isPlanExists = false;
             try
             {
+                //validate
+                _planAdded = new PlanItem(_plan);
+                if(!_planAdded.isValid)
+                {
+                    return _planAdded;
+                }
+
                 hccProgramPlan plan = hccProgramPlan.GetById(_plan.PlanID);
                 if (plan != null)
                 {
@@ -977,6 +1104,12 @@ namespace HealthyChefWebAPI.Repository
             bool _isPrefExists = false;
             try
             {
+                _prefAdded = new MealPreferencesItem(_pref);
+                if (!_prefAdded.isValid)
+                {
+                    return _prefAdded;
+                }
+
                 hccPreference pref = hccPreference.GetById(_pref.PreferenceID);
                 if (pref != null)
                 {

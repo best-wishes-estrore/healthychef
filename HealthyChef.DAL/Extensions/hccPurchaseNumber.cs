@@ -21,7 +21,7 @@ namespace HealthyChef.DAL
 
                 using (TransactionScope scope = new TransactionScope())
                 {                    
-                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("hcc_AddPurchaseNumber", conn))
                         {

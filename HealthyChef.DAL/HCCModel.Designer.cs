@@ -49,15 +49,15 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hccCartDefaultMenuExceptions_hccCartCalendars", "hccCartItemCalendar", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccCartItemCalendar), "hccCartDefaultMenuException", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartDefaultMenuException), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hcc_UserProfile_hcc_AddressShipping", "hccAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccAddress), "hccUserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccUserProfile), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hcc_UserProfile_Notes_hcc_UserProfile", "hccUserProfile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccUserProfile), "hccUserProfileNote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccUserProfileNote), true)]
+[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hcc_MenuItem_NutritionData_hcc_MenuItem", "hccMenuItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccMenuItem), "hccMenuItemNutritionData", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccMenuItemNutritionData), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hccCarts_hccCoupons", "hccCoupon", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccCoupon), "hccCart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCart), true)]
+[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccProgra__Prefe__77A09B57", "hccPreference", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccPreference), "hccProgramDefaultMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccProgramDefaultMenuExPref), true)]
+[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccProgra__Defau__76AC771E", "hccProgramDefaultMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccProgramDefaultMenu), "hccProgramDefaultMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccProgramDefaultMenuExPref), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hccCartALCMenuItem_hccCartItems_CartItemID", "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccCartItem), "hccCartALCMenuItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartALCMenuItem), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hccCartItemCalendars_hccCartItems", "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccCartItem), "hccCartItemCalendar", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartItemCalendar), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hccCartItemALCPrefs_hccCartItems", "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccCartItem), "hccCartItemMealPreference", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartItemMealPreference), true)]
-[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__73D00A73", "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccCartItem), "hccCartMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartMenuExPref), true)]
+[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__77A09B57", "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccCartItem), "hccCartMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartMenuExPref), true)]
 [assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hcc_CartItems_hcc_Carts", "hccCart", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccCart), "hccCartItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccCartItem), true)]
-[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccProgra__Prefe__77A09B57", "hccPreference", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccPreference), "hccProgramDefaultMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccProgramDefaultMenuExPref), true)]
-[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK__hccProgra__Defau__76AC771E", "hccProgramDefaultMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccProgramDefaultMenu), "hccProgramDefaultMenuExPref", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(HealthyChef.DAL.hccProgramDefaultMenuExPref), true)]
-[assembly: EdmRelationshipAttribute("HealthyChef.DAL", "FK_hcc_MenuItem_NutritionData_hcc_MenuItem", "hccMenuItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(HealthyChef.DAL.hccMenuItem), "hccMenuItemNutritionData", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(HealthyChef.DAL.hccMenuItemNutritionData), true)]
 
 #endregion
 
@@ -68,14 +68,14 @@ namespace HealthyChef.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class healthychefEntities : ObjectContext
+    public partial class healthychefEntitiesAPI : ObjectContext
     {
         #region Constructors
     
         /// <summary>
         /// Initializes a new healthychefEntities object using the connection string found in the 'healthychefEntities' section of the application configuration file.
         /// </summary>
-        public healthychefEntities() : base("name=healthychefEntities", "healthychefEntities")
+        public healthychefEntitiesAPI() : base("name=healthychefEntities", "healthychefEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -84,7 +84,7 @@ namespace HealthyChef.DAL
         /// <summary>
         /// Initialize a new healthychefEntities object.
         /// </summary>
-        public healthychefEntities(string connectionString) : base(connectionString, "healthychefEntities")
+        public healthychefEntitiesAPI(string connectionString) : base(connectionString, "healthychefEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -93,7 +93,7 @@ namespace HealthyChef.DAL
         /// <summary>
         /// Initialize a new healthychefEntities object.
         /// </summary>
-        public healthychefEntities(EntityConnection connection) : base(connection, "healthychefEntities")
+        public healthychefEntitiesAPI(EntityConnection connection) : base(connection, "healthychefEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -608,6 +608,22 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<hccMenuItemNutritionData> hccMenuItemNutritionDatas
+        {
+            get
+            {
+                if ((_hccMenuItemNutritionDatas == null))
+                {
+                    _hccMenuItemNutritionDatas = base.CreateObjectSet<hccMenuItemNutritionData>("hccMenuItemNutritionDatas");
+                }
+                return _hccMenuItemNutritionDatas;
+            }
+        }
+        private ObjectSet<hccMenuItemNutritionData> _hccMenuItemNutritionDatas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<hccCartSnapshot> hccCartSnapshots
         {
             get
@@ -688,18 +704,18 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<hccCartItem> hccCartItems
+        public ObjectSet<hccProgramDefaultMenuExPref> hccProgramDefaultMenuExPrefs
         {
             get
             {
-                if ((_hccCartItems == null))
+                if ((_hccProgramDefaultMenuExPrefs == null))
                 {
-                    _hccCartItems = base.CreateObjectSet<hccCartItem>("hccCartItems");
+                    _hccProgramDefaultMenuExPrefs = base.CreateObjectSet<hccProgramDefaultMenuExPref>("hccProgramDefaultMenuExPrefs");
                 }
-                return _hccCartItems;
+                return _hccProgramDefaultMenuExPrefs;
             }
         }
-        private ObjectSet<hccCartItem> _hccCartItems;
+        private ObjectSet<hccProgramDefaultMenuExPref> _hccProgramDefaultMenuExPrefs;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -720,34 +736,18 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<hccProgramDefaultMenuExPref> hccProgramDefaultMenuExPrefs
+        public ObjectSet<hccCartItem> hccCartItems
         {
             get
             {
-                if ((_hccProgramDefaultMenuExPrefs == null))
+                if ((_hccCartItems == null))
                 {
-                    _hccProgramDefaultMenuExPrefs = base.CreateObjectSet<hccProgramDefaultMenuExPref>("hccProgramDefaultMenuExPrefs");
+                    _hccCartItems = base.CreateObjectSet<hccCartItem>("hccCartItems");
                 }
-                return _hccProgramDefaultMenuExPrefs;
+                return _hccCartItems;
             }
         }
-        private ObjectSet<hccProgramDefaultMenuExPref> _hccProgramDefaultMenuExPrefs;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<hccMenuItemNutritionData> hccMenuItemNutritionDatas
-        {
-            get
-            {
-                if ((_hccMenuItemNutritionDatas == null))
-                {
-                    _hccMenuItemNutritionDatas = base.CreateObjectSet<hccMenuItemNutritionData>("hccMenuItemNutritionDatas");
-                }
-                return _hccMenuItemNutritionDatas;
-            }
-        }
-        private ObjectSet<hccMenuItemNutritionData> _hccMenuItemNutritionDatas;
+        private ObjectSet<hccCartItem> _hccCartItems;
 
         #endregion
 
@@ -1002,6 +1002,14 @@ namespace HealthyChef.DAL
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the hccMenuItemNutritionDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTohccMenuItemNutritionDatas(hccMenuItemNutritionData hccMenuItemNutritionData)
+        {
+            base.AddObject("hccMenuItemNutritionDatas", hccMenuItemNutritionData);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the hccCartSnapshots EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTohccCartSnapshots(hccCartSnapshot hccCartSnapshot)
@@ -1042,11 +1050,11 @@ namespace HealthyChef.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the hccCartItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the hccProgramDefaultMenuExPrefs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddTohccCartItems(hccCartItem hccCartItem)
+        public void AddTohccProgramDefaultMenuExPrefs(hccProgramDefaultMenuExPref hccProgramDefaultMenuExPref)
         {
-            base.AddObject("hccCartItems", hccCartItem);
+            base.AddObject("hccProgramDefaultMenuExPrefs", hccProgramDefaultMenuExPref);
         }
     
         /// <summary>
@@ -1058,24 +1066,90 @@ namespace HealthyChef.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the hccProgramDefaultMenuExPrefs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the hccCartItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddTohccProgramDefaultMenuExPrefs(hccProgramDefaultMenuExPref hccProgramDefaultMenuExPref)
+        public void AddTohccCartItems(hccCartItem hccCartItem)
         {
-            base.AddObject("hccProgramDefaultMenuExPrefs", hccProgramDefaultMenuExPref);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the hccMenuItemNutritionDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTohccMenuItemNutritionDatas(hccMenuItemNutritionData hccMenuItemNutritionData)
-        {
-            base.AddObject("hccMenuItemNutritionDatas", hccMenuItemNutritionData);
+            base.AddObject("hccCartItems", hccCartItem);
         }
 
         #endregion
 
         #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="lastName">No Metadata Documentation available.</param>
+        /// <param name="email">No Metadata Documentation available.</param>
+        /// <param name="phone">No Metadata Documentation available.</param>
+        /// <param name="purchNum">No Metadata Documentation available.</param>
+        /// <param name="delivDate">No Metadata Documentation available.</param>
+        /// <param name="roles">No Metadata Documentation available.</param>
+        public ObjectResult<Nullable<global::System.Guid>> hcc_UserProfileSearch(global::System.String lastName, global::System.String email, global::System.String phone, Nullable<global::System.Int32> purchNum, Nullable<global::System.DateTime> delivDate, global::System.String roles)
+        {
+            ObjectParameter lastNameParameter;
+            if (lastName != null)
+            {
+                lastNameParameter = new ObjectParameter("lastName", lastName);
+            }
+            else
+            {
+                lastNameParameter = new ObjectParameter("lastName", typeof(global::System.String));
+            }
+    
+            ObjectParameter emailParameter;
+            if (email != null)
+            {
+                emailParameter = new ObjectParameter("email", email);
+            }
+            else
+            {
+                emailParameter = new ObjectParameter("email", typeof(global::System.String));
+            }
+    
+            ObjectParameter phoneParameter;
+            if (phone != null)
+            {
+                phoneParameter = new ObjectParameter("phone", phone);
+            }
+            else
+            {
+                phoneParameter = new ObjectParameter("phone", typeof(global::System.String));
+            }
+    
+            ObjectParameter purchNumParameter;
+            if (purchNum.HasValue)
+            {
+                purchNumParameter = new ObjectParameter("purchNum", purchNum);
+            }
+            else
+            {
+                purchNumParameter = new ObjectParameter("purchNum", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter delivDateParameter;
+            if (delivDate.HasValue)
+            {
+                delivDateParameter = new ObjectParameter("delivDate", delivDate);
+            }
+            else
+            {
+                delivDateParameter = new ObjectParameter("delivDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter rolesParameter;
+            if (roles != null)
+            {
+                rolesParameter = new ObjectParameter("roles", roles);
+            }
+            else
+            {
+                rolesParameter = new ObjectParameter("roles", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<Nullable<global::System.Guid>>("hcc_UserProfileSearch", lastNameParameter, emailParameter, phoneParameter, purchNumParameter, delivDateParameter, rolesParameter);
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1563,6 +1637,48 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        /// <param name="cartID">No Metadata Documentation available.</param>
+        /// <param name="cartItemId">No Metadata Documentation available.</param>
+        /// <param name="taxRate">No Metadata Documentation available.</param>
+        /// <param name="newCartID">No Metadata Documentation available.</param>
+        public int hcc_CloneOrder(Nullable<global::System.Int32> cartID, Nullable<global::System.Int32> cartItemId, Nullable<global::System.Decimal> taxRate, ObjectParameter newCartID)
+        {
+            ObjectParameter cartIDParameter;
+            if (cartID.HasValue)
+            {
+                cartIDParameter = new ObjectParameter("CartID", cartID);
+            }
+            else
+            {
+                cartIDParameter = new ObjectParameter("CartID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter cartItemIdParameter;
+            if (cartItemId.HasValue)
+            {
+                cartItemIdParameter = new ObjectParameter("CartItemId", cartItemId);
+            }
+            else
+            {
+                cartItemIdParameter = new ObjectParameter("CartItemId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter taxRateParameter;
+            if (taxRate.HasValue)
+            {
+                taxRateParameter = new ObjectParameter("TaxRate", taxRate);
+            }
+            else
+            {
+                taxRateParameter = new ObjectParameter("TaxRate", typeof(global::System.Decimal));
+            }
+    
+            return base.ExecuteFunction("hcc_CloneOrder", cartIDParameter, cartItemIdParameter, taxRateParameter, newCartID);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectResult<hcc_RecurringOrderByDeliveryDate_Result> hcc_RecurringOrderByDeliveryDate()
         {
             return base.ExecuteFunction<hcc_RecurringOrderByDeliveryDate_Result>("hcc_RecurringOrderByDeliveryDate");
@@ -1718,75 +1834,31 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="lastName">No Metadata Documentation available.</param>
-        /// <param name="email">No Metadata Documentation available.</param>
-        /// <param name="phone">No Metadata Documentation available.</param>
-        /// <param name="purchNum">No Metadata Documentation available.</param>
-        /// <param name="delivDate">No Metadata Documentation available.</param>
-        /// <param name="roles">No Metadata Documentation available.</param>
-        public ObjectResult<Nullable<global::System.Guid>> hcc_UserProfileSearch(global::System.String lastName, global::System.String email, global::System.String phone, Nullable<global::System.Int32> purchNum, Nullable<global::System.DateTime> delivDate, global::System.String roles)
+        /// <param name="deliveryDate">No Metadata Documentation available.</param>
+        /// <param name="mealTypeID">No Metadata Documentation available.</param>
+        public ObjectResult<hcc_AlcMenu2_Result> hcc_AlcMenu2(Nullable<global::System.DateTime> deliveryDate, Nullable<global::System.Int32> mealTypeID)
         {
-            ObjectParameter lastNameParameter;
-            if (lastName != null)
+            ObjectParameter deliveryDateParameter;
+            if (deliveryDate.HasValue)
             {
-                lastNameParameter = new ObjectParameter("lastName", lastName);
+                deliveryDateParameter = new ObjectParameter("DeliveryDate", deliveryDate);
             }
             else
             {
-                lastNameParameter = new ObjectParameter("lastName", typeof(global::System.String));
+                deliveryDateParameter = new ObjectParameter("DeliveryDate", typeof(global::System.DateTime));
             }
     
-            ObjectParameter emailParameter;
-            if (email != null)
+            ObjectParameter mealTypeIDParameter;
+            if (mealTypeID.HasValue)
             {
-                emailParameter = new ObjectParameter("email", email);
+                mealTypeIDParameter = new ObjectParameter("MealTypeID", mealTypeID);
             }
             else
             {
-                emailParameter = new ObjectParameter("email", typeof(global::System.String));
+                mealTypeIDParameter = new ObjectParameter("MealTypeID", typeof(global::System.Int32));
             }
     
-            ObjectParameter phoneParameter;
-            if (phone != null)
-            {
-                phoneParameter = new ObjectParameter("phone", phone);
-            }
-            else
-            {
-                phoneParameter = new ObjectParameter("phone", typeof(global::System.String));
-            }
-    
-            ObjectParameter purchNumParameter;
-            if (purchNum.HasValue)
-            {
-                purchNumParameter = new ObjectParameter("purchNum", purchNum);
-            }
-            else
-            {
-                purchNumParameter = new ObjectParameter("purchNum", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter delivDateParameter;
-            if (delivDate.HasValue)
-            {
-                delivDateParameter = new ObjectParameter("delivDate", delivDate);
-            }
-            else
-            {
-                delivDateParameter = new ObjectParameter("delivDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter rolesParameter;
-            if (roles != null)
-            {
-                rolesParameter = new ObjectParameter("roles", roles);
-            }
-            else
-            {
-                rolesParameter = new ObjectParameter("roles", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction<Nullable<global::System.Guid>>("hcc_UserProfileSearch", lastNameParameter, emailParameter, phoneParameter, purchNumParameter, delivDateParameter, rolesParameter);
+            return base.ExecuteFunction<hcc_AlcMenu2_Result>("hcc_AlcMenu2", deliveryDateParameter, mealTypeIDParameter);
         }
     
         /// <summary>
@@ -1869,341 +1941,6 @@ namespace HealthyChef.DAL
             }
     
             return base.ExecuteFunction<hcc_OrderFulfillSearch_ALCnGC_ByRange_Result>("hcc_OrderFulfillSearch_ALCnGC_ByRange", startDateParameter, endDateParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="deliveryDate">No Metadata Documentation available.</param>
-        /// <param name="mealTypeID">No Metadata Documentation available.</param>
-        public ObjectResult<hcc_AlcMenu2_Result> hcc_AlcMenu2(Nullable<global::System.DateTime> deliveryDate, Nullable<global::System.Int32> mealTypeID)
-        {
-            ObjectParameter deliveryDateParameter;
-            if (deliveryDate.HasValue)
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", deliveryDate);
-            }
-            else
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter mealTypeIDParameter;
-            if (mealTypeID.HasValue)
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", mealTypeID);
-            }
-            else
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<hcc_AlcMenu2_Result>("hcc_AlcMenu2", deliveryDateParameter, mealTypeIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="pageNumber">No Metadata Documentation available.</param>
-        /// <param name="pageSize">No Metadata Documentation available.</param>
-        /// <param name="parentProfileId">No Metadata Documentation available.</param>
-        /// <param name="totalRecords">No Metadata Documentation available.</param>
-        public ObjectResult<hcc_SubProfileSearch_Result> hcc_SubProfileSearch(Nullable<global::System.Int32> pageNumber, Nullable<global::System.Int32> pageSize, Nullable<global::System.Int32> parentProfileId, ObjectParameter totalRecords)
-        {
-            ObjectParameter pageNumberParameter;
-            if (pageNumber.HasValue)
-            {
-                pageNumberParameter = new ObjectParameter("PageNumber", pageNumber);
-            }
-            else
-            {
-                pageNumberParameter = new ObjectParameter("PageNumber", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter pageSizeParameter;
-            if (pageSize.HasValue)
-            {
-                pageSizeParameter = new ObjectParameter("PageSize", pageSize);
-            }
-            else
-            {
-                pageSizeParameter = new ObjectParameter("PageSize", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter parentProfileIdParameter;
-            if (parentProfileId.HasValue)
-            {
-                parentProfileIdParameter = new ObjectParameter("ParentProfileId", parentProfileId);
-            }
-            else
-            {
-                parentProfileIdParameter = new ObjectParameter("ParentProfileId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<hcc_SubProfileSearch_Result>("hcc_SubProfileSearch", pageNumberParameter, pageSizeParameter, parentProfileIdParameter, totalRecords);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="cartID">No Metadata Documentation available.</param>
-        /// <param name="cartItemId">No Metadata Documentation available.</param>
-        /// <param name="taxRate">No Metadata Documentation available.</param>
-        /// <param name="newCartID">No Metadata Documentation available.</param>
-        public int hcc_CloneOrder(Nullable<global::System.Int32> cartID, Nullable<global::System.Int32> cartItemId, Nullable<global::System.Decimal> taxRate, ObjectParameter newCartID)
-        {
-            ObjectParameter cartIDParameter;
-            if (cartID.HasValue)
-            {
-                cartIDParameter = new ObjectParameter("CartID", cartID);
-            }
-            else
-            {
-                cartIDParameter = new ObjectParameter("CartID", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter cartItemIdParameter;
-            if (cartItemId.HasValue)
-            {
-                cartItemIdParameter = new ObjectParameter("CartItemId", cartItemId);
-            }
-            else
-            {
-                cartItemIdParameter = new ObjectParameter("CartItemId", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter taxRateParameter;
-            if (taxRate.HasValue)
-            {
-                taxRateParameter = new ObjectParameter("TaxRate", taxRate);
-            }
-            else
-            {
-                taxRateParameter = new ObjectParameter("TaxRate", typeof(global::System.Decimal));
-            }
-    
-            return base.ExecuteFunction("hcc_CloneOrder", cartIDParameter, cartItemIdParameter, taxRateParameter, newCartID);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="start">No Metadata Documentation available.</param>
-        /// <param name="end">No Metadata Documentation available.</param>
-        /// <param name="includeAlaCarte">No Metadata Documentation available.</param>
-        public int hcc_MenuItemsByDateRange(Nullable<global::System.DateTime> start, Nullable<global::System.DateTime> end, Nullable<global::System.Boolean> includeAlaCarte)
-        {
-            ObjectParameter startParameter;
-            if (start.HasValue)
-            {
-                startParameter = new ObjectParameter("start", start);
-            }
-            else
-            {
-                startParameter = new ObjectParameter("start", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter endParameter;
-            if (end.HasValue)
-            {
-                endParameter = new ObjectParameter("end", end);
-            }
-            else
-            {
-                endParameter = new ObjectParameter("end", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter includeAlaCarteParameter;
-            if (includeAlaCarte.HasValue)
-            {
-                includeAlaCarteParameter = new ObjectParameter("includeAlaCarte", includeAlaCarte);
-            }
-            else
-            {
-                includeAlaCarteParameter = new ObjectParameter("includeAlaCarte", typeof(global::System.Boolean));
-            }
-    
-            return base.ExecuteFunction("hcc_MenuItemsByDateRange", startParameter, endParameter, includeAlaCarteParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="start">No Metadata Documentation available.</param>
-        /// <param name="end">No Metadata Documentation available.</param>
-        public ObjectResult<hcc_ProductFeed_Result> hcc_ProductFeed(Nullable<global::System.DateTime> start, Nullable<global::System.DateTime> end)
-        {
-            ObjectParameter startParameter;
-            if (start.HasValue)
-            {
-                startParameter = new ObjectParameter("start", start);
-            }
-            else
-            {
-                startParameter = new ObjectParameter("start", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter endParameter;
-            if (end.HasValue)
-            {
-                endParameter = new ObjectParameter("end", end);
-            }
-            else
-            {
-                endParameter = new ObjectParameter("end", typeof(global::System.DateTime));
-            }
-    
-            return base.ExecuteFunction<hcc_ProductFeed_Result>("hcc_ProductFeed", startParameter, endParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="itemName">No Metadata Documentation available.</param>
-        /// <param name="mealTypeID">No Metadata Documentation available.</param>
-        /// <param name="deliveryDate">No Metadata Documentation available.</param>
-        public ObjectResult<hcc_ProductionDescription_Result> hcc_ProductionDescription(global::System.String itemName, Nullable<global::System.Int32> mealTypeID, Nullable<global::System.DateTime> deliveryDate)
-        {
-            ObjectParameter itemNameParameter;
-            if (itemName != null)
-            {
-                itemNameParameter = new ObjectParameter("ItemName", itemName);
-            }
-            else
-            {
-                itemNameParameter = new ObjectParameter("ItemName", typeof(global::System.String));
-            }
-    
-            ObjectParameter mealTypeIDParameter;
-            if (mealTypeID.HasValue)
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", mealTypeID);
-            }
-            else
-            {
-                mealTypeIDParameter = new ObjectParameter("MealTypeID", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter deliveryDateParameter;
-            if (deliveryDate.HasValue)
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", deliveryDate);
-            }
-            else
-            {
-                deliveryDateParameter = new ObjectParameter("DeliveryDate", typeof(global::System.DateTime));
-            }
-    
-            return base.ExecuteFunction<hcc_ProductionDescription_Result>("hcc_ProductionDescription", itemNameParameter, mealTypeIDParameter, deliveryDateParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="start">No Metadata Documentation available.</param>
-        /// <param name="end">No Metadata Documentation available.</param>
-        public ObjectResult<Nullable<global::System.Int32>> hcc_GetAllItemsForNextDeliverDates(Nullable<global::System.DateTime> start, Nullable<global::System.DateTime> end)
-        {
-            ObjectParameter startParameter;
-            if (start.HasValue)
-            {
-                startParameter = new ObjectParameter("start", start);
-            }
-            else
-            {
-                startParameter = new ObjectParameter("start", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter endParameter;
-            if (end.HasValue)
-            {
-                endParameter = new ObjectParameter("end", end);
-            }
-            else
-            {
-                endParameter = new ObjectParameter("end", typeof(global::System.DateTime));
-            }
-    
-            return base.ExecuteFunction<Nullable<global::System.Int32>>("hcc_GetAllItemsForNextDeliverDates", startParameter, endParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="itemName">No Metadata Documentation available.</param>
-        /// <param name="startDate">No Metadata Documentation available.</param>
-        /// <param name="endDate">No Metadata Documentation available.</param>
-        public ObjectResult<Nullable<global::System.DateTime>> AvailableDeliveryDatesForItem(global::System.String itemName, Nullable<global::System.DateTime> startDate, Nullable<global::System.DateTime> endDate)
-        {
-            ObjectParameter itemNameParameter;
-            if (itemName != null)
-            {
-                itemNameParameter = new ObjectParameter("ItemName", itemName);
-            }
-            else
-            {
-                itemNameParameter = new ObjectParameter("ItemName", typeof(global::System.String));
-            }
-    
-            ObjectParameter startDateParameter;
-            if (startDate.HasValue)
-            {
-                startDateParameter = new ObjectParameter("StartDate", startDate);
-            }
-            else
-            {
-                startDateParameter = new ObjectParameter("StartDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter endDateParameter;
-            if (endDate.HasValue)
-            {
-                endDateParameter = new ObjectParameter("EndDate", endDate);
-            }
-            else
-            {
-                endDateParameter = new ObjectParameter("EndDate", typeof(global::System.DateTime));
-            }
-    
-            return base.ExecuteFunction<Nullable<global::System.DateTime>>("AvailableDeliveryDatesForItem", itemNameParameter, startDateParameter, endDateParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="userProfileId">No Metadata Documentation available.</param>
-        public ObjectResult<global::System.String> GETUSERALLERGENS(Nullable<global::System.Int32> userProfileId)
-        {
-            ObjectParameter userProfileIdParameter;
-            if (userProfileId.HasValue)
-            {
-                userProfileIdParameter = new ObjectParameter("UserProfileId", userProfileId);
-            }
-            else
-            {
-                userProfileIdParameter = new ObjectParameter("UserProfileId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<global::System.String>("GETUSERALLERGENS", userProfileIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="userProfileId">No Metadata Documentation available.</param>
-        public ObjectResult<global::System.String> GETUSERPREFERENCES(Nullable<global::System.Int32> userProfileId)
-        {
-            ObjectParameter userProfileIdParameter;
-            if (userProfileId.HasValue)
-            {
-                userProfileIdParameter = new ObjectParameter("UserProfileId", userProfileId);
-            }
-            else
-            {
-                userProfileIdParameter = new ObjectParameter("UserProfileId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<global::System.String>("GETUSERPREFERENCES", userProfileIdParameter);
         }
 
         #endregion
@@ -4196,30 +3933,6 @@ namespace HealthyChef.DAL
         private Nullable<global::System.Guid> _ModifiedBy;
         partial void OnModifiedByChanging(Nullable<global::System.Guid> value);
         partial void OnModifiedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IsEditCoupon
-        {
-            get
-            {
-                return _IsEditCoupon;
-            }
-            set
-            {
-                OnIsEditCouponChanging(value);
-                ReportPropertyChanging("IsEditCoupon");
-                _IsEditCoupon = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsEditCoupon");
-                OnIsEditCouponChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _IsEditCoupon;
-        partial void OnIsEditCouponChanging(Nullable<global::System.Int32> value);
-        partial void OnIsEditCouponChanged();
 
         #endregion
 
@@ -5966,18 +5679,18 @@ namespace HealthyChef.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__73D00A73", "hccCartMenuExPref")]
+        [EdmRelationshipNavigationPropertyAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__77A09B57", "hccCartMenuExPref")]
         public EntityCollection<hccCartMenuExPref> hccCartMenuExPrefs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<hccCartMenuExPref>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartMenuExPref");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<hccCartMenuExPref>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartMenuExPref");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<hccCartMenuExPref>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartMenuExPref", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<hccCartMenuExPref>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartMenuExPref", value);
                 }
             }
         }
@@ -6528,16 +6241,16 @@ namespace HealthyChef.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__73D00A73", "hccCartItem")]
+        [EdmRelationshipNavigationPropertyAttribute("HealthyChef.DAL", "FK__hccCartMe__CartI__77A09B57", "hccCartItem")]
         public hccCartItem hccCartItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartItem").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartItem").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartItem").Value = value;
             }
         }
         /// <summary>
@@ -6549,13 +6262,13 @@ namespace HealthyChef.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartItem");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__73D00A73", "hccCartItem", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<hccCartItem>("HealthyChef.DAL.FK__hccCartMe__CartI__77A09B57", "hccCartItem", value);
                 }
             }
         }
@@ -9092,54 +8805,6 @@ namespace HealthyChef.DAL
         private Nullable<global::System.Boolean> _GlutenFreeOptionAvailable;
         partial void OnGlutenFreeOptionAvailableChanging(Nullable<global::System.Boolean> value);
         partial void OnGlutenFreeOptionAvailableChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ImageUrl
-        {
-            get
-            {
-                return _ImageUrl;
-            }
-            set
-            {
-                OnImageUrlChanging(value);
-                ReportPropertyChanging("ImageUrl");
-                _ImageUrl = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageUrl");
-                OnImageUrlChanged();
-            }
-        }
-        private global::System.String _ImageUrl;
-        partial void OnImageUrlChanging(global::System.String value);
-        partial void OnImageUrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] ImageData
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_ImageData);
-            }
-            set
-            {
-                OnImageDataChanging(value);
-                ReportPropertyChanging("ImageData");
-                _ImageData = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageData");
-                OnImageDataChanged();
-            }
-        }
-        private global::System.Byte[] _ImageData;
-        partial void OnImageDataChanging(global::System.Byte[] value);
-        partial void OnImageDataChanged();
 
         #endregion
 
@@ -9461,8 +9126,7 @@ namespace HealthyChef.DAL
         /// <param name="totalCarbohydrates">Initial value of the TotalCarbohydrates property.</param>
         /// <param name="dietaryFiber">Initial value of the DietaryFiber property.</param>
         /// <param name="protein">Initial value of the Protein property.</param>
-        /// <param name="sodium">Initial value of the Sodium property.</param>
-        public static hccMenuItemNutritionData CreatehccMenuItemNutritionData(global::System.Int32 menuItemID, global::System.Decimal calories, global::System.Decimal totalFat, global::System.Decimal totalCarbohydrates, global::System.Decimal dietaryFiber, global::System.Decimal protein, global::System.Decimal sodium)
+        public static hccMenuItemNutritionData CreatehccMenuItemNutritionData(global::System.Int32 menuItemID, global::System.Int32 calories, global::System.Int32 totalFat, global::System.Int32 totalCarbohydrates, global::System.Int32 dietaryFiber, global::System.Int32 protein)
         {
             hccMenuItemNutritionData hccMenuItemNutritionData = new hccMenuItemNutritionData();
             hccMenuItemNutritionData.MenuItemID = menuItemID;
@@ -9471,7 +9135,6 @@ namespace HealthyChef.DAL
             hccMenuItemNutritionData.TotalCarbohydrates = totalCarbohydrates;
             hccMenuItemNutritionData.DietaryFiber = dietaryFiber;
             hccMenuItemNutritionData.Protein = protein;
-            hccMenuItemNutritionData.Sodium = sodium;
             return hccMenuItemNutritionData;
         }
 
@@ -9511,7 +9174,7 @@ namespace HealthyChef.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal Calories
+        public global::System.Int32 Calories
         {
             get
             {
@@ -9526,8 +9189,8 @@ namespace HealthyChef.DAL
                 OnCaloriesChanged();
             }
         }
-        private global::System.Decimal _Calories;
-        partial void OnCaloriesChanging(global::System.Decimal value);
+        private global::System.Int32 _Calories;
+        partial void OnCaloriesChanging(global::System.Int32 value);
         partial void OnCaloriesChanged();
     
         /// <summary>
@@ -9535,7 +9198,7 @@ namespace HealthyChef.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal TotalFat
+        public global::System.Int32 TotalFat
         {
             get
             {
@@ -9550,8 +9213,8 @@ namespace HealthyChef.DAL
                 OnTotalFatChanged();
             }
         }
-        private global::System.Decimal _TotalFat;
-        partial void OnTotalFatChanging(global::System.Decimal value);
+        private global::System.Int32 _TotalFat;
+        partial void OnTotalFatChanging(global::System.Int32 value);
         partial void OnTotalFatChanged();
     
         /// <summary>
@@ -9559,7 +9222,7 @@ namespace HealthyChef.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal TotalCarbohydrates
+        public global::System.Int32 TotalCarbohydrates
         {
             get
             {
@@ -9574,8 +9237,8 @@ namespace HealthyChef.DAL
                 OnTotalCarbohydratesChanged();
             }
         }
-        private global::System.Decimal _TotalCarbohydrates;
-        partial void OnTotalCarbohydratesChanging(global::System.Decimal value);
+        private global::System.Int32 _TotalCarbohydrates;
+        partial void OnTotalCarbohydratesChanging(global::System.Int32 value);
         partial void OnTotalCarbohydratesChanged();
     
         /// <summary>
@@ -9583,7 +9246,7 @@ namespace HealthyChef.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal DietaryFiber
+        public global::System.Int32 DietaryFiber
         {
             get
             {
@@ -9598,8 +9261,8 @@ namespace HealthyChef.DAL
                 OnDietaryFiberChanged();
             }
         }
-        private global::System.Decimal _DietaryFiber;
-        partial void OnDietaryFiberChanging(global::System.Decimal value);
+        private global::System.Int32 _DietaryFiber;
+        partial void OnDietaryFiberChanging(global::System.Int32 value);
         partial void OnDietaryFiberChanged();
     
         /// <summary>
@@ -9607,7 +9270,7 @@ namespace HealthyChef.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal Protein
+        public global::System.Int32 Protein
         {
             get
             {
@@ -9622,33 +9285,9 @@ namespace HealthyChef.DAL
                 OnProteinChanged();
             }
         }
-        private global::System.Decimal _Protein;
-        partial void OnProteinChanging(global::System.Decimal value);
+        private global::System.Int32 _Protein;
+        partial void OnProteinChanging(global::System.Int32 value);
         partial void OnProteinChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Sodium
-        {
-            get
-            {
-                return _Sodium;
-            }
-            set
-            {
-                OnSodiumChanging(value);
-                ReportPropertyChanging("Sodium");
-                _Sodium = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Sodium");
-                OnSodiumChanged();
-            }
-        }
-        private global::System.Decimal _Sodium;
-        partial void OnSodiumChanging(global::System.Decimal value);
-        partial void OnSodiumChanged();
 
         #endregion
 
@@ -16550,54 +16189,6 @@ namespace HealthyChef.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ImageUrl
-        {
-            get
-            {
-                return _ImageUrl;
-            }
-            set
-            {
-                OnImageUrlChanging(value);
-                ReportPropertyChanging("ImageUrl");
-                _ImageUrl = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageUrl");
-                OnImageUrlChanged();
-            }
-        }
-        private global::System.String _ImageUrl;
-        partial void OnImageUrlChanging(global::System.String value);
-        partial void OnImageUrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] ImageData
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_ImageData);
-            }
-            set
-            {
-                OnImageDataChanging(value);
-                ReportPropertyChanging("ImageData");
-                _ImageData = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageData");
-                OnImageDataChanged();
-            }
-        }
-        private global::System.Byte[] _ImageData;
-        partial void OnImageDataChanging(global::System.Byte[] value);
-        partial void OnImageDataChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 MenuItemID
@@ -22850,721 +22441,6 @@ namespace HealthyChef.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="HealthyChef.DAL", Name="hcc_ProductFeed_Result")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class hcc_ProductFeed_Result : ComplexObject
-    {
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MenuItemId
-        {
-            get
-            {
-                return _MenuItemId;
-            }
-            set
-            {
-                OnMenuItemIdChanging(value);
-                ReportPropertyChanging("MenuItemId");
-                _MenuItemId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MenuItemId");
-                OnMenuItemIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _MenuItemId;
-        partial void OnMenuItemIdChanging(Nullable<global::System.Int32> value);
-        partial void OnMenuItemIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ItemTitle
-        {
-            get
-            {
-                return _ItemTitle;
-            }
-            set
-            {
-                OnItemTitleChanging(value);
-                ReportPropertyChanging("ItemTitle");
-                _ItemTitle = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ItemTitle");
-                OnItemTitleChanged();
-            }
-        }
-        private global::System.String _ItemTitle;
-        partial void OnItemTitleChanging(global::System.String value);
-        partial void OnItemTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ItemDescription
-        {
-            get
-            {
-                return _ItemDescription;
-            }
-            set
-            {
-                OnItemDescriptionChanging(value);
-                ReportPropertyChanging("ItemDescription");
-                _ItemDescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ItemDescription");
-                OnItemDescriptionChanged();
-            }
-        }
-        private global::System.String _ItemDescription;
-        partial void OnItemDescriptionChanging(global::System.String value);
-        partial void OnItemDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ItemPrice
-        {
-            get
-            {
-                return _ItemPrice;
-            }
-            set
-            {
-                OnItemPriceChanging(value);
-                ReportPropertyChanging("ItemPrice");
-                _ItemPrice = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ItemPrice");
-                OnItemPriceChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ItemPrice;
-        partial void OnItemPriceChanging(Nullable<global::System.Int32> value);
-        partial void OnItemPriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ItemImageLink
-        {
-            get
-            {
-                return _ItemImageLink;
-            }
-            set
-            {
-                OnItemImageLinkChanging(value);
-                ReportPropertyChanging("ItemImageLink");
-                _ItemImageLink = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ItemImageLink");
-                OnItemImageLinkChanged();
-            }
-        }
-        private global::System.String _ItemImageLink;
-        partial void OnItemImageLinkChanging(global::System.String value);
-        partial void OnItemImageLinkChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MenuID
-        {
-            get
-            {
-                return _MenuID;
-            }
-            set
-            {
-                OnMenuIDChanging(value);
-                ReportPropertyChanging("MenuID");
-                _MenuID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MenuID");
-                OnMenuIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _MenuID;
-        partial void OnMenuIDChanging(Nullable<global::System.Int32> value);
-        partial void OnMenuIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DeliveryDate
-        {
-            get
-            {
-                return _DeliveryDate;
-            }
-            set
-            {
-                OnDeliveryDateChanging(value);
-                ReportPropertyChanging("DeliveryDate");
-                _DeliveryDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DeliveryDate");
-                OnDeliveryDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _DeliveryDate;
-        partial void OnDeliveryDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnDeliveryDateChanged();
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="HealthyChef.DAL", Name="hcc_ProductionDescription_Result")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class hcc_ProductionDescription_Result : ComplexObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new hcc_ProductionDescription_Result object.
-        /// </summary>
-        /// <param name="menuItemID">Initial value of the MenuItemID property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        /// <param name="useCostRegular">Initial value of the UseCostRegular property.</param>
-        /// <param name="costRegular">Initial value of the CostRegular property.</param>
-        /// <param name="useCostSmall">Initial value of the UseCostSmall property.</param>
-        /// <param name="costSmall">Initial value of the CostSmall property.</param>
-        /// <param name="useCostLarge">Initial value of the UseCostLarge property.</param>
-        /// <param name="costLarge">Initial value of the CostLarge property.</param>
-        /// <param name="useCostChild">Initial value of the UseCostChild property.</param>
-        /// <param name="costChild">Initial value of the CostChild property.</param>
-        /// <param name="mealTypeID">Initial value of the MealTypeID property.</param>
-        /// <param name="allergensList">Initial value of the AllergensList property.</param>
-        public static hcc_ProductionDescription_Result Createhcc_ProductionDescription_Result(global::System.Int32 menuItemID, global::System.String name, global::System.String description, global::System.Boolean useCostRegular, global::System.Decimal costRegular, global::System.Boolean useCostSmall, global::System.Decimal costSmall, global::System.Boolean useCostLarge, global::System.Decimal costLarge, global::System.Boolean useCostChild, global::System.Decimal costChild, global::System.Int32 mealTypeID, global::System.String allergensList)
-        {
-            hcc_ProductionDescription_Result hcc_ProductionDescription_Result = new hcc_ProductionDescription_Result();
-            hcc_ProductionDescription_Result.MenuItemID = menuItemID;
-            hcc_ProductionDescription_Result.Name = name;
-            hcc_ProductionDescription_Result.Description = description;
-            hcc_ProductionDescription_Result.UseCostRegular = useCostRegular;
-            hcc_ProductionDescription_Result.CostRegular = costRegular;
-            hcc_ProductionDescription_Result.UseCostSmall = useCostSmall;
-            hcc_ProductionDescription_Result.CostSmall = costSmall;
-            hcc_ProductionDescription_Result.UseCostLarge = useCostLarge;
-            hcc_ProductionDescription_Result.CostLarge = costLarge;
-            hcc_ProductionDescription_Result.UseCostChild = useCostChild;
-            hcc_ProductionDescription_Result.CostChild = costChild;
-            hcc_ProductionDescription_Result.MealTypeID = mealTypeID;
-            hcc_ProductionDescription_Result.AllergensList = allergensList;
-            return hcc_ProductionDescription_Result;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ImageUrl
-        {
-            get
-            {
-                return _ImageUrl;
-            }
-            set
-            {
-                OnImageUrlChanging(value);
-                ReportPropertyChanging("ImageUrl");
-                _ImageUrl = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageUrl");
-                OnImageUrlChanged();
-            }
-        }
-        private global::System.String _ImageUrl;
-        partial void OnImageUrlChanging(global::System.String value);
-        partial void OnImageUrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] ImageData
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_ImageData);
-            }
-            set
-            {
-                OnImageDataChanging(value);
-                ReportPropertyChanging("ImageData");
-                _ImageData = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ImageData");
-                OnImageDataChanged();
-            }
-        }
-        private global::System.Byte[] _ImageData;
-        partial void OnImageDataChanging(global::System.Byte[] value);
-        partial void OnImageDataChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 MenuItemID
-        {
-            get
-            {
-                return _MenuItemID;
-            }
-            set
-            {
-                OnMenuItemIDChanging(value);
-                ReportPropertyChanging("MenuItemID");
-                _MenuItemID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MenuItemID");
-                OnMenuItemIDChanged();
-            }
-        }
-        private global::System.Int32 _MenuItemID;
-        partial void OnMenuItemIDChanging(global::System.Int32 value);
-        partial void OnMenuItemIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean UseCostRegular
-        {
-            get
-            {
-                return _UseCostRegular;
-            }
-            set
-            {
-                OnUseCostRegularChanging(value);
-                ReportPropertyChanging("UseCostRegular");
-                _UseCostRegular = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UseCostRegular");
-                OnUseCostRegularChanged();
-            }
-        }
-        private global::System.Boolean _UseCostRegular;
-        partial void OnUseCostRegularChanging(global::System.Boolean value);
-        partial void OnUseCostRegularChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal CostRegular
-        {
-            get
-            {
-                return _CostRegular;
-            }
-            set
-            {
-                OnCostRegularChanging(value);
-                ReportPropertyChanging("CostRegular");
-                _CostRegular = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CostRegular");
-                OnCostRegularChanged();
-            }
-        }
-        private global::System.Decimal _CostRegular;
-        partial void OnCostRegularChanging(global::System.Decimal value);
-        partial void OnCostRegularChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean UseCostSmall
-        {
-            get
-            {
-                return _UseCostSmall;
-            }
-            set
-            {
-                OnUseCostSmallChanging(value);
-                ReportPropertyChanging("UseCostSmall");
-                _UseCostSmall = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UseCostSmall");
-                OnUseCostSmallChanged();
-            }
-        }
-        private global::System.Boolean _UseCostSmall;
-        partial void OnUseCostSmallChanging(global::System.Boolean value);
-        partial void OnUseCostSmallChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal CostSmall
-        {
-            get
-            {
-                return _CostSmall;
-            }
-            set
-            {
-                OnCostSmallChanging(value);
-                ReportPropertyChanging("CostSmall");
-                _CostSmall = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CostSmall");
-                OnCostSmallChanged();
-            }
-        }
-        private global::System.Decimal _CostSmall;
-        partial void OnCostSmallChanging(global::System.Decimal value);
-        partial void OnCostSmallChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean UseCostLarge
-        {
-            get
-            {
-                return _UseCostLarge;
-            }
-            set
-            {
-                OnUseCostLargeChanging(value);
-                ReportPropertyChanging("UseCostLarge");
-                _UseCostLarge = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UseCostLarge");
-                OnUseCostLargeChanged();
-            }
-        }
-        private global::System.Boolean _UseCostLarge;
-        partial void OnUseCostLargeChanging(global::System.Boolean value);
-        partial void OnUseCostLargeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal CostLarge
-        {
-            get
-            {
-                return _CostLarge;
-            }
-            set
-            {
-                OnCostLargeChanging(value);
-                ReportPropertyChanging("CostLarge");
-                _CostLarge = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CostLarge");
-                OnCostLargeChanged();
-            }
-        }
-        private global::System.Decimal _CostLarge;
-        partial void OnCostLargeChanging(global::System.Decimal value);
-        partial void OnCostLargeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean UseCostChild
-        {
-            get
-            {
-                return _UseCostChild;
-            }
-            set
-            {
-                OnUseCostChildChanging(value);
-                ReportPropertyChanging("UseCostChild");
-                _UseCostChild = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UseCostChild");
-                OnUseCostChildChanged();
-            }
-        }
-        private global::System.Boolean _UseCostChild;
-        partial void OnUseCostChildChanging(global::System.Boolean value);
-        partial void OnUseCostChildChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal CostChild
-        {
-            get
-            {
-                return _CostChild;
-            }
-            set
-            {
-                OnCostChildChanging(value);
-                ReportPropertyChanging("CostChild");
-                _CostChild = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CostChild");
-                OnCostChildChanged();
-            }
-        }
-        private global::System.Decimal _CostChild;
-        partial void OnCostChildChanging(global::System.Decimal value);
-        partial void OnCostChildChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> CanyonRanchRecipe
-        {
-            get
-            {
-                return _CanyonRanchRecipe;
-            }
-            set
-            {
-                OnCanyonRanchRecipeChanging(value);
-                ReportPropertyChanging("CanyonRanchRecipe");
-                _CanyonRanchRecipe = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CanyonRanchRecipe");
-                OnCanyonRanchRecipeChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _CanyonRanchRecipe;
-        partial void OnCanyonRanchRecipeChanging(Nullable<global::System.Boolean> value);
-        partial void OnCanyonRanchRecipeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> CanyonRanchApproved
-        {
-            get
-            {
-                return _CanyonRanchApproved;
-            }
-            set
-            {
-                OnCanyonRanchApprovedChanging(value);
-                ReportPropertyChanging("CanyonRanchApproved");
-                _CanyonRanchApproved = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CanyonRanchApproved");
-                OnCanyonRanchApprovedChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _CanyonRanchApproved;
-        partial void OnCanyonRanchApprovedChanging(Nullable<global::System.Boolean> value);
-        partial void OnCanyonRanchApprovedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> VegetarianOptionAvailable
-        {
-            get
-            {
-                return _VegetarianOptionAvailable;
-            }
-            set
-            {
-                OnVegetarianOptionAvailableChanging(value);
-                ReportPropertyChanging("VegetarianOptionAvailable");
-                _VegetarianOptionAvailable = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("VegetarianOptionAvailable");
-                OnVegetarianOptionAvailableChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _VegetarianOptionAvailable;
-        partial void OnVegetarianOptionAvailableChanging(Nullable<global::System.Boolean> value);
-        partial void OnVegetarianOptionAvailableChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> VeganOptionAvailable
-        {
-            get
-            {
-                return _VeganOptionAvailable;
-            }
-            set
-            {
-                OnVeganOptionAvailableChanging(value);
-                ReportPropertyChanging("VeganOptionAvailable");
-                _VeganOptionAvailable = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("VeganOptionAvailable");
-                OnVeganOptionAvailableChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _VeganOptionAvailable;
-        partial void OnVeganOptionAvailableChanging(Nullable<global::System.Boolean> value);
-        partial void OnVeganOptionAvailableChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> GlutenFreeOptionAvailable
-        {
-            get
-            {
-                return _GlutenFreeOptionAvailable;
-            }
-            set
-            {
-                OnGlutenFreeOptionAvailableChanging(value);
-                ReportPropertyChanging("GlutenFreeOptionAvailable");
-                _GlutenFreeOptionAvailable = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("GlutenFreeOptionAvailable");
-                OnGlutenFreeOptionAvailableChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _GlutenFreeOptionAvailable;
-        partial void OnGlutenFreeOptionAvailableChanging(Nullable<global::System.Boolean> value);
-        partial void OnGlutenFreeOptionAvailableChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 MealTypeID
-        {
-            get
-            {
-                return _MealTypeID;
-            }
-            set
-            {
-                OnMealTypeIDChanging(value);
-                ReportPropertyChanging("MealTypeID");
-                _MealTypeID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MealTypeID");
-                OnMealTypeIDChanged();
-            }
-        }
-        private global::System.Int32 _MealTypeID;
-        partial void OnMealTypeIDChanging(global::System.Int32 value);
-        partial void OnMealTypeIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String AllergensList
-        {
-            get
-            {
-                return _AllergensList;
-            }
-            set
-            {
-                OnAllergensListChanging(value);
-                ReportPropertyChanging("AllergensList");
-                _AllergensList = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("AllergensList");
-                OnAllergensListChanged();
-            }
-        }
-        private global::System.String _AllergensList;
-        partial void OnAllergensListChanging(global::System.String value);
-        partial void OnAllergensListChanged();
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmComplexTypeAttribute(NamespaceName="HealthyChef.DAL", Name="hcc_PurchasesSearch_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
@@ -25852,479 +24728,6 @@ namespace HealthyChef.DAL
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="HealthyChef.DAL", Name="hcc_SubProfileSearch_Result")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class hcc_SubProfileSearch_Result : ComplexObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new hcc_SubProfileSearch_Result object.
-        /// </summary>
-        /// <param name="userProfileID">Initial value of the UserProfileID property.</param>
-        /// <param name="membershipID">Initial value of the MembershipID property.</param>
-        /// <param name="isActive">Initial value of the IsActive property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="accountBalance">Initial value of the AccountBalance property.</param>
-        /// <param name="useParentShipping">Initial value of the UseParentShipping property.</param>
-        public static hcc_SubProfileSearch_Result Createhcc_SubProfileSearch_Result(global::System.Int32 userProfileID, global::System.Guid membershipID, global::System.Boolean isActive, global::System.DateTime createdDate, global::System.Guid createdBy, global::System.Decimal accountBalance, global::System.Boolean useParentShipping)
-        {
-            hcc_SubProfileSearch_Result hcc_SubProfileSearch_Result = new hcc_SubProfileSearch_Result();
-            hcc_SubProfileSearch_Result.UserProfileID = userProfileID;
-            hcc_SubProfileSearch_Result.MembershipID = membershipID;
-            hcc_SubProfileSearch_Result.IsActive = isActive;
-            hcc_SubProfileSearch_Result.CreatedDate = createdDate;
-            hcc_SubProfileSearch_Result.CreatedBy = createdBy;
-            hcc_SubProfileSearch_Result.AccountBalance = accountBalance;
-            hcc_SubProfileSearch_Result.UseParentShipping = useParentShipping;
-            return hcc_SubProfileSearch_Result;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserProfileID
-        {
-            get
-            {
-                return _UserProfileID;
-            }
-            set
-            {
-                OnUserProfileIDChanging(value);
-                ReportPropertyChanging("UserProfileID");
-                _UserProfileID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserProfileID");
-                OnUserProfileIDChanged();
-            }
-        }
-        private global::System.Int32 _UserProfileID;
-        partial void OnUserProfileIDChanging(global::System.Int32 value);
-        partial void OnUserProfileIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ParentProfileID
-        {
-            get
-            {
-                return _ParentProfileID;
-            }
-            set
-            {
-                OnParentProfileIDChanging(value);
-                ReportPropertyChanging("ParentProfileID");
-                _ParentProfileID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ParentProfileID");
-                OnParentProfileIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ParentProfileID;
-        partial void OnParentProfileIDChanging(Nullable<global::System.Int32> value);
-        partial void OnParentProfileIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid MembershipID
-        {
-            get
-            {
-                return _MembershipID;
-            }
-            set
-            {
-                OnMembershipIDChanging(value);
-                ReportPropertyChanging("MembershipID");
-                _MembershipID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MembershipID");
-                OnMembershipIDChanged();
-            }
-        }
-        private global::System.Guid _MembershipID;
-        partial void OnMembershipIDChanging(global::System.Guid value);
-        partial void OnMembershipIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsActive
-        {
-            get
-            {
-                return _IsActive;
-            }
-            set
-            {
-                OnIsActiveChanging(value);
-                ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActive");
-                OnIsActiveChanged();
-            }
-        }
-        private global::System.Boolean _IsActive;
-        partial void OnIsActiveChanging(global::System.Boolean value);
-        partial void OnIsActiveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ProfileName
-        {
-            get
-            {
-                return _ProfileName;
-            }
-            set
-            {
-                OnProfileNameChanging(value);
-                ReportPropertyChanging("ProfileName");
-                _ProfileName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ProfileName");
-                OnProfileNameChanged();
-            }
-        }
-        private global::System.String _ProfileName;
-        partial void OnProfileNameChanging(global::System.String value);
-        partial void OnProfileNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FirstName
-        {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
-            }
-        }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LastName
-        {
-            get
-            {
-                return _LastName;
-            }
-            set
-            {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
-            }
-        }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> BillingAddressID
-        {
-            get
-            {
-                return _BillingAddressID;
-            }
-            set
-            {
-                OnBillingAddressIDChanging(value);
-                ReportPropertyChanging("BillingAddressID");
-                _BillingAddressID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BillingAddressID");
-                OnBillingAddressIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _BillingAddressID;
-        partial void OnBillingAddressIDChanging(Nullable<global::System.Int32> value);
-        partial void OnBillingAddressIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ShippingAddressID
-        {
-            get
-            {
-                return _ShippingAddressID;
-            }
-            set
-            {
-                OnShippingAddressIDChanging(value);
-                ReportPropertyChanging("ShippingAddressID");
-                _ShippingAddressID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ShippingAddressID");
-                OnShippingAddressIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ShippingAddressID;
-        partial void OnShippingAddressIDChanging(Nullable<global::System.Int32> value);
-        partial void OnShippingAddressIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
-        {
-            get
-            {
-                return _CreatedDate;
-            }
-            set
-            {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
-            }
-        }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid CreatedBy
-        {
-            get
-            {
-                return _CreatedBy;
-            }
-            set
-            {
-                OnCreatedByChanging(value);
-                ReportPropertyChanging("CreatedBy");
-                _CreatedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedBy");
-                OnCreatedByChanged();
-            }
-        }
-        private global::System.Guid _CreatedBy;
-        partial void OnCreatedByChanging(global::System.Guid value);
-        partial void OnCreatedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> ModifiedDate
-        {
-            get
-            {
-                return _ModifiedDate;
-            }
-            set
-            {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _ModifiedDate;
-        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnModifiedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> ModifiedBy
-        {
-            get
-            {
-                return _ModifiedBy;
-            }
-            set
-            {
-                OnModifiedByChanging(value);
-                ReportPropertyChanging("ModifiedBy");
-                _ModifiedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedBy");
-                OnModifiedByChanged();
-            }
-        }
-        private Nullable<global::System.Guid> _ModifiedBy;
-        partial void OnModifiedByChanging(Nullable<global::System.Guid> value);
-        partial void OnModifiedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String AuthNetProfileID
-        {
-            get
-            {
-                return _AuthNetProfileID;
-            }
-            set
-            {
-                OnAuthNetProfileIDChanging(value);
-                ReportPropertyChanging("AuthNetProfileID");
-                _AuthNetProfileID = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AuthNetProfileID");
-                OnAuthNetProfileIDChanged();
-            }
-        }
-        private global::System.String _AuthNetProfileID;
-        partial void OnAuthNetProfileIDChanging(global::System.String value);
-        partial void OnAuthNetProfileIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal AccountBalance
-        {
-            get
-            {
-                return _AccountBalance;
-            }
-            set
-            {
-                OnAccountBalanceChanging(value);
-                ReportPropertyChanging("AccountBalance");
-                _AccountBalance = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AccountBalance");
-                OnAccountBalanceChanged();
-            }
-        }
-        private global::System.Decimal _AccountBalance;
-        partial void OnAccountBalanceChanging(global::System.Decimal value);
-        partial void OnAccountBalanceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> DefaultCouponId
-        {
-            get
-            {
-                return _DefaultCouponId;
-            }
-            set
-            {
-                OnDefaultCouponIdChanging(value);
-                ReportPropertyChanging("DefaultCouponId");
-                _DefaultCouponId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DefaultCouponId");
-                OnDefaultCouponIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _DefaultCouponId;
-        partial void OnDefaultCouponIdChanging(Nullable<global::System.Int32> value);
-        partial void OnDefaultCouponIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean UseParentShipping
-        {
-            get
-            {
-                return _UseParentShipping;
-            }
-            set
-            {
-                OnUseParentShippingChanging(value);
-                ReportPropertyChanging("UseParentShipping");
-                _UseParentShipping = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UseParentShipping");
-                OnUseParentShippingChanged();
-            }
-        }
-        private global::System.Boolean _UseParentShipping;
-        partial void OnUseParentShippingChanging(global::System.Boolean value);
-        partial void OnUseParentShippingChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> CanyonRanchCustomer
-        {
-            get
-            {
-                return _CanyonRanchCustomer;
-            }
-            set
-            {
-                OnCanyonRanchCustomerChanging(value);
-                ReportPropertyChanging("CanyonRanchCustomer");
-                _CanyonRanchCustomer = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CanyonRanchCustomer");
-                OnCanyonRanchCustomerChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _CanyonRanchCustomer;
-        partial void OnCanyonRanchCustomerChanging(Nullable<global::System.Boolean> value);
-        partial void OnCanyonRanchCustomerChanged();
 
         #endregion
 

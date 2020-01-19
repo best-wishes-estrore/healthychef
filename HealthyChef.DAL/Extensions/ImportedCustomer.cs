@@ -130,7 +130,7 @@ namespace HealthyChef.DAL
                                             };
 
                                             //Save all hccProfile information
-                                            using (var cont = new healthychefEntities())
+                                            using (var cont = new healthychefEntitiesAPI())
                                             {
                                                 System.Data.EntityKey key = cont.CreateEntityKey("hccUserProfiles", newProfile);
                                                 object oldObj;
@@ -174,7 +174,7 @@ namespace HealthyChef.DAL
                                                 NoteTypeID = (int)Enums.UserProfileNoteTypes.ShippingNote
                                             };
 
-                                            using (var cont = new healthychefEntities())
+                                            using (var cont = new healthychefEntitiesAPI())
                                             {
                                                 EntityKey key = cont.CreateEntityKey("hccUserProfileNotes", shipNote);
                                                 object originalItem = null;
@@ -204,7 +204,7 @@ namespace HealthyChef.DAL
                                                 NoteTypeID = (int)Enums.UserProfileNoteTypes.GeneralNote
                                             };
 
-                                            using (var cont = new healthychefEntities())
+                                            using (var cont = new healthychefEntitiesAPI())
                                             {
                                                 EntityKey key = cont.CreateEntityKey("hccUserProfileNotes", hearNote);
                                                 object originalItem = null;
@@ -236,7 +236,7 @@ namespace HealthyChef.DAL
                                                 {
                                                     newProfile.ShippingAddressID = null;
                                                     //Save all hccProfile information
-                                                    using (var cont = new healthychefEntities())
+                                                    using (var cont = new healthychefEntitiesAPI())
                                                     {
                                                         System.Data.EntityKey key1 = cont.CreateEntityKey("hccUserProfiles", newProfile);
                                                         object oldObj1;
@@ -252,7 +252,7 @@ namespace HealthyChef.DAL
                                                         cont.SaveChanges();
                                                     }
                                                     //cont.Refresh(System.Data.Objects.RefreshMode.StoreWins, newProfile);
-                                                    using (var cont = new healthychefEntities())
+                                                    using (var cont = new healthychefEntitiesAPI())
                                                     {
                                                         EntityKey key = cont.CreateEntityKey("hccAddresses", shipAddr);
                                                         object originalItem = null;
@@ -345,7 +345,7 @@ namespace HealthyChef.DAL
                                             {
                                                 try
                                                 {
-                                                    using (var cont = new healthychefEntities())
+                                                    using (var cont = new healthychefEntitiesAPI())
                                                     {
                                                         EntityKey key = cont.CreateEntityKey("hccAddresses", shipAddr);
                                                         object originalItem = null;
@@ -374,7 +374,7 @@ namespace HealthyChef.DAL
                                             else
                                                 newProfile.ShippingAddressID = null;
 
-                                            using (var cont = new healthychefEntities())
+                                            using (var cont = new healthychefEntitiesAPI())
                                             {
                                                 System.Data.EntityKey upkey = cont.CreateEntityKey("hccUserProfiles", newProfile);
                                                 object oldObj;
@@ -425,7 +425,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.ImportedCustomers.OrderBy(a => a.Email).ToList();
                 }

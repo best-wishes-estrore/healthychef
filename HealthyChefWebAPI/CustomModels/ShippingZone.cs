@@ -16,6 +16,8 @@ namespace HealthyChefWebAPI.CustomModels
         public bool IsDefaultShippingZone { get; set; }
         public bool IsPickupShippingZone { get; set; }
         public string TypeName { get; set; }
+
+        public int OrderMinimum { get; set; }
     }
 
 

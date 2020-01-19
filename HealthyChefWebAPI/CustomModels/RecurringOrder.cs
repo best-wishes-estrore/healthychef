@@ -18,6 +18,20 @@ namespace HealthyChefWebAPI.CustomModels
         public string maxdeliverydate {get;set;}
         public string maxcutoffdate { get; set; }
 		public int quantity { get; set; }
+        public bool Recurringready { get; set; }
+        public DateTime MinCutOffDate { get; set; }
+        public DateTime? MaxCutOffDate
+        {
+            get
+            {
+                DateTime? _maxCutOffDate = null;
+                if(!string.IsNullOrEmpty(maxcutoffdate))
+                {
+                    _maxCutOffDate = Convert.ToDateTime(this.maxcutoffdate);
+                }
+                return _maxCutOffDate;
+            }
+        }
 
     }
 }

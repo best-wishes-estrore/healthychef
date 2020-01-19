@@ -50,5 +50,24 @@ namespace HealthyChefWebAPI.CustomModels
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsRetired { get; set; }
+
+        public IngredientItem()
+        {
+
+        }
+
+        public IngredientItem(Ingredients _ingredientToValidate)
+        {
+            if (string.IsNullOrEmpty(_ingredientToValidate.Name))
+            {
+                this.AddValidationError("Ingredient Name is Required");
+                this.isValid = false;
+            }
+            if (string.IsNullOrEmpty(_ingredientToValidate.Description))
+            {
+                this.AddValidationError("Ingredient Description is Required");
+                this.isValid = false;
+            }
+        }
     }
 }

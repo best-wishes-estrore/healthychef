@@ -18,16 +18,8 @@ namespace HealthyChef.DAL.Classes
         public DateTime? LastPurchaseDate { get; set; }
         public decimal LastPurchaseAmount { get; set; }
         public int LastPurchaseId { get; set; }
-        public int TotalOrders { get; set; }
         public string MktgOptIn { get; set; }
         public bool IsActive { get; set; }
-        public decimal TotalAmount { get; set; }
-        public string AccountPreferences { get; set; }
-        public string AccountAllergens { get; set; }
-        public string ProductType { get; set; }
-        public string AccountCustomPreferences { get; set; }
-        public int StatusId;
-        
 
         #endregion
     }

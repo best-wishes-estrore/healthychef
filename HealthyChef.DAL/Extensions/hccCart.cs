@@ -30,7 +30,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccCarts", this);
                     object oldObj;
@@ -63,7 +63,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     EntityKey key = cont.CreateEntityKey("hccCarts", this);
                     object originalItem = null;
@@ -171,7 +171,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCarts
                         .SingleOrDefault(c => c.CartID == cartId);
@@ -187,7 +187,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCarts
                         .Where(c => c.AspNetUserID == aspNetUserId)
@@ -204,7 +204,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCarts
                         .SingleOrDefault(c => c.PurchaseNumber == purchaseNumber);
@@ -403,7 +403,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var orders = cont.hccCarts
                            .Where(c => c.AspNetUserID == aspNetUserId
@@ -423,7 +423,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var orders = cont.hccCarts
                            .Where(c => c.AnonymousID == anonId
@@ -446,7 +446,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var orders = cont.hccCarts
                            .Where(c => c.StatusID == (int)cartStatus)
@@ -465,7 +465,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var carts = cont.hcc_SalesReportCarts(startDate, endDate).ToList();
                     return carts;
@@ -481,7 +481,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var orders = cont.hccCarts
                            .Where(c => c.AspNetUserID == aspNetUserId
@@ -504,7 +504,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var orders = cont.hccCarts
                             .Where(c => c.CouponID.HasValue
@@ -538,7 +538,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     List<hccCart> retVals = new List<hccCart>();
 
@@ -552,65 +552,7 @@ namespace HealthyChef.DAL
             }
             return null;
         }
-        public static decimal CalculateDiscountForSubTotalDiscount(hccCart cart,decimal totalNA)
-        {
-            decimal adjItemPrice = 0.00m;
-            decimal discountRation = 0.00m;
-            if (cart.CouponID.HasValue)
-            {
-                hccCoupon curCoupon = hccCoupon.GetById(cart.CouponID.Value); if (curCoupon != null)
-                {
-                    // check coupon usage against userId
 
-                    Enums.CouponUsageType usageType = curCoupon.UsageType;
-                    bool canUseCoupon = true;
-
-                    // check CouponsUsed
-                    if (usageType == Enums.CouponUsageType.FirstPurchaseOnly || usageType == Enums.CouponUsageType.OneTimeUse)
-                    {
-                        List<hccCart> couponCarts = hccCoupon.HasBeenUsedByUser(curCoupon.CouponID, cart.AspNetUserID.Value);
-
-                        if (couponCarts.Count > 0)
-                        {   // previous carts not this cart
-                            if (couponCarts.Count > 1
-                                || (couponCarts.Count == 1 && couponCarts[0].CartID != cart.CartID))
-                                canUseCoupon = false;
-                        }
-
-                        if (usageType == Enums.CouponUsageType.FirstPurchaseOnly)
-                        {   // previous paid/completed carts
-                            if (hccCart.GetBy(cart.AspNetUserID.Value).Where(a => a.Status == Enums.CartStatus.Paid || a.Status == Enums.CartStatus.Fulfilled).Count() > 0)
-                                canUseCoupon = false;
-                        }
-                    }
-
-                    if (canUseCoupon)
-                    {
-                        Enums.CouponDiscountType couponType = curCoupon.DiscountType;
-
-                        switch (couponType)
-                        {
-                            case Enums.CouponDiscountType.Monetary:
-                                discountRation = curCoupon.Amount;
-                                break;
-                            case Enums.CouponDiscountType.Percentage:
-
-                                //discountRation = Helpers.TruncateDecimal((cartItem.ItemPrice * (curCoupon.Amount / 100)), 2);
-                                discountRation = Math.Round((cart.SubTotalAmount* (curCoupon.Amount / 100)), 2);
-                                break;
-                            default: break;
-                        }
-                    }
-                    else
-                    {
-                        cart.CouponID = null;
-                        //lblFeedbackCoupon.Text = "The coupon for this cart was invalid and has been removed.";
-                    }
-                }
-              
-            }
-            return discountRation;
-        }
         public static void CalculateDiscountForItemByCart(hccCart cart, hccCartItem cartItem, decimal totalNA)
         {
             decimal adjItemPrice = 0.00m;
@@ -658,14 +600,13 @@ namespace HealthyChef.DAL
                                 itemPctOfTotalNA = cartItem.ItemPrice / totalNA;
 
                                 discountRation = curCoupon.Amount * itemPctOfTotalNA;
-                                adjItemPrice = Math.Round(((cartItem.ItemPrice * cartItem.Quantity) - discountRation), 2);
+                                adjItemPrice = Helpers.TruncateDecimal(cartItem.ItemPrice - discountRation, 2);
 
                                 break;
                             case Enums.CouponDiscountType.Percentage:
 
-                                //discountRation = Helpers.TruncateDecimal((cartItem.ItemPrice * (curCoupon.Amount / 100)), 2);
-                                discountRation = Math.Round((cartItem.ItemPrice*cartItem.Quantity * (curCoupon.Amount / 100)), 2);
-                                adjItemPrice = Math.Round(((cartItem.ItemPrice*cartItem.Quantity) - discountRation),2);
+                                discountRation = Helpers.TruncateDecimal((cartItem.ItemPrice * (curCoupon.Amount / 100)), 2);
+                                adjItemPrice = cartItem.ItemPrice - discountRation;
                                 break;
                             default: break;
                         }
@@ -676,10 +617,10 @@ namespace HealthyChef.DAL
                         //lblFeedbackCoupon.Text = "The coupon for this cart was invalid and has been removed.";
                     }
                 }
-
-                cartItem.DiscountAdjPrice = adjItemPrice;
-                cartItem.DiscountPerEach = discountRation;
             }
+
+            cartItem.DiscountAdjPrice = adjItemPrice;
+            cartItem.DiscountPerEach = discountRation;
 
             if (cartItem.DiscountAdjPrice == 0.00m)
                 cartItem.DiscountAdjPrice = cartItem.ItemPrice; // reflect item price here to ease calculations later of dealing with  DiscountAdjPrice == 0.00m ?? cartItem.ItemPrice
@@ -718,19 +659,15 @@ namespace HealthyChef.DAL
                 {
                     profCart.CartItemsWithMealSides.ForEach(delegate (hccCartItem cartItem)
                     {
-                        if (cartItem.ItemPrice.ToString("f2") != "0.00")
-                        {
-                            CalculateDiscountForItemByCart(this, cartItem, totalNA);//,itemName1
-                        }
+                        CalculateDiscountForItemByCart(this, cartItem, totalNA);//,itemName1
                     });
 
                     this.SubTotalAmount += profCart.SubTotalNA;
                     this.TaxAmount += profCart.SubTax;
                     this.ShippingAmount += profCart.ShippingFee;
                     //this.ShippingAmount += profCart.SubShipping;
-                    //this.SubTotalDiscount += profCart.SubDiscountAmount;
-                    this.SubTotalDiscount = CalculateDiscountForSubTotalDiscount(this, totalNA);
-                    //this.TaxableAmount += profCart.SubTaxableAmount;
+                    this.SubTotalDiscount += profCart.SubDiscountAmount;
+                    this.TaxableAmount += profCart.SubTaxableAmount;
                     this.DiscretionaryTaxAmount += profCart.SubDiscretionaryTaxAmount;
                 });
             }
@@ -740,7 +677,7 @@ namespace HealthyChef.DAL
                     && ex.InnerException is SqlException
                     && ex.InnerException.Message.Contains("Arithmetic overflow"))
                 {
-                    string message= ex.InnerException.Message;
+                    throw ex.InnerException;
                 }
                 else
                 {
@@ -895,27 +832,26 @@ namespace HealthyChef.DAL
                 string sOut = string.Empty;
                 StringBuilder sb = new StringBuilder();
 
-                sb.Append("<table width='100%' cellpadding='3' cellspacing='0'>");
-                sb.Append("<tr colspan='5' style='border:1px solid #cccccc; background:#ddd;width:100%;color: #39aa35'>");
-                sb.Append("<th style='text-align:left;width:15%;'>Order: " + this.PurchaseNumber + "</th>");
-                sb.Append("<th style='text-align:left;width:55%'>Item</th>");
-                sb.Append("<th style='text-align:center;width:10%;'>Qty.</th>");
-                sb.Append("<th style='text-align:right;width:10%;'>Unit Price</th>");
-                sb.Append("<th style='text-align:right;width:10%;'>Sub-Total</th>");
+                sb.Append("<table class='table table-hover table-bordered'>");
+                sb.Append("<tr>");
+                sb.Append("<th>Order #</th>");
+                sb.Append("<th>Item</th>");
+                sb.Append("<th>Quantity</th>");
+                sb.Append("<th>Unit Price</th>");
+                sb.Append("<th>Sub-Total</th>");
                 //sb.Append("<th style='text-align:right;width:100px;'>Sub-TotalMeals</th>");
-                //sb.Append("<th style='text-align:right;width:1%;'></th>");
                 sb.Append("</tr><td>");
 
-                string profileRow = "<tr style='color: #39aa35;border: 1px solid #cccccc; background-color: #dddddd;font-size:18px;'><td style='padding:5px;'><span style='font-size: 16px;'>Delivery:&nbsp;{1}</span></td><td style='padding:5px'>Profile:&nbsp;{0}</td><td style='padding:5px'></td><td style='padding:5px'></td><td style='padding:5px'></td></tr>";
-                string itemRow = "<tr style='background-color:#ffffff;'><td>{0}</td><td>{1}</td><td style='text-align:center;'>{2}</td><td style='text-align:center;'>{3}</td><td style='text-align:right;'>{4}</td></tr>";//< td style = 'text-align:right;' >{ 5}</ td >
-                string itemRowAlt = "<tr style='background-color:#f5f5f5;'><td>{0}</td><td>{1}</td><td style='text-align:center;'>{2}</td><td style='text-align:center;'>{3}</td><td style='text-align:right;'>{4}</td></tr>";//<td style='text-align:right;'>{5}</td>
-                string subTotalRow = "<tr><td colspan='5' style='text-align:right; padding: 5px; font-weight: bold;'>Profile Sub-Total:&nbsp;{0}</td></tr>";
+                string profileRow = "<tr><td>Profile:&nbsp;{0} : {1}</td></tr>";
+                string itemRow = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>";
+                string itemRowAlt = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>";
+                string subTotalRow = "<tr><td colspan='6'>Profile Sub-Total:&nbsp;{0}</td></tr>";
                 // subTotalMeal = "<tr><td colspan='6' style='text-align:right; padding: 2px; font-weight: bold;'>Profile Sub-TotalMeal:&nbsp;{0}</td></tr>";
                 string formatToUse = itemRow;
 
                 List<hccCartItem> cartItems = hccCartItem.GetBy(this.CartID);
                 List<ProfileCart> CurrentProfileCarts = new List<ProfileCart>();
-                
+
                 foreach (hccCartItem cartItem in cartItems)
                 {
                     ProfileCart profCart;
@@ -962,36 +898,12 @@ namespace HealthyChef.DAL
                         if (ci.UserProfile != null && !profiles.Contains(ci.UserProfile.ProfileName))
                             profiles.Add(ci.UserProfile.ProfileName);
                     });
-                    //MembershipUser user = Helpers.LoggedUser;
-                    //List<hccUserProfile> activeProfiles = new List<hccUserProfile>();
-                    //if (user != null)
-                    //{
-                    //    var CartUserASPNetId = (Guid)user.ProviderUserKey;
-                    //    activeProfiles = (from profile in hccUserProfile.GetBy(CartUserASPNetId) where profile.IsActive select profile).ToList();
-                    //}
-                    //else
-                    //{
-                    //    activeProfiles = new List<hccUserProfile>();
-                    //}
-                    //string subprofiledropdown = "<select id="+ profCart.CartItems[0].OrderNumber+ ">";
-                    //foreach (var activeprofile in activeProfiles)
-                    //{
-                    //    if (profiles.Aggregate((c, d) => c + ", " + d) == activeprofile.ProfileName)
-                    //    {
-                    //        subprofiledropdown += "<option value="+activeprofile.UserProfileID+" selected>" + activeprofile.ProfileName + "</option>";
-                    //    }
-                    //    else
-                    //    {
-                    //        subprofiledropdown += "<option value=" + activeprofile.UserProfileID + ">" + activeprofile.ProfileName + "</option>";
-                    //    }
-                    //}
-                    //subprofiledropdown += "</select>";
+
                     if (profCart.CartItems[0] != null && profCart.CartItems[0].UserProfile != null)
-                        sb.AppendFormat(profileRow, profiles.Aggregate((c, d) => c + ", " + d), profCart.CartItems[0].DeliveryDate.ToString("MM/dd/yy"), "");//, profCart.CartItems[0].NumberOfMeals
-                        //sb.AppendFormat(profileRow, subprofiledropdown, profCart.CartItems[0].DeliveryDate.ToString("MM/dd/yy"), "");//, profCart.CartItems[0].NumberOfMeals
+                        sb.AppendFormat(profileRow, profiles.Aggregate((c, d) => c + ", " + d), profCart.CartItems[0].DeliveryDate.ToShortDateString(),"");//, profCart.CartItems[0].NumberOfMeals
 
                     bool isEven = true;
-                    
+
                     profCart.CartItems.ForEach(delegate (hccCartItem cartItem)
                     {
                         if (isEven)
@@ -1003,54 +915,23 @@ namespace HealthyChef.DAL
                             formatToUse = itemRowAlt;
                         }
 
-                        string cartitemname = "";
-                        string cartitemnamewithsize = "";
                         string fullName = cartItem.ItemName;
-                        //cartitemfullname = fullName.Replace(cartItem.DeliveryDate.ToString("MM/dd/yyyy"),"");
-                        if (fullName.Contains(" Regular ") || fullName.Contains(" Regular Size"))
-                        {
-                            //var namewithsize = fullName.Replace("- Regular ", "");
-                            //namewithsize = namewithsize.Replace(" Size", "");
-                            //cartitemnamewithsize = namewithsize.Replace(cartItem.DeliveryDate.ToString("MM/d/yyyy"), "Regular Size");
-                            cartitemnamewithsize = fullName.Replace("Size", "");
-                        }
-                        else
-                        if (fullName.Contains(" Large ") || fullName.Contains(" Large Size"))
-                        {
-                            if (cartitemnamewithsize != "")
-                            {
-                                //var namewithsize = cartitemnamewithsize.Replace("- Large ", "");
-                                //namewithsize = namewithsize.Replace(" Size", "");
-                                //cartitemname = namewithsize.Replace(cartItem.DeliveryDate.ToString("MM/dd/yyyy"), "Large Size");
-                                cartitemname = cartitemname.Replace("Size", "");
-                            }
-                            else
-                            {
-                                //var namewithsize = fullName.Replace("- Large ", "");
-                                //cartitemname = namewithsize.Replace(cartItem.DeliveryDate.ToString("MM/d/yyyy"), "Large Size");
-                                cartitemname = fullName.Replace("Size", "");
-                            }
-
-                        }
-                        else
-                        {
-                            cartitemname = fullName.Replace("- " + cartItem.DeliveryDate.ToString("MM/d/yyyy"), "");
-                        }
                         if (cartItem.IsCancelled)
                             fullName += " - <b>Cancelled<b>";
-                        sb.AppendFormat(formatToUse, cartItem.OrderNumber, cartitemname == "" ? cartitemnamewithsize : cartitemname, cartItem.Quantity.ToString(),
-                            cartItem.mockSingleItemPrice.ToString("c"), cartItem.mockTotalPrice.ToString("c"), "");// cartItem.ItemSubMealTotal.ToString("c")
+
+                        sb.AppendFormat(formatToUse, cartItem.OrderNumber, fullName, cartItem.Quantity.ToString(),
+                            cartItem.TotalItemPrice.ToString("c"), cartItem.ItemSubTotalNA.ToString("c"),"");// cartItem.ItemSubMealTotal.ToString("c")
                         isEven = !isEven;
                     });
 
-                    sb.AppendFormat(subTotalRow, profCart.MockProfileSubTotal.ToString("c"));
+                    sb.AppendFormat(subTotalRow, profCart.SubTotalNA.ToString("c"));
                     //sb.AppendFormat(subTotalMeal, profCart.SubMealsCount.ToString("c"));
-                    sb.Append("<tr><td colspan='5'><hr /></td></tr>");
+                    sb.Append("<tr><td colspan='6'><hr /></td></tr>");
                 });
 
                 StringBuilder sb2 = new StringBuilder();
                 bool useSB2 = false;
-                sb2.Append("<tr><td rowspan='10'><table class='align_auto' width='200px'>");
+                sb2.Append("<tr><td rowspan='10'><table width='200px'>");
 
                 if (this.CouponID.HasValue)
                 {
@@ -1084,58 +965,54 @@ namespace HealthyChef.DAL
                 if (useSB2)
                 {
                     sb.Append(sb2.ToString());
-                    sb.Append("<table class='summary_heading' align='right'><tbody><tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Original Price:</td><td align='right'>" + (this.SubTotalAmount).ToString("c") + "</td></tr>"); //<td>&nbsp;</td>
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Discount:</td><td align='right' style='color:red;'>- " + this.SubTotalDiscount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Subtotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Tax:</td><td align='right'>" + this.TaxAmount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Shipping:</td><td align='right'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td>Total:</td><td align='right'>" + this.TotalAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<td>&nbsp;</td><td colspan='3' style='text-align:right;'><b>Subtotal:</td><td style='text-align:right;'>" + this.SubTotalAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Tax:</td><td style='text-align:right;'>" + this.TaxAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Shipping:</td><td style='text-align:right;'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Discount:</td><td style='text-align:right;'>(" + this.SubTotalDiscount.ToString("c") + ")</td></tr>");
+                    sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Total:</td><td style='text-align:right;border-top:1px solid black;'>" + this.TotalAmount.ToString("c") + "</td></tr>");
 
                     if (cartLedger != null)
                     {
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Account Balance:</td><td align='right'>" + (cartLedger.PostBalance + cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Credit From Balance:</td><td align='right'>" + (cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Account Balance:</td><td style='text-align:right;'>" + (cartLedger.PostBalance + cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Credit From Balance:</td><td style='text-align:right;border-top:1px solid black;'>" + (cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
                     }
                     else
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Account Balance:</td><td align='right'>" + (this.OwnerProfile != null ? this.OwnerProfile.AccountBalance : 0.00m).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Account Balance:</td><td style='text-align:right;'>" + (this.OwnerProfile != null ? this.OwnerProfile.AccountBalance : 0.00m).ToString("c") + "</td></tr>");
 
-                    sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Payment Amount:</td><td align='right'>" + this.PaymentDue.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;'>Payment Amount:</td><td style='text-align:right;'>" + this.PaymentDue.ToString("c") + "</td></tr>");
 
                     if (cartLedger != null)
                     {
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Remaining Account Balance:</td><td align='right'>" + (cartLedger.PostBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Remaining Account Balance:</td><td style='text-align:right;border-top:1px solid black;'>" + (cartLedger.PostBalance).ToString("c") + "</td></tr>");
                     }
                     else
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td>Remaining Account Balance:</td><td align='right'>" + (this.OwnerProfile != null ? (this.OwnerProfile.AccountBalance - this.CreditAppliedToBalance) : 0.00m).ToString("c") + "</td></tr></tbody></table>");
+                        sb.Append("<tr><td>&nbsp;</td><td colspan='3' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Remaining Account Balance:</td><td style='text-align:right;border-top:1px solid black;'>" + (this.OwnerProfile != null ? (this.OwnerProfile.AccountBalance - this.CreditAppliedToBalance) : 0.00m).ToString("c") + "</td></tr>");
 
                 }
                 else
                 {
-                    //sb.Append("<table class='summary_heading'><tbody>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Original Price:</td><td align='right'>" + (this.SubTotalAmount).ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Discount:</td><td align='right' style='color:red;'>- " + this.SubTotalDiscount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Subtotal:</td><td align='right'>" + ((this.SubTotalAmount) - (this.SubTotalDiscount)).ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Tax:</td><td align='right'>" + this.TaxAmount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Shipping:</td><td align='right'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
-                    sb.Append("<tr class='summary_data'><td colspan='2'>&nbsp;</td><td colspan='2'>Total:</td><td align='right'>" + this.TotalAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right;'><b>Subtotal:</td><td style='text-align:right;'>" + this.SubTotalAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Tax:</td><td style='text-align:right;'>" + this.TaxAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Shipping:</td><td style='text-align:right;'>" + this.ShippingAmount.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Discount:</td><td style='text-align:right;'>(" + this.SubTotalDiscount.ToString("c") + ")</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Total:</td><td style='text-align:right;border-top:1px solid black;'>" + this.TotalAmount.ToString("c") + "</td></tr>");
 
                     if (cartLedger != null)
                     {
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Credit From Balance:</td><td align='right'>" + (cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Account Balance:</td><td align='right'>" + (cartLedger.PostBalance + cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Credit From Balance:</td><td style='text-align:right;'>" + (cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Account Balance:</td><td style='text-align:right;'>" + (cartLedger.PostBalance + cartLedger.CreditFromBalance).ToString("c") + "</td></tr>");
                     }
                     else
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Account Balance:</td><td align='right'>"
+                        sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Account Balance:</td><td style='text-align:right;'>"
                             + (this.OwnerProfile == null ? 0.00m : this.OwnerProfile.AccountBalance).ToString("c") + "</td></tr>");
 
-                    sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Payment Amount:</td><td align='right'>" + this.PaymentDue.ToString("c") + "</td></tr>");
+                    sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;'>Payment Amount:</td><td style='text-align:right;'>" + this.PaymentDue.ToString("c") + "</td></tr>");
 
                     if (cartLedger != null)
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Remaining Account Balance:</td><td align='right'>" + (cartLedger.PostBalance).ToString("c") + "</td></tr>");
+                        sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Remaining Account Balance:</td><td style='text-align:right;border-top:1px solid black;'>" + (cartLedger.PostBalance).ToString("c") + "</td></tr>");
                     else
-                        sb.Append("<tr class='summary_data bgcolor'><td colspan='2'>&nbsp;</td><td colspan='2'>Remaining Account Balance:</td><td align='right'>"
+                        sb.Append("<tr><td colspan='2'>&nbsp;</td><td colspan='2' style='text-align:right; font-weight: bold;border-top:1px solid black;'>Remaining Account Balance:</td><td style='text-align:right;border-top:1px solid black;'>"
                             + (this.OwnerProfile == null ? 0.00m : (this.OwnerProfile.AccountBalance - this.CreditAppliedToBalance)).ToString("c") + "</td></tr>");
-                    //sb.Append("</body></table>");
                 }
 
                 sb.Append("</table>");

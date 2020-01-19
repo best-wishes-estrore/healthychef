@@ -104,5 +104,42 @@ namespace HealthyChefWebAPI.CustomModels
         public bool IsActive { get; set; }
         public Guid? CreatedBy { get; set; }
 
+
+        public CouponItem()
+        {
+
+        }
+
+        public CouponItem(Coupon _couponToValidate)
+        {
+            if (string.IsNullOrEmpty(_couponToValidate.RedeemCode))
+            {
+                this.AddValidationError("A redeem code is required.");
+                this.isValid = false;
+            }
+            if (string.IsNullOrEmpty(_couponToValidate.Title))
+            {
+                this.AddValidationError("A title is required.");
+                this.isValid = false;
+            }
+            //if (_couponToValidate.Amount == decimal.Zero)
+            //{
+            //    this.AddValidationError("Coupon Amount is Required");
+            //    this.isValid = false;
+            //}
+
+            if (_couponToValidate.DiscountTypeID == -1)
+            {
+                this.AddValidationError("An amount is required.");
+                this.isValid = false;
+            }
+
+            if (_couponToValidate.UsageTypeID == -1)
+            {
+                this.AddValidationError("A discount type is required.");
+                this.isValid = false;
+            }
+
+        }
     }
 }

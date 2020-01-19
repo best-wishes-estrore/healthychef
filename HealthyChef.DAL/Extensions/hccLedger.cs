@@ -25,7 +25,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccLedgers", this);
                     object oldObj;
@@ -50,7 +50,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccLedgers.ToList();
                 }
@@ -67,7 +67,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     if (daysBack.HasValue)
                     {
@@ -100,7 +100,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccLedgers.SingleOrDefault(a => a.LedgerID == ledgerId);
                 }
@@ -117,7 +117,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccLedgers.OrderByDescending(f => f.CreatedDate).Where(a => a.AsscCartID == cartId
                           && (a.TransactionTypeID == (int)Enums.LedgerTransactionType.Purchase))

@@ -1,1 +1,0 @@
-<%@ Page Language="C#" MasterPageFile="~/Templates/WebModules/Default.master" AutoEventWireup="true" Inherits="BayshoreSolutions.WebModules.Admin._Default" Title="Administration" StylesheetTheme="WebModules" Theme="WebModules" Codebehind="Default.aspx.cs" %>

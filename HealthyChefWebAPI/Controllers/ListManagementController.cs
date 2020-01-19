@@ -20,15 +20,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetAllPrograms();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetAllPrograms(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -40,15 +42,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetMealPrefs();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetMealPrefs(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -59,15 +63,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetCustomerPrefs();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetCustomerPrefs(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -79,15 +85,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetPlans();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetPlans(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -99,15 +107,16 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetAllergens();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetAllergens(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
-
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
             return response;
         }
         [HttpGet]
@@ -116,16 +125,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetAllCoupons();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetAllCoupons(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
-
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
             return response;
         }
         [HttpGet]
@@ -134,15 +144,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetMessageboxSizes();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetMessageboxSizes(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -153,15 +165,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetShippingZone();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetShippingZone(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -172,16 +186,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetAllIngredient();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetAllIngredient(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
-
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
             return response;
         }
 
@@ -192,15 +207,17 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
+            var _content = ListManagementRepository.GetItems();
+
             response.Content = new StringContent(
-                                ListManagementRepository.GetItems(),
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if (string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    response.StatusCode = HttpStatusCode.BadRequest;
+            //}
             return response;
         }
 

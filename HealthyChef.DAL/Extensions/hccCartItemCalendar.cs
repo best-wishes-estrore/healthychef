@@ -19,7 +19,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccCartItemCalendars", this);
                     object oldObj;
@@ -47,7 +47,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccCartItemCalendars", this);
                     object originalItem = null;
@@ -75,7 +75,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .SingleOrDefault(i => i.CartCalendarID == cartCalendarId);
@@ -91,7 +91,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .SingleOrDefault(i => i.CartItemID == cartItemId
@@ -108,7 +108,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .Join(cont.hccProductionCalendars, a => a.CalendarID, b => b.CalendarID, (a, b) => new { a, b })
@@ -127,7 +127,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .Join(cont.hccProductionCalendars, a => a.CalendarID, b => b.CalendarID, (a, b) => new { CartCal = a, ProdCal = b })
@@ -147,7 +147,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .Join(cont.hccProductionCalendars, a => a.CalendarID, b => b.CalendarID, (a, b) => new { CartCal = a, ProdCal = b })
@@ -167,7 +167,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccCartItemCalendars
                         .Join(cont.hccProductionCalendars, a => a.CalendarID, b => b.CalendarID, (a, b) => new { CartCal = a, ProdCal = b })

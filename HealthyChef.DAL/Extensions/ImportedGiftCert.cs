@@ -20,7 +20,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("ImportedGiftCerts", this);
                     object oldObj;
@@ -60,7 +60,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.ImportedGiftCerts.FirstOrDefault(a => a.ImportsGCID == id);
                 }
@@ -75,7 +75,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     long inCode;
                     bool rt = long.TryParse(code, out inCode);
@@ -102,7 +102,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.ImportedGiftCerts.ToList();
                 }
@@ -117,7 +117,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.ImportedGiftCerts
                         .Where(a => a.is_used == "N")
@@ -135,7 +135,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.ImportedGiftCerts.Where(a => a.is_used == "Y").ToList();
                 }

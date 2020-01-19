@@ -1,8 +1,0 @@
-<browsers>
-  <browser refID="Default">
-    <controlAdapters>
-      <adapter controlType="System.Web.UI.HtmlControls.HtmlForm"
-               adapterType="BayshoreSolutions.WebModules.FormRewriterControlAdapter" />
-    </controlAdapters>
-  </browser>
-</browsers>

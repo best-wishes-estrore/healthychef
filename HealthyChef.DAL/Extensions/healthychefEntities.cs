@@ -6,7 +6,7 @@ using System.Data.Objects;
 
 namespace HealthyChef.DAL
 {
-    public partial class healthychefEntities
+    public partial class healthychefEntitiesAPI
     {
         //private const string ENTITIES_DATA_CONTEXT = "healthychefEntities";
 

@@ -18,7 +18,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccProductionCalendars", this);
                     object oldObj;
@@ -61,7 +61,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .OrderByDescending(a => a.DeliveryDate)
@@ -78,7 +78,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .Where(a => a.DeliveryDate == deliveryDate)
@@ -95,7 +95,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .Where(a => a.DeliveryDate > startDate && a.DeliveryDate < endDate)
@@ -113,7 +113,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .Where(a => a.Name == name)
@@ -132,7 +132,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .Where(a => a.OrderCutOffDate >= DateTime.Today)
@@ -150,7 +150,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                         .Where(a => a.OrderCutOffDate >= DateTime.Today)
@@ -169,7 +169,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var t = cont.hccProductionCalendars
                         .Where(a => a.OrderCutOffDate >= DateTime.Today)
@@ -196,7 +196,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProductionCalendars
                 .SingleOrDefault(a => a.CalendarID == calendarId);
@@ -214,7 +214,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenus
                         .Where(a => a.MenuID == this.MenuID)

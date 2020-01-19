@@ -49,7 +49,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccMenuItems", this);
                     object oldObj;
@@ -76,7 +76,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItems.ToList();
                 }
@@ -91,7 +91,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItems
                         .Where(a => (HealthyChef.Common.Enums.MealTypes)a.MealTypeID == mealType
@@ -110,7 +110,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var r = cont.hccMenuItems
                         .Where(a => a.Name.ToLower() == name.ToLower()
@@ -131,7 +131,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var r = cont.hccMenuItems
                         .SingleOrDefault(a => a.Name.ToLower() == name.ToLower()
@@ -150,7 +150,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItems
                         .Where(a => a.IsRetired == isRetired)
@@ -168,7 +168,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItemIngredients
                         .Where(c => c.IngredientID == ingredientId)
@@ -187,7 +187,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var menu = cont.hccMenus
                         .Where(c => c.MenuID == menuId)
@@ -212,7 +212,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItems.SingleOrDefault(a => a.MenuItemID == menuItemId);
                 }
@@ -223,55 +223,11 @@ namespace HealthyChef.DAL
             }
         }
 
-        public static hccMenuItem GetByItemName(string menuItemName)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    //return (from menuitem in cont.hccMenuItems
-                    //        where menuitem.Name.Contains(menuItemName)
-                    //        select menuitem).ToList();
-                    return cont.hccMenuItems.Where(a => a.Name == menuItemName).FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public static  hccMenuItem GetByItemNameLast(string menuItemName)
-        {
-            try
-            {
-                List<hccMenuItem> Items = new List<hccMenuItem>();
-                using (var cont = new healthychefEntities())
-                {
-                    var MenuItems = (from menuitem in cont.hccMenuItems
-                                     where menuitem.Name == menuItemName
-                                     select menuitem).ToList();
-                    foreach(var data in MenuItems)
-                    {
-                        if (data.CostLarge != 0.0000M && data.CostChild != 0.0000M && data.CostRegular != 0.0000M && data.CostSmall != 0.0000M)
-                        {
-                            Items.Add(data);
-                        }
-                    }
-                    return Items.FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public List<hccIngredient> GetIngredients()
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     List<hccIngredient> items = cont.hccMenuItemIngredients
                         .Where(a => a.MenuItemID == this.MenuItemID)
@@ -294,7 +250,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItemIngredients
                        .Where(a => a.MenuItemID == this.MenuItemID)
@@ -315,7 +271,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccMenuItemPreferences
                         .Where(a => a.MenuItemID == this.MenuItemID)
@@ -559,20 +515,7 @@ namespace HealthyChef.DAL
                             CartItemType = Enums.GetEnumDescription(((Enums.CartItemTypeAbbr)cartItem.ItemTypeID))
                         };
 
-                        if(cartItem.ItemTypeID== Convert.ToInt32((Enums.CartItemType.AlaCarte)) && cartItem.Plan_IsAutoRenew==true)
-                        {
-                            newItem.IsFamilyStyle = "Yes";
-                        }
-                        else if (cartItem.ItemTypeID == Convert.ToInt32((Enums.CartItemType.AlaCarte)) && cartItem.Plan_IsAutoRenew == false)
-                        {
-                            newItem.IsFamilyStyle = "No";
-                        }
-                        else
-                        {
-                            newItem.IsFamilyStyle = "N/A";
-                        }
-                        hccUserProfile prof = hccUserProfile
-                            .GetById(result.UserProfileId);
+                        hccUserProfile prof = hccUserProfile.GetById(result.UserProfileId);
 
                         if (prof != null)
                         {
@@ -743,7 +686,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     List<hcc_WeeklyMenuReport_Result> retVals = new List<hcc_WeeklyMenuReport_Result>();
                     List<hcc_WeeklyMenuReport_Result> inVals = cont.hcc_WeeklyMenuReport(startDate, endDate).ToList();
@@ -993,8 +936,6 @@ namespace HealthyChef.DAL
         public string ProfileName { get; set; }
         public int DayNumber { get; set; }
         public string CartItemType { get; set; }
-        public string IsFamilyStyle { get; set; }
-        public bool? IsAutoRenew { get; set; }
     }
 
     public class CustCalDay

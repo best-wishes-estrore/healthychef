@@ -54,14 +54,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BayshoreSolutions.Common">
-      <HintPath>..\..\hcc\Missing References\MissingReferencesForHealthyChef\BayshoreSolutions.Common.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\hcc\Missing References\MissingReferencesForHealthyChefAPI\BayshoreSolutions.Common.dll</HintPath>
     </Reference>
     <Reference Include="BayshoreSolutions.WebModules">
-      <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\BayshoreSolutions.WebModules.dll</HintPath>
+      <HintPath>..\..\hcc\Missing References\MissingReferencesForHealthyChefAPI\BayshoreSolutions.WebModules.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\EntityFramework.dll</HintPath>
+      <HintPath>..\..\hcc\Missing References\MissingReferencesForHealthyChefAPI\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -91,12 +90,11 @@
     <Compile Include="Classes\ShippingLabelDetailsComparer.cs" />
     <Compile Include="Datasets\ActiveCustomers.cs">
       <DependentUpon>ActiveCustomers.xsd</DependentUpon>
-      <SubType>code</SubType>
     </Compile>
     <Compile Include="Datasets\ActiveCustomers.Designer.cs">
-      <DependentUpon>ActiveCustomers.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActiveCustomers.xsd</DependentUpon>
     </Compile>
     <Compile Include="Datasets\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -199,7 +197,6 @@
     </None>
     <None Include="Datasets\ActiveCustomers.xss">
       <DependentUpon>ActiveCustomers.xsd</DependentUpon>
-      <SubType>Designer</SubType>
     </None>
     <None Include="Datasets\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>

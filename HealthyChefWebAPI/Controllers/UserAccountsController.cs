@@ -14,35 +14,63 @@ namespace HealthyChefWebAPI.Controllers
     //[Authorize(Roles = "Administrators")]
     public class UserAccountsController : ApiController
     {
-
-        [HttpGet]
-        [ActionName("GetUserAccounts")]
-        public HttpResponseMessage GetUserAccounts(SearchParams searchParams)
-        {           
-            searchParams = searchParams ?? new SearchParams();
+        [HttpPost]
+        [ActionName("SearchGetUserAccounts")]
+        public HttpResponseMessage SearchGetUserAccounts(SearchParams searchParameters)
+        {
 
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
 
-            //response.Content = new StringContent(
-            //                    UserAccountsRepository.GetUserAccounts(
-            //                        searchParams.lastName, 
-            //                        searchParams.email, 
-            //                        searchParams.phone, 
-            //                        searchParams.purchaseNumber, 
-            //                        searchParams.deliveryDate,
-            //                        searchParams.roles), 
-            //                    Encoding.UTF8, 
-            //                    "application/json");
+            var _content = UserAccountsRepository.SearchGetUserAccounts(searchParameters);
 
             response.Content = new StringContent(
-                                UserAccountsRepository.GetUserAccountDetails(),
+                                _content,
+                                Encoding.UTF8,
+                                "application/json");
+            return response;
+        }
+
+
+        [HttpGet]
+        [ActionName("GetUserAccounts")]
+        public HttpResponseMessage GetUserAccounts()
+        {
+
+            var response = CreatHttpResponse.CreateHttpResponse(this.Request);
+            
+            var _content = UserAccountsRepository.GetUserAccountDetails();
+
+            response.Content = new StringContent(
+                                _content,
                                 Encoding.UTF8,
                                 "application/json");
 
-            if(string.IsNullOrEmpty(response.Content.ToString()))
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-            }
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    //response.StatusCode = HttpStatusCode.BadRequest;
+            //}
+
+            return response;
+        }
+
+        [HttpGet]
+        [ActionName("GetUserAccountsByRole")]
+        public HttpResponseMessage GetUserAccountsByRole(string roleid = null)
+        {
+
+            var response = CreatHttpResponse.CreateHttpResponse(this.Request);
+
+            var _content = UserAccountsRepository.GetUserAccountDetailsByRole(roleid);
+
+            response.Content = new StringContent(
+                                _content,
+                                Encoding.UTF8,
+                                "application/json");
+
+            //if (string.IsNullOrEmpty(_content))
+            //{
+            //    //response.StatusCode = HttpStatusCode.BadRequest;
+            //}
 
             return response;
         }
@@ -135,6 +163,21 @@ namespace HealthyChefWebAPI.Controllers
         {
             var response = CreatHttpResponse.CreateHttpResponse(this.Request);
             var _op = UserAccountsRepository.AddOrUpdatePreferenceForUser(_customerPreferences);
+            response.StatusCode = _op.StatusCode;
+
+            response.Content = new StringContent(
+                                DBHelper.ConvertDataToJson(_op),
+                                Encoding.UTF8,
+                                "application/json");
+
+            return response;
+        }
+        [HttpPost]
+        [ActionName("UpdateShippingAddressforsubprofile")]
+        public HttpResponseMessage UpdateShippingAddressforsubprofile(CustomerShippingAddress _shippingInfo)
+        {
+            var response = CreatHttpResponse.CreateHttpResponse(this.Request);
+            var _op = UserAccountsRepository.UpdateShippingAddressforsubprofile(_shippingInfo);
             response.StatusCode = _op.StatusCode;
 
             response.Content = new StringContent(

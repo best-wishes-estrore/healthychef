@@ -31,7 +31,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities(WebConfigurationManager.ConnectionStrings["healthychefEntities"].ConnectionString))
+                using (var cont = new healthychefEntitiesAPI(WebConfigurationManager.ConnectionStrings["healthychefEntities"].ConnectionString))
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccUserProfiles", this);
                     object oldObj;
@@ -114,7 +114,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .SingleOrDefault(a => a.UserProfileID == id);
@@ -139,7 +139,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .Where(a => a.MembershipID == userProviderKey)
@@ -152,27 +152,11 @@ namespace HealthyChef.DAL
             }
         }
 
-        public static hccUserProfile GetByAspId(Guid userId)
-        {
-            try
-            {
-                using (var cont = new healthychefEntities())
-                {
-                    return cont.hccUserProfiles
-                        .Where(a => a.MembershipID == userId && a.ParentProfileID == null).FirstOrDefault();
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
         public static hccUserProfile GetBy(int cartItemId)
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var ci = cont.hccCartItems
                         .Where(a => a.CartItemID == cartItemId)
@@ -195,7 +179,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .Where(a => a.MembershipID == userProviderKey
@@ -219,7 +203,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .SingleOrDefault(a => a.MembershipID == userProviderKey
@@ -236,7 +220,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .Where(a => a.MembershipID == userProviderKey && !a.ParentProfileID.HasValue && a.IsActive)
@@ -259,7 +243,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .Where(a => !a.ParentProfileID.HasValue).ToList();
@@ -280,7 +264,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccUserProfiles
                         .Where(a => a.ParentProfileID == this.UserProfileID).ToList();
@@ -351,11 +335,11 @@ namespace HealthyChef.DAL
                 List<MembershipUser> retVals = new List<MembershipUser>();
                 List<Guid?> profileIDs = new List<Guid?>();
 
-                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModules"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["WebModulesAPI"].ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand("hcc_UserProfileSearch", conn))
                     {
-
+                       
 
                         SqlParameter prm1 = new SqlParameter("@lastName", SqlDbType.NVarChar);
                         prm1.Value = lastName;
@@ -394,9 +378,9 @@ namespace HealthyChef.DAL
                         conn.Close();
                     }
                 }
-
+                
                 profileIDs.ForEach(
-                       delegate (Guid? membershipUserId)
+                       delegate(Guid? membershipUserId)
                        {
                            if (membershipUserId.HasValue)
                            {

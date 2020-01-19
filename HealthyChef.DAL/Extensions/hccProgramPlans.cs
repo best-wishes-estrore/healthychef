@@ -29,10 +29,11 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccProgramPlans", this);
                     object oldObj;
+
                     if (cont.TryGetObjectByKey(key, out oldObj))
                     {
                         cont.ApplyCurrentValues("hccProgramPlans", this);
@@ -68,7 +69,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramPlans
                         .Join(cont.hccPrograms, a => a.ProgramID, b => b.ProgramID, (j1, j2) => new { Plan= j1, Program=j2})
@@ -89,7 +90,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     if (isActive.HasValue)
                     {
@@ -119,7 +120,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     if (isActive.HasValue)
                     {
@@ -150,7 +151,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     return cont.hccProgramPlans
                         .Where(a => a.PlanID == id)
@@ -167,7 +168,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     var p = cont.hccProgramPlans
                         .Where(a => a.Name == planName)

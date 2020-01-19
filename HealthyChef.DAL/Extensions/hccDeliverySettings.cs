@@ -17,7 +17,7 @@ namespace HealthyChef.DAL
         {
             try
             {
-                using (var cont = new healthychefEntities())
+                using (var cont = new healthychefEntitiesAPI())
                 {
                     System.Data.EntityKey key = cont.CreateEntityKey("hccDeliverySettings", this);
                     object oldObj;
@@ -39,7 +39,7 @@ namespace HealthyChef.DAL
 
         public static List<hccDeliverySetting> GetAll()
         {
-            using (var cont = new healthychefEntities())
+            using (var cont = new healthychefEntitiesAPI())
             {
                 return cont.hccDeliverySettings.ToList();
             }
@@ -47,7 +47,7 @@ namespace HealthyChef.DAL
 
         public static hccDeliverySetting GetBy(Enums.MealTypes mealType)
         {
-            using (var cont = new healthychefEntities())
+            using (var cont = new healthychefEntitiesAPI())
             {
                 return cont.hccDeliverySettings
                     .Where(a => a.MealTypeID == (int)mealType)

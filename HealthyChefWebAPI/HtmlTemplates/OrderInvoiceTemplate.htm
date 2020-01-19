@@ -6,11 +6,11 @@
 </style>
 
 <div class="invoice">
-    <table style="width: 100%; padding: 5px;">
-        <tr style="height: 20px; background-color: #eeeeee;">
-            <td style="width: 200px; padding: 2px; border: 1px solid #cccccc; font-weight: bold;">Purchase Number:&nbsp;##PurchaseNumber##</td>
-            <td style="padding: 2px; border: 1px solid #cccccc; font-weight: bold;">Status:&nbsp;##OrderStatus##</td>
-            <td style="padding: 2px; border: 1px solid #cccccc; font-weight: bold;">##OrderDate##</td>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>Purchase Number:&nbsp;##PurchaseNumber##</td>
+            <td>Status:&nbsp;##OrderStatus##</td>
+            <td>##OrderDate##</td>
         </tr>
         <tr>
             <td>
@@ -23,7 +23,7 @@
                     ##OrderTransactionInfo##
                 </div>
             </td>
-            <td colspan="2" style="vertical-align:top;">
+            <td colspan="2">
                 <b>Shipping Information:</b><br />
                 <div>
                     ##OrderShippingAddressesToHtml## 
@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3" style="padding: 2px">
+            <td colspan="3">
                 <b>Purchased Items</b>
                 ##ItemsToHtml##
             </td>

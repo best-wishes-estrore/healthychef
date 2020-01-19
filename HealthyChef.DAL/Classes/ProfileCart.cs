@@ -23,20 +23,6 @@ namespace HealthyChef.DAL
             }
         }
 
-        public double MockProfileSubTotal
-        {
-            get
-            {
-                double MockProfileSubTotal = 0.00;
-                this.CartItems.ForEach(a => MockProfileSubTotal += a.mockTotalPrice);
-                return MockProfileSubTotal;
-            }
-            set
-            {
-
-            }
-        }
-
         /// <summary>
         /// SubTotal of ProfileCart CartItems.ItemSubTotalNA
         /// </summary>
@@ -58,8 +44,8 @@ namespace HealthyChef.DAL
             get
             {
                 decimal profSubDiscountAmount = 0.00m;
-                this.CartItemsWithMealSides.ForEach(a => profSubDiscountAmount += (a.DiscountPerEach));
-                    return profSubDiscountAmount;
+                this.CartItemsWithMealSides.ForEach(a => profSubDiscountAmount += (a.DiscountPerEach * a.Quantity));
+                return profSubDiscountAmount;
             }
         }
 
@@ -80,7 +66,6 @@ namespace HealthyChef.DAL
         {
             get
             {
-                var currentcart = hccCart.GetCurrentCart();
                 decimal profSubTax = 0.00m;
                 // if shipping address is FL, add tax for taxable items
                 if (ShippingAddress != null
@@ -102,30 +87,8 @@ namespace HealthyChef.DAL
                                     {
                                         decimal itemTax = 0.00m;
                                         decimal taxableAmt = 0.00m;
-                                        double discountpereachamount = 0.0;
-                                        //if()
-                                        //{
-
-                                        //}
-
-                                        //If Item is FamilyStyle
-                                        if (cartItem.Plan_IsAutoRenew == true)
-                                        {
-                                            discountpereachamount = Convert.ToDouble(Math.Round(Convert.ToDecimal((Convert.ToDouble(cartItem.ItemPrice) * cartItem.Quantity) * 0.10), 2));
-                                            taxableAmt = cartItem.ItemPrice * cartItem.Quantity - Convert.ToDecimal(discountpereachamount);
-                                        }
-                                        else
-                                        {
-                                            taxableAmt = cartItem.ItemPrice * cartItem.Quantity;
-                                        }
-                                        if (taxableAmt == cartItem.ItemPrice)
-                                        {
-                                            itemTax = Math.Round((taxableAmt * (taxRate / 100)), 2);
-                                        }
-                                        else
-                                        {
-                                            itemTax = Math.Round((taxableAmt * (taxRate / 100)), 2);
-                                        }
+                                        taxableAmt = cartItem.DiscountAdjPrice * cartItem.Quantity;
+                                        itemTax = Math.Round(taxableAmt * (taxRate / 100), 2);
                                         profSubTax += itemTax;
 
                                         decimal baseTaxAmt = Math.Round(taxableAmt * .06m, 2);
@@ -139,8 +102,6 @@ namespace HealthyChef.DAL
 
                                         SubTaxableAmount += taxableAmt;
                                         SubDiscretionaryTaxAmount += discTaxAmt;
-                                        cartItem.DiscretionaryTaxAmount = discTaxAmt;
-                                        cartItem.Save();
                                     }
                                 });
                             }
