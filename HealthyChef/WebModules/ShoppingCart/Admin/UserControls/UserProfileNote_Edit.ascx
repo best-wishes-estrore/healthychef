@@ -28,7 +28,7 @@
     </div>
     <div class="fieldRow">
         <div class="fieldCol">
-            <asp:CheckBox ID="chkNoteDisplayToUser" runat="server" Text="Display To User?" Visible="false" />
+         <asp:CheckBox ID="chkNoteDisplayToUser" runat="server"  Visible="false" /><label style="margin-left:10px;">  Display To User?</label>
         </div>
     </div>
     <div class="fieldRow">

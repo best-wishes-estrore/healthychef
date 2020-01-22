@@ -55,9 +55,14 @@ namespace HealthyChefCreationsMVC.Controllers
             cartViewModel.OrderMinimum  = returnZonebyZip(cartViewModel.Zipcode);
 
             Session["OrderMinimum"] = cartViewModel.OrderMinimum;
+            Session["Discount"] = cartViewModel.Discount;
+            Session["Total"] = cartViewModel.Subtotal;
             return View(cartViewModel);
         }
-
+        //public  int requiredAmountOrderMinimum()
+        //{
+           
+        //}
         public static int returnZonebyZip(string ZipCode)
         {
             hccShippingZone hccshopin = new hccShippingZone();

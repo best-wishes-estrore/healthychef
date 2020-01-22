@@ -144,6 +144,11 @@ namespace HealthyChefCreationsMVC
                 defaults: new { controller = "Menu", action = "Display", mealtype = UrlParameter.Optional, deliveryDate = UrlParameter.Optional }
                 );
             routes.MapRoute(
+             name: "view-menu-h",
+             url: "browse-menu/healthy-chef-favorites.aspx",
+             defaults: new { controller = "Menu", action = "Display", mealtype = 6, deliveryDate = UrlParameter.Optional }
+             );
+            routes.MapRoute(
                 name: "view-menu-b",
                 url: "browse-menu/breakfast.aspx",
                 defaults: new { controller = "Menu", action = "Display", mealtype = 0, deliveryDate = UrlParameter.Optional }

@@ -745,7 +745,7 @@
                                                             <td>
                                                                 @if (@Session["OrderMinimum"].ToString() != "0")
                                                                 {
-                                                                <span id="spanOrderMinimum">@Session["OrderMinimum"].ToString()</span>
+                                                                    <span id="spanOrderMinimum">@Session["OrderMinimum"].ToString()</span>
                                                                 }
                                                                 else
                                                                 {
@@ -1099,8 +1099,28 @@
 </div>
 
 
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog" style="left:0px !important;width:500px !important;">
+         
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Message</h4>
+            </div>
+            <div class="modal-body" id="divOrderMinimumText">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
+            </div>
+        </div>
 
-    <script type="text/javascript">
+    </div>
+</div>
+
+
+<script type="text/javascript">
     //$(document).ready(function () {
     //    $("#divLoader").css('display', 'block');
     //    $('body').css("opacity", '0.5');
@@ -1111,7 +1131,7 @@
     //});
     function BtnCheckoutPage()
     {
-        debugger;
+       // debugger;
         var OrderMinimum =  parseFloat($("#spanOrderMinimum").text());
         var ProductTotal = parseFloat($("#lblsubtotal").text().replace("$", "").replace(",", ""));
         var DiscountAmount = parseFloat($("#spanDiscount").text().replace("$", "").replace("-", ""));
@@ -1120,6 +1140,7 @@
             var requiredAmount = OrderMinimum - TotalDeduction;
             requiredAmount = requiredAmount.toFixed(2);
             var message = "Your Product Total is less than the $" + OrderMinimum + " minimum required to ship your product   Please add $" + requiredAmount+" more to complete your order.  "
+            $("#divOrderMinimumText").text(message);
             alert(message);
             return false;
         }
@@ -1509,170 +1530,170 @@ alert(response.d);
 
     }
 
-    </script>
-    <script>
-        function maxLengthCheck(object) {
-            if (object.value.length > object.maxLength)
-                object.value = object.value.slice(0, object.maxLength)
-        }
-        $("input[type='number']").attr({
-            "max": 99,
-            "min": 1
-        });
-        function isNumeric(evt) {
-            //var theEvent = evt || window.event;
-            //var key = theEvent.keyCode || theEvent.which;
-            //key = String.fromCharCode(key);
-            //var regex = /1-9]|\./;
-            //if (!regex.test(key)) {
-            //    theEvent.returnValue = false;
-            //    if (theEvent.preventDefault) theEvent.preventDefault();
-            //}
+</script>
+<script>
+    function maxLengthCheck(object) {
+        if (object.value.length > object.maxLength)
+            object.value = object.value.slice(0, object.maxLength)
+    }
+    $("input[type='number']").attr({
+        "max": 99,
+        "min": 1
+    });
+    function isNumeric(evt) {
+        //var theEvent = evt || window.event;
+        //var key = theEvent.keyCode || theEvent.which;
+        //key = String.fromCharCode(key);
+        //var regex = /1-9]|\./;
+        //if (!regex.test(key)) {
+        //    theEvent.returnValue = false;
+        //    if (theEvent.preventDefault) theEvent.preventDefault();
+        //}
 
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            if ((charCode == 46) || (charCode != 46 && charCode > 31
-                && (charCode < 48 || charCode > 57)))
-                return false;
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
 
-            return true;
+        return true;
 
-        }
-    </script>
+    }
+</script>
 
 
-    <style>
-        #snackbar1 {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #276f22;
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-            padding: 5px 16px;
-            position: fixed;
-            z-index: 1;
-            left: 0px;
-            top: 0px;
-            font-size: 17px;
+<style>
+    #snackbar1 {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #276f22;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 5px 16px;
+        position: fixed;
+        z-index: 1;
+        left: 0px;
+        top: 0px;
+        font-size: 17px;
+        width: 100%;
+    }
+
+    .color-orange {
+        color: #276f22;
+    }
+
+    .bgcolor {
+        background: #10d5e033;
+        padding: 10px;
+        /*border: 1px solid #276f22;*/
+    }
+
+        .bgcolor table {
             width: 100%;
         }
 
-        .color-orange {
-            color: #276f22;
-        }
-
-        .bgcolor {
-            background: #10d5e033;
-            padding: 10px;
-            /*border: 1px solid #276f22;*/
-        }
-
-            .bgcolor table {
-                width: 100%;
+            .bgcolor table td {
+                padding: 5px;
             }
 
-                .bgcolor table td {
-                    padding: 5px;
-                }
+    #CouponCodeText, #RedeemedGiftText {
+        width: 40%;
+        float: left;
+        margin-right: 4px;
+    }
 
-        #CouponCodeText, #RedeemedGiftText {
-            width: 40%;
-            float: left;
-            margin-right: 4px;
-        }
+    .bgcolor1 td {
+        padding: 10px 0px;
+    }
 
-        .bgcolor1 td {
-            padding: 10px 0px;
-        }
+    .bgcolor1 {
+        float: right;
+        width: 100%;
+        margin-top: 20px;
+    }
 
-        .bgcolor1 {
-            float: right;
-            width: 100%;
-            margin-top: 20px;
-        }
+    #familystylepopup .modal-dialog {
+        left: 0%;
+        top: 13%;
+        text-align: center;
+        width: 400px;
+        font-size: 18px;
+        color: red;
+    }
 
-        #familystylepopup .modal-dialog {
-            left: 0%;
-            top: 13%;
-            text-align: center;
-            width: 400px;
-            font-size: 18px;
+        #familystylepopup .modal-dialog a {
             color: red;
+            text-decoration: underline;
+            padding: 6px;
         }
 
-            #familystylepopup .modal-dialog a {
-                color: red;
-                text-decoration: underline;
-                padding: 6px;
-            }
+    .redeemgift {
+        width: 56%;
+        float: left;
+    }
 
-        .redeemgift {
-            width: 56%;
-            float: left;
-        }
+    .btn-default, .btn-default:hover, .btn-default:focus {
+        border-radius: 5px;
+        color: #72bb3b !important;
+        border: 1px solid #39aa35;
+        text-transform: capitalize;
+        padding: 5px 15px;
+        background: #fff;
+    }
 
-        .btn-default, .btn-default:hover, .btn-default:focus {
-            border-radius: 5px;
-            color: #72bb3b !important;
-            border: 1px solid #39aa35;
-            text-transform: capitalize;
-            padding: 5px 15px;
-            background: #fff;
-        }
-
-        #snackbar1.show {
-            visibility: visible;
-            /*-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    #snackbar1.show {
+        visibility: visible;
+        /*-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
                 animation: fadein 0.5s, fadeout 0.5s 2.5s;*/
-            transition: all 0.5s;
-            -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+    }
+
+    @@-webkit-keyframes fadein {
+        from {
+            top: 0;
+            opacity: 0;
         }
 
-        @@-webkit-keyframes fadein {
-            from {
-                top: 0;
-                opacity: 0;
-            }
+        to {
+            top: 30px;
+            opacity: 1;
+        }
+    }
 
-            to {
-                top: 30px;
-                opacity: 1;
-            }
+    @@keyframes fadein {
+        from {
+            top: 0;
+            opacity: 0;
         }
 
-        @@keyframes fadein {
-            from {
-                top: 0;
-                opacity: 0;
-            }
+        to {
+            top: 30px;
+            opacity: 1;
+        }
+    }
 
-            to {
-                top: 30px;
-                opacity: 1;
-            }
+    @@-webkit-keyframes fadeout {
+        from {
+            top: 30px;
+            opacity: 1;
         }
 
-        @@-webkit-keyframes fadeout {
-            from {
-                top: 30px;
-                opacity: 1;
-            }
+        to {
+            top: 0;
+            opacity: 0;
+        }
+    }
 
-            to {
-                top: 0;
-                opacity: 0;
-            }
+    @@keyframes fadeout {
+        from {
+            top: 30px;
+            opacity: 1;
         }
 
-        @@keyframes fadeout {
-            from {
-                top: 30px;
-                opacity: 1;
-            }
-
-            to {
-                top: 0;
-                opacity: 0;
-            }
+        to {
+            top: 0;
+            opacity: 0;
         }
-    </style>
+    }
+</style>

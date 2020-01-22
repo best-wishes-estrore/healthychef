@@ -460,6 +460,9 @@ margin-top: 50px;
     line-height: 1.428571429;
     color: #fff !important;
     white-space: nowrap;
+    font-family: 'Roboto black',sans-serif !important;
+    font-size: 13px;
+    font-weight: bold !important;
 }
 .dropdown-menu li a {
     color: #333 !important;

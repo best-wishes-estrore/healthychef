@@ -4,10 +4,20 @@
     ViewBag.Title = "Product Description";
     Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
 }
+<style>
+    img {
+        max-width: 6%;
+    }
+</style>
 <div class="container content_start">
     <div class="article-cnt" style="display: block;">
         @foreach (var m in Model.alcMenuForProductDesc)
         {
+            var _showHealthyChefFav = m.meal.CanyonRanchRecipe != true ? "hidden" : "";
+            var _showSoyFree = m.meal.CanyonRanchApproved != true ? "hidden" : "";
+            var _showVegOptAvail = m.meal.VegetarianOptionAvailable != true ? "hidden" : "";
+            var _showVeganOptAvail = m.meal.VeganOptionAvailable != true ? "hidden" : "";
+            var _showGlutenFreeAvail = m.meal.GlutenFreeOptionAvailable != true ? "hidden" : "";
             using (Html.BeginForm("AddMealToCart", "Menu", FormMethod.Post, new { @id = "ProductDescriptionAddToCart" + m.meal.MenuItemID }))
             {
                 <div id="familystyleinfo" class="modal fade" role="dialog">
@@ -45,7 +55,14 @@
                         </div>
                         <div class="col-md-7">
                             <div class="main-description newbutton">
-                                <h2 class="col-md-7"><span class="food-title">@m.meal.Name</span></h2>
+                                <h2 class="col-md-7">
+                                    <span class="food-title">@m.meal.Name</span>
+                                    <span><img id="" title="Healthy Chef Favorite" class="healthychef-favorite-logo @_showHealthyChefFav" src="~/Content/Images/Healthy-Chef-Logo-leaves.png"></span>
+                                    <span><img id="" title="Soy Free" class="options-logo @_showSoyFree" src="~/Content/Images/sf-button.png" style="border-width:0px;"></span>
+                                    <span><img id="" title="Vegetarian" class="options-logo @_showVegOptAvail" src="~/Content/Images/vg-button.png" alt="Vegetarian Option Available" style="border-width:0px;"></span>
+                                    <span><img id="" title="Vegan" class="options-logo @_showVeganOptAvail" src="~/Content/Images/vn-button.png" alt="Vegan Option Available" style="border-width:0px;"></span>
+                                    <span><img id="" title="Gluten Free" class="options-logo @_showGlutenFreeAvail" src="~/Content/Images/gf-button.png" alt="Gluten Free Option Available" style="border-width:0px;"></span>
+                                </h2>
                                 <a class="page-button-submit col-md-5 btn-orange hidden-xs" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
                             </div>
                             <!-- <div class="clearfix"></div> -->

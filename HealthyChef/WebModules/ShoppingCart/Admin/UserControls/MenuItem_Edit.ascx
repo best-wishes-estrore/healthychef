@@ -151,28 +151,28 @@
                     <asp:CheckBox ID="cbCanyonRanchApproved" runat="server" />
                 </td>
                 <td>
-                    <label>Soy Free Option Available</label></td>
+                    <label>Soy Free</label></td>
             </tr>
             <tr>
                 <td>
                     <asp:CheckBox ID="cbVegetarianOption" runat="server" />
                 </td>
                 <td>
-                    <label>Vegetarian Option Available</label></td>
+                    <label>Vegetarian</label></td>
             </tr>
             <tr>
                 <td>
                     <asp:CheckBox ID="cbVeganOption" runat="server" />
                 </td>
                 <td>
-                    <label>Vegan Option Available</label></td>
+                    <label>Vegan</label></td>
             </tr>
             <tr>
                 <td>
                     <asp:CheckBox ID="cbGlutenFreeOption" runat="server" />
                 </td>
                 <td>
-                    <label>Gluten-free Option Available</label></td>
+                    <label>Gluten-free</label></td>
             </tr>
         </table>
     </div>

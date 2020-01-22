@@ -10,7 +10,7 @@
                 <p>
                   <span style="color:red">NOTE: Changes to your Custom Meal Program preferences can be made by calling our customer service center.</span>
                     If changes are not made by the ordering deadline, they may not be reflected in your next delivery. 
-                    Please review with your customer service rep for details. 
+                    Please review with your customer service representative for details. 
                 </p>
                 <asp:CheckBoxList ID="cblPreferences" runat="server" RepeatColumns="5" RepeatLayout="Table" CssClass="checkbox_1" />
             </div>
