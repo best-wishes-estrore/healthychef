@@ -394,7 +394,7 @@ namespace HealthyChef.DAL
             }
             catch (Exception ex)
             {
-                BayshoreSolutions.WebModules.WebModulesAuditEvent.Raise(ex.Message, "hccCart.GetCurrentCart", ex);
+               
                 return null;
             }
         }

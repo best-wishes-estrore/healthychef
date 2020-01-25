@@ -68,8 +68,8 @@
     <Reference Include="CKFinder">
       <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\CKFinder.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus">
-      <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="FredCK.FCKeditorV2">
       <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\FredCK.FCKeditorV2.dll</HintPath>
@@ -96,6 +96,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MissingReferencesForHealthyChef\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="RssToolkit">
       <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\RssToolkit.dll</HintPath>
     </Reference>
@@ -118,8 +119,8 @@
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\System.Net.Http.Primitives.dll</HintPath>
@@ -127,6 +128,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Web" />
@@ -135,8 +137,11 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
-    <Reference Include="System.Web.Http">
-      <HintPath>..\..\..\Missing References\MissingReferencesForHealthyChef\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Web.Services" />
@@ -3237,7 +3242,9 @@
     <Content Include="cvv.html" />
     <Content Include="Details.aspx" />
     <Content Include="WebModules\Zip2Tax\z2t.png" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="client\jquery-ui-1.10.2.custom\development-bundle\demos\autocomplete\search.php" />
     <Content Include="client\jquery-ui-1.10.2.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
     <Content Include="client\jquery-ui-1.10.2.custom\development-bundle\demos\tabs\ajax\content4-broken.php" />
