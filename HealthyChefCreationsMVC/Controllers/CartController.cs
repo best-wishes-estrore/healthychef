@@ -59,10 +59,24 @@ namespace HealthyChefCreationsMVC.Controllers
             Session["Total"] = cartViewModel.Subtotal;
             return View(cartViewModel);
         }
-        //public  int requiredAmountOrderMinimum()
-        //{
-           
-        //}
+        [HttpGet]
+        public ActionResult requiredAmountOrderMinimum()
+        {
+            double requiredAmount = 0;
+            try
+            {
+                double orderMinimum = Convert.ToDouble(Session["OrderMinimum"]);
+                double Discount = Convert.ToDouble(Session["Discount"]);
+                double Total = Convert.ToDouble(Session["Total"]);
+                requiredAmount = orderMinimum - (Total + Discount);
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            return View(requiredAmount);
+        }
         public static int returnZonebyZip(string ZipCode)
         {
             hccShippingZone hccshopin = new hccShippingZone();
@@ -583,6 +597,9 @@ namespace HealthyChefCreationsMVC.Controllers
                     }
                 }
             }
+           
+            Session["Discount"] = cartViewModel.Discount;
+            Session["Total"] = cartViewModel.Subtotal;
             return View("~/Views/cart/index.cshtml", cartViewModel);
             //return Json(new { Success = _couponCodeAdded, Message = _message }, JsonRequestBehavior.AllowGet);
 

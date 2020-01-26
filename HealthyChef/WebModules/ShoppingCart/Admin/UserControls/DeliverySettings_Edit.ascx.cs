@@ -365,6 +365,8 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             string MaxFee = (row.FindControl("txtMaxFee") as TextBox).Text;
             bool check = (row.FindControl("chkDefaultShippingZone") as CheckBox).Checked;
             string OrderMinimumtext = (row.FindControl("txtOrderMinimum") as TextBox).Text;
+
+            
             int OrderMinimum = 0;
             if (string.IsNullOrEmpty(OrderMinimumtext))
             {
@@ -375,6 +377,14 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 OrderMinimum = Convert.ToInt32(OrderMinimumtext);
 
             }
+            if (OrderMinimum==0)
+            {
+
+           
+
+                return;
+            }
+           
             bool IsPickupcheck = (row.FindControl("chkPickupShippingZone") as CheckBox).Checked;
             string TypeName = (row.FindControl("txtShippingDesc") as TextBox).Text;
 

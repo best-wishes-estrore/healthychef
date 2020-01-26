@@ -443,11 +443,13 @@
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtOrderMinimum" runat="server" Text='<%# Eval("OrderMinimum") %>' MaxLength="4"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="revOrderMinimum" runat="server"
+                                  <%--  <asp:RegularExpressionValidator ID="revOrderMinimum" runat="server"
                                         ControlToValidate="txtOrderMinimum" ErrorMessage="Please Enter Only Numbers & upto Maxvalue 9999"
-                                        ValidationExpression="^\d+$"  ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>
+                                        ValidationExpression="^\d+$" ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>--%>
 
-                                 
+                                    <asp:RangeValidator runat="server" Type="Integer"
+                                        MinimumValue="1" MaximumValue="9999" ControlToValidate="txtOrderMinimum"
+                                        ErrorMessage="Value must be a whole number between 1 and 9999" ValidationExpression="^\d+$" ValidationGroup="ShippingZoneEditValidate" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="PickupShippingZone" ItemStyle-Width="150">
@@ -562,7 +564,7 @@
                                     <asp:CheckBox ID="chkIsDefaultShippingZone" runat="server" />
                                 </td>
                             </tr>
-                               <tr>
+                            <tr>
                                 <td>
                                     <label>OrderMinium</label></td>
                                 <td>:</td>
@@ -981,7 +983,7 @@
                     var MaxFee = $('#ctl00_Body_DeliverySettingsEdit1_txtMaxFee').val();
                     var isDefault = $('#ctl00_Body_DeliverySettingsEdit1_chkIsDefaultShippingZone').prop('checked');
                     var OrderMinimum = $('#ctl00_Body_DeliverySettingsEdit1_txtOrderMinium').val();
-                    var ShippingZonedata = { ZoneName: ZoneName, Multiplier: Multiplier, MinFee: MinFee, MaxFee: MaxFee, IsDefaultShippingZone: isDefault, Description: ShippingDesc ,OrderMinimum:OrderMinimum};
+                    var ShippingZonedata = { ZoneName: ZoneName, Multiplier: Multiplier, MinFee: MinFee, MaxFee: MaxFee, IsDefaultShippingZone: isDefault, Description: ShippingDesc, OrderMinimum: OrderMinimum };
 
                     $http({
                         method: "POST",
@@ -1025,7 +1027,7 @@
     $(document).ready(function () {
         $(document).on('keypress', '#ctl00_Body_DeliverySettingsEdit1_txtOrderMinium', function (event) {
 
-          $(this).val($(this).val().replace(/[^\d].+/, ""));
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
