@@ -239,7 +239,7 @@
                     $(lbl + '-' + day).text(NoOfside);
                     EnableSideddl('BreakfastSide', NoOfside);
                   
-                }
+                }e
                 attrval = "LunchEntree";
 
                 if (attrval == ddltype) {

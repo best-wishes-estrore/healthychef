@@ -1113,8 +1113,8 @@
                 <br />
                 <div id="divOrderMinimumText2"></div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
+            <div class="modal-footer" style="margin-right:145px">
+                <a type="button" class="btn btn-default" href="/browse-menu.aspx" >Continue Shopping</a>
             </div>
         </div>
     </div>
@@ -1150,13 +1150,14 @@
             }
         });
     }*@
+ 
     function BtnCheckoutPage()
     {
         debugger;
        var OrderMinimum = parseFloat($("#spanOrderMinimum").text());
         var ProductTotal = parseFloat($("#lblsubtotal").text().replace("$", "").replace(",", ""));
         var DiscountAmount = parseFloat($("#spanDiscount").text().replace("$", "").replace("-", ""));
-        var TotalDeduction = ProductTotal + DiscountAmount;
+        var TotalDeduction = ProductTotal;
         if (OrderMinimum > TotalDeduction) {
 
             var title = "Order Minimum";
@@ -1165,7 +1166,7 @@
             $("#MyPopup .modal-title").html(title);
           
             $("#MyPopup").modal("show");
-            var requiredAmount = OrderMinimum - ProductTotal - DiscountAmount;
+            var requiredAmount = OrderMinimum - ProductTotal;
             requiredAmount = requiredAmount.toFixed(2);
             var message1 = "Your Product Total is less than the $" + OrderMinimum + " minimum required to ship your product  "
             $("#divOrderMinimumText1").text(message1);
