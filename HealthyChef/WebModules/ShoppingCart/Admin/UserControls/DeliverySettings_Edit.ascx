@@ -434,7 +434,7 @@
                                     <asp:Label ID="lblDefaultShippingZone" runat="server" Text='<%# Eval("IsDefaultShippingZone") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:CheckBox ID="chkDefaultShippingZone" runat="server" Checked='<%# Eval("IsDefaultShippingZone").ToString() == "true" ? true :false %>' />
+                                    <asp:CheckBox ID="chkDefaultShippingZone" runat="server" Checked='<%# Eval("IsDefaultShippingZone").ToString() == "True" ? true :false %>' />
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="OrderMinimum" ItemStyle-Width="150">
@@ -459,7 +459,7 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Right" CssClass="HiddenCol" />
                                 <EditItemTemplate>
-                                    <asp:CheckBox ID="chkPickupShippingZone" runat="server" Checked='<%# Eval("IsPickupShippingZone").ToString() == "true" ? true :false %>' />
+                                    <asp:CheckBox ID="chkPickupShippingZone" runat="server" Checked='<%# Eval("IsPickupShippingZone").ToString() == "True" ? true :false %>' />
                                 </EditItemTemplate>
                                 <FooterStyle CssClass="HiddenCol" />
                             </asp:TemplateField>
