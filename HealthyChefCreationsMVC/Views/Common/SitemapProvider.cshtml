@@ -1,0 +1,42 @@
+﻿@model  IEnumerable<HealthyChefCreationsMVC.CustomModels.SiteMapProviderXml>
+
+@{
+    ViewBag.Title = "Sitemap";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+}
+<style>
+    .contentan a {
+        margin: 5px 0px;
+        display: inline-block;
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+<div class="container contentan" style="text-align:center">
+    <h2>Sitemap</h2>
+    <div>
+        @*@Model*@
+        @foreach (var s in Model)
+        {
+            if (s.Name == "Account Sign Up")
+            {
+                <a href="/login.aspx">@s.Name</a>
+            }
+            else if (s.Name == "Weight Loss Programs")
+            {
+                <a href="/meal-programs.aspx">@s.Name</a>
+            }
+            else
+            {
+                <a href="/@s.Url.Remove(0, 1)"> @s.Name </a>
+            }
+            <br />
+            foreach (var childnodes in s.listofSitemap)
+            {
+
+                <a href="/@childnodes.Url.Remove(0, 1)" style="color:forestgreen;font-weight:500">@childnodes.Name</a><br />
+            }
+        }
+
+    </div>
+</div>

@@ -1,0 +1,327 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.CustomerSubProfilesinfo
+@{
+    var isProfileSelected = Model.CurrentProfileId != 0 ? "" : "display:none;";
+}
+
+<style>
+    #panel6 tbody td {
+        padding: 8px;
+    }
+    /*#panel6 .table-bordered tbody tr:nth-child(odd) {
+        background-color: #ddd;
+        color: #000;
+    }
+    #panel6 .table-bordered .highlight {
+        background-color: #39aa35 !important;
+        color:#fff !important;
+    }
+    #panel6 table .highlight td:last-child a, #panel6 table .highlight td:last-child span {
+        color: #fff !important;
+    }*/
+</style>
+
+<div>
+    @if (Model.subProfiles != null && Model.subProfiles.Count != 0)
+    {
+        <table cellspacing="0" border="0" id="ctl00_body_ctl00_gvwSubProfiles" style="width:100%;border-collapse:collapse;">
+            <tbody>
+                <tr align="left">
+                    <th scope="col">Profile Name</th>
+                    <th scope="col">Is Active</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                @foreach (var sb in Model.subProfiles)
+                {
+            string BtnString = sb.IsActive ? "Deactivate" : "Reactivate";
+                    <tr>@*id="@sb.UserProfileID"*@
+                    <td>@sb.ProfileName</td>
+                    <td>@sb.IsActive</td>
+                    <td>
+                        <a onclick="DeactivateSubProfile(@sb.UserProfileID);" href="javascript:void()">@BtnString</a>
+                        &nbsp;@*<a href="@Url.Action("SelectSubProfile", "Account",new { profileId = sb.UserProfileID })">Select</a>*@
+                        <span onclick="subprofileselect(@sb.UserProfileID)" style="color:#39aa35;font-weight:bold; cursor:pointer;">Select</span>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div>This profile has no sub-profiles.</div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //if ($("#hdnShowSubTabs").val() == 'true') {
+        //    var idx = 0;
+        //    var lastSubTab = $("#hdnSubLastTab").val();
+
+        //    if (lastSubTab.length > 0) {
+        //        var t = $('#divSubTabs li a.profSub:contains(' + lastSubTab + ')');
+        //        idx = $('#divSubTabs li a.profSub').index($('#divSubTabs li a.profSub:contains(' + lastSubTab + ')'));
+        //        //$('#divSubTabs').tabs('option', "active", idx);
+        //    }
+
+        //    $("#divSubTabs").tabs({
+        //        active: idx,
+        //        cookie: {
+        //            // store cookie for a day, without, it would be a session cookie
+        //            expires: 1
+        //        }
+        //    });
+        //}
+        //else {
+        //    $("#divSubTabs").hide();
+        //}
+
+        //$('#divSubTabs li a.profSub:first').addClass('active-meal');
+
+        ////Set references
+        //$('#divSubTabs li a.profSub').each(function (i, e) {
+        //    $(e).click(function (event) {
+        //        event.preventDefault();
+        //        $("#hdnSubLastTab").val($(this).text());
+        //        //Clear active menu item
+        //        $('#divSubTabs li a.profSub').removeClass('active-meal');
+
+        //        //Set this menu item as active
+        //        $(this).addClass('active-meal');
+        //    });
+        //});
+
+        //$("#panel6 .table-bordered tr:odd").css({
+        //    "background-color": "#fff",
+        //    "color": "#000"
+        //});
+
+    });
+
+
+
+    function ShowTabs() {
+        $('#divSubTabs').show();
+        $('#CloseProfileButton').show();
+        $('#AddProfileButton').hide();
+    }
+    function HideTabs() {
+        window.location.href = "/my-profile.aspx/6";
+        $('#divSubTabs').hide();
+        $('#CloseProfileButton').hide();
+        $('#AddProfileButton').show();
+    }
+</script>
+<input type="hidden" name="ctl00$body$ctl00$SubProfileEdit1$hdnShowSubTabs" id="hdnShowSubTabs" value="false">
+<input type="hidden" name="ctl00$body$ctl00$SubProfileEdit1$hdnSubLastTab" id="hdnSubLastTab" value="Basic">
+<div class="fieldRow">
+    <label ID="lblFeedback0" ForeColor="Green" EnableViewState="false" style="color: #459e00;font-weight: 600">@TempData["BasicProfileData"] </label>
+    <label id="lblFeedback1" style="color: red;font-weight: 600">@TempData["BasicProfileData2"] </label>
+    <br>
+    <label id="lblFeedback1" style="color: red;font-weight: 600">@TempData["BasicProfileData1"] </label>
+    <div class="fieldCol p-5">
+        @if (Model.CurrentProfileId == 0)
+        {
+            <input type="button" name="" value="Add Sub-Profile" id="AddProfileButton" class="btn btn-green" onclick="ShowTabs();">
+            <input type="button" name="" value="Cancel / Close" id="CloseProfileButton" style="display:none;" onclick="window.location.reload();" class="btn btn-green">@*pixels - button - user pixels - button - solid - green - user*@
+        }
+        else
+        {
+            <input type="button" name="" value="Add Sub-Profile" id="AddProfileButton" class="btn btn-green" style="display:none;" onclick="ShowTabs();"> @*pixels - button - user pixels - button - solid - green - user*@
+            <input type="button" name="" value="Cancel / Close" id="CloseProfileButton" onclick="HideTabs();" class="btn btn-green"> @*style="display:none;">pixels-button-user pixels-button-solid-green-user*@
+        }
+
+
+
+        <span id=""></span>
+
+    </div>
+</div>
+<div class="fieldRow">
+    <div class="fieldCol">
+
+
+        <div>
+            <div id="" style="color:Red;display:none;">
+
+            </div>
+            <span id="" style="color:Green;"></span>
+        </div>
+    </div>
+</div>
+
+<div id="divSubTabs" class="nav nav-pills" style="@isProfileSelected">
+    @if (Model.CurrentProfileId != 0)
+    {
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top "><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top active"><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        @*@if (Model.CustomerSubProfilePrefUpdateModel.DisplaytoUser == false)
+        {
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top" style="display:none"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        }
+        else
+        {*@
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        @*}*@
+
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
+    </ul>
+    }
+    else
+    {
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAddresses" class="ui-state-default ui-corner-top active"><a href="#tabsSub2" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-10">Basic Info</a></li>
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liShipping" class="ui-state-default ui-corner-top "><a href="#tabsSub3" class="profSub ui-tabs-anchor" data-toggle="pill" id="ui-id-11">Shipping</a></li>
+        @*@if (Model.CustomerSubProfilePrefUpdateModel.DisplaytoUser == false)
+        {
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top" style="display:none"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        }
+        else
+        {*@
+            <li id="ctl00_body_ctl00_SubProfileEdit1_liPrefs" class="ui-state-default ui-corner-top"><a href="#tabsSub4" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-12">Preferences</a></li>
+        @*}*@
+        <li id="ctl00_body_ctl00_SubProfileEdit1_liAllergens" class="ui-state-default ui-corner-top" role="tab" style="display:none"><a href="#tabsSub5" data-toggle="pill" class="profSub ui-tabs-anchor" id="ui-id-13">Allergens</a></li>
+    </ul>
+    }
+    <div class="tab-content">
+        @if (Model.CurrentProfileId != 0)
+        {
+            <div id="tabsSub2" class="tab-pane fade ">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileBasicInfo.cshtml", Model.CustomerSubProfileBasicInfoModel);
+                }
+
+            </div>
+            <div id="tabsSub3" class="tab-pane fade p-20 in active">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileShippingInfo.cshtml", Model.CustomerSubProfileShippinInfoModel);
+                }
+            </div>
+            <div id="tabsSub4" class="tab-pane fade">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfilePreferencesInfo.cshtml", Model.CustomerSubProfilePrefUpdateModel);
+                }
+            </div>
+            <div id="tabsSub5" class="tab-pane fade">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileAllergensInfo.cshtml", Model.CustomerSubProfileAllergensUpdateModel);
+                }
+            </div>
+        }
+        else
+        {
+            <div id="tabsSub2" class="tab-pane fade in active">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileBasicInfo.cshtml", Model.CustomerSubProfileBasicInfoModel);
+                }
+
+            </div>
+            <div id="tabsSub3" class="tab-pane fade p-20">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileShippingInfo.cshtml", Model.CustomerSubProfileShippinInfoModel);
+                }
+            </div>
+            <div id="tabsSub4" class="tab-pane fade">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfilePreferencesInfo.cshtml", Model.CustomerSubProfilePrefUpdateModel);
+                }
+            </div>
+            <div id="tabsSub5" class="tab-pane fade">
+                @{
+                    Html.RenderPartial("~/Views/Account/_SubProfileAllergensInfo.cshtml", Model.CustomerSubProfileAllergensUpdateModel);
+                }
+            </div>
+        }
+    </div>
+</div>
+<style>
+    /*input, select {
+        width: 50%;
+    }*/
+
+    input[type="checkbox"] {
+        width: auto;
+        margin: 4px 6px;
+    }
+
+    #panel6 table tbody tr th {
+        text-align: left;
+    }
+</style>
+
+<script type="text/javascript">
+
+    function subprofileselect(UserProfileID)
+    {
+        debugger;
+        $.ajax({
+            url: '@Url.Action("SelectSubProfileInfo", "Account")',
+            type: 'POST',
+            data: '{profileId: "' + UserProfileID + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    $('#divSubTabs').show();
+                    $('#CloseProfileButton').show();
+                    $('#AddProfileButton').hide();
+                    $('#tabsSub2').html(response.SubProfileBasicinfo);
+                    $('#tabsSub3').html(response.SubProfilShippinginfo);
+                    $('#tabsSub4').html(response.SubProfilPreferenceinfo);
+                    if (response.display == false) {
+                        $('#ctl00_body_ctl00_SubProfileEdit1_liPrefs').hide();
+                       // $('#tabsSub4').hide();
+                        //$('#tabsSub1').show();
+                    }
+                    else {
+                        $('#ctl00_body_ctl00_SubProfileEdit1_liPrefs').show();
+                        }
+                    $('#tabsSub5').html(response.SubProfilAllergensinfo);
+                }
+            },
+            error: function (response) {
+                alert(response.d);
+            }
+        });
+    }
+   
+    //$('#panel6 .table-bordered tbody tr').click(function () {
+    //    $(this).addClass('highlight').siblings().removeClass('highlight');
+    //});
+function DeactivateSubProfile(profileId)
+{
+    var _confirm = confirm('Are you sure that you want to deactivate/reactivate this sub-profile?');
+    if (_confirm === false) {
+        return _confirm;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("DeActivateProfile", "Account")',
+        data: '{profileId: "' + profileId + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (res)
+        {
+            if (res.Success === true)
+            {
+               window.location.href = '@Url.Action("Index","Account",new { activeTab = 6 })';
+            }
+            else
+            {
+                alert(res.Message);
+            }
+        },
+        error: function (response) {
+            alert(response.d);
+        }
+    });
+
+}
+</script>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/" title="Site Home"  description="To the front-end website home page.">
+    <siteMapNode url="~/WebModules/Admin/MyWebsite/" title="Websites" description="To the website management page."
+                 SecurityTrimmingEnabled="true" roles="Administrators" />
+    <siteMapNode url="~/WebModules/Admin/WebsiteSettings/" title="System" description="To the website system settings."
+                 SecurityTrimmingEnabled="true" roles="Administrators" />
+    <siteMapNode url="~/WebModules/ShoppingCart/" title="Store Management" description="To the shopping cart management section"
+                  SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager, EmployeeProduction, EmployeeService">
+      <siteMapNode title="Order Management"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager, EmployeeProduction">
+        <siteMapNode title="Purchases" url="~/WebModules/ShoppingCart/Admin/Purchases.aspx" />
+        <siteMapNode title="Order Fulfillment" url="~/WebModules/ShoppingCart/Admin/OrderFulfillment.aspx" />
+        <siteMapNode title="Recurring Orders" url="~/WebModules/ShoppingCart/Admin/RecurringOrdersManager.aspx" />
+        <siteMapNode title="Cancellations" url="~/WebModules/ShoppingCart/Admin/CancellationsManager.aspx" />
+      </siteMapNode>
+      <siteMapNode title="Production Management"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction">        
+        <siteMapNode title="Gift Certificates" url="~/WebModules/ShoppingCart/Admin/GiftCertificationManager.aspx" />
+        <siteMapNode title="Menus" url="~/WebModules/ShoppingCart/Admin/MenuManager.aspx" />
+        <siteMapNode title="Production Calendars" url="~/WebModules/ShoppingCart/Admin/ProductionCalendar.aspx" />
+        <siteMapNode title="Program Default Menus" url="~/WebModules/ShoppingCart/Admin/DefaultMenuManager.aspx" />
+      </siteMapNode>
+      <siteMapNode title="List Management"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager">
+        <siteMapNode title="Allergens" url="~/WebModules/ShoppingCart/Admin/AllergenManager.aspx" />
+        <siteMapNode title="Coupons" url="~/WebModules/ShoppingCart/Admin/CouponManager.aspx" />
+        <siteMapNode title="Shipping Fees" url="~/WebModules/ShoppingCart/Admin/DeliverySettings.aspx" />
+        <siteMapNode title="Ingredients" url="~/WebModules/ShoppingCart/Admin/IngredientManager.aspx" />
+        <siteMapNode title="Items" url="~/WebModules/ShoppingCart/Admin/ItemManager.aspx" />
+        <siteMapNode title="Plans" url="~/WebModules/ShoppingCart/Admin/PlanManager.aspx" />
+        <siteMapNode title="Preferences" url="~/WebModules/ShoppingCart/Admin/PreferencesManager.aspx" />
+        <siteMapNode title="Programs" url="~/WebModules/ShoppingCart/Admin/ProgramManager.aspx" />
+      </siteMapNode>
+      <siteMapNode title="Reports"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction,EmployeeService">
+        <siteMapNode title="Chef Production Worksheet" url="~/WebModules/Reports/Admin/ChefProductionWorksheet.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />       
+        <siteMapNode title="Sales Detail Report" url="~/WebModules/Reports/Admin/SalesReport.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager" />        
+        <siteMapNode title="Meal Label Report" url="~/WebModules/Reports/Admin/MealLabels.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Customer Account Balance Report" url="~/WebModules/Reports/Admin/CustomerAccountBalance.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager" />       
+        <siteMapNode title="Customer Meal Calendar Report" url="~/WebModules/Reports/Admin/CustomerCalendar.aspx"
+                  SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager, EmployeeProduction" />
+        <siteMapNode title="Weekly Menu Report" url="~/WebModules/Reports/Admin/WeeklyMenuReport.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Week at a Glance Report" url="~/WebModules/Reports/Admin/WeekAtGlanceReport.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Packing Slip" url="~/WebModules/Reports/Admin/PackingSlip.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Meal Order Tickets Report" url="~/WebModules/Reports/Admin/MealOrderTix.aspx"
+                   SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Meal Count Report" url="~/WebModules/Reports/Admin/MealCount.aspx"
+                  SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager,EmployeeProduction" />
+        <siteMapNode title="Active Customers Report" url="~/WebModules/Reports/Admin/ActiveCustomers.aspx"
+                  SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager, EmployeeService" />
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode title="User Accounts" url="~/WebModules/ShoppingCart/Admin/AccountManager.aspx"
+                 SecurityTrimmingEnabled="true" roles="Administrators, EmployeeManager, EmployeeService" />
+  </siteMapNode>
+</siteMap>

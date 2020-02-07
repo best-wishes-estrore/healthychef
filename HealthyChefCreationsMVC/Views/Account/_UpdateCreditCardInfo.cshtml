@@ -1,0 +1,257 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.CustomerCreditCardInfo
+
+@{
+    var YearsDropdown = new List<SelectListItem>();
+    YearsDropdown.Add(new SelectListItem() { Text = "---", Value = "" });
+    int currYear = DateTime.Now.Year;
+    for (int i = 0; i <= 10; i++)
+    {
+        YearsDropdown.Add(new SelectListItem()
+        {
+            Text = (currYear + i).ToString(),
+            Value = (currYear + i).ToString()
+        });
+    }
+}
+
+@using (Html.BeginForm("UpdateCreditCardInfo", "Account", FormMethod.Post))
+{
+    <div class="fieldRow">
+        <div class="fieldCol">
+            @Html.HiddenFor(m => m.UserID, new { @id = "CreditCardInfoUserId" })
+
+            <h3>Credit Card Information</h3>
+            <div class="col-md-12 align_right">
+                @Html.LabelFor(m => m.UpdateCreditCardInfo, new { @class = "col-sm-3 push" })
+                @Html.CheckBoxFor(m => m.UpdateCreditCardInfo, new { @class = "col-md-2", style = "visibility:hidden", onchange = "ToggleControls();" })
+                @Html.ValidationMessageFor(m => m.UpdateCreditCardInfo)
+            </div>
+            <div class="clearfix"></div>
+            <style type="text/css">
+                .align_right .push {
+                    text-align: right;
+                }
+
+                .col-sm-2 {
+                    height: 34px;
+                    padding: 6px 12px;
+                }
+                .Code {
+                    margin-right:10px;
+                }
+                .cvvContainer {
+                    position: fixed;
+                    top: 0px;
+                    bottom: 0px;
+                    left: 0px;
+                    right: 0px;
+                    overflow: hidden;
+                    padding: 0;
+                    margin: 0;
+                    background-color: #333;
+                    filter: alpha(opacity=90);
+                    opacity: 0.9;
+                    z-index: 1000;
+                }
+
+                .cvvDisplay {
+                    text-align: center;
+                    vertical-align: middle;
+                    position: fixed;
+                    top: 10%;
+                    left: 25%;
+                    padding: 10px;
+                    width: 600px;
+                    height: 500px;
+                    z-index: 1001;
+                    background-color: #fff;
+                    border: solid 1px #000;
+                    filter: alpha(opacity=100);
+                    opacity: 1.0;
+                    overflow: hidden;
+                }
+            </style>
+            <div>
+                <span id="ctl00_body_ctl00_BillingInfoEdit1_CreditCardEdit1_lblFeedback" style="color:Green;"></span>
+                <span id="ctl00_body_ctl00_BillingInfoEdit1_CreditCardEdit1_lblErrorOnAuth" style="color:Red;"></span>
+
+                <span style="color:red">@ViewBag.CardErrorMessage</span>
+
+            </div>
+            <div id="CreditCardInfo">
+
+                <div class="fieldRow col-md-12">
+                    <div class="fieldCol">
+                        @Html.LabelFor(m => m.NameOnCard, new { @class = "col-sm-2 push required" })
+                        @Html.TextBoxFor(m => m.NameOnCard, new { @class = "form-control col-md-6 nameoncard AlphabetsOnly", disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.NameOnCard)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="fieldRow col-md-12">
+                    <div class="fieldCol">
+                        @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 push required" })
+                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control col-md-6 cardnumber", @onkeypress = "return isNumeric(event)", disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.CardNumber)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="fieldRow col-md-12">
+                    <div class="fieldCol expdate">
+                        <label for="ExipiresOnMonth" id="" class="col-sm-2 push required">Expiration Date:</label>
+                        @Html.DropDownList("ExipiresOnMonth", new List<SelectListItem>
+                                {
+                                  new SelectListItem{Text="---", Value = ""},
+                                  new SelectListItem{ Text="01", Value = "1" },
+                                  new SelectListItem{ Text="02", Value = "2" },
+                                  new SelectListItem{ Text="03", Value = "3" },
+                                  new SelectListItem{ Text="04", Value = "4" },
+                                  new SelectListItem{ Text="05", Value = "5" },
+                                  new SelectListItem{ Text="06", Value = "6" },
+                                  new SelectListItem{ Text="07", Value = "7" },
+                                  new SelectListItem{ Text="08", Value = "8" },
+                                  new SelectListItem{ Text="09", Value = "9" },
+                                  new SelectListItem{ Text="10", Value = "10" },
+                                  new SelectListItem{ Text="11", Value = "11" },
+                                  new SelectListItem{ Text="12", Value = "12" },
+                                 }, new { @class = "col-sm-2 expiry_Month", disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.ExipiresOnMonth)
+                        <p style="float:left;font-size:large">&nbsp; / &nbsp; </p>
+                        @Html.DropDownListFor(m => m.ExipiresOnYear, YearsDropdown, new { @class = "col-sm-2 expiry_date", disabled = "disabled" })
+                        @Html.ValidationMessageFor(m => m.ExipiresOnYear)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="fieldRow col-md-12">
+                    <div class="fieldCol">
+                        @Html.LabelFor(m => m.CardIdCode, new { @class = "col-sm-2 push required" })
+                        @Html.TextBoxFor(m => m.CardIdCode, new { @class = "form-control col-md-6 Code", disabled = "disabled", @onkeypress = "return isNumeric(event)", @maxlength = 4 })
+                        @Html.ValidationMessageFor(m => m.CardIdCode)
+
+                      <a class="ccvInfo" style="width:50px;height:50px" onclick="javascript:CVVClick();"><p style="font-size:23px; padding-top:6px;">?</p></a>
+                        <div class="cvvContainer" style="display: none;">
+                            <div class="cvvDisplay">
+                                <a class="ccvInfo" onclick="javascript:CVVClick();">Close</a>
+                                <br>
+                                <iframe src="/cvv.html" style="width: 100%; height: 100%;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                @*<div class="fieldRow">
+                        <div class="fieldCol">
+
+                        </div>
+                    </div>*@
+                <div class="fieldRow">
+                    <div class="fieldCol">
+
+                        <span id="ctl00_body_ctl00_BillingInfoEdit1_CreditCardEdit1_cstValCardInfo0" style="color:Red;display:none;">*</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div> <div class="col-md-offset-3">
+    <input type="submit" name="save" value="Save" onclick="" id="" class="btn btn-green disablebutton" disabled="disabled">@*pixels-button-user pixels-button-solid-green-user*@
+    <div>
+        <div id="ctl00_body_ctl00_BillingInfoEdit1_ValidationSummary1" style="color:Red;display:none;">
+        </div>
+    </div>
+</div>
+    @*<div class="fieldRow col-md-12">
+        <div class="fieldCol col-md-offset-3">
+            
+            <div>
+                <div id="ctl00_body_ctl00_BillingInfoEdit1_ValidationSummary1" style="color:Red;display:none;">
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="col-md-12">
+        <div class="validation-summary-errors text-danger">
+            @ViewBag.UpdateCreditCardInfoErrors
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="validation-summary-errors text-success">
+            @ViewBag.UpdateCreditCardInfoMessage
+        </div>
+    </div>
+    <div class="fieldRow col-md-12">
+        <div class="fieldCol">
+            <div>
+                <p class="">
+                    <span>@Model.NotesTitle</span>
+                </p>
+                <span>@Model.DisplayNote</span>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function CVVClick() {
+        if ($(".cvvContainer").is(":visible")) {
+            $(".cvvContainer").hide();
+        }
+        else {
+            $(".cvvContainer").show();
+        }
+    }
+
+    var _cardNumber = '';
+    $(document).ready(function () {
+        _cardNumber = $('#CardNumber').val();
+        ToggleControls();
+    });
+    function ToggleControls() {
+
+        var isUpdateCreditCardInfo = $('#UpdateCreditCardInfo').prop('checked');
+        var _allControls = $('#CreditCardInfo input, #CreditCardInfo select');
+        if (isUpdateCreditCardInfo === true) {
+            _allControls.attr('disabled', false);
+            $('#CardNumber').val(_cardNumber);
+            $('.disablebutton').attr('disabled', false)
+        }
+        else {
+        _allControls.attr('disabled', true);
+        $('#CardNumber').val(_cardNumber);
+        $('.disablebutton').attr('disabled', true)
+            $('.nameoncard').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+            $('.cardnumber').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+            $('.expiry_Month').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+            $('.expiry_date').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+            $('.Code').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+        }
+    }
+
+    function isNumeric(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
+
+        return true;
+    }
+
+
+    $('.AlphabetsOnly').keypress(function (e) {
+
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
+
+</script>
+<style>
+    .expiry_date {
+        width: 10%;
+    }
+</style>
+

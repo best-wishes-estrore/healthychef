@@ -1,0 +1,799 @@
+﻿@model HealthyChefCreationsMVC.CustomModels.ViewMenuModel
+
+@{
+    ViewBag.Title = "Product Description";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+}
+
+<div class="container content_start">
+    <div class="article-cnt" style="display: block;">
+        @foreach (var m in Model.alcMenuForProductDesc)
+        {
+            using (Html.BeginForm("AddMealToCart", "Menu", FormMethod.Post, new { @id = "ProductDescriptionAddToCart" + m.meal.MenuItemID }))
+            {
+                <div id="familystyleinfo" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            @*<div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    @*<h4 class="modal-title">Modal Header</h4>
+                                </div>*@
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <p>Family Style will deliver 2 or more portions in one serving dish.This makes heating meals for the whole family more convenient, reduces packaging, and allows you to save 10% on the price.</p>
+                            </div>
+                            @*<div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>*@
+                        </div>
+
+                    </div>
+                </div>
+                <div id="MealDetailsContainer" style="margin-top:90px;">
+                    <div class="loading-text" id="divLoader" style="display:none">
+                        <h1>
+                            Adding
+                            <span class="dot-one"> .</span>
+                            <span class="dot-two"> .</span>
+                            <span class="dot-three"> .</span>
+                        </h1>
+                    </div>
+                    <div id="snackbar" style="display:none">Product Added To Cart</div>
+                    <span id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_lblHeaderMealType"></span>
+                    <div class="mealItem">
+                        <div class="col-md-3" style="padding-left: 0px;">
+                            <img class="img-responsive" src="@m.meal.ImageUrl" />
+                        </div>
+                        <div class="col-md-7">
+                            <div class="main-description newbutton">
+                                <h2 class="col-md-7"><span class="food-title">@m.meal.Name</span></h2>
+                                <a class="page-button-submit col-md-5 btn-orange hidden-xs" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
+                            </div>
+                            <!-- <div class="clearfix"></div> -->
+                            <div class="ptb-10">@m.meal.Description</div>
+                            <p class=""><em>Allergens: @m.AllergenList</em></p>
+                            <a class="page-button-submit col-md-5 btn-mobile btn-orange visible-xs" style="padding: 10px;" href='/browse-menu.aspx'>SEE THIS WEEK'S COMPLETE MENUS</a>
+
+                            @if (Model.isActive)
+                            {
+                                <div class="" style="text-align:right">
+                                    <div class="pull-right" style="width:100%">
+                                        <div class="menuquestion cart_check align_FS">
+                                            <span>Save 10% With <b class="familystyle">Family Style</b></span>
+                                            <input type="checkbox" id="isFamilyStyle1_@m.meal.MenuItemID" onclick="togleFamilyStyle2(@m.meal.MenuItemID);" />
+                                            <div class="questionmark" data-toggle="modal" data-target="#familystyleinfo">
+                                                <img src="~/Content/Images/question.png" />
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <br /><br />
+                                        <strike style="margin-right:10px" class="strike"><span class="plan-price-text right-align" style="display:none" id="OriginalPriceStrike1_@m.meal.MenuItemID">@m.Price</span></strike><span class="plan-price-text right-align" id="originalprice1_@m.meal.MenuItemID">@m.Price</span><span class="plan-price-text right-align" style="display:none" id="discountedprice1_@m.meal.MenuItemID">@m.DiscountedMockPrice</span><span class="Qty_price"> | QTY:</span>
+                                        <input type="number" id="Quantity1_@m.meal.MenuItemID" class="Quantitymenu" onkeydown="return checkShortcut();" onchange="validateQuantity1(@m.meal.MenuItemID)" name="Quantity1" value="1" min="1" />
+                                        <br>
+                                        <div id="divfamilystyleerror1_@m.meal.MenuItemID" class="divfamilystyleerror" style="display:none;">
+                                            <span>Family Style requires 2 or more servings.</span>
+
+                                        </div>
+                                        @if (m.mealSizes.Count == 1)
+                                        {
+                                            <input type="button" name="" value="Add" onclick="AddProductToCart(@m.meal.MenuItemID);" id="" class="addToCart btn-orange" data-dismiss="modal" size="@m.mealSizes[0].SizeId.ToString()" price="@m.mealSizes[0].Price.ToString()">
+                                        }
+                                        else
+                                        {
+                                            <input type="button" name="" value="Add" onclick="AddProductToCart(@m.meal.MenuItemID);" id="" data-dismiss="modal" class="addToCart btn-orange">
+                                        }
+                                        <br />
+                                        @if (m.AvailableDeliverDates.Count() == 1)
+                                        {
+                                            <input type="hidden" id="SelecteddeliveryDate" value="@m.AvailableDeliverDates[0].Value" />
+                                            <span class="color-lightgreen">This meal will be delivered on @m.AvailableDeliverDates[0].Text</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="color-lightgreen">This meal will be delivered on</span>@Html.DropDownList("DeliveryDate", m.AvailableDeliverDates, new { id = "ddlDeliveryDate", @class = "date-picker dropdown_style", @placeholder = "Select a Delivery Dates" })
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="" style="text-align:right">
+                                    <div class="pull-right">
+                                        <span class="plan-price-text right-align" id="originalprice1_@m.meal.MenuItemID">@m.Price</span>
+                                        <h4 class="outofstock">Out Of Stock</h4>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="content_start col-md-10" style="padding-left:0px">
+
+                    <div class="Content header_title">
+                        @if (Model.activeProfiles.Count > 1 || (m.mealSizes != null && m.mealSizes.Count > 1) || (m.prefsList != null && m.prefsList.Count != 0))
+                        {
+                            <div class="modal-header">
+                                <h4 class="modal-title">Customize</h4>
+                            </div>
+                        }
+                        <div class="modal-body">
+                            <div class="table-responsive" style="width: 100%;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="vertical-align: top;width: 33.3%;padding-right: 1em;">
+                                                <div class="fly-column" style="width: 100%;">
+
+                                                    @if (Model.activeProfiles.Count > 1)
+                                                    {
+                                                        <div id="divProfiles">
+                                                            <h3 class="font-myriad-cond color-olive">Select a Profile</h3>
+                                                            <select name="ProfileID" id="" class="date-picker" style="width:100%">
+                                                                @foreach (var p in (Model.activeProfiles).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                                                                {
+                                                                    if (p.IsChildProfile == false)
+                                                                    {
+                                                                        <option value="@p.UserProfileID" selected="selected">@p.ProfileName</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@p.UserProfileID">@p.ProfileName</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    }
+
+                                                    @if (m.mealSizes != null && m.mealSizes.Count > 1)
+                                                    {
+                                                        <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSizes">
+                                                            <h3 class="font-myriad-cond color-olive">Serving Size</h3>
+                                                            <table class="form-select-menu radio-sizes">
+
+                                                                <tbody>
+                                                                    @foreach (var ms in m.mealSizes)
+                                                                    {
+                                                                        <tr class="bg-lime-light">
+                                                                            <td class="left-box" style="width:auto !important;display: inline-block;">
+                                                                                <span class="meal-size" data-price="@ms.Price"><input id="radiocosts_@m.meal.MenuItemID" type="radio" name="sizeId" onchange="adjustRadioValues1(@ms.Price,@m.meal.MenuItemID);" value="@ms.SizeId"></span>
+                                                                            </td>
+                                                                            <td class="middle-box">
+                                                                                @ms.Description
+                                                                            </td>
+                                                                            <td class="right-box">
+                                                                                @string.Format("{0:c}", ms.Price)
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    }
+                                                    else if (m.mealSizes.Count == 1)
+                                                    {
+                                                        <input type="hidden" value="@m.mealSizes[0].SizeId" name="sizeId" />
+                                                    }
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: top;padding-right: 1em;width: 33.3%">
+                                                <div class="fly-column" style="width: 100%;">
+                                                    @if (m.prefsList != null && m.prefsList.Count != 0)
+                                                    {
+                                                        <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divPrefs">
+                                                            <h3 class="font-myriad-cond color-olive">Options</h3>@*Preferences*@
+                                                            <table class="form-select-menu radio-prefs" border="0">
+
+                                                                <tbody>
+                                                                    @foreach (var pref in m.prefsList)
+                                                                    {
+                                                                        <tr>
+                                                                            <td class="left-box" style="width:auto !important;display: inline-block;">
+                                                                                <span class="meal-prefs" data-price="@pref.Preference.Cost"><input id="" type="checkbox" name="prefIds" value="@pref.PreferenceID"></span>
+                                                                            </td>
+                                                                            <td class="middle-box">
+                                                                                @pref.Preference.Name
+                                                                            </td>
+                                                                            <td class="right-box">
+                                                                                @pref.Preference.Cost
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </td>
+                                                <td id="sidesDishesColumn" style="vertical-align: top;width: 33.3%;">
+                                                    <div class="fly-column" style="width: 100%;">
+                                                        @if (Model.NoOfSideDishes != 0)
+                                                        {
+                                                            if (Model.alcSides1 != null)
+                                                            {
+                                                                if (m.meal.MealTypeID == 10 || m.meal.MealTypeID == 30 || m.meal.MealTypeID == 50 || m.meal.MealTypeID == 70)
+                                                                {
+                                                                    <div id="ctl00_body_ctl00_MealTabRepeater_lvwMealItems_ctrl0_divSidesDishes">
+                                                                        <h3 class="font-myriad-cond color-olive">Select Side Dishes</h3>
+                                                                        <table class="form-select-menu select-sides" border="0">
+                                                                            <tbody>
+                                                                                @if (Model.NoOfSideDishes > 0)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <select name="sideDish1" id="ddlSide11-@m.meal.MenuItemID" class="meal-side" meal-side="1" style="width:100%;margin-bottom: 2px;">
+                                                                                                @foreach (var d in Model.alcSides1)
+                                                                                                {
+                                                                                                    <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                                }
+                                                                                            </select>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                                @if (Model.NoOfSideDishes > 1)
+                                                                                {
+                                                                                    /**/
+
+                                                                                    <tr class="bg-grey-light">
+                                                                                        <td style="border: none;">
+                                                                                            @if (Model.alcSides1 != null)
+                                                                                            {
+                                                                                                <select name="sideDish2" id="ddlSide22-@m.meal.MenuItemID" class="meal-side" meal-side="2" style="width:100%;">
+                                                                                                    @foreach (var d in Model.alcSides1)
+                                                                                                    {
+                                                                                                        <option value="@d.MenuItemID" cost-child="@d.CostChild" cost-small="@d.CostSmall" cost-regular="@d.CostRegular" cost-large="@d.CostLarge">@d.Name</option>
+                                                                                                    }
+                                                                                                </select>
+                                                                                            }
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                }
+
+                                                            }
+                                                        }
+                                                    </div>
+                                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="cl">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Content header_title">
+                        <div class="modal-header">
+                            @*<button type="button" class="close" data-dismiss="modal" id="closebutton">&times;</button>*@
+                            <h4 class="modal-title">@m.meal.Name Nutrition</h4>
+                        </div>
+                        <div class="modal-body" style="padding:0px;">
+                            <div class="col-md-11" style="padding:15px 0px">
+                                <div class="col-md-2">
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Calories</legend>
+                                        <label>@m.NutritionInfo.Calories</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-2">
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Fat (g)</legend>
+                                        <label>@m.NutritionInfo.Fat</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-2">
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Protein (g)</legend>
+                                        <label>@m.NutritionInfo.Protein</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-3">
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Carbohydrates (g)</legend>
+                                        <label>@m.NutritionInfo.Carbohydrates</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-3">
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Sodium (mg)</legend>
+                                        <label>@m.NutritionInfo.Sodium</label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            }
+        }
+    </div>
+</div>
+<div id="divLoader" style="display:none">
+    <img src="~/Content/Images/ajax-loading.gif" />
+</div>
+<style type="text/css">
+    .modal-dialog {
+        left: 0px;
+    }
+
+    .header_title .modal-header {
+        min-height: 16.428571429px;
+        padding: 5px;
+        border-bottom: 1px solid #39aa35;
+        color: #fff;
+        background: #39aa35;
+    }
+
+    .addToCart {
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    .Quantitymenu {
+        margin-right: 17px;
+    }
+
+    .content_start {
+        margin-top: 1%;
+        margin-bottom: 10px;
+    }
+
+    .page-button-submit:hover {
+        color: #fff;
+    }
+
+    .header_title .col-md-2, .header_title .col-md-3 {
+        padding: 0px;
+    }
+
+    legend {
+        border-bottom: 0px solid #ddd;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .mealItem .img-responsive {
+        height: 100%;
+        min-height: 100px;
+    }
+
+    .main-description .food-title {
+        font-size: 16px;
+        color: #39aa35;
+        font-family: 'Ubuntu', sans-serif;
+        padding-right: 9px;
+        font-weight: bold;
+    }
+
+    fieldset {
+        text-align: center;
+    }
+
+    .questionmark {
+        margin-right: 0px;
+        margin-left: 2px;
+        margin-top: 7px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .menuquestion {
+        /* margin-bottom: 10px;*/
+        text-align: right;
+    }
+
+    .outofstock {
+        min-height: 16.428571429px;
+        padding: 5px 15px !important;
+        border-bottom: 1px solid #cccccc;
+        color: #000;
+        background-image: linear-gradient(#cccccc,#cccccc);
+        line-height: initial !important;
+        border-radius: 0px;
+        font-size: 15px !important;
+        cursor: no-drop;
+    }
+
+    .newbutton .col-md-7 {
+        padding: 0px;
+        float: left;
+    }
+
+    .newbutton .page-button-submit {
+        width: auto !important;
+        line-height: 10px;
+    }
+    <!-- .allergenem { -->
+        <!-- float: left; -->
+        <!--
+    }
+
+    .ptb-10 {
+        /*  float: left; */
+        width: 100%;
+        display: table;
+    }
+
+    .color-lightgreen {
+        color: #39aa35;
+        text-align: left;
+        float: left;
+        font-size: 17px;
+        font-weight: bold;
+        padding: 5px;
+    }
+
+    .strike:before {
+        top: 0.75em;
+    }
+
+    #ddlDeliveryDate {
+        float: left;
+        padding: 6px 4px;
+    }
+
+    .content_start .table-responsive {
+        overflow-x: hidden;
+    }
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #276f22;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 5px 16px;
+        position: fixed;
+        z-index: 1;
+        left: 0px;
+        top: 0px;
+        font-size: 17px;
+        width: 100%;
+    }
+
+
+        #snackbar.show {
+            visibility: visible;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+        }
+
+    @@-webkit-keyframes fadein {
+        from {
+            top: 0;
+            opacity: 0;
+        }
+
+        to {
+            top: 30px;
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadein {
+        from {
+            top: 0;
+            opacity: 0;
+        }
+
+        to {
+            top: 30px;
+            opacity: 1;
+        }
+    }
+
+    @@-webkit-keyframes fadeout {
+        from {
+            top: 30px;
+            opacity: 1;
+        }
+
+        to {
+            top: 0;
+            opacity: 0;
+        }
+    }
+
+    @@keyframes fadeout {
+        from {
+            top: 30px;
+            opacity: 1;
+        }
+
+        to {
+            top: 0;
+            opacity: 0;
+        }
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".meal-side").change(function () {
+            var mealItem = $(this).closest('.mealItem');
+
+            if (mealItem.length == 0)
+                return;
+
+            if (!checkHighlightMealSideControl(mealItem, 1) || !checkHighlightMealSideControl(mealItem, 2))
+                return;
+
+            //calcPrice(mealItem, true);
+        });
+
+
+
+        $("#ddlDeliveryDate").change(function () {
+            var deliverydate = $('#ddlDeliveryDate').find(":selected").val();
+            $("#divLoader").show();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("_ProductDescription", "Menu")',
+                data: { deliverydate: deliverydate},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (data)
+                {
+                    debugger;
+                    $("#wrapper").html(data.responseText);
+                    $("#divLoader").hide();
+                   // alert('Data: ' + data);
+                },
+                error: function (data) {
+                    debugger;
+                    $("#wrapper").html(data.responseText);
+                    $("#divLoader").hide();
+                    //alert('Data: ' + data);
+                }
+            });
+
+        });
+
+        function checkHighlightMealSideControl(mealItem, ordinal) {
+
+            if (!mealItem)
+                return false;
+
+            var mealSideControl = mealItem.find("select[meal-side='" + ordinal + "']");
+
+            if (mealSideControl.length == 0)
+                return false;
+
+            var mealSideMenuItemId = mealSideControl.val();
+
+            if (mealSideMenuItemId > -1) {
+                mealSideControl.closest('tr').addClass('bg-lime-light');
+            } else {
+                mealSideControl.closest('tr').removeClass('bg-lime-light');
+            }
+            return true;
+        }
+        $('.meal-size').each(function (index, element) {
+            //Select the first radio button in each set
+            $(this).find('[type="radio"]').prop('checked', false);
+            $(this).find('[type="radio"][value="3"]').prop('checked', true);
+            //Alternate row colors and remove border from last List Item
+            $(this).find('.form-select-menu').each(function () {
+                $('tr:odd', $(this)).addClass('bg-grey-light');
+                $('tr:last td', $(this)).css('border', 'none');
+            });
+            //Set default prices
+            calcPrice(element, false);
+        });
+
+        $('.meal-size').click(function () {
+            $('tr', $(this).closest('.form-select-menu')).removeClass('bg-lime-light');
+            $(this).closest('tr').addClass('bg-lime-light');
+
+            $(this).closest('.article-cnt').find('[type="radio"]').prop('checked', false);
+            $(this).find(':radio').prop('checked', true);
+
+            calcPrice1($(this).closest('.article-cnt'), true);
+        });
+        function calcPrice1(mealItem, allowOverridePrice) {
+            var price = 0;
+            var sizePrice = parseFloat($('input[type=radio]:checked', mealItem).closest("span").attr('data-price'));
+            price += ((isNaN(sizePrice)) ? 0 : sizePrice);
+            $('input[type=checkbox]:checked', mealItem).each(function (index, element) {
+                var optionPrice = parseFloat($(element).attr('data-price'));
+                price += ((isNaN(optionPrice)) ? 0 : optionPrice);
+            });
+
+            if (allowOverridePrice) {
+                price += getMealSideCost(mealItem, 1);
+                price += getMealSideCost(mealItem, 2);
+            }
+
+            //Output to Html
+            var priceLabel = $('.plan-price-text', mealItem);
+
+            if (priceLabel.text().trim() == '' || allowOverridePrice) {
+                priceLabel.text('$' + price);
+                priceLabel.formatCurrency();
+            }
+        }
+
+        function getMealSideCostBySize(mealSide, size) {
+            var result;
+
+            switch (size) {
+                case "1":
+                    result = parseFloat(mealSide.attr("cost-child"));
+                    break;
+                case "2":
+                    result = parseFloat(mealSide.attr("cost-small"));
+                    break;
+                case "3":
+                    result = parseFloat(mealSide.attr("cost-regular"));
+                    break;
+                case "4":
+                    result = parseFloat(mealSide.attr("cost-large"));
+                    break;
+                default:
+                    result = 0;
+                    break;
+            }
+            return isNaN(result) ? 0 : result;
+        }
+
+        function getMealSideCost(mealItem, ordinal) {
+            try {
+                var selectedMealSide = mealItem.find("select[meal-side='" + ordinal + "']").find(":selected");
+                if (selectedMealSide.length == 0)
+                    return 0;
+
+                var selectedSize = mealItem.find(".meal-size").find("input:checked");
+                if (selectedSize.length == 0)
+                    return 0;
+
+                return getMealSideCostBySize(selectedMealSide, selectedSize.val());
+            }
+            catch (ex) {
+                return 0;
+            }
+        }
+    });
+
+        function AddProductToCart(menuItemId)
+        {
+            debugger;
+            $("#divLoader").css('display', '');
+            $('body').css("opacity", '0.7');
+            var AddtoCartFormData = getFormData($('#ProductDescriptionAddToCart' + menuItemId));
+            if (AddtoCartFormData.Quantity1 === undefined || AddtoCartFormData.Quantity1 === '' || AddtoCartFormData.Quantity1 === 0  )
+            {
+                alert('please enter quantity');
+                $("#divLoader").css('display', 'none');
+                $('body').css("opacity", '1.0');
+                return false;
+            }
+            if (AddtoCartFormData.Quantity1 === "0") {
+                alert('Quantity should be grater than zero');
+                $("#divLoader").css('display', 'none');
+                $('body').css("opacity", '1.0');
+                return false;
+            }
+            var e = document.getElementById("ddlSide11-" + menuItemId);
+            var e1 = document.getElementById("ddlSide22-" + menuItemId);
+            if (e != null) {
+                AddtoCartFormData.sideDishString1 = e.options[e.selectedIndex].text;
+                AddtoCartFormData.sideDishString1Id = e.options[e.selectedIndex].value;
+                if (AddtoCartFormData.sideDish1 == -1) {
+                    AddtoCartFormData.sideDishString1 = '';
+                    AddtoCartFormData.sideDishString1Id = 0;
+                }
+            }
+            if (e1 != null) {
+                AddtoCartFormData.sideDishString2 = e1.options[e1.selectedIndex].text;
+                AddtoCartFormData.sideDishString2Id = e1.options[e1.selectedIndex].value;
+                if (AddtoCartFormData.sideDish2 == -1) {
+                    AddtoCartFormData.sideDishString2 = '';
+                    AddtoCartFormData.sideDishString2Id = 0;
+                }
+            }
+            AddtoCartFormData.isFamilyStyle = document.getElementById('isFamilyStyle1_' + menuItemId).checked;
+            if (AddtoCartFormData.Quantity1 == 1 && AddtoCartFormData.isFamilyStyle == true) {
+                alert("Family Style will deliver 2 or more portions in one serving dish.This makes heating meals for the whole family more convenient, reduces packaging, and allows you to save 10% on the price.");
+                $("#divLoader").css('display', 'none');
+                $('body').css("opacity", '1.0');
+                return false;
+            }
+
+            AddtoCartFormData.Quantity = AddtoCartFormData.Quantity1;
+            AddtoCartFormData.menuItemID = menuItemId;
+            //when sizeId is Undefined..
+            var sizeId = $("input[name='sizeId']:checked").val();
+            if(sizeId != undefined)
+            {
+                AddtoCartFormData.sizeId = sizeId;
+            }
+            AddtoCartFormData.DeliveryDate = $('#ddlDeliveryDate').find(":selected").val();
+            if (AddtoCartFormData.DeliveryDate === null || AddtoCartFormData.DeliveryDate === "" || AddtoCartFormData.DeliveryDate === undefined)
+              {
+                  AddtoCartFormData.DeliveryDate = $('#SelecteddeliveryDate').val();
+              }
+                $('input[value="3"]').prop('checked', true);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddMealToCartAjax", "Menu")',
+                    data: JSON.stringify(AddtoCartFormData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.Success === false) {
+                            alert(res.Message);
+                            $('body').css("opacity", '1');
+                            $("#divLoader").css('display', 'none');
+                        }
+                        else {
+                            $('#UserCartCountGlobal').html(res.CartCount);
+                            $('#aCart').addClass('cart-has-items');
+                            var x = document.getElementById("snackbar");
+                            x.className = "show";
+                            setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+                            $('#snackbar').show();
+                            $("#Yourcartpartialview").html(res.Message);
+                            $('body').css("opacity", '1');
+                            $("#divLoader").css('display', 'none');
+                            $('#Addselectpopup-' + menuItemId + '').modal('hide');
+                            document.getElementById('isFamilyStyle1_' + menuItemId).checked = false;
+                            document.getElementById("Quantity1_" + menuItemId).value = "1";
+                            $("#divfamilystyleerror1_" + menuItemId).hide();
+                            $("#originalprice1_" + menuItemId).show();
+                            $("#OriginalPriceStrike1_" + menuItemId).hide();
+                            $("#discountedprice1_" + menuItemId).hide();
+                            window.location.href = '/cart.aspx';
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                        $('body').css("opacity", '1');
+                        $("#divLoader").css('display', 'none');
+                    }
+                });
+        }
+
+    function togleFamilyStyle2(MenuItemID) {
+        if (document.getElementById('isFamilyStyle1_' + MenuItemID).checked) {
+            var itemqantity = document.getElementById('Quantity1_' + MenuItemID).value;
+            if (itemqantity == 2 || itemqantity > 2) {
+                document.getElementById("isFamilyStyle1_" + MenuItemID).checked = true;
+                $("#originalprice1_" + MenuItemID).hide();
+                $("#OriginalPriceStrike1_" + MenuItemID).show();
+                $("#discountedprice1_" + MenuItemID).show();
+            }
+            else {
+                $("#originalprice1_" + MenuItemID).hide();
+                $("#OriginalPriceStrike1_" + MenuItemID).show();
+                $("#discountedprice1_" + MenuItemID).show();
+                $("#divfamilystyleerror1_" + MenuItemID).css('display', 'inline-block');
+                var qty = document.getElementById('Quantity1_' + MenuItemID);
+                qty.value = 2;
+                qty.focus();
+            }
+        }
+        else {
+            document.getElementById('Quantity1_' + MenuItemID).value = 1;
+            $("#divfamilystyleerror1_" + MenuItemID).hide();
+            $("#originalprice1_" + MenuItemID).show();
+            $("#OriginalPriceStrike1_" + MenuItemID).hide();
+            $("#discountedprice1_" + MenuItemID).hide();
+        }
+    }
+    function adjustRadioValues1(price, menuitemid) {
+        document.getElementById('OriginalPriceStrike1_' + menuitemid).textContent = "$" + price;
+        document.getElementById('discountedprice1_' + menuitemid).textContent = "$" + (price * 0.9).toFixed(2);
+    }
+
+    
+
+</script>

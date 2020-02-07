@@ -1,0 +1,165 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.ContactUsViewModel
+
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+}
+
+<style>
+    .wm_ShortText {
+        width: 150px;
+    }
+
+    .wm-field {
+        padding: 5px;
+    }
+
+    .entity_edit label {
+        font-weight: bold;
+       
+    }
+
+    .entity_edit .wm_Longtext {
+        min-height: 100px !important;
+        width: 65% !important;
+    }
+    .wm_FormBuilder .field-validation-valid {
+        position: absolute;
+    }
+    .wm-field-id-9 label {
+        margin-top: 10px;
+    }
+</style>
+<div class="heading-image">
+    <p><img class="img-responsive" src="/userfiles/images/Kabob%20-%20Banner.png" alt=""></p>
+    <em class="layout">&nbsp;</em>
+</div>
+<div class="container">
+    <div class="col-md-8 background_bg cco">
+        <div class="more-space">
+            <h2>
+                Contact Us
+            </h2>
+
+            <div id="ctl00_Body_ctl00_FormPanel" class="entity_edit wm_FormBuilder">
+                @using (Html.BeginForm("Index", "Contactus", FormMethod.Post))
+                {
+                    @*<div>
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </div>*@
+
+                    <div class="wm-field wm-field-id-1 wm-field-name-firstname row">
+                        @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-4 required" })
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "wm_ShortText  AlphabetsOnly" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger col-md-offset-4" })
+                    </div>
+
+                    <div class="wm-field wm-field-id-2 wm-field-name-lastname  row">
+
+                        @Html.LabelFor(m => m.LastName, new { @class = "col-sm-4 required" })
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "wm_ShortText  AlphabetsOnly" })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger col-md-offset-4"  })
+                    </div>
+                    <div class="wm-field wm-field-id-3 wm-field-name-address row">
+
+                        @Html.LabelFor(m => m.Address, new { @class = "col-sm-4" })
+                        @Html.TextBoxFor(m => m.Address, new { @class = "wm_ShortText" })
+                        @Html.ValidationMessageFor(m => m.Address)
+                    </div>
+                    <div class="wm-field wm-field-id-4 wm-field-name-city row">
+
+                        @Html.LabelFor(m => m.City, new { @class = "col-sm-4" })
+                        @Html.TextBoxFor(m => m.City, new { @class = "wm_ShortText AlphabetsOnly" })
+                        @Html.ValidationMessageFor(m => m.City)
+                    </div>
+                    <div class="wm-field wm-field-id-5 wm-field-name-state row">
+
+                        @Html.LabelFor(m => m.State, new { @class = "col-sm-4" })
+                        @Html.TextBoxFor(m => m.State, new { @class = "wm_ShortText AlphabetsOnly" })
+                        @Html.ValidationMessageFor(m => m.State)
+                    </div>
+                    <div class="wm-field wm-field-id-6 wm-field-name-postalcode row">
+
+                        @Html.LabelFor(m => m.PostalCode, new { @class = "col-sm-4" })
+                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "wm_ShortText", @onkeypress = "return isNumeric(event)", @maxlength = 5 })
+                        @*@Html.TextBoxFor(m => m.PostalCode, new { @class = "wm_ShortText", @onkeypress = "return isNumeric(event)" })*@
+                        @Html.ValidationMessageFor(m => m.PostalCode)
+                    </div>
+                    <div class="wm-field wm-field-id-7 wm-field-name-phonenumber row">
+
+                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-4" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "wm_ShortText", @onkeypress = "return isNumeric(event)", @maxlength = 20 })
+                        @*@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "wm_ShortText" , @onkeypress = "return isNumeric(event)" })*@
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
+                    <div class="wm-field wm-field-id-8 wm-field-name-emailaddress row">
+
+                        @Html.LabelFor(m => m.EmailAddress, new { @class = "col-sm-4 required" })
+                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "wm_ShortText" })
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger  col-md-offset-4" })
+                    </div>
+                    <div class="wm-field wm-field-id-9 wm-field-name-questioncomments row">
+
+                        @Html.LabelFor(m => m.QuestionsComments, new { @class = "col-sm-4" })
+                        @Html.TextAreaFor(m => m.QuestionsComments, new { @class = "wm_Longtext" })
+                        @Html.ValidationMessageFor(m => m.QuestionsComments)
+                    </div>
+
+                    <div class="field col-md-offset-7 mbleapp">
+                        <label>&nbsp;</label>
+                        <input type="submit" value="Submit" class="btn btn-green" style="margin-top:3%" />
+                    </div>
+                }
+
+            </div>
+            <div class="cl">&nbsp;</div>
+            <div class="top">&nbsp;</div>
+            <div class="bottom">&nbsp;</div>
+        </div>
+    </div>
+
+    <div id="sidebar" class="col-md-4" style="padding-right:0px;">
+        <div class="box-green">
+            <div class="center">
+                <h3>Speak to a Customer Service Representative</h3>
+                <p>Call 866-575-2433.</p>
+                <p style="text-align: center;"><img width="225" height="165" alt="" src="/userfiles/images/CustomerService.jpg"></p>
+            </div>
+            @*<div class="top">&nbsp;</div>
+                <div class="bottom">&nbsp;</div>*@
+        </div>
+        <div class="clearfix"></div>
+        @{
+            Html.RenderAction("WhiteBoxSection", "Common");
+        }
+    </div>
+</div>
+<style>
+    .box-green {
+        padding: 6px 10px;
+        background: #f2f2f2;
+        border: 2px solid #ddd;
+        margin: 40px 0px;
+    }
+</style>
+<script>
+    function isNumeric(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
+
+        return true;
+    }
+
+    $('.AlphabetsOnly').keypress(function (e) {
+
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
+</script>

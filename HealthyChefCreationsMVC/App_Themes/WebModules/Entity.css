@@ -1,0 +1,66 @@
+
+.entity_edit input[type=text], 
+.entity_edit input[type=submit], 
+.entity_edit input[type=file], 
+.entity_edit input[type=button], 
+.entity_edit input[type=password],
+.entity_edit select {
+    margin-right: .5em;
+    font-size: 13px;
+}
+.entity_edit textarea {
+    font-size: 13px;
+}
+/* Highlight the current input element. */
+.entity_edit input:focus {
+    background-color: #FFF0BB;
+}
+.entity_edit fieldset {
+    padding: 1em;
+}
+.entity_edit legend {
+    padding: 0em .5em 0em .5em;
+    /*margin: 0em 0em .5em 0em;*/
+}
+.entity_edit .help {
+	color: #5A5A5A;
+}
+
+/******************************************************************************
+    .entity_edit
+******************************************************************************/
+.entity_edit td  {
+    vertical-align: top;
+}
+.entity_edit .field {
+    margin-top: .85em;
+    margin-bottom: .85em;
+}
+/* all children (not descendants). broken in IE 6. */
+.entity_edit .field > * {
+}
+.entity_edit .field .required {
+	border-left: 1px solid red;
+	padding-left: .25em;
+}
+.entity_edit .field .help {
+	display: block;
+	margin: .25em 0em;
+}
+.entity_edit .section {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+/*.entity_edit .toolbar {
+    margin-top: 1.5em;
+    margin-bottom: .65em;
+}*/
+/*.entity_edit .toolbar .saveButton {
+    width: 5em;
+    font-weight: bold;
+}
+.entity_edit .toolbar .cancelButton {
+    width: 5em;
+}*/
+
+

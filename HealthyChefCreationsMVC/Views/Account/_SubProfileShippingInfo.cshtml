@@ -1,0 +1,239 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.CustomerSubProfileShippinInfo 
+
+@{
+    var StatesDropdown = new List<SelectListItem>();
+    var DeliveryTypesDropdown = new List<SelectListItem>();
+    foreach (var s in HealthyChef.Common.Helpers.US_States)
+    {
+        StatesDropdown.Add(new SelectListItem()
+        {
+            Text = s.Name,
+            Value = s.Abbr
+        });
+    }
+
+    var types = HealthyChef.Common.Enums.GetEnumAsTupleList(typeof(HealthyChef.Common.Enums.DeliveryTypes));
+    if (HealthyChef.Common.Helpers.LoggedUser == null || Roles.IsUserInRole(HealthyChef.Common.Helpers.LoggedUser.UserName, "Customer"))
+    {
+        types.RemoveAt(types.IndexOf(types.Where(a => a.Item2 == (int)HealthyChef.Common.Enums.DeliveryTypes.LocalDelivery).Single()));
+    }
+
+    foreach (var dd in types)
+    {
+        DeliveryTypesDropdown.Add(new SelectListItem()
+        {
+            Text = dd.Item1,
+            Value = dd.Item2.ToString()
+        });
+    }
+
+}
+
+@using (Html.BeginForm("UpdateSubProfileShippingInfo", "Account", FormMethod.Post))
+{
+
+<div id="ctl00_body_ctl00_AddressEdit_Shipping1_pnlAddressEdit" data-ctrl="addrShipping" onkeypress="">
+
+    <p>
+        NOTE: Changes saved to shipping addresses in profiles will be applied to future purchases only,
+        and will not be automatically applied to future delivery weeks for existing orders from previous purchases.
+        To change the shipping address for a future delivery week for an existing order from a previous purchase,
+        please contact Customer Service. Shipping addresses for existing orders from previous purchases cannot be changed online.
+    </p>
+    @Html.HiddenFor(m => m.UserID, new { @id = "ShippingInfoUserId" })
+    @Html.HiddenFor(m => m.ProfileId, new { @id = "ShippingInfoProfileId" })
+    @Html.HiddenFor(m => m.ShippingAddressID)
+    <div class="fieldRow col-md-12">
+        <div class="fieldCol startprfle">
+            @Html.CheckBoxFor(m => m.SameAsMainAccount, new { @class = "form-control col-md-6", id = "mycheck" })@*, onclick = "DisableAllFields(this.checked);" })*@
+            @Html.ValidationMessageFor(m => m.SameAsMainAccount)
+            @Html.LabelFor(m => m.SameAsMainAccount, new { @class = "push labelextent" })
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="table_row plan_edit" id="PanelOfShippingAdress">
+
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-2 push required" })
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control col-md-6 sub-profile-address AlphabetsOnly", id = "ShippingInfoFirstName" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-sm-2 push required" })
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control col-md-6 sub-profile-address AlphabetsOnly", id = "ShippingInfoLastName" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.Address1, new { @class = "col-sm-2 push required" })
+                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control col-md-6 sub-profile-address" })
+                @Html.ValidationMessageFor(m => m.Address1)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.Address2, new { @class = "col-sm-2 push" })
+                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control col-md-6 sub-profile-address" })
+                @Html.ValidationMessageFor(m => m.Address2)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.City, new { @class = "col-sm-2 push required" })
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control col-md-6 sub-profile-address AlphabetsOnly" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.State, new { @class = "col-sm-2 push required" })
+                @Html.DropDownListFor(m => m.State, StatesDropdown, new { @class = "form-control col-md-6 sub-profile-address" })
+                @Html.ValidationMessageFor(m => m.State)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.PostalCode, new { @class = "col-sm-2 push required" })
+                @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control col-md-6 sub-profile-address", @onkeypress = "return isNumeric(event)", @maxlength = 5 })
+                @Html.ValidationMessageFor(m => m.PostalCode)
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.Phone, new { @class = "col-sm-2 push" })
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control col-md-6 sub-profile-address", @onkeypress = "return isNumeric(event)", @maxlength = 20 })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="" class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.DefaultShippingTypeID, new { @class = "col-sm-2 push" })
+                @Html.DropDownListFor(m => m.DefaultShippingTypeID, DeliveryTypesDropdown, new { @class = "form-control col-md-6 sub-profile-address" })
+                @Html.ValidationMessageFor(m => m.DefaultShippingTypeID)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="" class="fieldRow col-md-12">
+            <div class="fieldCol">
+                @Html.LabelFor(m => m.IsBusiness, new { @class = "col-sm-2 push" })
+                @Html.CheckBoxFor(m => m.IsBusiness, new { @class = "form-control width_at sub-profile-address" })
+                @Html.ValidationMessageFor(m => m.IsBusiness)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        @*<div class="col-md-offset-3">
+            <input type="submit" name="save" value="Save" onclick="" id="" class="pixels-button-user pixels-button-solid-green-user">
+            <div>
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        @*<div class="fieldRow col-md-12">
+
+        </div>*@
+    </div>
+
+    <div class="col-md-offset-3">
+        <input type="submit" name="save" value="Save" onclick="" id="" class="btn btn-green">@*pixels-button-user pixels-button-solid-green-user*@
+        <div>
+            @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="fieldRow col-md-12">
+        <div class="fieldCol">
+            <div>
+                <p class="">
+                    <span>@Model.NotesTitle</span>
+                </p>
+                <span>@Model.DisplayNote</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+<style>
+    .validation_error_group ul, .field-validation-error {
+        padding: 10px;
+        color:red;
+    }
+    .startprfle input {
+        width: auto !important;
+    }
+    .width_at {
+        width: auto !important;
+    }
+
+    button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        outline: -webkit-focus-ring-color auto 0px;
+    }
+</style>
+
+<script type="text/javascript">
+    function DisableAllFields(checked)
+    {
+        if (checked)
+        {
+            $('.sub-profile-address').attr('disabled', true);
+            //$('.disablethedrpdn').css("pointer-events", "none");
+            //$('.disablethedrpdn').css('background', '#ddd');
+        }
+        else
+        {
+            $('.sub-profile-address').attr('disabled', false);
+            //$('.disablethedrpdn').css("pointer-events", "auto");
+            //$('.disablethedrpdn').css('background', '#fff');
+        }
+    }
+
+    function isNumeric(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode == 46) || (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57)))
+            return false;
+
+        return true;
+    }
+
+    $('.AlphabetsOnly').keypress(function (e)
+    {
+        
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    $('#mycheck').change(function ()
+    {
+        
+        var issameasmainaccount = false;
+        if ($("#mycheck").prop('checked') == true) {
+            issameasmainaccount = true;
+        }
+        if (issameasmainaccount == true) {
+            $("#PanelOfShippingAdress").css("display", "none");
+        }
+        else
+        {
+            $("#PanelOfShippingAdress").css("display", "block");
+        }
+      
+    });
+</script>

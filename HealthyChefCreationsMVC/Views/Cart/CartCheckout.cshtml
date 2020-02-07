@@ -1,0 +1,163 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.CartCheckoutViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+}
+<style>
+    .btn-orange, .btn-orange:hover, .btn-orange, .btn-orange:focus {
+        text-transform: capitalize;
+    }
+
+    .btn-default, .btn-default:hover, .btn-default:focus {
+        border-radius: 5px;
+        color: #72bb3b !important;
+        border: 1px solid #39aa35;
+        text-transform: capitalize;
+        padding: 5px 15px;
+        background: #fff;
+    }
+
+    .paypal {
+        width: 30%;
+        padding: 0px 10px;
+        cursor: pointer;
+    }
+</style>
+<div id="divLoader" style="display:none;"> <img src="~/Content/Images/redesign/loadercart.gif" alt="Loader" /> </div> @*~/Content/Images/ajax-loading.gif*@
+<div class="container">
+    <div class="background_bg mblebg">
+        <h2 style="text-align: center; font-size: 30px;color:#276f22;padding-top: 0.4em;" class="color-orange">Order Summary</h2>
+        @Html.Raw(Model.HtmlString)
+        <span id="lblConfirmFeedback1" style="color: red;font-size: 14px;float: right;width: 100%;text-align: right;">
+            @ViewBag.ErrorMessage
+        </span>
+        <div class="termsandconditions" style="margin: auto 0px auto auto; text-align: right; max-width: 625px;">
+            <fieldset>
+                <legend style="display: none"></legend>
+                <span style="font-size: 11px;" class="checkingtest">
+                    <span id="CheckBoxRequired" style="text-align: left;color: red;display: none;font-size: 13px;margin: 10px 0px;font-weight: bold;width:100%;float:left;">You must select this box to proceed.<br></span>
+                    <input id="cbTermsAndConditions" type="checkbox" name="TermsAndConditions">
+                    <span for="cbTermsAndConditions" class="second-block_colterm">(Required) I have read, understand and agree to the terms and conditions, including the auto-renew, cancellation and change policies. Terms and conditions may be viewed by clicking the link at the bottom of any page on this website. </span>
+                </span>
+                <div class="clearfix"></div>
+                <div class="checkingtest">
+                    <input id="cbMarketingOptIn" type="checkbox" name="MarketingOptIn" checked="checked">
+                    <span class="second-block_colterm">Yes, I would like to receive the Healthy Chef Creations newsletter and promotional emails from Healthy Chef Creations.</span>
+                </div>
+                <br>
+                <br>
+            </fieldset>
+
+            <br>
+
+            <a href="@Url.Action("ConfirmCancel","Cart")" class="btn btn-default">Cancel and Restart</a>
+            @if (ViewBag.ErrorMessage == null)
+            {
+                @*<img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal" />*@
+                <img src="~/Content/Images/paypal.png" onclick="CompletePurchaseWithPaypal();" class="paypal" alt="Check out with PayPal"/>
+                <button type="button" class="btn btn-orange" onclick="CompletePurchase();">Complete Purchase</button>
+            }
+            @*<button type="button" class="btn btn-orange" onclick="CompletePurchaseWithPaypal();">Complete Purchase with Paypal</button>*@
+
+            @*<a href="" class="pixels-button-double pixels-button-double-green" style="float:right">Complete Purchase</a>*@
+
+
+
+            <br>
+            (Your payment card will be charged)
+            <div id="" style="text-align: right;">
+                <div id="ValSumConfirmCheckoutGroup" style="color:Red;display:none;">
+                </div>
+            </div>
+            <br>
+            <span id="lblConfirmFeedback" style="color:red;font-size:15px">
+
+            </span>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $('select').change(function()
+        {
+            //debugger;
+            var changeprofileordernumber = $(this).attr('id');
+            var changeprofileid = $("#" + changeprofileordernumber).val();
+                  $.ajax({
+                 type: "POST",
+                 url: '@Url.Action("ChangeSubProfile", "Cart")',
+                 data: '{ordernumber: "' + changeprofileordernumber + '",profileid: "' + changeprofileid + '"}',
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (res)
+                 {
+                     //debugger;
+                     if (res.Success === true) {
+                         window.location.href = '@Url.Action("CartCheckout", "Cart")';
+                     }
+                 },
+                 error: function (response)
+                 {
+                     alert(response.d);
+                 }
+             });
+        });
+    function CompletePurchase()
+    {
+        $("#divLoader").css('display', '');
+        $('body').css("opacity", '0.9');
+        $('#CheckBoxRequired').hide();
+        $('#lblConfirmFeedback').text('');
+
+        var isTermsAndConditionsAccepted = $('#cbTermsAndConditions').prop('checked');
+        if (isTermsAndConditionsAccepted === false)
+        {
+            $('#CheckBoxRequired').show();
+            $("#divLoader").css('display', 'none');
+            return false;
+        }
+        var isMarketingOptIn = $('#cbMarketingOptIn').prop('checked');
+        $.ajax({
+        type: "POST",
+        url: '@Url.Action("CompletePurchase","Cart")',
+        data: '{MarketingOptIn: "' + isMarketingOptIn + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (res)
+        {
+            if (res.data != null && res.Success)
+            {
+                window.location.href = '/ThankYou.aspx?purchaseNum=' + res.data+'';
+            }
+            //window.location.href = '~/topic/thankyou.aspx';@*'@Url.Action("ThankYou","Cart")';*@
+
+            $('#lblConfirmFeedback').text(res.Message);
+            $('body').css("opacity", '1');
+            $("#divLoader").css('display', 'none');
+        },
+        failure: function (response) {
+            alert(response.d);
+            $('body').css("opacity", '1');
+            $("#divLoader").css('display', 'none');
+        }
+    });
+        }
+        function CompletePurchaseWithPaypal()
+        {
+            var isTermsAndConditionsAccepted = $('#cbTermsAndConditions').prop('checked');
+            if (isTermsAndConditionsAccepted) {
+                location.href = '@Url.Action("PaymentWithPaypal","Paypal")';
+            }
+            else {
+                $('#CheckBoxRequired').show();
+            }
+        }
+        $(document).ready(function () {
+            function disableBack() { window.history.forward() }
+
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+        });
+
+    </script>
+</div>

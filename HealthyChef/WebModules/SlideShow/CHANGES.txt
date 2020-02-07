@@ -1,0 +1,24 @@
+20101217
+===============================================================================
+- fixed bug in js slideshow that creates link when no link is set
+
+20100813
+===============================================================================
+- modified the flash file to use the slideshowimagehandler.ashx handler
+
+20091230
+===============================================================================
+- modified SlideShowService to return a valid value in GetFullPath()
+- modified SlideShowImages_manage to post the size parameter
+- modified Image_SaveButton_Click to strip the file name of special characters
+- added RenameFile method to concatenate (1) to the file name for images
+
+20091027
+===============================================================================
+- added links to admin screen for js slideshow
+
+- replace db access with subsonic 
+
+20080829
+===============================================================================
+- Initial release.

@@ -1,0 +1,187 @@
+﻿@using HealthyChefCreationsMVC.CustomModels;
+@model  List<hccProgramDefaultMenuDetails>
+
+@if (Model != null && Model.Count > 0)
+{
+    var count = 0;
+    <div id='myCarousel-@ViewData["media"]-@ViewData["MealType"]' class="carousel slide menu-carousel" data-interval="false" data-ride="carousel">
+        <div id="defaultBreakFastMenu" class="carousel-inner carousel-content">
+            <!-- Wrapper for slides -->
+
+            @{
+                List<string> lstplan = new List<string>();
+
+                foreach (var defaultplan in Model)
+                {
+                    
+
+                    if (!lstplan.Contains(defaultplan.MenuItemName))
+                    {
+
+                        var isActive = count == 0 ? "active" : "";
+                        <div class="menu_data item @isActive">
+                            <table id="plan-mealtypes-@ViewData["media"]-@ViewData["MealType"]" cellpadding="5" cellspacing="1" class="full-width">
+                                <tbody id="planmenu">
+                                    <tr>
+                                        <td colspan="2">
+                                            <span class="meals_menu">@ViewData["MealType"]</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hiderowmenu">
+
+                                        @*<td style="width:80px">Day @defaultplan.DayNumber:</td>*@
+                                        <td class="">
+                                            <img id="imageurl" class="img-responsive" src="@defaultplan.MenuItemImageUrl" />
+                                        </td>
+                                        <td class="menuitems" style="text-align: justify;">
+
+                                            <strong class="menuItemtitle">@defaultplan.MenuItemName</strong><br />
+                                            @if (!Request.Browser.IsMobileDevice)
+                                            {
+                                                <p class="descriptionTruncateForDesktop"> @defaultplan.Description</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="descriptionTruncateForMobile"> @defaultplan.Description</p>
+                                            }
+                                            <strong>
+                                                <b>
+                                                    <span>@defaultplan.Calories</span>
+                                                </b>
+                                                <b>
+                                                    <span>@defaultplan.Fat<span></span></span>
+                                                </b>
+
+                                                <b> <span>@defaultplan.Carbohydrates<span></span></span></b>
+                                                @*<b> <span>@defaultplan.DietaryFiber<span>g</span></span></b>*@
+                                                <b>
+                                                    <span>@defaultplan.Protein<span></span></span>
+                                                </b>
+                                                <b>
+                                                    <span>@defaultplan.Sodium<span></span></span>
+                                                </b>
+                                            </strong>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        count++;
+                    }
+                    else
+                    {
+
+                    }
+
+                    lstplan.Add(defaultplan.MenuItemName);
+                }
+            }
+
+        </div>
+        <!-- Left and right controls -->
+        <a class="carousel-left carousel-control left" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]" data-slide="prev">
+            <span class="fa fa-chevron-left top45"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-right carousel-control right tif" style="margin-right:10px;" href="#myCarousel-@ViewData["media"]-@ViewData["MealType"]" data-slide="next">
+            <span class="fa fa-chevron-right top45"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+}
+<script>
+
+    if ($('input[name=mealtype][value=1]').is(':checked')) {       
+        $("div[id^='myCarousel-'][id='breakfast']").css("display", "show");
+    }
+    else {       
+        $("div[id^='myCarousel-'][id='breakfast']").css("display", "none");
+    }
+
+    if ($('input[name=mealtype][value=2]').is(':checked')) {
+        $("div[id^='myCarousel-'][id='lunch']").show();
+    }
+    else {
+        $("div[id^='myCarousel-'][id='lunch']").hide();
+    }
+
+    if ($('input[name=mealtype][value=3]').is(':checked')) {
+        $("div[id^='myCarousel-'][id='dinner']").show();
+    }
+    else {
+        $("div[id^='myCarousel-'][id='dinner']").hide();
+    }
+    $(document).ready(function () {
+
+        healthylivingshowhide();
+
+        $(document).on('change', '#ddldeliveryDate', function (e) {
+            e.stopImmediatePropagation();
+            // $("#ddldeliveryDate").change(function () {
+            //alert(0);
+            healthylivingshowhide();
+            healthyDietshowhide();
+        })
+        function healthyDietshowhide() {
+            $("#plan-types tr td").each(function () {
+
+                var td = $(this);
+                if (td.text().trim() == "HCG Diet") {
+                    $("#myCarousel-desktop-Breakfast").hide()
+                }
+            });
+        }
+
+        function healthylivingshowhide() {
+         
+            $("#plan-mealtypes tr td").each(function () {
+
+                var td = $(this);
+
+
+                if (td.find('input:checkbox').prop('value') == "1") {
+                    if (td.find('input:checkbox').prop('checked')) {
+                        $("#myCarousel-desktop-Breakfast").show();
+                        $("#myCarousel--Breakfast").show();
+                    } else {
+                        $("#myCarousel-desktop-Breakfast").hide();
+                        $("#myCarousel--Breakfast").hide();
+                    }
+                }
+
+
+                if (td.find('input:checkbox').prop('value') == "2") {
+                    if (td.find('input:checkbox').prop('checked')) {
+                        $("#myCarousel-desktop-Lunch").show();
+                        $("#myCarousel--Lunch").show();
+
+                    } else {
+                        $("#myCarousel-desktop-Lunch").hide();
+                        $("#myCarousel--Lunch").hide();
+                    }
+                }
+
+
+                if (td.find('input:checkbox').prop('value') == "3") {
+                    if (td.find('input:checkbox').prop('checked')) {
+                        $("#myCarousel-desktop-Dinner").show();
+                        $("#myCarousel--Dinner").show();
+                    } else {
+                        $("#myCarousel-desktop-Dinner").hide();
+                        $("#myCarousel--Dinner").hide();
+                    }
+                }
+            })
+        }
+
+    });
+    //$(document).ready(function () {
+    //    $('.menu-carousel').carousel({
+    //        pause: true,
+    //        interval: false,
+    //    });
+    //})
+</script>

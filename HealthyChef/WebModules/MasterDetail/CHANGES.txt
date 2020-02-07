@@ -1,0 +1,21 @@
+2011-04-06- mfeliciano
+===============================================================================
+- Added Template property to settings that sets the initial template to the 
+Detail item when the page is created.  To install run the Upgrade_MasterDetail_Settings_Template_04062011.sql 
+in the db\migrate folder in the main folder.
+
+
+2009-10-27 - rread
+===============================================================================
+- Integrated into CMS core template.
+
+
+2009-07-02 - rread
+===============================================================================
+- Improved scalability.  Increased the artifical limit of the number of detail pages from 170 to 2660.
+This limitation is caused by the number if Module Ids that can be passed to the MasterDetail_GetRecentItems stored proc. 
+
+
+2009-06-24 - rread
+===============================================================================
+- Initial release.

@@ -1,0 +1,78 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.CustomerRecurringOrderInfo
+
+<script>
+    $(document).ready(function () {
+        $('a[id*=btnDelete]').each(function () {
+            var hrefJs = $(this).attr('href');
+            hrefJs = hrefJs.substring(11, hrefJs.length); // remvoves the leading "javascript:"
+            $(this).attr('href', 'javascript: if(confirmDelete()){' + hrefJs + '; }');
+        });
+    });
+
+    function confirmDelete() {
+        if (!confirm('Are you sure you want to cancel this recurring order?')) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+@if (Model.RecurringOrders != null)
+{
+
+    <div class="m-2">
+        <table class="table" style="width:100%;">
+            <tbody>
+                <tr>
+                    <th>Recurring Orders</th>
+                    <th>Last Scheduled Delivery</th>
+
+                </tr>
+
+                @foreach (var ro in Model.CustomerRecurringOrders)
+                {
+                    if (ro.ItemDetails != "Item not available")
+                    {
+                        <tr>
+                            <td>
+                                <span>@Html.Raw(ro.ItemDetails)</span>
+                            </td>
+                            <td>
+                                <span>@ro.RecurringDate</span>
+                            </td>
+                            <td>
+                                @if (ro.AllowCancel)
+                                {
+                                    <a href="#" onclick="location.href='@Url.Action("DeleteRecurringOrder", "Account", new { cartId = ro.CartId, cartItemId = ro.CartItemId })'" id="btnDelete">Cancel Auto-Renew</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    @*else
+                    {
+                        <tr>
+                            <td>
+                                <span>@Html.Raw(ro.ItemDetails)</span>
+                            </td>
+                            <td>
+                                <span>@ro.RecurringDate</span>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Cancel Auto-Renew", "DeleteRecurringOrder", "Account", new { cartId = ro.CartId, cartItemId = ro.CartItemId })
+                               <a href="#" onclick="location.href='@Url.Action("DeleteRecurringOrder", "Account", new { cartId = ro.CartId, cartItemId = ro.CartItemId })'" id="btnDelete">Cancel Auto-Renew</a>
+                            </td>
+                        </tr>
+                    }*@
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+}
+<style>
+    .m-2 table th {
+        border-top: none !important;
+    }
+</style>

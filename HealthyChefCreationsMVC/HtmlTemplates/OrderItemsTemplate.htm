@@ -1,0 +1,106 @@
+﻿<span style="font-size: 10px !important;">
+    <table width="100%" cellpadding="4" cellspacing="0">
+        <tr style="border: 1px solid #cccccc; background-color: whitesmoke">
+            <td nowrap>
+                <b>SKU #</b>
+            </td>
+            <td width="70%">
+                <b>Description</b>
+            </td>
+            <td align="center" nowrap>
+                <b>Qty</b>
+            </td>
+            <td align="right" nowrap>
+                <b>Unit Price</b>
+            </td>
+            <td nowrap>
+                <b>Total<b>
+            </td>
+        </tr>
+        ##ItemRowsHtml##
+        <tr>
+            <td colspan="5">
+                <table>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <b>Item Total</b>:
+                        </td>
+                        <td align="right">
+                            ##SubTotal##
+                            <!--" + originalAmount.ToString("c") + "-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <b>Subtotal:
+                        </td>
+                        <td align="right">
+                            " + this.SubTotalAmount.ToString("c") + "
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <b>Subtotal:
+                        </td>
+                        <td align="right">
+                            " + this.SubTotalAmount.ToString("c") + "
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Shipping Method:</b>&nbsp;&nbsp;" + shippingDetails + "
+                        </td>
+                        <td align="right" nowrap>
+                            <b>Shipping & Handling:
+                        </td>
+                        <td align="right">
+                            " + this.ShipEstAmount.ToString("c") + "
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <b>Tax:
+                        </td>
+                        <td align="right">
+                            " + this.TaxAmount.ToString("c") + "
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Tax Number:</b>&nbsp;&nbsp;" + currentCustomer.TAXNU + "
+                        </td>
+                        <td align="right">
+                            <b>Tax Discount:
+                        </td>
+                        <td align="right">
+                            (" + this.TaxDiscount.ToString("c") + ")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <b><font color="#990000">Total:</font>
+                        </td>
+                        <td align="right">
+                            <font color="#990000">" + this.TotalAmount.ToString("c") + "</font>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</span>

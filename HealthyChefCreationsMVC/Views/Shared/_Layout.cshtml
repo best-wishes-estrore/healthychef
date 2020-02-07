@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="nxMDGgxTErPKXNuICvBxfQPXY4XdPqCUpPUpFSnGIgU" />
+    <link rel="shortcut icon" href="~/Content/Images/Healthy-Chef-Logo-leaves.png" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    @*<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/HealthyChefStyles")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/HealthyChefScripts")
+
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <meta name="msvalidate.01" content="36EB1A194C116E88B600C9EB1A332622" />
+    <asp:ContentPlaceHolder runat="server" ID="masterHeader"></asp:ContentPlaceHolder>
+    @*<meta name="google-site-verification" content="pEdaIoVNdrxoDXJowruYbab9hy2qMQxLxb2gJJKLaJE" />*@
+    <meta name="google-site-verification" content="nxMDGgxTErPKXNuICvBxfQPXY4XdPqCUpPUpFSnGIgU" />
+</head>
+<body class="home-page">
+    <div id="wrapper">
+
+        @*@{
+            //Html.RenderPartial("_TopHeader");
+            Html.RenderAction("TopHeaderSection", "Common");
+        }*@
+
+        <div class="page_gap">
+            <div class="desktop_view">
+                @if (Request.Browser.IsMobileDevice)
+                {
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
+                }
+                else if (Request.Browser["ScreenPixelsWidth"] == "768")
+                {
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
+                }
+                else
+                {
+                    Html.RenderAction("TopHeaderSection", "Common");
+                    Html.RenderAction("HeaderSection", "Common");
+                }
+                @*@{
+            Html.RenderAction("HeaderSection", "Common");
+        }*@
+            </div>
+        </div>
+    </div>
+    <div class="body-content1">
+        @RenderBody()
+    </div>
+    <div class="clearfix"></div>
+    @{
+        // Html.RenderPartial("_Footer");
+        Html.RenderAction("FooterSection", "Common");
+    }
+
+    <script>
+        $('#intercom-container .intercom-launcher-frame').css("cssText", "position: absolute !important;");
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1068905029;
+        var google_conversion_label = "1zRJCN367gYQxeTY_QM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <script>
+        var FullName = $('#ctl00_lblFullName').text();
+        var UserName = $('#ctl00_lblUserName').text();
+        var UserEmail = $('#ctl00_lblUserEmail').text();
+
+        if (UserEmail != '' && FullName != '') {
+            window.intercomSettings = {
+                app_id: "ktzghdfu",
+                name: FullName,
+                email: UserEmail,
+                created_at: new Date(),
+                custom_launcher_selector: '#my_custom_link'
+            };
+        }
+        else {
+            window.intercomSettings = {
+                app_id: "ktzghdfu",
+                custom_launcher_selector: '#my_custom_link'
+            }
+        }
+        function unixTimeStamp(date) {
+            var myDate = date.split(' ');
+            myDate = myDate[0].split("/");
+            var newDate = myDate[0] + "/" + myDate[1] + "/" + myDate[2];
+            return new Date(newDate).getTime();
+        }
+        $('#my_custom_link').css();
+    </script>
+
+    @*<script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else { var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/ktzghdfu'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })()</script>*@
+
+    <script>
+        (function () {
+            var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else {
+                var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() {
+                    var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true;
+                    s.src = 'https://widget.intercom.io/widget/ktzghdfu'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+                } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); }
+            }
+        })()
+    </script>
+    <noscript>
+        <div style="display: inline;">
+            <img height="1" width="1" style="border-style: none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1068905029/?value=0&amp;label=1zRJCN367gYQxeTY_QM&amp;guid=ON&amp;script=0" />
+        </div>
+    </noscript>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @@keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

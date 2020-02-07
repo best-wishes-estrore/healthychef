@@ -1,0 +1,402 @@
+﻿@model HealthyChefCreationsMVC.CustomModels.ViewMenuModel
+@{
+    bool IsCartPrinted = false;
+}
+<div class="col-md-4" style="padding:0px 5px">
+    <h4 style="color:#39aa35;">Your Cart</h4>
+    <div class="sidemenucart">
+
+        <div class="colcart">
+            <div id="yourcart" class="colul" style="width:100%;">
+                @if (Model.cartViewModel.FirstOrDefault().cartItems.Count() > 0)
+                {
+                    IsCartPrinted = true;
+                }
+                <div id="1" class="col-11">
+                    @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).FirstOrDefault() != null)
+                    {
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[0].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
+                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                        {
+                            var itemname = cartitem.ItemName.Split('-')[2];
+                            if (Model.calendar[0].DeliveryDate == Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[0].DeliveryDate).FirstOrDefault().DeliveryDate)
+                            {
+                                if (cartitem.ItemName.Contains("Gift Certificate "))
+                                {
+                                    <h5>@cartitem.ItemName.Split('-')[0]</h5>
+                                }
+                                else
+                                {
+                                    if (cartitem.Plan_PlanID != null)
+                                    {
+                                        <h5>@cartitem.SimpleName.ToString()</h5>@*@cartitem.SimpleName.ToString()*@
+                                    }
+                                    else
+                                    {
+                                        <h5>@itemname</h5>
+                                    }
+                                }
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="cart_check">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="visibility:hidden;margin:0px" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td align="right">
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
+                            }
+                        }
+                    }
+                </div>
+                <div id="2" class="col-11">
+                    @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[1].DeliveryDate).FirstOrDefault() != null)
+                    {
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[1].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
+                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[1].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                        {
+                            var itemname = cartitem.ItemName.Split('-')[2];
+                            if (Model.calendar[1].DeliveryDate == Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[1].DeliveryDate).FirstOrDefault().DeliveryDate)
+                            {
+                                if (cartitem.ItemName.Contains("Gift Certificate "))
+                                {
+                                    <h5>@cartitem.ItemName.Split('-')[0]</h5>
+                                }
+                                else
+                                {
+                                    if (cartitem.Plan_PlanID != null)
+                                    {
+                                        <h5>@cartitem.SimpleName.ToString()</h5>@*@cartitem.SimpleName.ToString()*@
+                                    }
+                                    else
+                                    {
+                                        <h5>@itemname</h5>
+                                    }
+                                }
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="cart_check">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin:0px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td><a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
+                            }
+                        }
+                    }
+                </div>
+                <div id="3" class="col-11">
+                    @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[2].DeliveryDate).FirstOrDefault() != null)
+                    {
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[2].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
+                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[2].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                        {
+                            var itemname = cartitem.ItemName.Split('-')[2];
+                            if (Model.calendar[2].DeliveryDate == Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[2].DeliveryDate).FirstOrDefault().DeliveryDate)
+                            {
+                                if (cartitem.ItemName.Contains("Gift Certificate "))
+                                {
+                                    <h5>@cartitem.ItemName.Split('-')[0]</h5>
+                                }
+                                else
+                                {
+                                    if (cartitem.Plan_PlanID != null)
+                                    {
+                                        <h5>@cartitem.SimpleName.ToString()</h5>@*@cartitem.SimpleName.ToString()*@
+                                    }
+                                    else
+                                    {
+                                        <h5>@itemname</h5>
+                                    }
+                                }
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child"><span>$@cartitem.mockItemPrice.ToString("0.00")</span></td>
+                                                        <td>
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" >
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td align="right">
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class=" cart_check" style="padding:5px 10px">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: -2px 0px 0px 11px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
+                            }
+                        }
+                    }
+                </div>
+                <div id="4" class="col-11">
+                    @if (Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[3].DeliveryDate).FirstOrDefault() != null)
+                    {
+                        <span style="color: #276f22;font-size: 15px;"><b>Delivered on:<span>&nbsp;@Model.calendar[3].DeliveryDate.ToString("MMMM d, yyyy (ddd)")</span></b></span>
+                        foreach (var cartitem in Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[3].DeliveryDate).OrderBy(x => x.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff")))
+                        {
+                            var itemname = cartitem.ItemName.Split('-')[2];
+                            if (Model.calendar[3].DeliveryDate == Model.cartViewModel.FirstOrDefault().cartItems.Where(x => x.DeliveryDate == Model.calendar[3].DeliveryDate).FirstOrDefault().DeliveryDate)
+                            {
+                                if (cartitem.ItemName.Contains("Gift Certificate "))
+                                {
+                                    <h5>@cartitem.ItemName.Split('-')[0]</h5>
+                                }
+                                else
+                                {
+                                    if (cartitem.Plan_PlanID != null)
+                                    {
+                                        <h5>@cartitem.SimpleName.ToString()</h5>@*@cartitem.SimpleName.ToString()*@
+                                    }
+                                    else
+                                    {
+                                        <h5>@itemname</h5>
+                                    }
+                                }
+                                <div id="menuitemsid">
+                                    <table class="menuitemadd">
+                                        <tr>
+                                            <td align="left" width="60%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td class="mobile_child">
+                                                            <span>$@cartitem.mockItemPrice.ToString("0.00")</span>
+                                                        </td>
+                                                        <td >
+                                                            <span>QTY:</span>
+                                                            <input name="" class="Quantitymenu" type="number" value=@cartitem.Quantity min="1" onchange="UpdateItemQuantity(@cartitem.CartItemID,this)" id="ItemQuantity_@cartitem.CartItemID" title="Update quantity" style="width:30px;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td align="right" width="40%">
+                                                <table class="menuitemadd">
+                                                    <tr>
+                                                        <td>
+                                                            @if (cartitem.ItemTypeID == 1)
+                                                            {
+                                                                <div class="pull-left cart_check" style="padding:5px 10px">
+                                                                    @if (cartitem.Quantity >= 2)
+                                                                    {
+                                                                        <span style="color: #F06324;">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span style="color: #F06324;visibility:hidden">Family Style:</span> <input type="checkbox" onchange="DeleteFamilyStyleItem(@cartitem.CartItemID)" checked="@cartitem.Plan_IsAutoRenew" style="margin: 0px;visibility:hidden" />
+                                                                    }
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="DeleteCartItem(@cartitem.CartItemID)" id="" title="Remove item from cart" href="javascript:void(0)" style="color:Red;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="color:#777070;height:0px;width:100%;background-color: #ddd;margin-top: 1px;" />
+                            }
+
+                        }
+                    }
+                </div>
+                <div>
+                    @if (@Model.mockSubTotal != null)
+                    {
+                        <span class="pull-left" style="font-weight: bold;color: #000;font-size: 14px !important;">Subtotal:</span><span class="pull-right" style="padding-right: 10px;font-weight: bold;color: #000;font-size: 14px !important;">@Model.mockSubTotal</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        if (IsCartPrinted)
+        {
+            <input type="button" id="" onclick="window.location.href='/cart.aspx'" class="btn btn-orange" style="text-decoration:none;margin-top: 8px;width:100%;border-radius: 0px;color:#fff;font-weight:500" value="View Cart" />
+        }
+        else
+        {
+            <input type="button" id="" onclick="window.location.href='/cart.aspx'" class="btn btn-orange" style="text-decoration:none;margin-top: 8px;width:100%;border-radius: 0px;color:#fff;font-weight:500" value="View Cart" disabled="disabled" />
+        }
+    }
+    else
+    {
+        if (IsCartPrinted)
+        {
+            <input type="button" id="" onclick="window.location.href='/login.aspx?ReturnUrl=/cart.aspx'" class="btn btn-orange" style="text-decoration:none;margin-top: 8px;width:100%;border-radius: 0px;color:#fff;font-weight:500" value="View Cart" />
+        }
+        else
+        {
+            <input type="button" id="" onclick="window.location.href='/login.aspx?ReturnUrl=/cart.aspx'" class="btn btn-orange" style="text-decoration:none;margin-top: 8px;width:100%;border-radius: 0px;color:#fff;font-weight:500" value="View Cart" disabled="disabled" />
+        }
+    }
+    <a href="/subscription.aspx" style="margin-top: 8px;width:100%;border-radius: 0px;color:#39aa35;font-weight:500;display:none;" class="btn btn-default">Subscriptions save time and money</a>
+</div>
+<script>
+    function DeleteCartItem(cartItemId) {
+
+
+        var _confirm = confirm('Are you sure that you want to remove this item from the cart?');
+        if (_confirm === false) {
+            x.className = "hide";
+            return _confirm;
+        }
+        else {
+            $('#cartItem_' + cartItemId).remove();
+            $.ajax({
+                type: "POST",
+                /**/
+                url: '@Url.Action("DeleteCartItem", "Cart")',
+                /**/
+                data: '{cartItemId: "' + cartItemId + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (res) {
+                    if (res.Success === true) {
+                        window.location.href = '/browse-menu.aspx';@*// '@Url.Action("Index", "Cart")';*@
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+    }
+    function UpdateItemQuantity(cartItemId, txtQuantityObj) {
+        var newQty = $(txtQuantityObj).val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateCartItemQuantity", "Cart")',
+    data: '{cartItemId: "' + cartItemId + '",newQty: "' + newQty + '"}',
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (res) {
+        if (res.Success === true) {
+            window.location.href = '@Url.Action("Display", "Menu")';
+        }
+        else {
+            alert("Error in updating cart item quantity");
+        }
+},
+failure: function (response) {
+alert(response.d);
+}
+});
+    }
+    function DeleteFamilyStyleItem(cartItemId)
+    {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteAutoRenewItem", "Cart")',
+                data: '{cartItemId: "' + cartItemId + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (res) {
+                    if (res.Success === true) {
+                        window.location.href = '@Url.Action("Display", "Menu")';
+                    }
+                    else if (res.Success === false) {
+                        alert(res.Message);
+                        window.location.href = '@Url.Action("Display", "Menu")';
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+        });
+    };
+</script>

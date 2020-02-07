@@ -1,0 +1,96 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.BillingInfo
+
+@{
+    var StatesDropdown = new List<SelectListItem>();
+    foreach (var s in HealthyChef.Common.Helpers.US_States)
+    {
+        StatesDropdown.Add(new SelectListItem()
+        {
+            Text = s.Name,
+            Value = s.Abbr
+        });
+    }
+
+}
+
+@using (Html.BeginForm("BillingInfo", "Home", FormMethod.Post))
+            {
+    @Html.Label("This is same as My shipping Address")
+    <input type="checkbox" onclick="SetBilling(this.checked);" />
+    @Html.HiddenFor(m => m.UserID)
+              @Html.HiddenFor(m=>m.BillingAddressID)
+                <div class="wm-field">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2" })
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+                <div class="wm-field">
+                    @Html.LabelFor(m => m.LastName, new { @class = "col-md-2" })
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+                <div class="wm-field">
+                    @Html.LabelFor(m => m.Address1, new { @class = "col-md-2" })
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.Address1)
+                </div>
+                <div class="wm-field">
+                    @Html.LabelFor(m => m.Address2, new { @class = "col-md-2" })
+                    @Html.TextBoxFor(m => m.Address2, new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.Address2)
+                </div>
+                <div class="wm-field">
+                    @Html.LabelFor(m => m.City, new { @class = "col-md-2" })
+                    @Html.TextBoxFor(m => m.City, new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.City)
+                </div>
+                <div class="wm-field dropdown_list">
+                    @Html.LabelFor(m => m.State, new { @class = "col-md-2" })
+                    @Html.DropDownListFor(m => m.State, StatesDropdown, "--please select states---", new { @class = "col-md-6" })
+                    @Html.ValidationMessageFor(m => m.State)
+                </div>
+                    <div class="wm-field">
+                        @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-2" })
+                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "col-md-6" })
+                        @Html.ValidationMessageFor(m => m.PostalCode)
+                    </div>
+                    <div class="wm-field">
+                        @Html.LabelFor(m => m.Phone, new { @class = "col-md-2" })
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "col-md-6" })
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                    <div class="col-md-offset-2">
+                        <input type="submit" value="save" class="pixels-button-solid-green pixels-button" />
+                    </div>
+}
+
+<style type="text/css">
+    #sidebar, #content .top, #slider, body.home-page #content .bottom {
+        display: none;
+    }
+
+    body.home-page #content {
+        width: 100% !important;
+        padding: 20px !important;
+        margin: 0px !important;
+        background: #fff;
+    }
+
+    .form_submit {
+        padding: 20px;
+    }
+
+    body.home-page #wrapper {
+        background: none;
+    }
+
+    .wm-field {
+        margin: 5px 0px;
+        display: inline-block;
+        width: 100%;
+    }
+
+        .wm-field .col-md-6 {
+            padding: 0px;
+        }
+</style>

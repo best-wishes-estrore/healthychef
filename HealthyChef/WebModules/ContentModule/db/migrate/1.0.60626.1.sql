@@ -1,0 +1,1 @@
+INSERT WebModules_SchemaVersions ([AppName],Major, Minor, Revision, Build) VALUES ('ContentModule', 1,0,60626,1) 

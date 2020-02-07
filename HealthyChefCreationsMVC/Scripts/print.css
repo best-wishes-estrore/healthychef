@@ -1,0 +1,18 @@
+* /* set all elements to black & white. */
+{
+    background: white;
+    font-size: 11pt;
+    color: black;
+}
+.no-print, /* indicates that an element should _not_ be printed. */
+.webmodules_editModuleLink,
+.webmodules_editPageLink
+{
+    display: none;
+    width: 0px;
+    height: 0px;
+}
+.only-print /* indicates that an element should _only_ appear in print. */
+{
+    display: block;
+}

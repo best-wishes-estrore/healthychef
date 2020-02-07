@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="WebModulesCMS" EntityNamespace="BayshoreSolutions.WebModules.FormBuilder" ContextNamespace="BayshoreSolutions.WebModules.FormBuilder" Class="FormBuilderDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=prog04\mssqlserver2008;Initial Catalog=WebModulesCMS;User ID=WebModulesCMS_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebModules" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.FormBuilder_Field" Member="FormBuilder_Fields">
+    <Type Name="FormBuilder_Field">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ModuleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="HelpText" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Options" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="FormBuilder_Field_FormBuilder_FieldInput" Member="FormBuilder_FieldInputs" ThisKey="Id" OtherKey="FieldId" Type="FormBuilder_FieldInput" />
+      <Association Name="FormBuilder_Module_FormBuilder_Field" Member="FormBuilder_Module" ThisKey="ModuleId" OtherKey="ModuleId" Type="FormBuilder_Module" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_Template_Field" Member="FormBuilder_Template_Fields">
+    <Type Name="FormBuilder_Template_Field">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TemplateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="HelpText" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Options" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="FormBuilder_Template_FormBuilder_Template_Field" Member="FormBuilder_Template" ThisKey="TemplateId" OtherKey="Id" Type="FormBuilder_Template" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_FieldInput" Member="FormBuilder_FieldInputs">
+    <Type Name="FormBuilder_FieldInput">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ResponseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FieldId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InputValue" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="FormBuilder_Field_FormBuilder_FieldInput" Member="FormBuilder_Field" ThisKey="FieldId" OtherKey="Id" Type="FormBuilder_Field" IsForeignKey="true" />
+      <Association Name="FormBuilder_Response_FormBuilder_FieldInput" Member="FormBuilder_Response" ThisKey="ResponseId" OtherKey="Id" Type="FormBuilder_Response" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_Response" Member="FormBuilder_Responses">
+    <Type Name="FormBuilder_Response">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ModuleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IPAddress" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsComplete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="FormBuilder_Response_FormBuilder_FieldInput" Member="FormBuilder_FieldInputs" ThisKey="Id" OtherKey="ResponseId" Type="FormBuilder_FieldInput" />
+      <Association Name="FormBuilder_Response_FormBuilder_ResponseReferrer" Member="FormBuilder_ResponseReferrers" ThisKey="Id" OtherKey="ResponseId" Type="FormBuilder_ResponseReferrer" />
+      <Association Name="FormBuilder_Module_FormBuilder_Response" Member="FormBuilder_Module" ThisKey="ModuleId" OtherKey="ModuleId" Type="FormBuilder_Module" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_Template" Member="FormBuilder_Templates">
+    <Type Name="FormBuilder_Template">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="FormBuilder_Template_FormBuilder_Template_Field" Member="FormBuilder_Template_Fields" ThisKey="Id" OtherKey="TemplateId" Type="FormBuilder_Template_Field" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_ResponseReferrer" Member="FormBuilder_ResponseReferrers">
+    <Type Name="FormBuilder_ResponseReferrer">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ResponseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="domain" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="query" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="referringUrl" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="landingUrl" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Association Name="FormBuilder_Response_FormBuilder_ResponseReferrer" Member="FormBuilder_Response" ThisKey="ResponseId" OtherKey="Id" Type="FormBuilder_Response" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormBuilder_Module" Member="FormBuilder_Modules">
+    <Type Name="FormBuilder_Module">
+      <Column Name="ModuleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NotifyEmail" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ConfirmationPageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StyleName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SubmitButtonText" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Ack_Enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Ack_FromEmailAddress" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Ack_EmailAddressFieldLabel" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Ack_Subject" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Ack_Body" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="FormBuilder_Module_FormBuilder_Field" Member="FormBuilder_Fields" ThisKey="ModuleId" OtherKey="ModuleId" Type="FormBuilder_Field" />
+      <Association Name="FormBuilder_Module_FormBuilder_Response" Member="FormBuilder_Responses" ThisKey="ModuleId" OtherKey="ModuleId" Type="FormBuilder_Response" />
+    </Type>
+  </Table>
+  <Function Name="dbo.FormBuilder_Field_MovePosition" Method="FormBuilder_Field_MovePosition">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="direction" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.FormBuilder_Field_RebuildSortOrder" Method="FormBuilder_Field_RebuildSortOrder">
+    <Parameter Name="moduleId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.FormBuilder_FieldInput_GetByModuleId" Method="FormBuilder_FieldInput_GetByModuleId">
+    <Parameter Name="moduleId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="startDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="endDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="FormBuilder_FieldInput_GetByModuleIdResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ResponseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FieldId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InputValue" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

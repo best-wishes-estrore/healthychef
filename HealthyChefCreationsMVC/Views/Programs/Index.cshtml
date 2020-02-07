@@ -1,0 +1,113 @@
+﻿@model  HealthyChefCreationsMVC.CustomModels.ProgramsViewModel
+@{
+    ViewBag.Title = "Healthy Prepared Meals Delivered | Healthy Organic Meal Delivery Program | Healthy Chef";
+    Layout = "~/Views/Shared/_LayoutNoColumns.cshtml";
+}
+
+
+<div class="container">
+    <div id="main">
+        <div class="background_bg">
+            <div class="container-bottom">
+                <div class="container-cnt">
+                    <!-- Header -->
+                    <div class="full-page-header standard_meal">
+                        <div class="alignleft">
+                            <p style="border: 3px solid #95d444;border-radius: 5px;"><img width="100%" alt="" src="~/userfiles/images/standardmealprograms.jpg"></p>
+                        </div>
+                        <div class="info">
+                            <h2 style="text-align: left;">Customized Meal Programs</h2>
+                            <p><span style="color: rgb(51, 51, 51);">Every meal plan is made to your specifications: select your calorie counts, reduce allergens, or clarify your favorite ingredients.</span></p>
+                            <p>&nbsp;</p>
+                            <p><span style="color: rgb(51, 51, 51);">Call us at <a href="tel:18665752433"><b>866-575-CHEF (2433)</b></a> and we’ll take care of you.</span></p>
+                            <p>&nbsp;</p>
+                            <!-- <h3 style="text-align: center;"> -->
+                            <!-- <span class="save_align">Save big with our multi-week discounts</span><span style="color: rgb(255, 102, 0);">!</span><span style="color: rgb(0, 0, 0);"> -->
+                            <!-- <br> -->
+                            <!-- </span> -->
+                            <!-- </h3> -->
+
+                            <script type="text/javascript">
+                                (function () {
+                                    var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true;
+                                    hm.src = ('++u-heatmap-it+log-js').replace(/[+]/g, '/').replace(/-/g, '.');
+                                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);
+                                })();
+                            </script>
+                        </div>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                    <!-- Body Content -->
+
+
+                    <link href="~/Content/popover.css" rel="stylesheet">
+
+                    <script src="~/Scripts/jquery.popover-1.1.2.js"></script>
+
+                    <style type="text/css">
+                        fieldset {
+                            margin: 0;
+                            padding: 1em;
+                            border: none;
+                        }
+
+                        .popoverClass {
+                            height: 35px;
+                            width: 450px;
+                        }
+                    </style>
+
+                    <div>&nbsp;</div>
+
+                    @if (Model != null)
+                    {
+                        foreach (var p in Model.programs)
+                        {
+                            <div class="section newmenuprograms">
+                                <!-- <div class="section-top">&nbsp;</div> -->
+
+                                <div class="section-middle">
+                                    <table border="0" class="full-width">
+                                        <tr>
+                                            <td width="20%">
+                                                <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })">
+                                                    <img alt="@p.Name" src="@p.ImagePath" class="img-responsive">
+                                                </a>
+                                            </td>
+                                            <td width="80%" align="top">
+                                                <div class="description">
+                                                    <a id="" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })">
+                                                        <h3>@p.Name</h3>
+                                                    </a>
+                                                    <div style="margin: 0.5em 0; color: #333; font-size: 14px; line-height: 18px;">@p.Description</div>
+                                                </div>
+                                                <div class="price">
+                                                    <p style="display:none">
+                                                        As low as<br>
+                                                        <span>
+                                                            <span id="">@p.Price</span>
+                                                        </span> per day.
+                                                    </p>
+
+                                                    <a id="" class="btn btn-orange page-button-arrow" href="@Url.Action("Details", "Programs", new { Id = p.ProgramID,programName = p.Name.Replace(' ','-') })" style="margin-bottom: 4px;">Select</a>
+                                                    @*<a id="" class="btn btn-green page-button-arrow" href="@Url.Action("Details", "Content", new { Id = p.MoreInfoNavID })">More Info</a>*@@*page-button*@
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+
+                                    <div class="cl">&nbsp;</div>
+
+                                </div>
+                                <!-- <div class="section-bottom">&nbsp;</div> -->
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

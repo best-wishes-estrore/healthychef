@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Module.master.cs" MasterPageFile="Default.master"
+    Inherits="BayshoreSolutions.WebModules.Templates.WebModules.Module" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="Body" runat="server">
+    <div class="p-5">
+        <div class="pull-right">
+            <a id="MainMenuLink" runat="server">Return to Main Menu</a>
+        </div>
+         <div class="clearfix"></div>
+    </div>
+    <h3>
+        <em>
+            <asp:Literal ID="ModuleNameCtl" runat="server" /></em>
+        <asp:Literal ID="ModuleTypeNameCtl" runat="server" />
+        Module</h3>
+    <asp:ContentPlaceHolder ID="Body" runat="server" />
+</asp:Content>

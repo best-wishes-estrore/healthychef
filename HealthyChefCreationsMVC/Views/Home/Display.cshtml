@@ -1,0 +1,92 @@
+﻿@model HealthyChefCreationsMVC.CustomModels.HomeViewModel
+@{
+    ViewBag.Title = "Healthy Food Delivery Program | Prepared Meal Delivery Service |Healthy Chef Creations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="clearfix"></div>
+<div id="main">
+    <div id="content" class="post col-md-8">
+        @Html.Raw(Model.HtmlString)
+
+    </div>
+    @*<div id="sidebar" class="col-md-4">
+        @{
+            Html.RenderAction("WhiteBoxSection", "Common");
+        }
+    </div>*@
+    <div class="cl">
+        &nbsp;
+    </div>
+
+    @if (TempData["CreditCardError"] != null)
+    {
+        <script type="text/javascript">
+           alert("@(TempData["CreditCardError"])");
+        </script>
+    }
+
+
+</div>
+<style>
+    #content {
+        width: 100%;
+        padding: 0px 0px;
+        margin:0px !important;
+    }
+    /*.blocktest:before {
+        background: url('https://www.iconsdb.com/icons/preview/green/double-quote-serif-left-xxl.png');
+        width: 30px;
+        height: 30px;
+        background-color: #f6f8f5;
+        background-size: 100% 100%;
+    }
+
+    .blocktest:after {
+        background: url('https://www.iconsdb.com/icons/preview/green/double-quote-serif-right-xxl.png');
+        width: 30px;
+        height: 30px;
+        background-color: #f6f8f5;
+        background-size: 100% 100%;
+    }*/
+    blockquote {
+        color: #616161;
+        font-family: Georgia,serif;
+        font-size: 18px;
+        font-style: italic;
+        line-height: 1.45;
+        margin: 0.25em 0;
+        padding: 0.25em 40px;
+        position: relative;
+        quotes: "\201C""\201D""\2018""\2019"; /*"\201C" "\201D";*/
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .blocktest:before, .blocktest:after {
+        color: #39aa35;
+        content: close-quote;
+        display: block;
+        font-size: 100%;
+        position: absolute;
+    }
+
+    .blocktest:before {
+        content: " “ ";
+        left: 0;
+        font-size: 120px;
+        top:-10px;
+    }
+
+    .blocktest:after {
+        content: "„";
+        color: #39aa35;
+        right: 0;
+        float: right;
+        font-size: 120px;
+        position: absolute;
+        bottom:-20px;
+    }
+    .blocktest {
+        padding: 0px 20px;
+    }
+</style>

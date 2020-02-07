@@ -1,0 +1,120 @@
+-----------Exception Details on  12/20/2018 4:49:48 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 12/20/2018 4:49:48 PM
+
+Error Line No : 
+
+Error Message: String
+
+Exception Type: System.String
+
+Error Location : step1
+
+ Error Page Url: http://localhost:49881/Paypal/PaymentWithPaypal
+
+User Host IP: 
+
+
+--------------------------------*End*------------------------------------------
+
+
+
+-----------Exception Details on  12/20/2018 4:49:52 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 12/20/2018 4:49:52 PM
+
+Error Line No : 
+
+Error Message: String
+
+Exception Type: System.String
+
+Error Location : GetAPIContext Step1
+
+ Error Page Url: http://localhost:49881/Paypal/PaymentWithPaypal
+
+User Host IP: 
+
+
+--------------------------------*End*------------------------------------------
+
+
+
+-----------Exception Details on  12/20/2018 4:49:55 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 12/20/2018 4:49:55 PM
+
+Error Line No : 
+
+Error Message: String
+
+Exception Type: System.String
+
+Error Location : AYGbHnva5ReSha-sb-33ZpohsTd6d1HL0Gc5ZoS8sdPgOpwC_YF5MIx4i1pmQzZLJRPF-H2l7qQ5V9fZ
+
+ Error Page Url: http://localhost:49881/Paypal/PaymentWithPaypal
+
+User Host IP: 
+
+
+--------------------------------*End*------------------------------------------
+
+
+
+-----------Exception Details on  12/20/2018 4:49:55 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 12/20/2018 4:49:55 PM
+
+Error Line No : 
+
+Error Message: String
+
+Exception Type: System.String
+
+Error Location : EM3WoRAQzAdYp7Bc1sWNaY82ir23pOjWTpBXPeYIT3sUqRsRj_umWpI7ENwfjYWEgxI2bhU6l2tDNTGY
+
+ Error Page Url: http://localhost:49881/Paypal/PaymentWithPaypal
+
+User Host IP: 
+
+
+--------------------------------*End*------------------------------------------
+
+
+
+-----------Exception Details on  12/20/2018 4:49:56 PM-----------------
+-------------------------------------------------------------------------------------
+
+
+
+Log Written Date: 12/20/2018 4:49:56 PM
+
+Error Line No : 
+
+Error Message: String
+
+Exception Type: System.String
+
+Error Location : System.Collections.Generic.Dictionary`2[System.String,System.String]
+
+ Error Page Url: http://localhost:49881/Paypal/PaymentWithPaypal
+
+User Host IP: 
+
+
+--------------------------------*End*------------------------------------------
+
+
+

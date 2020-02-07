@@ -1,0 +1,197 @@
+﻿.MasterDetail_ListItem
+{
+    display:block;
+    padding-bottom:5px;
+    min-height:80px;
+}
+.MasterDetail_ListItem img
+{
+    float:left;
+    clear:right;
+}
+.MasterDetail_ListItem p
+{
+    display:inline;
+}
+.MasterDetail_ListItemFeatured,
+.MasterDetail_ListItemFeatured p,
+.MasterDetail_ListItemFeatured span,
+.MasterDetail_ListItemFeatured a
+{
+	background-color:#FFF8DD;
+	font-weight:bold;
+}
+.MasterDetail_FeaturedLabel,
+.MasterDetail_FeaturedLabel span
+{
+	font-weight:bold;
+	background-color:#FFDB4F;
+	width:100%;
+}
+.MasterDetail_Image 
+{
+     padding-right:10px;
+}
+.MasterDetail_AdminHelp
+{
+	background-color:#F5F5F5;
+	border:solid 1px #EEEEEE;
+	padding:1px 10px 10px 10px;
+}
+.MasterDetail_RSS
+{
+    margin-top:2px;
+    margin-bottom:2px;
+}
+.MasterDetail_RSS a
+{
+    padding-left:20px;
+}
+.MasterDetail_Comments
+{
+	background-color:#F5F5F5;
+	border:solid 1px #EEEEEE;
+	padding:1px 10px 10px 10px;
+}
+.MasterDetail_CommentsName
+{
+	color:#0AA7D6;
+	font-weight:bold;
+}
+.MasterDetail_CommentsDate
+{
+	color:#999999;
+}
+.MasterDetail_CommentsText
+{
+	color:#000;
+}
+.MasterDetail_CommentsFlag
+{
+	color:#0AA7D6;
+	font-size:smaller;
+	background-color:#fff;
+	border:solid 1px #EEEEEE;
+	padding:2px;
+}
+.MasterDetail_MiniSummaryCategory
+{
+	float:left;
+	color:#000;
+	font-size:11px;
+	font-weight:bold;
+}
+.MasterDetail_MiniSummaryTitle
+{
+	float:left;
+	font-size:11px;
+}
+.MasterDetail_MiniSummaryTimestamp 
+{
+	font-size:9px;
+	color:gray;
+	padding-left:3px;
+}
+/*----- Begin MasterDetail_MiniSummaryList -----*/
+.MasterDetail_MiniSummaryList {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.MasterDetail_MiniSummaryList li {
+	height:1%;
+	overflow:hidden;
+	vertical-align:top;
+	font-size:11px;
+	line-height:20px;
+	color:#000;
+}
+.MasterDetail_MiniSummaryComment {
+	float:left;
+	width:16px;
+	height:14px;
+	background:url(/WebModules/MasterDetail/public/images/comment-callout.gif) no-repeat;
+	text-align:center;
+	color:#fff;
+	font-size:8px;
+	line-height:12px;
+	display:inline;
+	margin:0 0 0 4px;
+}
+/*----- End MasterDetail_MiniSummaryList -----*/
+
+.modalBackground 
+{ 
+ background-color:#888888; 
+ filter:alpha(opacity=70); 
+ opacity:0.7;
+}
+.modalPanel 
+{ 
+	background-color: #fff;
+	border-color:#ECE9E9;
+	border-style:solid;
+	border-width: 1px;
+}
+
+.modalHeader 
+{
+	border:solid 1px #ECE9E9;
+	background-color:#F5F5F5;
+	color:#0AA7D6;
+	text-align: left;
+	padding: 8px;
+	cursor: move;
+}
+
+.modalBody 
+{
+	border:solid 1px #ECE9E9;	
+	padding-left:5px;
+	padding-top:5px;
+}
+
+.loadingbox
+{
+    position:absolute;
+    top:40%;
+    left:40%;
+    border:1px solid #06419B; 
+    background-color: #ffffff; 
+    height:50px; 
+    width:250px;
+    text-align:center;
+    padding-top:30px
+}
+.help
+{
+	font-size:smaller;
+}
+
+/* ----------------------- Begin Pager styles --------------------------- */
+.MasterDetail_PageLabel {
+	display:inline;
+}
+.MasterDetail_PageNumbers {
+	display:inline;
+}
+div.MasterDetail_Pagination {
+	padding: 3px;
+	margin: 3px;
+	display:inline;
+}
+div.MasterDetail_Pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+	text-decoration: none;
+	color: #000099;
+	background-color:#A6F0FB;
+}
+div.MasterDetail_Pagination a:hover, div.MasterDetail_Pagination a:active {
+	border: 1px solid #000099;
+	color: #000;
+	background-color:#DFFBFF;
+}
+
+/* ----------------------- End Pager styles --------------------------- */
