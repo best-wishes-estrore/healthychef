@@ -1,3 +1,0 @@
-
-<asp:GridView runat="server" GridLines="None">
-</asp:GridView>

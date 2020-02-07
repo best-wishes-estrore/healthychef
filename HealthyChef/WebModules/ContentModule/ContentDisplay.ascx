@@ -1,2 +1,0 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContentDisplay.ascx.cs" Inherits="BayshoreSolutions.WebModules.ContentModule.ContentDisplay" %>
-<asp:Literal ID="ContentArea" runat="server" />
