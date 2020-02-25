@@ -33,7 +33,9 @@ namespace HealthyChefCreationsMVC.CustomModels
         public string Zipcode { get; set; }
         public string ZoneId { get; set; }
 
-        public int OrderMinimum { get; set; }
+        public int MainProfileOrderMinimum { get; set; }
+        public string MainProfilePostalCode { get; set; }
+        public string MainProfileName { get; set; }
         public hccCoupon ActiveCoupon
         {
             get
@@ -240,6 +242,8 @@ namespace HealthyChefCreationsMVC.CustomModels
                             if (profCart == null)
                             {
                                 profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
+                                profCart.OrderMinimum = returnOrderMinimumbyZip(profCart.ShippingAddress.PostalCode);
+                                profCart.PostalCode = profCart.ShippingAddress.PostalCode;
                                 this.profCart.Add(profCart);
                             }
                             profCart.CartItems.Add(cartItem);
@@ -621,7 +625,17 @@ namespace HealthyChefCreationsMVC.CustomModels
                     throw ex;
             }
         }
-
+        public static int returnOrderMinimumbyZip(string ZipCode)
+        {
+            hccShippingZone hccshopin = new hccShippingZone();
+            DataSet ds = hccshopin.BindZoneByZipCodeNew(ZipCode);
+            int OrderMinimum = 0;
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                OrderMinimum = Convert.ToInt32(ds.Tables[0].Rows[0]["OrderMinimum"].ToString());  //ZoneId from On Select Zone Dropdown
+            }
+            return OrderMinimum;
+        }
         public bool IsUserLoggedIn()
         {
             try

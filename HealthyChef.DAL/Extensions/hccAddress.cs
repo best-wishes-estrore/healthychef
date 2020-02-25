@@ -122,6 +122,7 @@ namespace HealthyChef.DAL
                 Street = this.Address1 + (string.IsNullOrWhiteSpace(this.Address2) ? string.Empty : " " + this.Address2),
                 Zip = this.PostalCode,
                 Fax = string.Empty
+               
             };
 
             return retAddr;
@@ -215,5 +216,6 @@ namespace HealthyChef.DAL
         {
             return base.Equals(obj);
         }
+        public int OrderMinimum { get; set; }
     }
 }

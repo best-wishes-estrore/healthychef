@@ -52,31 +52,12 @@ namespace HealthyChefCreationsMVC.Controllers
                     }
                 }
             }
-            cartViewModel.OrderMinimum  = returnZonebyZip(cartViewModel.Zipcode);
-
-            Session["OrderMinimum"] = cartViewModel.OrderMinimum;
-            Session["Discount"] = cartViewModel.Discount;
-            Session["Total"] = cartViewModel.Subtotal;
+            cartViewModel.MainProfileOrderMinimum = returnZonebyZip(cartViewModel.Zipcode);
+            cartViewModel.MainProfilePostalCode= cartViewModel.Zipcode;
+            cartViewModel.MainProfileName = cartViewModel.BillingAddress.Split(' ')[0];
             return View(cartViewModel);
         }
-        [HttpGet]
-        public ActionResult requiredAmountOrderMinimum()
-        {
-            double requiredAmount = 0;
-            try
-            {
-                double orderMinimum = Convert.ToDouble(Session["OrderMinimum"]);
-                double Discount = Convert.ToDouble(Session["Discount"]);
-                double Total = Convert.ToDouble(Session["Total"]);
-                requiredAmount = orderMinimum - (Total + Discount);
-            }
-            catch (Exception)
-            {
 
-                
-            }
-            return View(requiredAmount);
-        }
         public static int returnZonebyZip(string ZipCode)
         {
             hccShippingZone hccshopin = new hccShippingZone();
@@ -84,10 +65,11 @@ namespace HealthyChefCreationsMVC.Controllers
             int OrderMinimum = 0;
             if (ds.Tables[0].Rows.Count > 0)
             {
-                 OrderMinimum = Convert.ToInt32(ds.Tables[0].Rows[0]["OrderMinimum"].ToString());  //ZoneId from On Select Zone Dropdown
+                OrderMinimum = Convert.ToInt32(ds.Tables[0].Rows[0]["OrderMinimum"].ToString());  //ZoneId from On Select Zone Dropdown
             }
             return OrderMinimum;
         }
+
 
         [HttpGet]
         public ActionResult Checkout()

@@ -288,7 +288,10 @@ namespace HealthyChef.DAL
                 return cartItems;
             }
         }
-        public hccAddress ShippingAddress { get { if (ShippingAddressId > 0) { return hccAddress.GetById(ShippingAddressId); } else { return null; } } }
+
+        public int OrderMinimum { get; set; }
+        public string PostalCode { get; set; }
+        public hccAddress ShippingAddress { get { if (ShippingAddressId > 0) { return hccAddress.GetById(ShippingAddressId); } else { return null; } }}
         public bool HasProgramPlan { get { return CartItems.Exists(a => a.ItemType == Enums.CartItemType.DefinedPlan); } }
     }
 }

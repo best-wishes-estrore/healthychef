@@ -393,10 +393,10 @@
 
                             <asp:TemplateField HeaderText="Multiplier" ItemStyle-Width="150">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblMultiplier" runat="server" Text='<%# Eval("Multiplier") %>'></asp:Label>
+                                    <asp:Label ID="lblMultiplier" runat="server" Width="100px" Text='<%# Eval("Multiplier") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtMultiplier" runat="server" Text='<%# Eval("Multiplier") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtMultiplier" runat="server" Width="100px" Text='<%# Eval("Multiplier") %>'></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvMultiplier" runat="server" ControlToValidate="txtMultiplier"
                                         ErrorMessage="Please Enter Multiplier" ValidationGroup="ShippingZoneEditValidate"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revMultiplier" runat="server" ControlToValidate="txtMultiplier"
@@ -410,7 +410,7 @@
                                     <asp:Label ID="lblMinFee" runat="server" Text='<%# Eval("MinFee") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtMinFee" runat="server" Text='<%# Eval("MinFee") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtMinFee" runat="server" Width="100px"  Text='<%# Eval("MinFee") %>'></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="revMinFee" runat="server" ControlToValidate="txtMinFee"
                                         ErrorMessage="Please Enter Numaric & Decimal Upto two" ValidationExpression="((\d+)((\.\d{1,2})?))$"
                                         ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>
@@ -422,7 +422,7 @@
                                     <asp:Label ID="lblMaxFee" runat="server" Text='<%# Eval("MaxFee") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtMaxFee" runat="server" Text='<%# Eval("MaxFee") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtMaxFee" runat="server" Width="100px"  Text='<%# Eval("MaxFee") %>'></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="revMaxFee" runat="server" ControlToValidate="txtMaxFee"
                                         ErrorMessage="Please Enter Numaric & Decimal Upto two" ValidationExpression="((\d+)((\.\d{1,2})?))$"
                                         ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>
@@ -442,7 +442,7 @@
                                     <asp:Label ID="lblOrderMinimum" runat="server" Text='<%# Eval("OrderMinimum") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtOrderMinimum" runat="server" Text='<%# Eval("OrderMinimum") %>' MaxLength="4"></asp:TextBox>
+                                    <asp:TextBox ID="txtOrderMinimum" Width="100px"  runat="server" Text='<%# Eval("OrderMinimum") %>' MaxLength="4"></asp:TextBox>
                                   <%--  <asp:RegularExpressionValidator ID="revOrderMinimum" runat="server"
                                         ControlToValidate="txtOrderMinimum" ErrorMessage="Please Enter Only Numbers & upto Maxvalue 9999"
                                         ValidationExpression="^\d+$" ValidationGroup="ShippingZoneEditValidate"></asp:RegularExpressionValidator>--%>
