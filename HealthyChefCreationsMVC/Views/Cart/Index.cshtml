@@ -1117,7 +1117,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">Order Minimum</h4>
+                <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body" id="divOrderMinimumText" style="font-size:18px">
                 <div id="divOrderMinimumText1"></div>
@@ -1189,15 +1189,15 @@
             var amount = $(this).text().split('-')[2];
 
             MainTotalAmount = MainTotalAmount + parseFloat(amount);
-
-
-
+            
         });
         if (MainOrderMinimum > MainTotalAmount) {
-            
-            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + MainOrderMinimum + " minimum required to ship your product. Please add  " + (MainOrderMinimum - MainTotalAmount).toFixed(2)+ " more to complete your order";
+
+            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + MainOrderMinimum + " minimum required to ship your product. Please add  " + (MainOrderMinimum - MainTotalAmount).toFixed(2) + " more to complete your order.";
+            message1 += "<br/><br/>";
         }
-        message1 += "<br/><br/>";
+      
+        
         $(DistinctProfiles).each(function (index, value) {
             var OrderMinimum = 0;
             var TotalAmount = 0;
@@ -1216,23 +1216,26 @@
 
             });
             if (OrderMinimum > TotalAmount) {
-                message1 += " Your Product Total for sub profile  <b> " + value + "</b>  profile is less than the $" + OrderMinimum + " minimum required to ship your product. Please add " + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order";
+                message1 += " Your Product Total for sub profile  <b> " + value + "</b> is less than the $" + OrderMinimum + " minimum required to ship your product. Please add " + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order.";
+                message1 += "<br/><br/>";
             }
-            message1 += "<br/><br/>";
+           
+           
         });
 
 
-        var message2 = "";
-      
-      
-
         $("#divOrderMinimumText1").html(message1);
-        if (message1 != "") {
+        if (message1 !== "") {
             $("#MyPopup .modal-title").html(title);
             $("#MyPopup").modal("show");
+
+            $('#MymodalPreventScript').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
             return false;
         }
-
+       
 
         $("#divLoader").css('display', '');
         $('body').css("opacity", '0.9');
@@ -1648,7 +1651,7 @@ alert(response.d);
 
     }
 </script>
-<script>
+@*<script>
     $(document).ready(function () {
         $('#MybtnModalPreventScript').click(function () {
             $('#MymodalPreventScript').modal({
@@ -1657,7 +1660,7 @@ alert(response.d);
             });
         });
     });
-</script>
+</script>*@
 
 <style>
     #snackbar1 {
