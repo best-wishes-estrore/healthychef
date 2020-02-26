@@ -1180,20 +1180,22 @@
         });
         var message1 = "";
         var title = "Order Minimum";
-        var OrderMinimum = 0; var TotalAmount = 0;
+        var MainOrderMinimum = 0;
+        var MainTotalAmount = 0;
         $(".spanMainOrderMinimumdata").each(function () {
             //  debugger;
 
-            OrderMinimum = $(this).text().split('-')[0];
+            MainOrderMinimum = $(this).text().split('-')[0];
             var amount = $(this).text().split('-')[2];
 
-            TotalAmount = TotalAmount + parseFloat(amount);
+            MainTotalAmount = MainTotalAmount + parseFloat(amount);
 
 
 
         });
-        if (OrderMinimum > TotalAmount) {
-            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + OrderMinimum + " minimum required to ship your product. Please add  " + (OrderMinimum - TotalAmount).toFixed(2); + " more to complete your order";
+        if (MainOrderMinimum > MainTotalAmount) {
+            
+            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + MainOrderMinimum + " minimum required to ship your product. Please add  " + (MainOrderMinimum - MainTotalAmount).toFixed(2)+ " more to complete your order";
         }
         message1 += "<br/><br/>";
         $(DistinctProfiles).each(function (index, value) {
