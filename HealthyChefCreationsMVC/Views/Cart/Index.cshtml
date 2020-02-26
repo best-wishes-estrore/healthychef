@@ -1193,9 +1193,9 @@
 
         });
         if (OrderMinimum > TotalAmount) {
-            message1 += " Your Product Total for Main profile is less than the $ " + OrderMinimum + " minimum required to ship your product. Please add  " + (OrderMinimum - TotalAmount).toFixed(2); + " more to complete your order";
+            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + OrderMinimum + " minimum required to ship your product. Please add  " + (OrderMinimum - TotalAmount).toFixed(2); + " more to complete your order";
         }
-        message1 += "\n\n";
+        message1 += "<br/><br/>";
         $(DistinctProfiles).each(function (index, value) {
             var OrderMinimum = 0;
             var TotalAmount = 0;
@@ -1214,9 +1214,9 @@
 
             });
             if (OrderMinimum > TotalAmount) {
-                message1 += " Your Product Total for sub profile " + value + " profile is less than the $" + OrderMinimum + " minimum required to ship your product. Please add " + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order";
+                message1 += " Your Product Total for sub profile  <b> " + value + "</b>  profile is less than the $" + OrderMinimum + " minimum required to ship your product. Please add " + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order";
             }
-            message1 += "\n\n";
+            message1 += "<br/><br/>";
         });
 
 
@@ -1224,7 +1224,7 @@
       
       
 
-        $("#divOrderMinimumText1").text(message1);
+        $("#divOrderMinimumText1").html(message1);
         if (message1 != "") {
             $("#MyPopup .modal-title").html(title);
             $("#MyPopup").modal("show");
