@@ -437,13 +437,13 @@
                                                     </td>
 
                                                     <td style="display:none">
-                                                        @if (@profCart.ShippingAddress.FirstName != Model.MainProfileName)
+                                                        @if (@Item.UserProfile.ProfileName != Model.MainProfileName)
                                                         {
-                                                            <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.FirstName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
+                                                            <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
                                                         }
                                                         else
                                                         {
-                                                            <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.FirstName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
+                                                            <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
                                                         }
 
                                                     </td>
@@ -1110,10 +1110,10 @@
 </div>
 
 <div id="MymodalPreventScript" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="left:0px !important;width:500px !important;">
+    <div class="modal-dialog" style="left:0px !important;">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="border-bottom:none !important;">
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
@@ -1124,7 +1124,7 @@
                 <br />
                 <div id="divOrderMinimumText2"></div>
             </div>
-            <div class="modal-footer" style="margin-right:145px">
+            <div class="modal-footer" style="border-top:none !important;">
                 <a type="button" class="btn btn-default" href="/browse-menu.aspx">Continue Shopping</a>
             </div>
         </div>

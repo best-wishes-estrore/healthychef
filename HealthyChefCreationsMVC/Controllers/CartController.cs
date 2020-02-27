@@ -54,7 +54,7 @@ namespace HealthyChefCreationsMVC.Controllers
             }
             cartViewModel.MainProfileOrderMinimum = returnZonebyZip(cartViewModel.Zipcode);
             cartViewModel.MainProfilePostalCode= cartViewModel.Zipcode;
-                cartViewModel.MainProfileName = cartViewModel.parentProfile.FirstName;
+                cartViewModel.MainProfileName = cartViewModel.parentProfile.ProfileName;
             return View(cartViewModel);
         }
 
