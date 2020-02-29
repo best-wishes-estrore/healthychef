@@ -282,6 +282,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                                         if (CurrentCart.SubTotalDiscount > 0.00m)
                                         {
                                             Discount = CurrentCart.SubTotalDiscount.ToString("c");
+                                            
                                             SubTotalAdj = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
                                             mockSubTotal = SubTotalAdj;
                                         }

@@ -439,11 +439,11 @@
                                                     <td style="display:none">
                                                         @if (@Item.UserProfile.ProfileName != Model.MainProfileName)
                                                         {
-                                                            <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
+                                                            <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
                                                         }
                                                         else
                                                         {
-                                                            <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode</span>
+                                                            <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
                                                         }
 
                                                     </td>
@@ -1182,13 +1182,14 @@
         var title = "Order Minimum";
         var MainOrderMinimum = 0;
         var MainTotalAmount = 0;
+     
         $(".spanMainOrderMinimumdata").each(function () {
             //  debugger;
 
             MainOrderMinimum = $(this).text().split('-')[0];
             var amount = $(this).text().split('-')[2];
-
-            MainTotalAmount = MainTotalAmount + parseFloat(amount);
+            var MainSubDsicount = $(this).text().split('-')[5];
+            MainTotalAmount = (MainTotalAmount + parseFloat(amount)) - parseFloat(MainSubDsicount);
             
         });
         if (MainOrderMinimum > MainTotalAmount) {
@@ -1208,8 +1209,8 @@
                 if (value == $(this).text().split('-')[1]) {
                     OrderMinimum = $(this).text().split('-')[0];
                     var amount = $(this).text().split('-')[2];
-
-                    TotalAmount = TotalAmount + parseFloat(amount);
+                    var SubDsicount = $(this).text().split('-')[5];
+                    TotalAmount = (TotalAmount + parseFloat(amount))- parseFloat(SubDsicount);
 
                 }
 
