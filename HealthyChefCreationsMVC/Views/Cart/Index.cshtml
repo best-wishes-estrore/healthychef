@@ -437,14 +437,19 @@
                                                     </td>
 
                                                     <td style="display:none">
-                                                        @if (@Item.UserProfile.ProfileName != Model.MainProfileName)
+
+                                                        @if (Model.parentProfile != null)
                                                         {
-                                                            <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
+                                                           if (@Item.UserProfile.ProfileName != Model.parentProfile.ProfileName)
+                                                            {
+                                                                <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
-                                                        }
+
 
                                                     </td>
 
@@ -1182,16 +1187,17 @@
         var title = "Order Minimum";
         var MainOrderMinimum = 0;
         var MainTotalAmount = 0;
-     
+        var MainSubDsicount = 0;
         $(".spanMainOrderMinimumdata").each(function () {
-            //  debugger;
+            debugger;
 
             MainOrderMinimum = $(this).text().split('-')[0];
             var amount = $(this).text().split('-')[2];
-            var MainSubDsicount = $(this).text().split('-')[5];
-            MainTotalAmount = (MainTotalAmount + parseFloat(amount)) - parseFloat(MainSubDsicount);
+            MainSubDsicount = $(this).text().split('-')[5];
+            MainTotalAmount = (MainTotalAmount + parseFloat(amount));
             
         });
+        MainTotalAmount = MainTotalAmount-parseFloat(MainSubDsicount);
         if (MainOrderMinimum > MainTotalAmount) {
 
             message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + MainOrderMinimum + " minimum required to ship your product. Please add  " + (MainOrderMinimum - MainTotalAmount).toFixed(2) + " more to complete your order.";
@@ -1205,7 +1211,7 @@
             var NoOfProfiles = DistinctProfiles.length;
 
             $(".spanOrderMinimumdata").each(function () {
-              //  debugger;
+                debugger;
                 if (value == $(this).text().split('-')[1]) {
                     OrderMinimum = $(this).text().split('-')[0];
                     var amount = $(this).text().split('-')[2];

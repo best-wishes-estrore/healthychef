@@ -242,8 +242,12 @@ namespace HealthyChefCreationsMVC.CustomModels
                             if (profCart == null)
                             {
                                 profCart = new ProfileCart(shippingAddressId, cartItem.DeliveryDate);
-                                profCart.OrderMinimum = returnOrderMinimumbyZip(profCart.ShippingAddress.PostalCode);
-                                profCart.PostalCode = profCart.ShippingAddress.PostalCode;
+                                if (profCart.ShippingAddress!=null)
+                                {
+                                    profCart.OrderMinimum = returnOrderMinimumbyZip(profCart.ShippingAddress.PostalCode);
+                                    profCart.PostalCode = profCart.ShippingAddress.PostalCode;
+                                }
+                              
                                 this.profCart.Add(profCart);
                             }
                             profCart.CartItems.Add(cartItem);
@@ -282,7 +286,6 @@ namespace HealthyChefCreationsMVC.CustomModels
                                         if (CurrentCart.SubTotalDiscount > 0.00m)
                                         {
                                             Discount = CurrentCart.SubTotalDiscount.ToString("c");
-                                            
                                             SubTotalAdj = (CurrentCart.SubTotalAmount - CurrentCart.SubTotalDiscount).ToString("c");
                                             mockSubTotal = SubTotalAdj;
                                         }
