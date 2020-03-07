@@ -442,11 +442,11 @@
                                                         {
                                                            if (@Item.UserProfile.ProfileName != Model.parentProfile.ProfileName)
                                                             {
-                                                                <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
+                                                        <span class="spanOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount-@profCart.OrderMinimumDeliveryDate</span>
                                                             }
                                                             else
                                                             {
-                                                                <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount</span>
+                                                        <span class="spanMainOrderMinimumdata" style="display:none">@profCart.OrderMinimum-@Item.UserProfile.ProfileName-@Item.mockTotalPrice-@Item.Quantity-@profCart.PostalCode-@profCart.SubDiscountAmount-@profCart.OrderMinimumDeliveryDate</span>
                                                             }
                                                         }
 
@@ -1169,7 +1169,7 @@
 
     function BtnCheckoutPage()
     {
-       // debugger;
+       debugger;
         var MainProfileOrderMinimum = parseFloat($("#spanOrderMinimum").text());
         var ProductTotal = parseFloat($("#lblsubtotal").text().replace("$", "").replace(",", ""));
         var DiscountAmount = parseFloat($("#spanDiscount").text().replace("$", "").replace("-", ""));
@@ -1187,49 +1187,59 @@
         var title = "Order Minimum";
         var MainOrderMinimum = 0;
         var MainTotalAmount = 0;
-        var MainSubDsicount = 0;
+        var MainSubDiscount = 0;
+        var MainDeliveryDates = [];
         $(".spanMainOrderMinimumdata").each(function () {
             debugger;
 
             MainOrderMinimum = $(this).text().split('-')[0];
             var amount = $(this).text().split('-')[2];
-            MainSubDsicount = $(this).text().split('-')[5];
+            var DeliveryDate = $(this).text().split('-')[6];
+            if (MainDeliveryDates.indexOf(DeliveryDate)==-1) {
+                MainSubDiscount = MainSubDiscount + parseFloat($(this).text().split('-')[5]);
+                MainDeliveryDates.push(DeliveryDate);
+            }
+           
+
+           
             MainTotalAmount = (MainTotalAmount + parseFloat(amount));
-            
         });
-        MainTotalAmount = MainTotalAmount-parseFloat(MainSubDsicount);
+        MainTotalAmount = MainTotalAmount - parseFloat(MainSubDiscount);
         if (MainOrderMinimum > MainTotalAmount) {
 
-            message1 += " Your Product Total for <b> Main</b> profile is less than the $ " + MainOrderMinimum + " minimum required to ship your product. Please add  " + (MainOrderMinimum - MainTotalAmount).toFixed(2) + " more to complete your order.";
+            message1 += " Your Product Total for <b> Main</b> profile is less than the $" + MainOrderMinimum + " minimum required to ship your product. Please add $" + (MainOrderMinimum - MainTotalAmount).toFixed(2) + " more to complete your order.";
             message1 += "<br/><br/>";
         }
       
-        
+        var OrderMinimum = 0;
+        var TotalAmount = 0;
+        var SubDiscount = 0;
+        var DeliveryDates = [];
         $(DistinctProfiles).each(function (index, value) {
-            var OrderMinimum = 0;
-            var TotalAmount = 0;
             var NoOfProfiles = DistinctProfiles.length;
-
+            TotalAmount = 0;
             $(".spanOrderMinimumdata").each(function () {
                 debugger;
                 if (value == $(this).text().split('-')[1]) {
                     OrderMinimum = $(this).text().split('-')[0];
                     var amount = $(this).text().split('-')[2];
-                    var SubDsicount = $(this).text().split('-')[5];
-                    TotalAmount = (TotalAmount + parseFloat(amount))- parseFloat(SubDsicount);
-
+                    var DeliveryDate = $(this).text().split('-')[6];
+                    if (DeliveryDates.indexOf(DeliveryDate) == -1) {
+                        SubDiscount = SubDiscount + parseFloat($(this).text().split('-')[5]);
+                        DeliveryDates.push(DeliveryDate);
+                    }
+                     
+                    TotalAmount = (TotalAmount + parseFloat(amount));
                 }
-
-
             });
+
+            TotalAmount = TotalAmount - parseFloat(SubDiscount);
             if (OrderMinimum > TotalAmount) {
-                message1 += " Your Product Total for sub profile  <b> " + value + "</b> is less than the $" + OrderMinimum + " minimum required to ship your product. Please add " + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order.";
+                message1 += " Your Product Total for sub profile  <b> " + value + "</b> is less than the $" + OrderMinimum + " minimum required to ship your product. Please add $" + (OrderMinimum - TotalAmount).toFixed(2) + " more to complete your order.";
                 message1 += "<br/><br/>";
             }
-           
-           
+         
         });
-
 
         $("#divOrderMinimumText1").html(message1);
         if (message1 !== "") {

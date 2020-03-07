@@ -246,6 +246,7 @@ namespace HealthyChefCreationsMVC.CustomModels
                                 {
                                     profCart.OrderMinimum = returnOrderMinimumbyZip(profCart.ShippingAddress.PostalCode);
                                     profCart.PostalCode = profCart.ShippingAddress.PostalCode;
+                                    profCart.OrderMinimumDeliveryDate = profCart.DeliveryDate.ToString();
                                 }
                               
                                 this.profCart.Add(profCart);
