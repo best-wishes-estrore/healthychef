@@ -1266,9 +1266,11 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
                 ddlShippingZone.DataTextField = ds.Tables[0].Columns[0].ColumnName;//"ZoneName"
                 ddlShippingZone.DataValueField = ds.Tables[0].Columns[1].ColumnName; //"ZoneID"
                 ddlShippingZone.DataBind();
+                
                 DataSet ds2 = hccshopin.BindZoneByZipCode(ZipCode);
                 int ZoneId = Convert.ToInt32(ds2.Tables[0].Rows[0]["ZoneID"].ToString());  //ZoneId from On Select Zone Dropdown
                 ddlShippingZone.SelectedValue = ZoneId.ToString();       //lblShippingZone.Text = ZoneId.ToString();
+                lblZone.Text = Convert.ToString(ZoneId-1);
                 DataTable ds1 = hccshopin.BindGridShippingZoneByZoneID(ZoneId);
 
                 if (ds1.Rows.Count > 0)
@@ -1721,6 +1723,7 @@ namespace HealthyChef.WebModules.ShoppingCart.Admin.UserControls
             hccShippingZone hccshopin = new hccShippingZone();
             string txtZipZone = txtShippingZipCode.Text;
             string ddlZone = ddlShippingZone.SelectedValue;
+            lblZone.Text= Convert.ToString(Convert.ToInt32(ddlShippingZone.SelectedValue) - 1);
             if (txtZipZone == null || txtZipZone == "")
             {
                 Response.Write("<script>alert('Please enter valid zip code')</script>");

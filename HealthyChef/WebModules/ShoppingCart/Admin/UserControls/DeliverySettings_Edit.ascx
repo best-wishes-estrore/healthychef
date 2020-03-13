@@ -289,7 +289,13 @@
                             <td>
                                 <asp:Label ID="lblShipMultiplier" runat="server"></asp:Label></td>
                         </tr>
-
+                         <tr>
+                            <td>
+                                <label class="col-sm-12">Zone</label></td>
+                            <td>:</td>
+                            <td>
+                                <asp:Label ID="lblZone" runat="server"></asp:Label></td>
+                        </tr>
                     </table>
                     <asp:Label ID="lblUpdateMessage" runat="server" Style="color: red;"></asp:Label>
                     <br />
