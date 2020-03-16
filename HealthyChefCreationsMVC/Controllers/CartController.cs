@@ -70,7 +70,11 @@ namespace HealthyChefCreationsMVC.Controllers
             int OrderMinimum = 0;
             if (ds.Tables[0].Rows.Count > 0)
             {
-                OrderMinimum = Convert.ToInt32(ds.Tables[0].Rows[0]["OrderMinimum"].ToString());  //ZoneId from On Select Zone Dropdown
+                if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["OrderMinimum"].ToString()))
+                {
+                    OrderMinimum = Convert.ToInt32(ds.Tables[0].Rows[0]["OrderMinimum"].ToString());  //ZoneId from On Select Zone Dropdown
+                }
+                
             }
             return OrderMinimum;
         }

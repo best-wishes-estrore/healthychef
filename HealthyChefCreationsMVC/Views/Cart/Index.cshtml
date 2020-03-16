@@ -1169,7 +1169,7 @@
 
     function BtnCheckoutPage()
     {
-       debugger;
+      // debugger;
         var MainProfileOrderMinimum = parseFloat($("#spanOrderMinimum").text());
         var ProductTotal = parseFloat($("#lblsubtotal").text().replace("$", "").replace(",", ""));
         var DiscountAmount = parseFloat($("#spanDiscount").text().replace("$", "").replace("-", ""));
@@ -1190,7 +1190,7 @@
         var MainSubDiscount = 0;
         var MainDeliveryDates = [];
         $(".spanMainOrderMinimumdata").each(function () {
-            debugger;
+            //debugger;
 
             MainOrderMinimum = $(this).text().split('-')[0];
             var amount = $(this).text().split('-')[2];
@@ -1219,7 +1219,7 @@
             var NoOfProfiles = DistinctProfiles.length;
             TotalAmount = 0;
             $(".spanOrderMinimumdata").each(function () {
-                debugger;
+               // debugger;
                 if (value == $(this).text().split('-')[1]) {
                     OrderMinimum = $(this).text().split('-')[0];
                     var amount = $(this).text().split('-')[2];
